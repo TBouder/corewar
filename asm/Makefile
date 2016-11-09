@@ -6,18 +6,24 @@
 #    By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/10/05 20:24:05 by tbouder           #+#    #+#              #
-#    Updated: 2016/11/09 17:17:21 by tbouder          ###   ########.fr        #
+#    Updated: 2016/11/09 17:16:50 by tbouder          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-# NAME 		= 	asm
-#
-# CC			= 	gcc
-# CFLAGS		= 	-Wall -Werror -Wextra
-#
-# LIB			=	../libft/libft.a
-#
-# HEADER 		=	asm.h
+NAME 		= 	asm
+
+CC			= 	gcc
+CFLAGS		= 	-Wall -Werror -Wextra
+
+LIB			=	../libft/libft.a
+
+HEADER 		=	asm.h
+
+################################################################################
+#	SRC
+################################################################################
+SRC			=	main.c
+OBJ			=	$(SRC:.c=.o)
 
 ################################################################################
 #	RULES
@@ -27,15 +33,16 @@
 all: $(NAME)
 
 $(NAME):
-	# $(MAKE) -C ../libft
-	$(MAKE) -C asm
+	# $(MAKE) re -C ../libft
+	$(CC) $(CFLAGS) -c $(SRC)
+	$(CC) -o $(NAME) $(OBJ) $(LIB)
 
 clean:
 	# $(MAKE) clean -C ../libft
-	$(MAKE) clean -C asm
+	rm -f $(OBJ)
 
 fclean: clean
 	# $(MAKE) fclean -C ../libft
-	$(MAKE) fclean -C asm
+	rm -f $(NAME)
 
 re: fclean all
