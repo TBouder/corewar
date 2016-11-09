@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/17 11:59:39 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/09 16:04:19 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/11/09 16:09:55 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int					get_next_line(int const fd, char **line)
 	static t_gnl	gnl;
 
 	gnl.i = 0;
-	gnl.j = 0;
+	gnl.y = 0;
 	gnl.buff = ft_strnew(BUFF_SIZE + 1);
 	if (gnl.str == NULL && (gnl.str = ft_strnew(1)) == NULL)
 		return (-1);
@@ -66,11 +66,11 @@ int					get_next_line(int const fd, char **line)
 	while (gnl.tmp == NULL)
 	{
 		gnl.i = read(fd, gnl.buff, BUFF_SIZE);
-		if ((gnl.j = ft_return_value(&gnl)) < 1)
+		if ((gnl.y = ft_return_value(&gnl)) < 1)
 		{
 			ft_strdel(&gnl.buff);
 			ft_strdel(&gnl.str);
-			return (gnl.j);
+			return (gnl.y);
 		}
 	}
 	return (ft_clear(&gnl, line));
