@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/09 13:18:43 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/10 14:04:56 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,11 @@ typedef struct		s_block
 {
 	unsigned int	size;
 }					t_block;
+
+typedef struct		s_options
+{
+	int				flags[122];
+}					t_options;
 
 /*
 ** Conditions
@@ -219,6 +224,12 @@ void 				ft_btreecmp_rev(t_btree **tree, void const *content,
 void 				ft_btreecmp(t_btree **tree, void const *content,
 						size_t c_size);
 t_btree				*ft_btreenew(void const *content, size_t c_size);
+void 				ft_btreedel(t_btree *tree);
+
+/*
+** Others (Flags in str)
+*/
+int					ft_extract_options(char **av, t_options *options);
 
 
 #endif

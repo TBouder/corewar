@@ -1,19 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm.h                                              :+:      :+:    :+:   */
+/*   ft_btreedel.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/10 15:25:01 by tbouder          ###   ########.fr       */
+/*   Created: 2016/11/09 13:11:54 by tbouder           #+#    #+#             */
+/*   Updated: 2016/11/10 11:50:30 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ASM_H
-# define ASM_H
+/*
+** The ft_btreedel() function remove and free the current tree.
+*/
 
-# include "../libft/libft.h"
-# include <errno.h>
+#include "../libft.h"
 
-#endif
+void ft_btreedel(t_btree *tree)
+{
+	if (tree)
+	{
+		ft_btreedel(tree->left);
+		ft_btreedel(tree->right);
+		tree->content_size = 0;
+		tree->left = NULL;
+		tree->right = NULL;
+		free(tree->content);
+		free(tree);
+		tree = NULL;
+	}
+}
