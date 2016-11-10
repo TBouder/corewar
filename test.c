@@ -6,13 +6,11 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 18:17:24 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/10 16:57:01 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/10 19:44:47 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
-
-#define  TAILLE 10
 
 // 1 EAX : Utilisé pour les opérations arithmétiques et le stockage de la valeur de retour des appels systèmes.
 // 2 EDX : Utilisé pour les opérations arithmétiques et les opérations d'entrée/sortie.
@@ -82,28 +80,61 @@ int	my_strcmp(const char * str1,const char * str2)
  return __res;
 }
 
-void	my_strcpy(char * src, char * dest)
+/*
+** TAILLE DES OPERANDES
+**	b → byte (8 bits - 1 octet)
+**	w → word (16 bits - 2 octets)
+**	s → short (32 bits - 4 octets, pour les opérations en virgule flottante)
+**	l → long (32 bits - 4 octets pour les entiers, 64 bits - 8 octets pour les flottants)
+**	q → quad (64 bits - 8 octets)
+**	t → ten bytes (80 bits - 10 octets)
+**	o → octo (128 bits - 16 octets), pour l'architecture x86-64
+*/
+
+/*
+** LETTRE/REGISTRE
+**	R	->	EAX, EBX, ECX, EDX, ESI, EDI, ESP et EBP
+**	q	->	EAX, EBX, ECX, EDX (mode 32 bits)
+**	a	->	Registre EAX (registre accumulateur. Utilisé pour les opé et le stockage de la valeur de retour)
+**	b	->	Registre EBX
+**	c	->	Registre ECX
+**	d	->	Registre EDX
+**	S	->	Registre ESI (pointeur source)
+**	D	->	Registre EDI (pointeur destination)
+**	A	->	Combinaison EAX:EDX
+*/
+
+void	my_strcpy(char *src, char *dest)
 {
-	int S, D, A;
+	int S, D, A = 0;
 
 	__asm__ __volatile__
 	(
-		"cld\n"               /* ESI++, EDI++ */
-		"1:\tlodsb\n"         /* MOVB DS:ESI, AL */
-		"stosb\n"             /* MOVB AL, ES:EDI */
-		"testb\t%%al,%%al\n"  /* ZF=1 si AL == 0 */
-		"jne\t1b"               /* JMP si ZF == 0 */
+		"cld\n"					// -> SERT A CLEAR ESI ET EDI
+		"1: LODSL\n"			// -> COPIE DS:EDI DANS AL
+		"STOSL\n"				// -> COPIE AL DANS ES:EDI
 
-		:"=&S" (S),"=&D" (D), "=&a" (A)
-		:"0" (src),"1" (dest), "2" (0)
-		:"memory"
+		"TESTB %%al, %%al\n"	/* ZF=1 si AL == 0 */ // SI LES BITS SONT ACTIF, ZF=1 SINON ZF=0
+		"JNE 1b"				/* JMP si ZF == 0 */
+
+		// & SIGNIFIE QU'ON NE DOIT PAS ALLOUER LE MEME REGISTRE
+		// "=&S" (S) -> ON INITIALISE LA SOURCE A NULL (0)
+		// "=&D" (D) -> ON INITIALISE LA DESTINATION A NULL (0)
+		// "=&a" (A) -> ON INITIALISE LA ZONE DE STOCKAGE A NULL (0)
+		: "=&S" (S), "=&D" (D), "=&a" (A)
+
+		// ON MET A L'EMPLACEMENT 0 (=&S) SRC
+		// ON MET A L'EMPLACEMENT 1 (=&D) DEST
+		// ON MET A L'EMPLACEMENT 2 (=&a) ????? Si ca s'est bien passe ?
+		: "0" (src), "1" (dest), "2" (0)
+		: "memory" //PERNET DE PROTECT
 	);
 }
 
 int main (void)
 {
-	char * str1 = (char*) malloc(TAILLE*sizeof(char));
-	char * str2 = (char*) malloc(TAILLE*sizeof(char));
+	char * str1 = (char*) malloc(10 * sizeof(char));
+	char * str2 = (char*) malloc(10 * sizeof(char));
 
 	if (!str1 || !str2)
 		return EXIT_FAILURE;
