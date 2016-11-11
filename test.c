@@ -6,52 +6,48 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 18:17:24 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/10 19:44:47 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/11 13:43:31 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 
-// 1 EAX : Utilisé pour les opérations arithmétiques et le stockage de la valeur de retour des appels systèmes.
-// 2 EDX : Utilisé pour les opérations arithmétiques et les opérations d'entrée/sortie.
-// 3 ECX : registre compteur (counter register)
-// 4 EBX : Utilisé comme pointeur de donnée (située dans DS en mode segmenté).
+/*
+	int		ft_add(int a, int b)
+	{
+		int		c;
 
-int		ft_add(int a, int b)
-{
-	int		c;
+		__asm__
+		(
+			"add %1, %2" //ON VA ADDITIONNER
+			: "=r" (c) //ET METTRE LE RESULTAT DANS C
+			: "r" (a), "0"(b) //A ET B
+		);
+		return (c);
+	}
 
-	__asm__
-	(
-		"add %1, %2" //ON VA ADDITIONNER
-		: "=r" (c) //ET METTRE LE RESULTAT DANS C
-		: "r" (a), "0"(b) //A ET B
-	);
-	return (c);
-}
+	void	ft_mv(int a, int *b)
+	{
+		__asm__
+		(
+			"movl %1, %0"
+			: "=&r" (*b)
+			: "r" (a)
+		);
+	}
 
-void	ft_mv(int a, int *b)
-{
-	__asm__
-	(
-		"movl %1, %0"
-		: "=&r" (*b)
-		: "r" (a)
-	);
-}
 
-//
-// int		main(int ac, char **av)
-// {
-// 	int a = 10;
-//     int b = 5;
-// 	int c = ft_add(a, b);
-// 	int d;
-// 	ft_mv(c, &d);
-// 	ft_printf("a = %d && b = %d && c = %d && d = %d\n", a, b, c, d);
-//     return 0;
-// }
-
+	int		main(int ac, char **av)
+	{
+		int a = 10;
+	    int b = 5;
+		int c = ft_add(a, b);
+		int d;
+		ft_mv(c, &d);
+		ft_printf("a = %d && b = %d && c = %d && d = %d\n", a, b, c, d);
+	    return 0;
+	}
+*/
 /******************************************************************************/
 
 int	my_strcmp(const char * str1,const char * str2)
@@ -80,67 +76,51 @@ int	my_strcmp(const char * str1,const char * str2)
  return __res;
 }
 
-/*
-** TAILLE DES OPERANDES
-**	b → byte (8 bits - 1 octet)
-**	w → word (16 bits - 2 octets)
-**	s → short (32 bits - 4 octets, pour les opérations en virgule flottante)
-**	l → long (32 bits - 4 octets pour les entiers, 64 bits - 8 octets pour les flottants)
-**	q → quad (64 bits - 8 octets)
-**	t → ten bytes (80 bits - 10 octets)
-**	o → octo (128 bits - 16 octets), pour l'architecture x86-64
-*/
-
-/*
-** LETTRE/REGISTRE
-**	R	->	EAX, EBX, ECX, EDX, ESI, EDI, ESP et EBP
-**	q	->	EAX, EBX, ECX, EDX (mode 32 bits)
-**	a	->	Registre EAX (registre accumulateur. Utilisé pour les opé et le stockage de la valeur de retour)
-**	b	->	Registre EBX
-**	c	->	Registre ECX
-**	d	->	Registre EDX
-**	S	->	Registre ESI (pointeur source)
-**	D	->	Registre EDI (pointeur destination)
-**	A	->	Combinaison EAX:EDX
-*/
-
-void	my_strcpy(char *src, char *dest)
+char	*ft_strinit_asm(char *src)
 {
 	int S, D, A = 0;
+	char	*dest;
+
+	dest = ft_strnew(ft_strlen(src));
 
 	__asm__ __volatile__
 	(
-		"cld\n"					// -> SERT A CLEAR ESI ET EDI
-		"1: LODSL\n"			// -> COPIE DS:EDI DANS AL
-		"STOSL\n"				// -> COPIE AL DANS ES:EDI
+		// -> SERT A CLEAR ESI ET EDI
+		"cld\n"
 
-		"TESTB %%al, %%al\n"	/* ZF=1 si AL == 0 */ // SI LES BITS SONT ACTIF, ZF=1 SINON ZF=0
-		"JNE 1b"				/* JMP si ZF == 0 */
+		//Loop CORRESPOND A L'ADRESSE
+			// On copie le contenu du pointeur ESI (source) de DS et on l'ajoute a AL (accumulateur (zone de stockage))
+			// On copie le contenu de AL (accumulateur (zone de stockage)) dans le pointeur EDI (destination) de ES
+			// Si AL == 1 alors ZF = 0 sinon ZF = 1
+			// Si ZF == 0 alors retourner a loop (au debut de la loop)
+		"loop:"
+			"LODSB\n"
+			"STOSB\n"
+			"TESTB %%AL, %%AL\n"
+			"JNE loop"
 
-		// & SIGNIFIE QU'ON NE DOIT PAS ALLOUER LE MEME REGISTRE
-		// "=&S" (S) -> ON INITIALISE LA SOURCE A NULL (0)
-		// "=&D" (D) -> ON INITIALISE LA DESTINATION A NULL (0)
-		// "=&a" (A) -> ON INITIALISE LA ZONE DE STOCKAGE A NULL (0)
+		// Creation d'une dependance de la source, dest et zone de stockage avec le block asm pour que le contenu change avant la fin
+		// de la fonction
+		// : "=&S" (S), "=&D" (D) // -> MEME RESULTAT, PK ??
 		: "=&S" (S), "=&D" (D), "=&a" (A)
 
-		// ON MET A L'EMPLACEMENT 0 (=&S) SRC
-		// ON MET A L'EMPLACEMENT 1 (=&D) DEST
-		// ON MET A L'EMPLACEMENT 2 (=&a) ????? Si ca s'est bien passe ?
+		// On met src dans S, dest dans D et 0 dans a
+		// : "0" (src), "1" (dest) // -> MEME RESULTAT, PK ??
 		: "0" (src), "1" (dest), "2" (0)
-		: "memory" //PERNET DE PROTECT
+
+		//PERMET DE PROTECT CAR EN FAISANT LODSL ET STOSL ON NE CONNAIT PAS LE NOMBRE D'OCTETS A COPIER
+		: "memory"
 	);
+	return (dest);
 }
 
 int main (void)
 {
-	char * str1 = (char*) malloc(10 * sizeof(char));
-	char * str2 = (char*) malloc(10 * sizeof(char));
+	char	*str1;
+	char	*str2;
 
-	if (!str1 || !str2)
-		return EXIT_FAILURE;
-
-	my_strcpy((char*)"foo", str1);
-	my_strcpy((char*)"bar", str2);
+	str1 = ft_strinit_asm("foo foo bar foo");
+	str2 = ft_strinit_asm("foo foo bar bar");
 
 	if (!my_strcmp(str1, str2))
 		ft_printf("Les deux chaines \"%s\" et \"%s\" sont egales.\n", str1, str2);
