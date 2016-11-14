@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 18:17:24 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/11 13:43:31 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/11 17:41:38 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,11 +101,9 @@ char	*ft_strinit_asm(char *src)
 
 		// Creation d'une dependance de la source, dest et zone de stockage avec le block asm pour que le contenu change avant la fin
 		// de la fonction
-		// : "=&S" (S), "=&D" (D) // -> MEME RESULTAT, PK ??
 		: "=&S" (S), "=&D" (D), "=&a" (A)
 
 		// On met src dans S, dest dans D et 0 dans a
-		// : "0" (src), "1" (dest) // -> MEME RESULTAT, PK ??
 		: "0" (src), "1" (dest), "2" (0)
 
 		//PERMET DE PROTECT CAR EN FAISANT LODSL ET STOSL ON NE CONNAIT PAS LE NOMBRE D'OCTETS A COPIER
