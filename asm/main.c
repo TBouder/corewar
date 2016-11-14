@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
+/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 16:03:50 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/11 19:44:56 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/14 18:10:41 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,11 @@ char	ft_verif_extension(char *source)
 
 int		main(int ac, char **av)
 {
-	t_asm		*env;
+	t_asm		env;
 	t_options	*options;
 	int			i;
 
-	env = (t_asm *)malloc(sizeof(t_asm));
+	// env = (t_asm *)malloc(sizeof(t_asm));
 	options = (t_options *)malloc(sizeof(t_options));
 	i = ft_extract_options(av, options);
 	if (i == ac)
@@ -78,6 +78,7 @@ int		main(int ac, char **av)
 		if (ft_verif_extension(av[i]))
 		{
 			// ft_transform_file();
+			ft_parse_file(&env);
 			ft_printf("Writing output program to {10}%s{0}\n", av[i]);
 		}
 		else
