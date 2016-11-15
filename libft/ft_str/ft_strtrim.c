@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/23 16:07:14 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/15 15:32:32 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/15 15:55:22 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int		count_spaces_nd(char const *s)
 
 	j = 1;
 	spaces = 0;
-	while (ft_isspace(s[ft_strlen(s) - j]))
+	while (ft_isspace(s[ft_strlen(s) + 1 - j]))
 	{
 		j++;
 		spaces++;
