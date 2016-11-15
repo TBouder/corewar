@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 16:03:50 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/15 14:38:24 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/15 14:50:06 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,9 @@ void	ft_clear_all(t_asm *env)
 	ft_dbstrdel(env->file_content);
 	ft_strdel(&env->filename);
 	ft_strdel(&env->filename_noext);
-	free(env->options);
 }
 
-static void	ft_init_env(t_asm *env)
+void	ft_init_env(t_asm *env)
 {
 	env->file_content = NULL;
 	env->file_len = 0;
@@ -45,7 +44,6 @@ void	ft_get_file_content(t_asm *env)
 		env->file_len++;
 		ft_strdel(&line);
 	}
-	ft_strdel(&line);
 	env->file_content = ft_dbstrnew(env->file_len);
 	ft_dbstrassign(env->file_content, lst, env->file_len);
 	ft_lstclr(&lst);
@@ -58,9 +56,10 @@ void	ft_usage_asm(char *prog_name)
 	ft_printf("annotated version of the code to the standard output\n");
 }
 
-void	ft_error_asm(char *source)
+void	ft_error_asm(t_asm *env, char *source)
 {
 	ft_printf("Can't read source file {9}%s{0}\n", source);
+	free(env->options);
 	exit(1);
 }
 
@@ -72,7 +71,7 @@ char	ft_verif_extension(t_asm *env, char *source)
 
 	errno = 0;
 	if (source == NULL || (env->fd = open(source, O_RDONLY)) == -1 || errno != 0)
-		ft_error_asm(source);
+		ft_error_asm(env, source);
 	extension = ft_strinit_asm(ft_strrchr(source, '.'));
 	result = EQU(extension, ".s");
 	if (result)
@@ -99,11 +98,9 @@ int		main(int ac, char **av)
 	{
 		if (ft_verif_extension(&env, av[i]))
 		{
-			// ft_transform_file();
 			ft_get_file_content(&env);
 			ft_putdbstr(env.file_content, env.file_len);
-			// ft_printf("Writing output program to {10}%s{0}.cor\n", env.filename_noext);
-
+			ft_printf("Writing output program to {10}%s{0}.cor\n", env.filename_noext);
 			ft_clear_all(&env);
 		}
 		else
@@ -111,5 +108,6 @@ int		main(int ac, char **av)
 	}
 	else if (ac - i > 1)
 		ft_printf("Multiple args detected. Only {9}one{0} arg needed\n");
+	free(env.options);
 	return (0);
 }
