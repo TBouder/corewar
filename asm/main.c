@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 16:03:50 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/15 15:34:26 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/15 16:30:57 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*ft_remove_end(char *str, char c)
 	int		string_len;
 	int		comment_len;
 
-	comment = ft_strinit(ft_strrchr(str, c));
+	comment = ft_strrchr(str, c);
 	if (comment)
 	{
 		string_len = ft_strlen_asm(str);
@@ -32,10 +32,8 @@ char	*ft_remove_end(char *str, char c)
 		sub = ft_strsub(str, 0, string_len - comment_len);
 		ret = ft_strtrim(sub);
 		ft_strdel(&sub);
-		ft_strdel(&comment);
 		return (ret);
 	}
-	ft_strdel(&comment);
 	return (ft_strtrim(str));
 }
 
@@ -62,6 +60,7 @@ void	ft_get_file_content(t_asm *env)
 {
 	t_list	*lst;
 	char	*line;
+	char	*tmp;
 	char	*final_line;
 
 	lst = NULL;
@@ -69,9 +68,14 @@ void	ft_get_file_content(t_asm *env)
 	{
 		if (DIFF(line, ""))
 		{
-			final_line = ft_remove_end(line, ';');
-			ft_lstend(&lst, (char *)final_line, ft_strlen_asm(final_line) + 1);
-			env->file_len++;
+			tmp = ft_remove_end(line, ';');
+			final_line = ft_remove_end(tmp, '#');
+			if (DIFF(final_line, ""))
+			{
+				ft_lstend(&lst, (char *)final_line, ft_strlen_asm(final_line) + 1);
+				env->file_len++;
+			}
+			ft_strdel(&tmp);
 			ft_strdel(&final_line);
 		}
 		ft_strdel(&line);
@@ -88,9 +92,16 @@ void	ft_usage_asm(char *prog_name)
 	ft_printf("annotated version of the code to the standard output\n");
 }
 
-void	ft_error_asm(t_asm *env, char *source)
+void	ft_error_asm(t_asm *env, char *source, int err)
 {
-	ft_printf("Can't read source file {9}%s{0}\n", source);
+	if (err == 0)
+		ft_printf("{9}Directories{0} are not allowed\n");
+	if (err == 1)
+		ft_printf("Can't read source file {9}%s{0}\n", source);
+	if (err == 2)
+		ft_printf("Extension {9}.s{0} is missing (NOEXT)\n");
+	if (err == 3)
+		ft_printf("File {9}%s{0} is empty\n", env->filename);
 	free(env->options);
 	exit(1);
 }
@@ -103,7 +114,11 @@ char	ft_verif_extension(t_asm *env, char *source)
 
 	errno = 0;
 	if (source == NULL || (env->fd = open(source, O_RDONLY)) == -1 || errno != 0)
-		ft_error_asm(env, source);
+		ft_error_asm(env, source, 1);
+	if (open(source, O_DIRECTORY) != -1)
+		ft_error_asm(env, source, 0);
+	if (!ft_strrchr(source, '.'))
+		ft_error_asm(env, source, 2);
 	extension = ft_strinit_asm(ft_strrchr(source, '.'));
 	result = EQU(extension, ".s");
 	if (result)
@@ -131,6 +146,8 @@ int		main(int ac, char **av)
 		if (ft_verif_extension(&env, av[i]))
 		{
 			ft_get_file_content(&env);
+			if (env.file_len == 0)
+				ft_error_asm(&env, av[i], 3);
 			ft_putdbstr(env.file_content, env.file_len);
 			ft_printf("Writing output program to {10}%s{0}.cor\n", env.filename_noext);
 			ft_clear_all(&env);
