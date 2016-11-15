@@ -1,41 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm.h                                              :+:      :+:    :+:   */
+/*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/15 14:48:17 by quroulon         ###   ########.fr       */
+/*   Created: 2016/11/14 17:46:27 by quroulon          #+#    #+#             */
+/*   Updated: 2016/11/15 16:51:49 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ASM_H
-# define ASM_H
+#include "asm.h"
 
-# include "../libft/libft.h"
-# include <errno.h>
-
-typedef struct	s_asm
+void		ft_parse_file(t_asm *env)
 {
-	t_options	*options;
-	int			fd;
+	int		i;
 
-	char		*filename;
-	char		*filename_noext;
-	char		*champ_name;
-	char		*champ_comment;
+	i = 0;
+	while (env->file_content[i])
+	{
+		if (EQU(ft_strsub(env->file_content[i], 0, 5), ".name"))
+			ft_printf("{10}NAME{0}\n");
+		if (EQU(ft_strsub(env->file_content[i], 0, 8), ".comment"))
+			ft_printf("{10}COMMENT{0}\n");
 
-	char		**file_content;
-	int			file_len;
-}				t_asm;
-
-/*
-** ft_asm_func.c
-*/
-int				ft_strlen_asm(char *str);
-char			*ft_strinit_asm(char *str);
-
-void				ft_parse_file(t_asm *env);
-
-#endif
+		// if (ft_strchr(env->file_content[i], '.'))
+		// 	ft_printf("{9}parse{0}\n");
+		i++;
+	}
+}

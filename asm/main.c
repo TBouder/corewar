@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 16:03:50 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/15 16:36:34 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/15 16:42:12 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,8 @@ int		main(int ac, char **av)
 			if (env.file_len == 0)
 				ft_error_asm(&env, av[i], 3);
 			ft_putdbstr(env.file_content, env.file_len);
+
+			ft_parse_file(&env);
 			ft_printf("Writing output program to {10}%s{0}.cor\n", env.filename_noext);
 			ft_clear_all(&env);
 		}
