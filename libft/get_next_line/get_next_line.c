@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/17 11:59:39 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/15 15:37:03 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/15 15:38:29 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,34 +24,31 @@ int				ft_return_value(t_gnl *gnl)
 	if (gnl->i > 0)
 	{
 		gnl->buff[gnl->i] = '\0';
-		gnl->line = ft_strjoin(gnl->str, gnl->buff);
-		ft_strdel(&gnl->str);
+		if (!(gnl->line = ft_strjoin(gnl->str, gnl->buff)))
+			return (-1);
+		free(gnl->str);
 		gnl->str = gnl->line;
 		gnl->tmp = ft_strchr(gnl->str, '\n');
 	}
 	else if (gnl->i == 0)
 	{
 		gnl->tmp = ft_strchr(gnl->str, '\0');
-		if (ft_strequ(gnl->tmp, gnl->str))
+		if (ft_strequ((gnl->tmp), gnl->str))
 			return (0);
 	}
-	else
+	else if (gnl->i < 0)
 		return (-1);
 	return (1);
 }
 
-int					get_next_line(int const fd, char **line)
+int				get_next_line(int const fd, char **line)
 {
 	static t_gnl	gnl;
 
-	gnl.i = 0;
-	gnl.y = 0;
 	gnl.buff = ft_strnew(BUFF_SIZE + 1);
 	if (!gnl.str && (gnl.str = (char *)ft_memalloc(sizeof(char))) == NULL)
 		return (ft_free_return(&gnl, -1));
 	gnl.tmp = ft_strchr(gnl.str, '\n');
-	if (line == NULL)
-		return (-1);
 	while (gnl.tmp == NULL)
 	{
 		gnl.i = read(fd, gnl.buff, BUFF_SIZE);
