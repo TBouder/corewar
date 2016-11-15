@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/15 14:39:03 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/15 14:57:34 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 
 # define PI		3.141592653589793
 # define EQU	ft_strequ
+# define DIFF	!ft_strequ
 # define CMP	ft_strcmp
 # define FALSE	0
 # define TRUE	1
