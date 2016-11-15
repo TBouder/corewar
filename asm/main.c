@@ -6,11 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 16:03:50 by tbouder           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2016/11/14 18:19:32 by quroulon         ###   ########.fr       */
-=======
-/*   Updated: 2016/11/15 12:59:21 by tbouder          ###   ########.fr       */
->>>>>>> tbouder
+/*   Updated: 2016/11/15 14:11:39 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,18 +200,11 @@ int		main(int ac, char **av)
 		if (ft_verif_extension(&env, av[i]))
 		{
 			// ft_transform_file();
-<<<<<<< HEAD
-			ft_test(&env);
-			ft_printf("%s - %s\n", env.filename, env.filename_noext);
-			ft_printf("Writing output program to {10}%s{0}.cor\n", env.filename_noext);
-			// ft_printf("\033[A"); //CHEAT TO REMOVE LAST \n
-=======
 			ft_get_file_content(&env);
 			ft_putdbstr(env.file_content, env.file_len);
 			// ft_printf("Writing output program to {10}%s{0}.cor\n", env.filename_noext);
 
 			ft_clear_all(&env);
->>>>>>> tbouder
 		}
 		else
 			ft_printf("File extension is {9}not .s{0}\n");
