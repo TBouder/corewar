@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 16:03:50 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/15 14:30:43 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/11/15 14:40:12 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,9 +199,9 @@ int		main(int ac, char **av)
 	{
 		if (ft_verif_extension(&env, av[i]))
 		{
-			// ft_transform_file();
 			ft_get_file_content(&env);
 			ft_putdbstr(env.file_content, env.file_len);
+			ft_parse_file(&env);
 			// ft_printf("Writing output program to {10}%s{0}.cor\n", env.filename_noext);
 
 			ft_clear_all(&env);
