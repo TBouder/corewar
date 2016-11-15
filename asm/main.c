@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 16:03:50 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/15 16:30:57 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/15 16:36:34 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,10 @@ void	ft_error_asm(t_asm *env, char *source, int err)
 	if (err == 2)
 		ft_printf("Extension {9}.s{0} is missing (NOEXT)\n");
 	if (err == 3)
+	{
 		ft_printf("File {9}%s{0} is empty\n", env->filename);
+		ft_clear_all(env);
+	}
 	free(env->options);
 	exit(1);
 }
