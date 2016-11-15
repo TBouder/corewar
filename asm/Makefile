@@ -6,14 +6,14 @@
 #    By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/10/05 20:24:05 by tbouder           #+#    #+#              #
-#    Updated: 2016/11/09 17:16:50 by tbouder          ###   ########.fr        #
+#    Updated: 2016/11/14 18:44:09 by tbouder          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 		= 	asm
 
 CC			= 	gcc
-CFLAGS		= 	-Wall -Werror -Wextra
+CFLAGS		= 	-Wall -Werror -Wextra -g
 
 LIB			=	../libft/libft.a
 

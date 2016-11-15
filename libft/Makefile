@@ -6,14 +6,14 @@
 #    By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/10/05 20:24:05 by tbouder           #+#    #+#              #
-#    Updated: 2016/11/09 13:19:09 by tbouder          ###   ########.fr        #
+#    Updated: 2016/11/14 18:53:10 by tbouder          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 		= 	libft.a
 
 CC			= 	gcc
-CFLAGS		= 	-Wall -Werror -Wextra
+CFLAGS		= 	-Wall -Werror -Wextra -g
 OCLINT		=	oclint
 OFLAGS		=	-enable-global-analysis -rc SHORT_VARIABLE_NAME=1 \
 				-rc LONG_LINE=80 -rc CYCLOMATIC_COMPLEXITY=25 -disable-rule \
