@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 16:03:50 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/14 18:13:25 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/15 12:59:21 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	*ft_strinit_asm(char *str)
 	s = 0;
 	d = 0;
 	a = 0;
-	dest = ft_strnew(ft_strlen_asm(str));
+	dest = ft_strnew(ft_strlen(str));
 	__asm__ __volatile__
 	(
 		"CLD		\n"
@@ -63,21 +63,92 @@ char	*ft_strinit_asm(char *str)
 }
 /********************************!ASM******************************************/
 
+/********************************LIBFT*****************************************/
 
-void	ft_test(t_asm *env)
+char	**ft_dbstrnew(size_t size)
 {
-	char	*line;
-	int		fd;
-	int		nb_line;
+	char		**buffer;
+	size_t		i;
 
-	nb_line = 0;
-	fd = open(env->filename, O_RDONLY);
-	while (get_next_line(fd, &line))
+	buffer = NULL;
+	if (!(buffer = (char **)malloc(sizeof(char *) * (size + 1))))
+		return (NULL);
+	i = 0;
+	while (i < size + 1)
 	{
-		ft_putendl(line);
-		nb_line++;
+		buffer[i] = NULL;
+		i++;
 	}
-	ft_printf("{11}%d{0}\n", nb_line);
+	return (buffer);
+}
+
+void	ft_dbstrassign(char **tab, t_list *lst, size_t size)
+{
+	size_t		i;
+
+	i = 0;
+	if (!tab)
+		return ;
+	while (i < size && lst)
+	{
+		tab[i] = ft_strinit((char *)lst->content);
+		i++;
+		lst = lst->next;
+	}
+}
+
+void	ft_putdbstr(char **tab, size_t size)
+{
+	size_t		i;
+
+	i = 0;
+	if (!tab)
+		return ;
+	while (i < size)
+	{
+		ft_printf("[{10}%s{0}]\n", tab[i]);
+		i++;
+	}
+}
+
+/*******************************!LIBFT*****************************************/
+
+void	ft_clear_all(t_asm *env)
+{
+	ft_dbstrdel(env->file_content);
+	ft_strdel(&env->filename);
+	ft_strdel(&env->filename_noext);
+	free(env->options);
+}
+
+static void	ft_init_env(t_asm *env)
+{
+	env->file_content = NULL;
+	env->file_len = 0;
+
+	env->champ_name = NULL;
+	env->champ_comment = NULL;
+	env->filename = NULL;
+	env->filename_noext = NULL;
+	env->options = NULL;
+}
+
+void	ft_get_file_content(t_asm *env)
+{
+	t_list	*lst;
+	char	*line;
+
+	lst = NULL;
+	while (get_next_line(env->fd, &line))
+	{
+		ft_lstend(&lst, (char *)line, ft_strlen(line));
+		env->file_len++;
+		ft_strdel(&line);
+	}
+	ft_strdel(&line);
+	env->file_content = ft_dbstrnew(env->file_len);
+	ft_dbstrassign(env->file_content, lst, env->file_len);
+	ft_lstclr(&lst);
 }
 
 void	ft_usage_asm(char *prog_name)
@@ -95,33 +166,33 @@ void	ft_error_asm(char *source)
 
 char	ft_verif_extension(t_asm *env, char *source)
 {
-	int		fd;
 	int		result;
 	int		len_source;
 	char	*extension;
 
 	errno = 0;
-	if (source == NULL || (fd = open(source, O_RDONLY)) == -1 || errno != 0)
+	if (source == NULL || (env->fd = open(source, O_RDONLY)) == -1 || errno != 0)
 		ft_error_asm(source);
-	extension = ft_strinit_asm(ft_strrchr(source, '.'));
+	extension = ft_strinit(ft_strrchr(source, '.'));
 	result = EQU(extension, ".s");
 	if (result)
 	{
-		len_source = ft_strlen_asm(source);
-		env->filename = ft_strinit_asm(source);
+		len_source = ft_strlen(source);
+		env->filename = ft_strinit(source);
 		env->filename_noext = ft_strsub(source, 0, len_source - 2);
 	}
+	ft_strdel(&extension);
 	return (result);
 }
 
 int		main(int ac, char **av)
 {
 	t_asm		env;
-	t_options	*options;
 	int			i;
 
-	options = (t_options *)malloc(sizeof(t_options));
-	i = ft_extract_options(av, options);
+	ft_init_env(&env);
+	env.options = (t_options *)malloc(sizeof(t_options));
+	i = ft_extract_options(av, env.options);
 	if (i == ac)
 		ft_usage_asm(av[0]);
 	else if (ac - i == 1)
@@ -129,11 +200,11 @@ int		main(int ac, char **av)
 		if (ft_verif_extension(&env, av[i]))
 		{
 			// ft_transform_file();
-			ft_test(&env);
-			ft_printf("%s - %s\n", env.filename, env.filename_noext);
-			ft_printf("Writing output program to {10}%s{0}.cor\n", env.filename_noext);
-			// ft_printf("\033[A"); //CHEAT TO REMOVE LAST \n
-			// ft_printf("{A}");
+			ft_get_file_content(&env);
+			ft_putdbstr(env.file_content, env.file_len);
+			// ft_printf("Writing output program to {10}%s{0}.cor\n", env.filename_noext);
+
+			ft_clear_all(&env);
 		}
 		else
 			ft_printf("File extension is {9}not .s{0}\n");
