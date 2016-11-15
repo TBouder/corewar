@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 16:03:50 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/15 12:59:21 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/15 14:08:55 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@ void	ft_get_file_content(t_asm *env)
 	lst = NULL;
 	while (get_next_line(env->fd, &line))
 	{
-		ft_lstend(&lst, (char *)line, ft_strlen(line));
+		ft_lstend(&lst, (char *)line, ft_strlen(line) + 1);
 		env->file_len++;
 		ft_strdel(&line);
 	}
