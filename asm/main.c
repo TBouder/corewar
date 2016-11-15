@@ -6,12 +6,38 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 16:03:50 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/15 14:50:06 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/15 15:34:26 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
+/*
+** This function is used to remove all the stuff after [;] or [#] and the white
+** spaces
+*/
+char	*ft_remove_end(char *str, char c)
+{
+	char	*comment;
+	char	*sub;
+	char	*ret;
+	int		string_len;
+	int		comment_len;
+
+	comment = ft_strinit(ft_strrchr(str, c));
+	if (comment)
+	{
+		string_len = ft_strlen_asm(str);
+		comment_len = ft_strlen_asm(comment);
+		sub = ft_strsub(str, 0, string_len - comment_len);
+		ret = ft_strtrim(sub);
+		ft_strdel(&sub);
+		ft_strdel(&comment);
+		return (ret);
+	}
+	ft_strdel(&comment);
+	return (ft_strtrim(str));
+}
 
 void	ft_clear_all(t_asm *env)
 {
@@ -36,12 +62,18 @@ void	ft_get_file_content(t_asm *env)
 {
 	t_list	*lst;
 	char	*line;
+	char	*final_line;
 
 	lst = NULL;
 	while (get_next_line(env->fd, &line))
 	{
-		ft_lstend(&lst, (char *)line, ft_strlen_asm(line) + 1);
-		env->file_len++;
+		if (DIFF(line, ""))
+		{
+			final_line = ft_remove_end(line, ';');
+			ft_lstend(&lst, (char *)final_line, ft_strlen_asm(final_line) + 1);
+			env->file_len++;
+			ft_strdel(&final_line);
+		}
 		ft_strdel(&line);
 	}
 	env->file_content = ft_dbstrnew(env->file_len);
