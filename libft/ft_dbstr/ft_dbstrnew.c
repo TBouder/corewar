@@ -1,39 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm.h                                              :+:      :+:    :+:   */
+/*   ft_dbstrnew.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/15 14:31:29 by tbouder          ###   ########.fr       */
+/*   Created: 2016/11/15 14:31:56 by tbouder           #+#    #+#             */
+/*   Updated: 2016/11/15 14:36:47 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ASM_H
-# define ASM_H
-
-# include "../libft/libft.h"
-# include <errno.h>
-
-typedef struct	s_asm
-{
-	t_options	*options;
-	int			fd;
-
-	char		*filename;
-	char		*filename_noext;
-	char		*champ_name;
-	char		*champ_comment;
-
-	char		**file_content;
-	int			file_len;
-}				t_asm;
-
 /*
-** ft_asm_func.c
+** The ft_dbstrnew() function init to null a double tab and return it
 */
-int				ft_strlen_asm(char *str);
-char			*ft_strinit_asm(char *str);
 
-#endif
+#include "../libft.h"
+
+char	**ft_dbstrnew(size_t size)
+{
+	char		**buffer;
+	size_t		i;
+
+	buffer = NULL;
+	if (!(buffer = (char **)malloc(sizeof(char *) * (size + 1))))
+		return (NULL);
+	i = 0;
+	while (i < size + 1)
+	{
+		buffer[i] = NULL;
+		i++;
+	}
+	return (buffer);
+}

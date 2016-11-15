@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 13:32:00 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/10 14:24:59 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/14 18:51:35 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int			ft_extract_options(char **av, t_options *options)
 	int		value;
 
 	k = 0;
-	while (k <= 122)
+	while (k < 122)
 		options->flags[k++] = FALSE;
 	i = 1;
 	while (av[i] && av[i][0] == '-' && ft_isalnum(av[i][1]))
