@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/10 14:04:56 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/15 14:57:34 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 
 # define PI		3.141592653589793
 # define EQU	ft_strequ
+# define DIFF	!ft_strequ
 # define CMP	ft_strcmp
 # define FALSE	0
 # define TRUE	1
@@ -141,6 +142,9 @@ int					ft_strcountchar(char *str, char c);
 ** Double strings
 */
 void				ft_dbstrdel(char **str);
+void				ft_dbstrassign(char **tab, t_list *lst, size_t size);
+char				**ft_dbstrnew(size_t size);
+void				ft_putdbstr(char **tab, size_t size);
 
 /*
 ** Numbers
