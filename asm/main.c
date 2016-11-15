@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 16:03:50 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/15 14:48:03 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/11/15 16:05:18 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	ft_clear_all(t_asm *env)
 	ft_dbstrdel(env->file_content);
 	ft_strdel(&env->filename);
 	ft_strdel(&env->filename_noext);
+	ft_strdel(&env->champ_name);
+	ft_strdel(&env->champ_comment);
 	free(env->options);
 }
 
@@ -102,6 +104,9 @@ int		main(int ac, char **av)
 			ft_putdbstr(env.file_content, env.file_len);
 			ft_parse_file(&env);
 			// ft_printf("Writing output program to {10}%s{0}.cor\n", env.filename_noext);
+		
+			ft_printf("{9}%s{0}\n", env.champ_name);
+			ft_printf("{9}%s{0}\n", env.champ_comment);
 
 			ft_clear_all(&env);
 		}

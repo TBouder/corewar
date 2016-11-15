@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim_char.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
+/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/14 19:14:18 by tbouder           #+#    #+#             */
-/*   Updated: 2016/01/08 15:10:01 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/15 15:58:59 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ char			*ft_strtrim_char(char const *s, char c)
 	if (s == NULL)
 		return (NULL);
 	custom_char = count_spaces_st(s, c) + count_spaces_nd(s, c);
-	str = ft_strnew(ft_strlen(s) - custom_char);
 	str = ft_strsub(s, count_spaces_st(s, c), ft_strlen(s)
 		- count_spaces_nd(s, c));
 	str[ft_strlen(s) - custom_char] = '\0';
