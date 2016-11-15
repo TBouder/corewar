@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 14:37:54 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/15 16:54:21 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/15 17:05:15 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_putdbstr(char **tab, size_t size)
 		return ;
 	while (i < size)
 	{
-		ft_printf("{42}%s{0}\n", tab[i]);
+		ft_printf("%s\n", tab[i]);
 		i++;
 	}
 }
