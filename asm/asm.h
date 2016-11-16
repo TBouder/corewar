@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/15 18:35:05 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/11/15 18:38:33 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int				ft_strlen_asm(char *str);
 char			*ft_strinit_asm(char *str);
 
 void			ft_error_asm(t_asm *env, char *msg, int err);
-
 
 void			ft_parse_file(t_asm *env);
 
