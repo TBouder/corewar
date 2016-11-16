@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 17:46:27 by quroulon          #+#    #+#             */
-/*   Updated: 2016/11/15 17:22:02 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/15 18:34:00 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,11 @@ void		ft_recover_champ_infos(t_asm *env, int i)
 	}
 	ft_strdel(&tmp);
 }
+
+// void		ft_get_command(t_asm *env, int i)
+// {
+	// if ()
+// }
 
 void		ft_parse_file(t_asm *env)
 {

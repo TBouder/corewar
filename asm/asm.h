@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/15 15:58:51 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/11/15 17:47:59 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 # define ASM_H
 
 # include "../libft/libft.h"
+# include "op.h"
 # include <errno.h>
+
+// extern  op_t    op_tab[];
 
 typedef struct	s_asm
 {
@@ -28,6 +31,7 @@ typedef struct	s_asm
 
 	char		**file_content;
 	int			file_len;
+	// t_op		op_tab[17];
 }				t_asm;
 
 /*
