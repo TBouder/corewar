@@ -6,9 +6,10 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 16:03:50 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/15 17:32:49 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/16 14:16:23 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "asm.h"
 
@@ -94,19 +95,11 @@ void	ft_usage_asm(char *prog_name)
 	ft_printf("annotated version of the code to the standard output\n");
 }
 
-void	ft_error_asm(t_asm *env, char *source, int err)
+void	ft_error_asm(t_asm *env, char *msg, int clear)
 {
-	if (err == 0)
-		ft_printf("{9}Directories{0} are not allowed\n");
-	if (err == 1)
-		ft_printf("Can't read source file {9}%s{0}\n", source);
-	if (err == 2)
-		ft_printf("Extension {9}.s{0} is missing (NOEXT)\n");
-	if (err == 3)
-	{
-		ft_printf("File {9}%s{0} is empty\n", env->filename);
+	ft_printf("{9}%s{0}\n", msg);
+	if (clear == 1)
 		ft_clear_all(env);
-	}
 	free(env->options);
 	exit(1);
 }
@@ -119,11 +112,11 @@ char	ft_verif_extension(t_asm *env, char *source)
 
 	errno = 0;
 	if (source == NULL || (env->fd = open(source, O_RDONLY)) == -1 || errno != 0)
-		ft_error_asm(env, source, 1);
+		ft_error_asm(env, BAD_SRC_FILE, 0);
 	if (open(source, O_DIRECTORY) != -1)
-		ft_error_asm(env, source, 0);
+		ft_error_asm(env, NO_DIR, 0);
 	if (!ft_strrchr(source, '.'))
-		ft_error_asm(env, source, 2);
+		ft_error_asm(env, NO_EXT, 0);
 	extension = ft_strinit_asm(ft_strrchr(source, '.'));
 	result = EQU(extension, ".s");
 	if (result)
@@ -152,7 +145,7 @@ int		main(int ac, char **av)
 		{
 			ft_get_file_content(&env);
 			if (env.file_len == 0)
-				ft_error_asm(&env, av[i], 3);
+				ft_error_asm(&env, EMPTY_FILE, 1);
 			ft_putdbstr(env.file_content, env.file_len);
 
 			ft_parse_file(&env);
