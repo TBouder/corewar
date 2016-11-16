@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 17:46:27 by quroulon          #+#    #+#             */
-/*   Updated: 2016/11/15 18:33:45 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/11/16 13:13:18 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@ void		ft_recover_description(t_asm *env, int i)
 
 	tmp = ft_strchr(env->file_content[i], '"');
 	env->champ_comment = ft_strtrim_char(tmp, '"');
+	//TODO replace 128 by COMMENT_LENGTH
+	if (ft_strlen(env->champ_comment) - 1 > 2048)
+		ft_error_asm(env, CHAMP_COMMENT_TOO_LONG, 1);
 	tmp = NULL;
 }
 
@@ -27,6 +30,9 @@ void		ft_recover_name(t_asm *env, int i)
 
 	tmp = ft_strchr(env->file_content[i], '"');
 	env->champ_name = ft_strtrim_char(tmp, '"');
+	//TODO replace 128 by PROG_NAME_LENGTH
+	if (ft_strlen(env->champ_name) - 1 > 128)
+		ft_error_asm(env, CHAMP_NAME_TOO_LONG, 1);
 	tmp = NULL;
 }
 
