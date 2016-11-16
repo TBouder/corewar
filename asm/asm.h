@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/15 18:38:33 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/11/16 13:16:36 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # define NO_DIR "Directories are not allowed"
 # define NO_EXT "Extension .s is missing (NOEXT)"
 # define EMPTY_FILE "File is empty"
+# define CHAMP_NAME_TOO_LONG "Champion name too long (Max length 128)"
+# define CHAMP_COMMENT_TOO_LONG "Champion comment too long (Max length 2048)"
 
 typedef struct	s_asm
 {

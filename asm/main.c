@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 16:03:50 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/15 18:35:11 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/11/16 12:50:01 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,10 +94,10 @@ void	ft_usage_asm(char *prog_name)
 	ft_printf("annotated version of the code to the standard output\n");
 }
 
-void	ft_error_asm(t_asm *env, char *msg, int err)
+void	ft_error_asm(t_asm *env, char *msg, int clear)
 {
 	ft_printf("{9}%s{0}\n", msg);
-	if (err == 1)
+	if (clear == 1)
 		ft_clear_all(env);
 	free(env->options);
 	exit(1);
