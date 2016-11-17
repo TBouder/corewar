@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/17 15:54:00 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/17 16:35:37 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void			ft_parse_file(t_asm *env);
 ** ft_transform_hex.c
 */
 char			*ft_transform_magic(void);
-char			*ft_transform_name(t_asm *env);
+char			*ft_transform_champ_infos(char *content, size_t content_size);
 
 
 #endif

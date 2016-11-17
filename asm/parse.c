@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 17:46:27 by quroulon          #+#    #+#             */
-/*   Updated: 2016/11/17 15:56:39 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/17 16:50:42 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,11 @@ void		ft_parse_file(t_asm *env)
 		int		fd;
 		fd = open("test.cor", O_WRONLY, O_CREAT, 0600);
 		write(fd, ft_transform_magic(), MAGIC_LEN);
-		write(fd, ft_transform_name(env), PROG_NAME_LENGTH);
+		write(fd, ft_transform_champ_infos(env->champ_name, PROG_NAME_LENGTH), PROG_NAME_LENGTH);
+		// write(fd, "\x00", 1);
+		// write(fd, "\x00", 4);
+		// write(fd, "\x00", 4);
+		// write(fd, "\x00", 4);
+		// write(fd, ft_transform_champ_infos(env->champ_comment, COMMENT_LENGTH), COMMENT_LENGTH);
 	}
 }
