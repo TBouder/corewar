@@ -6,10 +6,10 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 17:46:27 by quroulon          #+#    #+#             */
-/*   Updated: 2016/11/17 17:43:23 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/11/17 17:44:42 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <stdio.h>
+
 #include "asm.h"
 
 void		ft_recover_description(t_asm *env, int i)
@@ -77,6 +77,11 @@ void		ft_parse_file(t_asm *env)
 		int		fd;
 		fd = open("test.cor", O_WRONLY, O_CREAT, 0600);
 		write(fd, ft_transform_magic(), MAGIC_LEN);
-		write(fd, ft_transform_name(env), PROG_NAME_LENGTH);
+		write(fd, ft_transform_champ_infos(env->champ_name, PROG_NAME_LENGTH), PROG_NAME_LENGTH);
+		// write(fd, "\x00", 1);
+		// write(fd, "\x00", 4);
+		// write(fd, "\x00", 4);
+		// write(fd, "\x00", 4);
+		// write(fd, ft_transform_champ_infos(env->champ_comment, COMMENT_LENGTH), COMMENT_LENGTH);
 	}
 }

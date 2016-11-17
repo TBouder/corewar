@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 15:52:08 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/17 15:54:10 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/17 16:42:05 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char		*ft_transform_magic(void)
 	magic_hex = ft_strnew_hex(MAGIC_LEN);
 	magic_len = ft_strlen(magic);
 	y = (MAGIC_LEN * 2) / magic_len;
-	if (y == 1 && (PROG_NAME_LENGTH * 2) % (magic_len - 1) == 0)
+	if (y == 1 && (MAGIC_LEN * 2) % (magic_len - 1) == 0)
 		y = 0;
 	while (i <= MAGIC_LEN)
 	{
@@ -40,7 +40,7 @@ char		*ft_transform_magic(void)
 	return (magic_hex);
 }
 
-char		*ft_transform_name(t_asm *env)
+char		*ft_transform_champ_infos(char *content, size_t content_size)
 {
 	int		i;
 	int		y;
@@ -49,11 +49,11 @@ char		*ft_transform_name(t_asm *env)
 	int		magic_len;
 
 	i = 0;
-	magic = ft_strinit(env->champ_name);
-	magic_hex = ft_strnew_hex(PROG_NAME_LENGTH);
+	magic = ft_strinit(content);
+	magic_hex = ft_strnew_hex(content_size);
 	magic_len = ft_strlen(magic);
-	y = (PROG_NAME_LENGTH * 2) / magic_len;
-	if (y == 1 && (PROG_NAME_LENGTH * 2) % (magic_len - 1) == 0)
+	// y = (content_size * 2) / magic_len;
+	// if (y == 1 && (content_size * 2) % (magic_len - 1) == 0)
 		y = 0;
 	while (magic[i])
 	{
