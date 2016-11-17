@@ -6,10 +6,10 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 17:46:27 by quroulon          #+#    #+#             */
-/*   Updated: 2016/11/16 13:13:18 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/11/16 18:33:26 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
+#include <stdio.h>
 #include "asm.h"
 
 void		ft_recover_description(t_asm *env, int i)
@@ -58,6 +58,11 @@ void		ft_recover_champ_infos(t_asm *env, int i)
 		}
 	}
 	ft_strdel(&tmp);
+
+	FILE *fp;
+	fp = fopen("test.cor","wb+");
+	fwrite(env->champ_name, 16, 9, fp);
+
 }
 
 void		ft_parse_file(t_asm *env)
