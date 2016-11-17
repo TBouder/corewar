@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 17:46:27 by quroulon          #+#    #+#             */
-/*   Updated: 2016/11/17 12:30:39 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/11/17 16:23:19 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdio.h>
@@ -59,11 +59,6 @@ void		ft_recover_champ_infos(t_asm *env, int i)
 	}
 }
 
-// void		ft_get_command(t_asm *env, int i)
-// {
-	// if ()
-// }
-
 void		ft_parse_file(t_asm *env)
 {
 	int		i;
@@ -74,5 +69,14 @@ void		ft_parse_file(t_asm *env)
 		if (env->file_content[i][0] == '.')
 			ft_recover_champ_infos(env, i);
 		i++;
+	}
+
+
+	/*THIS PART IS HERE TO TEST : WILL PRINT IN THE test.cor FILE*/
+	{
+		int		fd;
+		fd = open("test.cor", O_WRONLY, O_CREAT, 0600);
+		write(fd, ft_transform_magic(), MAGIC_LEN);
+		write(fd, ft_transform_name(env), PROG_NAME_LENGTH);
 	}
 }
