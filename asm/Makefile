@@ -6,7 +6,7 @@
 #    By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/10/05 20:24:05 by tbouder           #+#    #+#              #
-#    Updated: 2016/11/15 17:48:26 by tbouder          ###   ########.fr        #
+#    Updated: 2016/11/17 15:53:04 by tbouder          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,8 +22,8 @@ HEADER 		=	asm.h
 ################################################################################
 #	SRC
 ################################################################################
-SRC			=	main.c ft_asm_func.c parse.c
-OBJ			=	main.o ft_asm_func.o parse.o
+SRC			=	main.c ft_asm_func.c parse.c ft_transform_hex.c
+OBJ			=	main.o ft_asm_func.o parse.o ft_transform_hex.o
 
 ################################################################################
 #	RULES
