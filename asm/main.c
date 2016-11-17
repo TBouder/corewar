@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 16:03:50 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/16 12:50:01 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/11/16 14:16:23 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "asm.h"
 
@@ -71,7 +72,7 @@ void	ft_get_file_content(t_asm *env)
 		if (DIFF(line, ""))
 		{
 			tmp = ft_remove_end(line, ';');
-			final_line = ft_remove_end(tmp, '#');
+			final_line = ft_remove_end(tmp, COMMENT_CHAR);
 			if (DIFF(final_line, ""))
 			{
 				ft_lstend(&lst, (char *)final_line, ft_strlen_asm(final_line) + 1);
