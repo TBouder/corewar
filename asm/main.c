@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 16:03:50 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/16 14:48:11 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/17 21:30:33 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,7 @@ int		main(int ac, char **av)
 			ft_get_file_content(&env);
 			if (env.file_len == 0)
 				ft_error_asm(&env, EMPTY_FILE, 1);
-			ft_putdbstr(env.file_content, env.file_len);
+			// ft_putdbstr(env.file_content, env.file_len);
 
 			ft_parse_file(&env);
 			// ft_printf("{9}%s{0}\n", env.champ_name);
