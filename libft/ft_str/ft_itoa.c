@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/23 15:28:57 by tbouder           #+#    #+#             */
-/*   Updated: 2016/02/05 10:55:28 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/17 15:54:46 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 */
 
 #include "../libft.h"
-#include <stdlib.h>
 
 static char	*except(int n, char *nb)
 {

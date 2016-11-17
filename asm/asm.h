@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/16 14:21:46 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/17 15:54:00 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,14 @@
 # include "op.h"
 # include <errno.h>
 
-# define BAD_SRC_FILE "Can't read source file"
-# define NO_DIR "Directories are not allowed"
-# define NO_EXT "Extension .s is missing (NOEXT)"
-# define EMPTY_FILE "File is empty"
-# define CHAMP_NAME_TOO_LONG "Champion name too long (Max length 128)" // TODO NAME_LENGTH
-# define CHAMP_COMMENT_TOO_LONG "Champion comment too long (Max length 2048)" // TODO COMMENT_LENGTH
+# define	BAD_SRC_FILE "Can't read source file"
+# define	NO_DIR "Directories are not allowed"
+# define	NO_EXT "Extension .s is missing (NOEXT)"
+# define	EMPTY_FILE "File is empty"
+# define	CHAMP_NAME_TOO_LONG "Champion name too long (Max length 128)" // TODO NAME_LENGTH
+# define	CHAMP_COMMENT_TOO_LONG "Champion comment too long (Max length 2048)" // TODO COMMENT_LENGTH
+
+# define	MAGIC_LEN 4
 
 typedef struct	s_asm
 {
@@ -45,8 +47,21 @@ typedef struct	s_asm
 int				ft_strlen_asm(char *str);
 char			*ft_strinit_asm(char *str);
 
+/*
+** main.c
+*/
 void			ft_error_asm(t_asm *env, char *msg, int err);
 
+/*
+** parse.c
+*/
 void			ft_parse_file(t_asm *env);
+
+/*
+** ft_transform_hex.c
+*/
+char			*ft_transform_magic(void);
+char			*ft_transform_name(t_asm *env);
+
 
 #endif

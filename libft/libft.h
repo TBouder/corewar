@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/15 16:54:55 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/17 15:55:50 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ int					ft_dbstrlen(char **str);
 */
 
 char				*ft_strnew(size_t size);
+char				*ft_strnew_hex(size_t size);
 char				*ft_strinit(char *s1);
 void				ft_strdel(char **as);
 void				ft_strclr(char *s);
@@ -133,6 +134,7 @@ char				**ft_strsplit(char const *s, char c);
 
 char				*ft_itoa(int n);
 char				*ft_itoa_base(long long n, int base);
+char				*ft_itox(unsigned long long n);
 int					ft_toupper(int c);
 int					ft_tolower(int c);
 
