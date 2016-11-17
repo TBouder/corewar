@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/16 13:16:36 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/11/16 14:21:46 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,15 @@
 # define ASM_H
 
 # include "../libft/libft.h"
+# include "op.h"
 # include <errno.h>
 
 # define BAD_SRC_FILE "Can't read source file"
 # define NO_DIR "Directories are not allowed"
 # define NO_EXT "Extension .s is missing (NOEXT)"
 # define EMPTY_FILE "File is empty"
-# define CHAMP_NAME_TOO_LONG "Champion name too long (Max length 128)"
-# define CHAMP_COMMENT_TOO_LONG "Champion comment too long (Max length 2048)"
+# define CHAMP_NAME_TOO_LONG "Champion name too long (Max length 128)" // TODO NAME_LENGTH
+# define CHAMP_COMMENT_TOO_LONG "Champion comment too long (Max length 2048)" // TODO COMMENT_LENGTH
 
 typedef struct	s_asm
 {
@@ -35,6 +36,7 @@ typedef struct	s_asm
 
 	char		**file_content;
 	int			file_len;
+	// t_op		op_tab[17];
 }				t_asm;
 
 /*
