@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/17 16:35:37 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/17 21:29:36 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,12 @@
 # define	CHAMP_COMMENT_TOO_LONG "Champion comment too long (Max length 2048)" // TODO COMMENT_LENGTH
 
 # define	MAGIC_LEN 4
+# define	TMP_SIZE 77
+// # define	TMP_SIZE 1080
+// # define	TMP_SIZE 4320
+// # define	TMP_SIZE 316536
+// # define	TMP_SIZE 5064589
+// # define	TMP_SIZE 81033438
 
 typedef struct	s_asm
 {
@@ -62,6 +68,7 @@ void			ft_parse_file(t_asm *env);
 */
 char			*ft_transform_magic(void);
 char			*ft_transform_champ_infos(char *content, size_t content_size);
+void			ft_transform_size(int content, int fd);
 
 
 #endif
