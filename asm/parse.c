@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 17:46:27 by quroulon          #+#    #+#             */
-/*   Updated: 2016/11/18 14:34:32 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/18 16:04:23 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,15 @@ void		ft_recover_champ_infos(t_asm *env, int i)
 	}
 }
 
+int			ft_detect_errors(t_asm *env)
+{
+	if (!env->champ_name)
+		ft_error_asm(env, ERR_NOCHAMP_NAME, 1);
+	else if (!env->champ_comment)
+		return (1); //ERROR NO CHAMP COMMENT
+	return (0);
+}
+
 void		ft_put_data(t_asm *env)
 {
 	int		fd;
@@ -84,15 +93,6 @@ void		ft_put_data(t_asm *env)
 	ft_strdel(&hex_string);
 }
 
-int			ft_detect_errors(t_asm *env)
-{
-	if (!env->champ_name)
-		ft_error_asm(env, ERR_NOCHAMP_NAME, 1);
-	else if (!env->champ_comment)
-		return (1); //ERROR NO CHAMP COMMENT
-	return (0);
-}
-
 void		ft_parse_file(t_asm *env)
 {
 	int		i;
@@ -102,6 +102,10 @@ void		ft_parse_file(t_asm *env)
 	{
 		if (env->file_content[i][0] == '.')
 			ft_recover_champ_infos(env, i);
+		else
+		{
+			// ft_get_size(env, i);
+		}
 		i++;
 	}
 	if (ft_detect_errors(env) == 0)

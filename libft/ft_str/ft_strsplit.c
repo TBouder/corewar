@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/23 16:06:19 by tbouder           #+#    #+#             */
-/*   Updated: 2016/04/26 15:17:06 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/18 15:24:08 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 */
 
 #include "../libft.h"
-#include <stdlib.h>
 
 static int		count_w(char const *s, char *c)
 {
