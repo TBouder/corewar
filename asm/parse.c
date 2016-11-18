@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 17:46:27 by quroulon          #+#    #+#             */
-/*   Updated: 2016/11/18 16:04:23 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/18 18:40:03 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void		ft_parse_file(t_asm *env)
 			ft_recover_champ_infos(env, i);
 		else
 		{
-			// ft_get_size(env, i);
+			ft_get_size(env, i);
 		}
 		i++;
 	}
