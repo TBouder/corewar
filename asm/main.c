@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 16:03:50 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/18 14:39:20 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/18 16:03:58 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,25 @@
 ** This function is used to remove all the stuff after [;] or [#] and the white
 ** spaces
 */
+void	ft_strreplace_space(char *str)
+{
+	int		i;
+
+	i = 0;
+	// ft_printf("{11}%s{0}\n", str);
+	while (str[i])
+	{
+		if (ft_isspace(str[i]))
+			str[i] = ' ';
+		i++;
+	}
+}
 char	*ft_remove_end(char *str, char c)
 {
 	char	*comment;
 	char	*sub;
 	char	*ret;
+	char	*trim;
 	int		string_len;
 	int		comment_len;
 
@@ -31,11 +45,16 @@ char	*ft_remove_end(char *str, char c)
 		string_len = ft_strlen_asm(str);
 		comment_len = ft_strlen_asm(comment);
 		sub = ft_strsub(str, 0, string_len - comment_len);
-		ret = ft_strtrim(sub);
+		trim = ft_strtrim(sub);
 		ft_strdel(&sub);
-		return (ret);
 	}
-	return (ft_strtrim(str));
+	else
+		trim = ft_strtrim(str);
+	ret = ft_strtrim_char(trim, '\t');
+	ft_strreplace_space(ret);
+	ft_strdel(&trim);
+	return (ret);
+	// return (ft_strtrim(str));
 }
 
 void	ft_clear_all(t_asm *env)
