@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 16:03:50 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/18 16:03:58 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/18 18:41:24 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,26 +35,23 @@ char	*ft_remove_end(char *str, char c)
 	char	*comment;
 	char	*sub;
 	char	*ret;
-	char	*trim;
 	int		string_len;
 	int		comment_len;
 
-	comment = ft_strrchr(str, c);
+	comment = ft_strinit(ft_strrchr(str, c));
 	if (comment)
 	{
 		string_len = ft_strlen_asm(str);
 		comment_len = ft_strlen_asm(comment);
 		sub = ft_strsub(str, 0, string_len - comment_len);
-		trim = ft_strtrim(sub);
+		ret = ft_strtrim(sub);
 		ft_strdel(&sub);
+		ft_strdel(&comment);
+		return (ret);
 	}
-	else
-		trim = ft_strtrim(str);
-	ret = ft_strtrim_char(trim, '\t');
-	ft_strreplace_space(ret);
-	ft_strdel(&trim);
-	return (ret);
-	// return (ft_strtrim(str));
+	ft_strdel(&comment);
+	return (ft_strtrim(str));
+
 }
 
 void	ft_clear_all(t_asm *env)
@@ -92,6 +89,7 @@ void	ft_get_file_content(t_asm *env)
 		{
 			tmp = ft_remove_end(line, ';');
 			final_line = ft_remove_end(tmp, COMMENT_CHAR);
+			ft_strreplace_space(final_line);
 			if (DIFF(final_line, ""))
 			{
 				ft_lstend(&lst, (char *)final_line, ft_strlen_asm(final_line) + 1);
