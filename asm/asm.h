@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/17 21:29:36 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/18 14:03:18 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,7 @@
 
 # include "../libft/libft.h"
 # include "op.h"
-# include <errno.h>
-
-# define	BAD_SRC_FILE "Can't read source file"
-# define	NO_DIR "Directories are not allowed"
-# define	NO_EXT "Extension .s is missing (NOEXT)"
-# define	EMPTY_FILE "File is empty"
-# define	CHAMP_NAME_TOO_LONG "Champion name too long (Max length 128)" // TODO NAME_LENGTH
-# define	CHAMP_COMMENT_TOO_LONG "Champion comment too long (Max length 2048)" // TODO COMMENT_LENGTH
+# include "errors.h"
 
 # define	MAGIC_LEN 4
 # define	TMP_SIZE 77

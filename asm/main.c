@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 16:03:50 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/17 21:30:33 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/18 14:39:20 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,6 @@ void	ft_get_file_content(t_asm *env)
 void	ft_usage_asm(char *prog_name)
 {
 	ft_printf("Usage: %s [-a] <sourcefile.s>\n", prog_name);
-	ft_printf("\t-a : Instead of creating a .cor file, outputs a stripped and");
-	ft_printf("annotated version of the code to the standard output\n");
 }
 
 void	ft_error_asm(t_asm *env, char *msg, int clear)
@@ -112,11 +110,11 @@ char	ft_verif_extension(t_asm *env, char *source)
 
 	errno = 0;
 	if (source == NULL || (env->fd = open(source, O_RDONLY)) == -1 || errno != 0)
-		ft_error_asm(env, BAD_SRC_FILE, 0);
+		ft_error_asm(env, ERR_BAD_SRC_FILE, 0);
 	if (open(source, O_DIRECTORY) != -1)
-		ft_error_asm(env, NO_DIR, 0);
+		ft_error_asm(env, ERR_DIR, 0);
 	if (!ft_strrchr(source, '.'))
-		ft_error_asm(env, NO_EXT, 0);
+		ft_error_asm(env, ERR_NOEXT, 0);
 	extension = ft_strinit_asm(ft_strrchr(source, '.'));
 	result = EQU(extension, ".s");
 	if (result)
@@ -145,9 +143,7 @@ int		main(int ac, char **av)
 		{
 			ft_get_file_content(&env);
 			if (env.file_len == 0)
-				ft_error_asm(&env, EMPTY_FILE, 1);
-			// ft_putdbstr(env.file_content, env.file_len);
-
+				ft_error_asm(&env, ERR_EMPTY_FILE, 1);
 			ft_parse_file(&env);
 			// ft_printf("{9}%s{0}\n", env.champ_name);
 			// ft_printf("{9}%s{0}\n", env.champ_comment);
@@ -155,10 +151,10 @@ int		main(int ac, char **av)
 			ft_clear_all(&env);
 		}
 		else
-			ft_printf("File extension is {9}not .s{0}\n");
+			ft_error_asm(&env, ERR_NOT_S, 0);
 	}
 	else if (ac - i > 1)
-		ft_printf("Multiple args detected. Only {9}one{0} arg needed\n");
+		ft_error_asm(&env, MULT_ARGS, 0);
 	free(env.options);
 	return (0);
 }
