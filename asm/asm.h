@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/18 15:19:51 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/19 15:18:41 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct	s_asm
 	char		*filename_noext;
 	char		*champ_name;
 	char		*champ_comment;
+	int			instruct_size;
 
 	char		**file_content;
 	int			file_len;
@@ -68,6 +69,16 @@ void			ft_transform_size(int content, int fd);
 ** ft_get_size.c
 */
 void			ft_get_size(t_asm *env, int i);
+
+/*
+** ft_get_size_helper.c
+*/
+int				ft_isind(char c);
+int				ft_analyse_args_one(int code, char *arg1);
+int				ft_analyse_args_two(int code, char *arg1, char *arg2);
+int				ft_analyse_args_three(int code, char *arg1, char *arg2, char *arg3);
+
+
 
 
 #endif

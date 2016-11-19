@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 16:03:50 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/18 18:41:24 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/18 23:40:09 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	ft_strreplace_space(char *str)
 	while (str[i])
 	{
 		if (ft_isspace(str[i]))
+			str[i] = ' ';
+		if (str[i] == ',') //////PTETE PAS TOP POUR LA VERIF
 			str[i] = ' ';
 		i++;
 	}
@@ -65,6 +67,8 @@ void	ft_clear_all(t_asm *env)
 
 void	ft_init_env(t_asm *env)
 {
+	env->options = NULL;
+
 	env->file_content = NULL;
 	env->file_len = 0;
 
@@ -72,7 +76,7 @@ void	ft_init_env(t_asm *env)
 	env->champ_comment = NULL;
 	env->filename = NULL;
 	env->filename_noext = NULL;
-	env->options = NULL;
+	env->instruct_size = 0;
 }
 
 void	ft_get_file_content(t_asm *env)
