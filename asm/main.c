@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 16:03:50 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/16 14:48:11 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/18 23:40:09 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,21 @@
 ** This function is used to remove all the stuff after [;] or [#] and the white
 ** spaces
 */
+void	ft_strreplace_space(char *str)
+{
+	int		i;
+
+	i = 0;
+	// ft_printf("{11}%s{0}\n", str);
+	while (str[i])
+	{
+		if (ft_isspace(str[i]))
+			str[i] = ' ';
+		if (str[i] == ',') //////PTETE PAS TOP POUR LA VERIF
+			str[i] = ' ';
+		i++;
+	}
+}
 char	*ft_remove_end(char *str, char c)
 {
 	char	*comment;
@@ -25,7 +40,7 @@ char	*ft_remove_end(char *str, char c)
 	int		string_len;
 	int		comment_len;
 
-	comment = ft_strrchr(str, c);
+	comment = ft_strinit(ft_strrchr(str, c));
 	if (comment)
 	{
 		string_len = ft_strlen_asm(str);
@@ -33,9 +48,12 @@ char	*ft_remove_end(char *str, char c)
 		sub = ft_strsub(str, 0, string_len - comment_len);
 		ret = ft_strtrim(sub);
 		ft_strdel(&sub);
+		ft_strdel(&comment);
 		return (ret);
 	}
+	ft_strdel(&comment);
 	return (ft_strtrim(str));
+
 }
 
 void	ft_clear_all(t_asm *env)
@@ -49,6 +67,8 @@ void	ft_clear_all(t_asm *env)
 
 void	ft_init_env(t_asm *env)
 {
+	env->options = NULL;
+
 	env->file_content = NULL;
 	env->file_len = 0;
 
@@ -56,7 +76,7 @@ void	ft_init_env(t_asm *env)
 	env->champ_comment = NULL;
 	env->filename = NULL;
 	env->filename_noext = NULL;
-	env->options = NULL;
+	env->instruct_size = 0;
 }
 
 void	ft_get_file_content(t_asm *env)
@@ -73,6 +93,7 @@ void	ft_get_file_content(t_asm *env)
 		{
 			tmp = ft_remove_end(line, ';');
 			final_line = ft_remove_end(tmp, COMMENT_CHAR);
+			ft_strreplace_space(final_line);
 			if (DIFF(final_line, ""))
 			{
 				ft_lstend(&lst, (char *)final_line, ft_strlen_asm(final_line) + 1);
@@ -91,8 +112,6 @@ void	ft_get_file_content(t_asm *env)
 void	ft_usage_asm(char *prog_name)
 {
 	ft_printf("Usage: %s [-a] <sourcefile.s>\n", prog_name);
-	ft_printf("\t-a : Instead of creating a .cor file, outputs a stripped and");
-	ft_printf("annotated version of the code to the standard output\n");
 }
 
 void	ft_error_asm(t_asm *env, char *msg, int clear)
@@ -112,11 +131,11 @@ char	ft_verif_extension(t_asm *env, char *source)
 
 	errno = 0;
 	if (source == NULL || (env->fd = open(source, O_RDONLY)) == -1 || errno != 0)
-		ft_error_asm(env, BAD_SRC_FILE, 0);
+		ft_error_asm(env, ERR_BAD_SRC_FILE, 0);
 	if (open(source, O_DIRECTORY) != -1)
-		ft_error_asm(env, NO_DIR, 0);
+		ft_error_asm(env, ERR_DIR, 0);
 	if (!ft_strrchr(source, '.'))
-		ft_error_asm(env, NO_EXT, 0);
+		ft_error_asm(env, ERR_NOEXT, 0);
 	extension = ft_strinit_asm(ft_strrchr(source, '.'));
 	result = EQU(extension, ".s");
 	if (result)
@@ -145,9 +164,7 @@ int		main(int ac, char **av)
 		{
 			ft_get_file_content(&env);
 			if (env.file_len == 0)
-				ft_error_asm(&env, EMPTY_FILE, 1);
-			ft_putdbstr(env.file_content, env.file_len);
-
+				ft_error_asm(&env, ERR_EMPTY_FILE, 1);
 			ft_parse_file(&env);
 			// ft_printf("{9}%s{0}\n", env.champ_name);
 			// ft_printf("{9}%s{0}\n", env.champ_comment);
@@ -155,10 +172,10 @@ int		main(int ac, char **av)
 			ft_clear_all(&env);
 		}
 		else
-			ft_printf("File extension is {9}not .s{0}\n");
+			ft_error_asm(&env, ERR_NOT_S, 0);
 	}
 	else if (ac - i > 1)
-		ft_printf("Multiple args detected. Only {9}one{0} arg needed\n");
+		ft_error_asm(&env, MULT_ARGS, 0);
 	free(env.options);
 	return (0);
 }
