@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 17:46:27 by quroulon          #+#    #+#             */
-/*   Updated: 2016/11/17 17:44:42 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/11/17 17:57:13 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void		ft_recover_description(t_asm *env, int i)
 
 	tmp = ft_strchr(env->file_content[i], '"');
 	env->champ_comment = ft_strtrim_char(tmp, '"');
-	if (ft_strlen(env->champ_comment) - 1 > COMMENT_LENGTH)
+	if (ft_strlen(env->champ_comment) > COMMENT_LENGTH)
 		ft_error_asm(env, CHAMP_COMMENT_TOO_LONG, 1);
 }
 
@@ -28,7 +28,8 @@ void		ft_recover_name(t_asm *env, int i)
 
 	tmp = ft_strchr(env->file_content[i], '"');
 	env->champ_name = ft_strtrim_char(tmp, '"');
-	if (ft_strlen(env->champ_name) - 1 > PROG_NAME_LENGTH)
+	// ft_printf("strlen %d\n, [%s]", ft_strlen(env->champ_name), env->champ_name);
+	if (ft_strlen(env->champ_name) > PROG_NAME_LENGTH)
 		ft_error_asm(env, CHAMP_NAME_TOO_LONG, 1);
 }
 
