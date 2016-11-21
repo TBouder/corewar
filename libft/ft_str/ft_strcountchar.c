@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/29 15:20:42 by tbouder           #+#    #+#             */
-/*   Updated: 2016/05/29 15:21:30 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/18 14:10:54 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,5 @@ int		ft_strcountchar(char *str, char c)
 			space++;
 		i++;
 	}
-	return (space + 1);
+	return (space);
 }

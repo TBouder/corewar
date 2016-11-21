@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/17 16:35:37 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/19 15:18:41 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,27 @@
 
 # include "../libft/libft.h"
 # include "op.h"
-# include <errno.h>
-
-# define	BAD_SRC_FILE "Can't read source file"
-# define	NO_DIR "Directories are not allowed"
-# define	NO_EXT "Extension .s is missing (NOEXT)"
-# define	EMPTY_FILE "File is empty"
-# define	CHAMP_NAME_TOO_LONG "Champion name too long (Max length 128)" // TODO NAME_LENGTH
-# define	CHAMP_COMMENT_TOO_LONG "Champion comment too long (Max length 2048)" // TODO COMMENT_LENGTH
+# include "errors.h"
 
 # define	MAGIC_LEN 4
+# define	TMP_SIZE 77
+// # define	TMP_SIZE 1080
+// # define	TMP_SIZE 4320
+// # define	TMP_SIZE 316536
+// # define	TMP_SIZE 5064589
+// # define	TMP_SIZE 81033438
 
 typedef struct	s_asm
 {
 	t_options	*options;
 	int			fd;
+	int			fd_cor;
 
 	char		*filename;
 	char		*filename_noext;
 	char		*champ_name;
 	char		*champ_comment;
+	int			instruct_size;
 
 	char		**file_content;
 	int			file_len;
@@ -62,6 +63,22 @@ void			ft_parse_file(t_asm *env);
 */
 char			*ft_transform_magic(void);
 char			*ft_transform_champ_infos(char *content, size_t content_size);
+void			ft_transform_size(int content, int fd);
+
+/*
+** ft_get_size.c
+*/
+void			ft_get_size(t_asm *env, int i);
+
+/*
+** ft_get_size_helper.c
+*/
+int				ft_isind(char c);
+int				ft_analyse_args_one(int code, char *arg1);
+int				ft_analyse_args_two(int code, char *arg1, char *arg2);
+int				ft_analyse_args_three(int code, char *arg1, char *arg2, char *arg3);
+
+
 
 
 #endif

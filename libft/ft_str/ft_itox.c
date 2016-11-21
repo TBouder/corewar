@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/23 15:28:57 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/17 15:55:36 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/18 13:23:17 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ static void		ft_convert(unsigned long long n, char *s, int *index)
 	}
 	else
 	{
-		ft_strdel(&str);
 		ft_convert(n / 16, s, index);
 		ft_convert(n % 16, s, index);
 	}
+	ft_strdel(&str);
 }
 
 char			*ft_itox(unsigned long long n)
