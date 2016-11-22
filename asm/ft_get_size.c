@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 15:19:07 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/22 12:39:23 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/22 14:50:35 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,45 +57,55 @@ int				ft_get_opcode(char *opname)
 	return (opcode);
 }
 
-int				ft_verif_label(char *str)
+int				ft_verif_label_direct(char *str, int type)
 {
 	int		i;
 
 	i = 0;
-	if (str && str[i] == DIRECT_CHAR && str[i + 1] == LABEL_CHAR)
+	if (type == 0)
 	{
 		i = 2;
 		while ((str[i] >= 97 && str[i] <= 122) || ft_isnumber(str[i]) ||
 				str[i] == '-')
 			i++;
 		if (!str[i])
-			return (1); //SUCCESS DIRECT LABEL
+			return (1);
 	}
-	else if (str && str[i] == DIRECT_CHAR && str[i + 1] != LABEL_CHAR)
+	else
 	{
 		i = 1;
 		while (ft_isnumber(str[i]) || str[i] == '-')
 			i++;
 		if (!str[i])
-			return (1); //SUCCESS DIRECT INT
+			return (1);
 	}
+	return (0);
+}
+
+int				ft_verif_label(char *str)
+{
+	int		i;
+	int		reg_nb;
+
+	i = 0;
+	if (str && str[i] == DIRECT_CHAR && str[i + 1] == LABEL_CHAR)
+		return (ft_verif_label_direct(str, 0));
+	else if (str && str[i] == DIRECT_CHAR && str[i + 1] != LABEL_CHAR)
+		return (ft_verif_label_direct(str, 1));
 	else if (str && (ft_isnumber(str[i]) || str[i] == '-'))
 	{
 		i = 1;
 		while (ft_isnumber(str[i]))
 			i++;
 		if (!str[i])
-			return (2); //SUCCESS INDIRECT
+			return (2);
 	}
 	else if (str && str[i] == 'r')
 	{
-		int		reg_nb;
-
 		reg_nb = ft_atoi(str);
 		i = 1;
 		if (reg_nb <= REG_NUMBER)
-			return (3); //SUCCESS REG
-
+			return (3);
 	}
 	return (0);
 }
@@ -113,7 +123,10 @@ void			ft_get_size(t_asm *env, int i)
 	ft_init_function_tab(tab);
 
 	if (opcode != 0)
+	{
 		arg_value = tab[(int)opcode](content[1], content[2], content[3]);
+		ft_printf("{9}%d : %s{0}\n", arg_value, env->file_content[i]);
+	}
 	if (arg_value < 0)
 	{
 		if (arg_value == -1)
@@ -123,5 +136,4 @@ void			ft_get_size(t_asm *env, int i)
 		ft_error_asm(env, "", 1);
 	}
 	env->instruct_size += arg_value;
-	// ft_printf("[{9}%d{0}]\n", env->instruct_size);
 }

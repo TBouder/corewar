@@ -14,9 +14,10 @@ xxx:
 #zork:
 	live	%42
 	fork	%:xxx
+	live2:	live 	%4
 	st	r1,13
 	ld	%0,r15
-zork_:
+ld:
 	live	%42
 	zjmp	%-5
 
