@@ -6,55 +6,11 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 16:03:50 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/22 10:38:13 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/22 16:01:56 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "asm.h"
-
-/*
-** This function is used to remove all the stuff after [;] or [#] and the white
-** spaces
-*/
-void	ft_strreplace_space(char *str)
-{
-	int		i;
-
-	i = 0;
-	// ft_printf("{11}%s{0}\n", str);
-	while (str[i])
-	{
-		if (ft_isspace(str[i]))
-			str[i] = ' ';
-		if (str[i] == ',') //////PTETE PAS TOP POUR LA VERIF
-			str[i] = ' ';
-		i++;
-	}
-}
-char	*ft_remove_end(char *str, char c)
-{
-	char	*comment;
-	char	*sub;
-	char	*ret;
-	int		string_len;
-	int		comment_len;
-
-	comment = ft_strinit(ft_strrchr(str, c));
-	if (comment)
-	{
-		string_len = ft_strlen_asm(str);
-		comment_len = ft_strlen_asm(comment);
-		sub = ft_strsub(str, 0, string_len - comment_len);
-		ret = ft_strtrim(sub);
-		ft_strdel(&sub);
-		ft_strdel(&comment);
-		return (ret);
-	}
-	ft_strdel(&comment);
-	return (ft_strtrim(str));
-
-}
 
 void	ft_clear_all(t_asm *env)
 {
@@ -77,36 +33,6 @@ void	ft_init_env(t_asm *env)
 	env->filename = NULL;
 	env->filename_noext = NULL;
 	env->instruct_size = 0;
-}
-
-void	ft_get_file_content(t_asm *env)
-{
-	t_list	*lst;
-	char	*line;
-	char	*tmp;
-	char	*final_line;
-
-	lst = NULL;
-	while (get_next_line(env->fd, &line))
-	{
-		if (DIFF(line, ""))
-		{
-			tmp = ft_remove_end(line, ';');
-			final_line = ft_remove_end(tmp, COMMENT_CHAR);
-			ft_strreplace_space(final_line);
-			if (DIFF(final_line, ""))
-			{
-				ft_lstend(&lst, (char *)final_line, ft_strlen_asm(final_line) + 1);
-				env->file_len++;
-			}
-			ft_strdel(&tmp);
-			ft_strdel(&final_line);
-		}
-		ft_strdel(&line);
-	}
-	env->file_content = ft_dbstrnew(env->file_len);
-	ft_dbstrassign(env->file_content, lst, env->file_len);
-	ft_lstclr(&lst);
 }
 
 void	ft_usage_asm(char *prog_name)
@@ -166,9 +92,14 @@ int		main(int ac, char **av)
 			if (env.file_len == 0)
 				ft_error_asm(&env, ERR_EMPTY_FILE, 1);
 			ft_parse_file(&env);
-			ft_printf("{9}[%s]{0}\n", env.champ_name);
-			ft_printf("{9}[%s]{0}\n", env.champ_comment);
+
+			ft_printf("----------------------------------------------------\n");
+			ft_printf("{11}%-17s{0} : [{10}%s{0}]\n", "Champion Name", env.champ_name);
+			ft_printf("{11}%-17s{0} : [{10}%s{0}]\n", "Champion Comment", env.champ_comment);
+			ft_printf("{11}%-17s{0} : [{10}%d{0}]\n", "File Size", env.instruct_size);
+			ft_printf("----------------------------------------------------\n");
 			ft_printf("Writing output program to {10}%s{0}.cor\n", env.filename_noext);
+
 			ft_clear_all(&env);
 		}
 		else

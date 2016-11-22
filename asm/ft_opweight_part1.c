@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 11:55:28 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/22 12:31:55 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/22 16:10:54 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int		ft_opweight_4_5(char *arg1, char *arg2, char *arg3)
 	if (ft_verif_label(arg1) == 3 &&
 		ft_verif_label(arg2) == 3 &&
 		ft_verif_label(arg3) == 3)
-		return (4);
+		return (4 + 1);
 	return (-1);
 }
 
