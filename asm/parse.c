@@ -6,72 +6,67 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 17:46:27 by quroulon          #+#    #+#             */
-/*   Updated: 2016/11/22 12:26:06 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/11/22 15:48:38 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-void		ft_recover_comment(t_asm *env, char *line)
+void		ft_recover_comment(t_asm *env, char *line, int i, int j)
 {
-	int		i;
-	int		j;
-	char	*tmp;
-
-	i = 1;
-	j = 8;
-	while (line[j] && line[j] != '"')
+	while (line[i] && line[i] != '"')
 	{
-		if (line[j] != ' ')
+		if (ft_isspace(line[i]) == 0)
 			ft_error_asm(env, ERR_SYNTAX_ERROR_BCOMMENT, 1);
-		j++;
-	}
-	tmp = ft_strchr(line, '"');
-	if (!tmp || tmp[0] != '"')
-		ft_error_asm(env, ERR_NOCHAMP_COMMENT, 1);
-	while (tmp[i] && tmp[i] != '"')
 		i++;
-	if (tmp[i] != '"')
+	}
+	i++;
+	j = i;
+	while (line[i] && line[i] != '"')
+		i++;
+	if (line[i] != '"')
 		ft_error_asm(env, ERR_NOCHAMP_COMMENT, 1);
-	env->champ_comment = ft_strsub(tmp, 1, i - 1);
+	env->champ_comment = ft_strsub(line, j, i - j);
+	ft_printf("[%s]\n", env->champ_comment);
 	if (ft_strlen(env->champ_comment) == 0)
 		ft_error_asm(env, ERR_NOCHAMP_COMMENT, 1);
 	else if (ft_strlen(env->champ_comment) == COMMENT_LENGTH)
 		ft_error_asm(env, ERR_CHAMP_COMMENT_TOO_LONG, 1);
-	while (tmp[i])
+	i++;
+	while (line[i])
 	{
-		i++;
-		if (tmp[i] >= 32 && tmp[i] <= 126)
+		if (ft_isspace(line[i]) == 0)
 			ft_error_asm(env, ERR_SYNTAX_ERROR_ACOMMENT, 1);
+		i++;
 	}
-	ft_printf("[%s]\n", env->champ_comment);
 }
 
-void		ft_recover_name(t_asm *env, char *line)
+void		ft_recover_name(t_asm *env, char *line, int i, int j)
 {
-	int		i;
-	char	*tmp;
-
-	i = 1;
-	tmp = ft_strchr(line, '"');
-	if (!tmp || tmp[0] != '"')
-		ft_error_asm(env, ERR_NOCHAMP_NAME, 1);
-	while (tmp[i] && tmp[i] != '"')
+	while (line[i] && line[i] != '"')
+	{
+		if (ft_isspace(line[i]) == 0)
+			ft_error_asm(env, ERR_SYNTAX_ERROR_BNAME, 1);
 		i++;
-	if (tmp[i] != '"')
+	}
+	i++;
+	j = i;
+	while (line[i] && line[i] != '"')
+		i++;
+	if (line[i] != '"')
 		ft_error_asm(env, ERR_NOCHAMP_NAME, 1);
-	env->champ_name = ft_strsub(tmp, 1, i - 1);
+	env->champ_name = ft_strsub(line, j, i - j);
 	if (ft_strlen(env->champ_name) == 0)
 		ft_error_asm(env, ERR_NOCHAMP_NAME, 1);
 	else if (ft_strlen(env->champ_name) == PROG_NAME_LENGTH)
 		ft_error_asm(env, ERR_CHAMP_NAME_TOO_LONG, 1);
-	while (tmp[i])
+	i++;
+	while (line[i])
 	{
-		i++;
-		if (tmp[i] >= 32 && tmp[i] <= 126)
+		if (ft_isspace(line[i]) == 0)
 			ft_error_asm(env, ERR_SYNTAX_ERROR_ANAME, 1);
+		i++;
 	}
-	ft_printf("[%s]\n", env->champ_name);
 }
 
 void		ft_recover_champ_infos(t_asm *env, int i)
@@ -82,7 +77,7 @@ void		ft_recover_champ_infos(t_asm *env, int i)
 	if (EQU(tmp, NAME_CMD_STRING) == 1 && !env->champ_name)
 	{
 		ft_strdel(&tmp);
-		ft_recover_name(env, env->file_content[i]);
+		ft_recover_name(env, env->file_content[i], 5, 0);
 	}
 	else
 	{
@@ -91,7 +86,7 @@ void		ft_recover_champ_infos(t_asm *env, int i)
 		if (EQU(tmp, COMMENT_CMD_STRING) == 1 && !env->champ_comment)
 		{
 			ft_strdel(&tmp);
-			ft_recover_comment(env, env->file_content[i]);
+			ft_recover_comment(env, env->file_content[i], 8, 0);
 		}
 		else
 		{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
+/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/19 15:18:41 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/22 15:42:41 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ void			ft_error_asm(t_asm *env, char *msg, int err);
 ** parse.c
 */
 void			ft_parse_file(t_asm *env);
+void			ft_recover_comment(t_asm *env, char *line, int i, int j);
+void			ft_recover_name(t_asm *env, char *line, int i, int j);
 
 /*
 ** ft_transform_hex.c
