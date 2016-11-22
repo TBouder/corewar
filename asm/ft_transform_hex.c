@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 15:52:08 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/18 13:24:22 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/21 15:37:36 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void		ft_transform_size(int content, int fd)
 	len_size = (len_size / 2) + odd;
 	len_buffer = 8 - len_size;
 	write(fd, "\x00", len_buffer);
-	hex_string = ft_transform_size_helper(TMP_SIZE, len_size);
+	hex_string = ft_transform_size_helper(content, len_size);
 	write(fd, hex_string, len_size);
 	ft_strdel(&hex_string);
 	ft_strdel(&content_str);
