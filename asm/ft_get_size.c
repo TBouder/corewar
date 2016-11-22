@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_get_size.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
+/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 15:19:07 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/19 15:18:55 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/21 11:02:20 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void			ft_get_opcode_name(t_asm *env, char **content)
 	opcode = ft_get_opcode(content[0]);
 	env->instruct_size += ft_get_args(opcode, content);
 
-	ft_printf("%s : %d\n", content[0], env->instruct_size);
+	// ft_printf("%s : %d\n", content[0], env->instruct_size);
 	// ft_printf("[{11}%s{0}] : [{10}%d{0}]\n", content[0], ft_get_opcode(content[0]));
 	// env->instruct_size += ft_put_weight_opname(content[0]);
 	// ft_printf("[{10}%s{0}] -> [%d] ", content[0], env->instruct_size);
@@ -90,5 +90,5 @@ void			ft_get_size(t_asm *env, int i)
 	content = ft_strsplit(env->file_content[i], ' ');
 
 	ft_get_opcode_name(env, content);
-	ft_printf("[{9}%d{0}]\n", env->instruct_size);
+	// ft_printf("[{9}%d{0}]\n", env->instruct_size);
 }

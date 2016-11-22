@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 17:46:27 by quroulon          #+#    #+#             */
-/*   Updated: 2016/11/21 10:08:14 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/11/22 10:31:08 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,28 @@ void		ft_recover_description(t_asm *env, int i)
 		ft_error_asm(env, ERR_CHAMP_COMMENT_TOO_LONG, 1);
 }
 
-void		ft_recover_name(t_asm *env, int i)
+void		ft_recover_name(t_asm *env, char *line)
 {
+	int		i;
 	char	*tmp;
-	int		nb_quote;
 
-	tmp = ft_strchr(env->file_content[i], '"');
-	if (!tmp || (nb_quote = ft_strcountchar(tmp, '"')) != 2 || (nb_quote == 2 && ft_strlen(tmp) == 2))
+	i = 1;
+	tmp = ft_strchr(line, '"');
+	if (!tmp || tmp[0] != '"')
 		ft_error_asm(env, ERR_NOCHAMP_NAME, 1);
-	env->champ_name = ft_strtrim_char(tmp, '"');
-	// ft_printf("strlen %d\n, [%s]", ft_strlen(env->champ_name), env->champ_name);
-	if (ft_strlen(env->champ_name) > PROG_NAME_LENGTH)
-		ft_error_asm(env, ERR_CHAMP_NAME_TOO_LONG, 1);
+	while (tmp[i] && tmp[i] != '"')
+		i++;
+	if (tmp[i] != '"')
+		ft_error_asm(env, ERR_NOCHAMP_NAME, 1);
+	env->champ_name = ft_strsub(tmp, 1, i - 1);
+	if (ft_strlen(env->champ_name) == 0)
+		ft_error_asm(env, ERR_NOCHAMP_NAME, 1);
+	while (tmp[i])
+	{
+		i++;
+		if (tmp[i] >= 32 && tmp[i] <= 126)
+			ft_error_asm(env, SYNTAX_ERROR_NAME, 1);
+	}
 }
 
 void		ft_recover_champ_infos(t_asm *env, int i)
@@ -44,7 +54,7 @@ void		ft_recover_champ_infos(t_asm *env, int i)
 	if (EQU(tmp, NAME_CMD_STRING) == 1 && !env->champ_name)
 	{
 		ft_strdel(&tmp);
-		ft_recover_name(env, i);
+		ft_recover_name(env, env->file_content[i]);
 	}
 	else
 	{
