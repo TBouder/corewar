@@ -1,4 +1,4 @@
-.name 'name'
+.name "name
 .comment "Comment"
 
 sti	r1, %:live, %1			;change live by the right value

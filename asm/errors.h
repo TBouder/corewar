@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
+/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 14:02:38 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/22 10:53:31 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/22 12:30:16 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,11 @@
 # define	ERR_CHAMP_NAME_TOO_LONG		"{9}Error{0} : Champion name too long (Max length 128)" // TODO NAME_LENGTH
 # define	ERR_CHAMP_COMMENT_TOO_LONG	"{9}Error{0} : Champion comment too long (Max length 2048)" // TODO COMMENT_LENGTH
 # define	ERR_NOCHAMP_NAME			"{9}Error{0} : Can't get champion name" // TODO COMMENT_LENGTH
+# define	ERR_NOCHAMP_COMMENT			"{9}Error{0} : Can't get champion comment" // TODO COMMENT_LENGTH
 # define	MULT_ARGS					"{9}Error{0} : Only one arg allowed" // TODO COMMENT_LENGTH
-# define	SYNTAX_ERROR_NAME			"{9}Error{0} : Syntax error after the name"
+# define	ERR_SYNTAX_ERROR_BNAME		"{9}Error{0} : Syntax error before the name"
+# define	ERR_SYNTAX_ERROR_ANAME		"{9}Error{0} : Syntax error after the name"
+# define	ERR_SYNTAX_ERROR_BCOMMENT	"{9}Error{0} : Syntax error before the comment"
+# define	ERR_SYNTAX_ERROR_ACOMMENT	"{9}Error{0} : Syntax error after the comment"
 
 #endif
