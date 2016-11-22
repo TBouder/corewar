@@ -6,33 +6,31 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 15:19:07 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/22 10:52:38 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/22 12:39:23 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-int				ft_get_args(int code, char **content)
+void			ft_init_function_tab(int (*tab[17])())
 {
-	if (code == 1 || code == 9 || code == 12 || code == 15 || code == 16)
-	{
-		if (content && content[1] && !content[2])
-			return (ft_analyse_args_one(code, content[1]));
-		return (0);
-	}
-	else if (code == 2 || code == 3 || code == 13)
-	{
-		if (content && content[1] && content[2] && !content[3])
-			return (ft_analyse_args_two(code, content[1], content[2]));
-		return (0);
-	}
-	else
-	{
-		if (content && content[1] && content[2] && content[3] && !content[4])
-			return (ft_analyse_args_three(code, content[1], content[2], content[3]));
-		return (0);
-	}
-	return (0);
+	tab[0] = NULL;
+	tab[1] = &ft_opweight_1;
+	tab[2] = &ft_opweight_2;
+	tab[3] = &ft_opweight_3;
+	tab[4] = &ft_opweight_4_5;
+	tab[5] = &ft_opweight_4_5;
+	tab[6] = &ft_opweight_6_7_8;
+	tab[7] = &ft_opweight_6_7_8;
+	tab[8] = &ft_opweight_6_7_8;
+	tab[9] = &ft_opweight_9_12_15;
+	tab[10] = &ft_opweight_10_14;
+	tab[11] = &ft_opweight_11;
+	tab[12] = &ft_opweight_9_12_15;
+	tab[13] = &ft_opweight_13;
+	tab[14] = &ft_opweight_10_14;
+	tab[15] = &ft_opweight_9_12_15;
+	tab[16] = &ft_opweight_16;
 }
 
 int				ft_get_opcode(char *opname)
@@ -59,18 +57,69 @@ int				ft_get_opcode(char *opname)
 	return (opcode);
 }
 
+int				ft_verif_label(char *str)
+{
+	int		i;
+
+	i = 0;
+	if (str && str[i] == DIRECT_CHAR && str[i + 1] == LABEL_CHAR)
+	{
+		i = 2;
+		while ((str[i] >= 97 && str[i] <= 122) || ft_isnumber(str[i]) ||
+				str[i] == '-')
+			i++;
+		if (!str[i])
+			return (1); //SUCCESS DIRECT LABEL
+	}
+	else if (str && str[i] == DIRECT_CHAR && str[i + 1] != LABEL_CHAR)
+	{
+		i = 1;
+		while (ft_isnumber(str[i]) || str[i] == '-')
+			i++;
+		if (!str[i])
+			return (1); //SUCCESS DIRECT INT
+	}
+	else if (str && (ft_isnumber(str[i]) || str[i] == '-'))
+	{
+		i = 1;
+		while (ft_isnumber(str[i]))
+			i++;
+		if (!str[i])
+			return (2); //SUCCESS INDIRECT
+	}
+	else if (str && str[i] == 'r')
+	{
+		int		reg_nb;
+
+		reg_nb = ft_atoi(str);
+		i = 1;
+		if (reg_nb <= REG_NUMBER)
+			return (3); //SUCCESS REG
+
+	}
+	return (0);
+}
+
 void			ft_get_size(t_asm *env, int i)
 {
 	char		**content;
+	int			(*tab[17])(char *, char *, char *);
 	int			opcode;
-	int			arg_value;
-	content = ft_strsplit(env->file_content[i], ' ');
+	int			arg_value = 0;
 
+	content = ft_split_args(env->file_content[i], ' ');
 	opcode = ft_get_opcode(content[0]);
-	arg_value = ft_get_args(opcode, content);
-	if (arg_value == -1)
+
+	ft_init_function_tab(tab);
+
+	if (opcode != 0)
+		arg_value = tab[(int)opcode](content[1], content[2], content[3]);
+	if (arg_value < 0)
 	{
-		ft_printf("{9}ERROR{0} : One argument of this line is falty [%s]", env->file_content[i]);
+		if (arg_value == -1)
+			ft_printf("{9}ERROR{0} : One argument of this line is falty [%s]", env->file_content[i]);
+		if (arg_value == -2)
+			ft_printf("{9}ERROR{0} : Too many arguments for [%s]", content[0]);
 		ft_error_asm(env, "", 1);
 	}
 	env->instruct_size += arg_value;
