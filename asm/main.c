@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 16:03:50 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/18 23:40:09 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/22 10:38:13 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,8 +166,8 @@ int		main(int ac, char **av)
 			if (env.file_len == 0)
 				ft_error_asm(&env, ERR_EMPTY_FILE, 1);
 			ft_parse_file(&env);
-			// ft_printf("{9}%s{0}\n", env.champ_name);
-			// ft_printf("{9}%s{0}\n", env.champ_comment);
+			ft_printf("{9}[%s]{0}\n", env.champ_name);
+			ft_printf("{9}[%s]{0}\n", env.champ_comment);
 			ft_printf("Writing output program to {10}%s{0}.cor\n", env.filename_noext);
 			ft_clear_all(&env);
 		}
