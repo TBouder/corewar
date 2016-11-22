@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_get_size.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 15:19:07 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/22 10:36:51 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/11/22 10:52:38 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,16 @@ void			ft_get_size(t_asm *env, int i)
 {
 	char		**content;
 	int			opcode;
+	int			arg_value;
 	content = ft_strsplit(env->file_content[i], ' ');
 
 	opcode = ft_get_opcode(content[0]);
-	env->instruct_size += ft_get_args(opcode, content);
+	arg_value = ft_get_args(opcode, content);
+	if (arg_value == -1)
+	{
+		ft_printf("{9}ERROR{0} : One argument of this line is falty [%s]", env->file_content[i]);
+		ft_error_asm(env, "", 1);
+	}
+	env->instruct_size += arg_value;
 	// ft_printf("[{9}%d{0}]\n", env->instruct_size);
 }
