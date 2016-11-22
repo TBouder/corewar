@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/22 15:42:41 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/11/22 15:51:13 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,16 +71,26 @@ void			ft_transform_size(int content, int fd);
 ** ft_get_size.c
 */
 void			ft_get_size(t_asm *env, int i);
+int				ft_verif_label(char *str);
 
 /*
-** ft_get_size_helper.c
+** ft_tools.c
 */
-int				ft_isind(char c);
-int				ft_analyse_args_one(int code, char *arg1);
-int				ft_analyse_args_two(int code, char *arg1, char *arg2);
-int				ft_analyse_args_three(int code, char *arg1, char *arg2, char *arg3);
+char			**ft_split_args(char const *s, char c);
 
-
+/*
+** ft_opweight_part{1..2}.c
+*/
+int				ft_opweight_1(char *arg1, char *arg2, char *arg3);
+int				ft_opweight_2(char *arg1, char *arg2, char *arg3);
+int				ft_opweight_3(char *arg1, char *arg2, char *arg3);
+int				ft_opweight_4_5(char *arg1, char *arg2, char *arg3);
+int				ft_opweight_6_7_8(char *arg1, char *arg2, char *arg3);
+int				ft_opweight_9_12_15(char *arg1, char *arg2, char *arg3);
+int				ft_opweight_10_14(char *arg1, char *arg2, char *arg3);
+int				ft_opweight_11(char *arg1, char *arg2, char *arg3);
+int				ft_opweight_13(char *arg1, char *arg2, char *arg3);
+int				ft_opweight_16(char *arg1, char *arg2, char *arg3);
 
 
 #endif
