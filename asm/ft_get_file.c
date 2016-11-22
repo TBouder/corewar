@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 15:27:33 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/22 16:02:29 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/22 16:33:08 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ void	ft_get_file_content_helper(t_asm *env, char *final_line, t_list **lst)
 	len = 0;
 	while (final_line[len] && final_line[len] != ' ')
 		len++;
-
 	command = ft_strsub(final_line, 0, len);
 	args = ft_strsub(final_line, len, ft_strlen_asm(final_line));
 	if (command[len - 1] == ':')
@@ -75,9 +74,7 @@ void	ft_get_file_content_helper(t_asm *env, char *final_line, t_list **lst)
 			ft_lstend(lst, final_line, ft_strlen_asm(final_line) + 1);
 	}
 	else
-	{
 		ft_lstend(lst, final_line, ft_strlen_asm(final_line) + 1);
-	}
 
 	env->file_len++;
 }
@@ -103,8 +100,6 @@ void	ft_get_file_content(t_asm *env)
 				tmp1 = ft_strtrim(tmp2);
 				ft_strdel(&tmp2);
 				ft_get_file_content_helper(env, tmp1, &lst);
-				// ft_lstend(&lst, (char *)final_line, ft_strlen_asm(final_line) + 1); //OLD
-				// env->file_len++; //OLD
 				ft_strdel(&tmp1);
 			}
 		}

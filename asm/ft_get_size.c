@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 15:19:07 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/22 14:50:35 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/22 16:50:14 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,8 @@ int				ft_verif_label(char *str)
 	}
 	else if (str && str[i] == 'r')
 	{
+		if (!ft_isstrnum(str + 1))
+			return (0);
 		reg_nb = ft_atoi(str);
 		i = 1;
 		if (reg_nb <= REG_NUMBER)
