@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 14:02:38 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/22 10:19:22 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/22 10:53:31 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@
 # define	ERR_CHAMP_COMMENT_TOO_LONG	"{9}Error{0} : Champion comment too long (Max length 2048)" // TODO COMMENT_LENGTH
 # define	ERR_NOCHAMP_NAME			"{9}Error{0} : Can't get champion name" // TODO COMMENT_LENGTH
 # define	MULT_ARGS					"{9}Error{0} : Only one arg allowed" // TODO COMMENT_LENGTH
-// # define	BAD_ARG						"{9}Error{0} : " // TODO COMMENT_LENGTH
+# define	SYNTAX_ERROR_NAME			"{9}Error{0} : Syntax error after the name"
 
 #endif

@@ -1,4 +1,4 @@
-.name		"Octobre Rouge V4.2"                                                 
+.name		"Octobre Rouge V4.2"
 .comment	"dddddddd"
 
 st	r1,19
