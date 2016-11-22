@@ -8,7 +8,7 @@ ld	%1, r3
 ld	%33, r6
 
 forks:
-	add	r2, r3, r2		;increment r2
+	add	r2, r3, r2		;increment r2 
 	xor	r2, %15, r4		;if (r4) {carry = 0}
 	or	r2, %15, r4		;if (r4) {carry = 0}
 	and	r2, %15, r4		;if (r4) {carry = 0}
@@ -21,8 +21,7 @@ forks:
 endwhile:
 	ld	%0, r4			;carry = 1
 
-yolololol:
-	live %5
+yolololol: live %5
 	zjmp %:live
 
 live:
