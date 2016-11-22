@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 15:19:07 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/21 11:02:20 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/11/22 10:36:51 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,36 +59,13 @@ int				ft_get_opcode(char *opname)
 	return (opcode);
 }
 
-void			ft_get_opcode_name(t_asm *env, char **content)
-{
-	env->fd_cor = 0;
-	int		opcode;
-
-	opcode = ft_get_opcode(content[0]);
-	env->instruct_size += ft_get_args(opcode, content);
-
-	// ft_printf("%s : %d\n", content[0], env->instruct_size);
-	// ft_printf("[{11}%s{0}] : [{10}%d{0}]\n", content[0], ft_get_opcode(content[0]));
-	// env->instruct_size += ft_put_weight_opname(content[0]);
-	// ft_printf("[{10}%s{0}] -> [%d] ", content[0], env->instruct_size);
-	// env->instruct_size += ft_put_weight_args(content);
-	// ft_printf("[{10}%s{0}] -> [%d]\n", content[0], env->instruct_size);
-	// ft_printf("-> [%d]\n", env->instruct_size);
-
-	// while (content[i])
-	// {
-	// 	ft_printf("[{10}%s{0}]", content[i]);
-	// 	i++;
-	// }
-	// ft_printf("\n");
-}
-
 void			ft_get_size(t_asm *env, int i)
 {
 	char		**content;
-
+	int			opcode;
 	content = ft_strsplit(env->file_content[i], ' ');
 
-	ft_get_opcode_name(env, content);
+	opcode = ft_get_opcode(content[0]);
+	env->instruct_size += ft_get_args(opcode, content);
 	// ft_printf("[{9}%d{0}]\n", env->instruct_size);
 }
