@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/24 13:52:09 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/24 14:50:13 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ typedef struct	s_asm
 	t_options	*options;
 	int			fd;
 	int			fd_cor;
+
+	char		*error_val;
+	int			error_int;
 
 	char		*filename;
 	char		*filename_noext;

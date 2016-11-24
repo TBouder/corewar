@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 16:03:50 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/24 14:31:14 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/24 14:57:24 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,13 @@
 
 void	ft_clear_all(t_asm *env)
 {
-	(env->file_content) ? ft_dbstrdel(env->file_content) : 0;
+	ft_dbstrdel(env->file_content);
 	ft_strdel(&env->filename);
 	ft_strdel(&env->filename_noext);
 	ft_strdel(&env->champ_name);
 	ft_strdel(&env->champ_comment);
 	ft_btreedel(env->file_labels);
-
-	// char	*line;
-	// while (get_next_line(env->fd, &line))
-		// ft_strdel(&line);
-	// ft_strdel(&line);
+	ft_strdel(&env->error_val);
 }
 
 void	ft_init_env(t_asm *env)
@@ -34,6 +30,9 @@ void	ft_init_env(t_asm *env)
 	env->file_content = NULL;
 	env->file_labels = NULL;
 	env->file_len = 0;
+
+	env->error_val = NULL;
+	env->error_int = 0;
 
 	env->champ_name = NULL;
 	env->champ_comment = NULL;
