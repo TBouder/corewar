@@ -6,7 +6,7 @@ sti	r1, %1, %1			;change live by the right valu.namee
 # sti	r1, %:yolololol, %1			#change live by the right value
 # ld	%1, r3
 # ld	%33, r6
-
+stis
 # forks:
 # 	add	r2, r3, r2		;increment r2 
 # 	xor	r2, %15, r4		;if (r4) {carry = 0}
