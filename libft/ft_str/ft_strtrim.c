@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/23 16:07:14 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/24 10:04:44 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/11/24 11:08:09 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,26 +60,3 @@ char			*ft_strtrim(char const *s)
 	str[ft_strlen(s) - spaces] = '\0';
 	return (str);
 }
-
-// char		*ft_strtrim(char const *s)
-// {
-// 	char	*str;
-// 	int		i;
-// 	int		j;
-
-// 	i = 0;
-// 	if (s == NULL)
-// 		return (NULL);
-// 	j = ft_strlen(s) - 1;
-// 	while (s[i] == ' ' || s[i] == '\n' || s[i] == '\t')
-// 		i++;
-	
-
-// 	while ((s[j] == ' ' || s[j] == '\n' || s[j] == '\t') && i < j)
-// 	{
-// 		ft_printf("str : [%s], char : [%c], strlen : %d, j : %d\n", s, s[j], ft_strlen(s), j);
-// 		j--;
-// 	}
-// 	str = ft_strsub(s, i, j - i + 1);
-// 	return (str);
-// }

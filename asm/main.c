@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 16:03:50 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/24 10:05:52 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/11/24 10:45:33 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,12 +93,12 @@ int		main(int ac, char **av)
 				ft_error_asm(&env, ERR_EMPTY_FILE, 1);
 			ft_parse_file(&env);
 
-			// ft_printf("----------------------------------------------------\n");
-			// ft_printf("{11}%-17s{0} : [{10}%s{0}]\n", "Champion Name", env.champ_name);
-			// ft_printf("{11}%-17s{0} : [{10}%s{0}]\n", "Champion Comment", env.champ_comment);
-			// ft_printf("{11}%-17s{0} : [{10}%d{0}]\n", "File Size", env.instruct_size);
-			// ft_printf("----------------------------------------------------\n");
-			// ft_printf("Writing output program to {10}%s{0}.cor\n", env.filename_noext);
+			ft_printf("----------------------------------------------------\n");
+			ft_printf("{11}%-17s{0} : [{10}%s{0}]\n", "Champion Name", env.champ_name);
+			ft_printf("{11}%-17s{0} : [{10}%s{0}]\n", "Champion Comment", env.champ_comment);
+			ft_printf("{11}%-17s{0} : [{10}%d{0}]\n", "File Size", env.instruct_size);
+			ft_printf("----------------------------------------------------\n");
+			ft_printf("Writing output program to {10}%s{0}.cor\n", env.filename_noext);
 
 			ft_clear_all(&env);
 		}
