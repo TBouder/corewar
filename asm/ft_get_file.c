@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 15:27:33 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/24 11:40:59 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/11/24 13:33:47 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,17 @@ void	ft_get_file_content_helper(t_asm *env, char *final_line, t_list **lst)
 			ft_lstend(lst, final_line, ft_strlen_asm(final_line) + 1);
 		ft_dbstrdel(split);
 	}
-	else
+	else if (ft_get_opcode(command) != 0 || ft_strstr(command, ".name") || ft_strstr(command, ".comment"))
 		ft_lstend(lst, final_line, ft_strlen_asm(final_line) + 1);
+	else
+	{
+		ft_printf("{9}Error{0} : Syntax error at token %s", command);
+		ft_strdel(&command);
+		ft_strdel(&args);
+		ft_lstclr(lst);
+		ft_strdel(&final_line);
+		ft_error_asm(env, "", 1);
+	}
 
 	env->file_len++;
 	ft_strdel(&command);
