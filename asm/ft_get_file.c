@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 15:27:33 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/24 13:33:47 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/11/24 14:20:46 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char	*ft_remove_end(char *str)
 	return (NULL);
 }
 
-void	ft_get_file_content_helper(t_asm *env, char *final_line, t_list **lst)
+void	ft_get_file_content_helper(t_asm *env, char *final_line, t_list **lst, int *err)
 {
 	int		len;
 	char	**split;
@@ -92,15 +92,7 @@ void	ft_get_file_content_helper(t_asm *env, char *final_line, t_list **lst)
 	else if (ft_get_opcode(command) != 0 || ft_strstr(command, ".name") || ft_strstr(command, ".comment"))
 		ft_lstend(lst, final_line, ft_strlen_asm(final_line) + 1);
 	else
-	{
-		ft_printf("{9}Error{0} : Syntax error at token %s", command);
-		ft_strdel(&command);
-		ft_strdel(&args);
-		ft_lstclr(lst);
-		ft_strdel(&final_line);
-		ft_error_asm(env, "", 1);
-	}
-
+		(*err)++;
 	env->file_len++;
 	ft_strdel(&command);
 	ft_strdel(&args);
@@ -108,11 +100,13 @@ void	ft_get_file_content_helper(t_asm *env, char *final_line, t_list **lst)
 
 void	ft_get_file_content(t_asm *env)
 {
+	int		err;
 	t_list	*lst;
 	char	*line;
 	char	*tmp1;
 	char	*tmp2;
 
+	err = 0;
 	lst = NULL;
 	while (get_next_line(env->fd, &line))
 	{
@@ -126,11 +120,17 @@ void	ft_get_file_content(t_asm *env)
 			{
 				tmp1 = ft_strtrim(tmp2);
 				ft_strdel(&tmp2);
-				ft_get_file_content_helper(env, tmp1, &lst);
+				ft_get_file_content_helper(env, tmp1, &lst, &err);
 				ft_strdel(&tmp1);
 			}
 		}
 		ft_strdel(&line);
+		if (err != 0)
+		{
+			ft_printf("{9}Error{0} : Syntax error at line %d", env->file_len);
+			ft_lstclr(&lst);
+			ft_error_asm(env, "", 1);
+		}
 	}
 	env->file_content = ft_dbstrnew(env->file_len);
 	ft_dbstrassign(env->file_content, lst, env->file_len);
