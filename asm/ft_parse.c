@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   ft_parse.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 17:46:27 by quroulon          #+#    #+#             */
-/*   Updated: 2016/11/22 16:22:55 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/24 11:07:47 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,9 @@ void		ft_recover_comment(t_asm *env, char *line, int i, int j)
 	if (line[i] != '"')
 		ft_error_asm(env, ERR_NOCHAMP_COMMENT, 1);
 	env->champ_comment = ft_strsub(line, j, i - j);
-	ft_printf("[%s]\n", env->champ_comment);
 	if (ft_strlen(env->champ_comment) == 0)
 		ft_error_asm(env, ERR_NOCHAMP_COMMENT, 1);
-	else if (ft_strlen(env->champ_comment) == COMMENT_LENGTH)
+	else if (ft_strlen(env->champ_comment) > COMMENT_LENGTH)
 		ft_error_asm(env, ERR_CHAMP_COMMENT_TOO_LONG, 1);
 	i++;
 	while (line[i])
@@ -58,7 +57,7 @@ void		ft_recover_name(t_asm *env, char *line, int i, int j)
 	env->champ_name = ft_strsub(line, j, i - j);
 	if (ft_strlen(env->champ_name) == 0)
 		ft_error_asm(env, ERR_NOCHAMP_NAME, 1);
-	else if (ft_strlen(env->champ_name) == PROG_NAME_LENGTH)
+	else if (ft_strlen(env->champ_name) > PROG_NAME_LENGTH)
 		ft_error_asm(env, ERR_CHAMP_NAME_TOO_LONG, 1);
 	i++;
 	while (line[i])
@@ -130,15 +129,21 @@ void		ft_put_data(t_asm *env)
 void		ft_parse_file(t_asm *env)
 {
 	int		i;
+	int		cpt;
 
 	i = 0;
+	cpt = 0;
 	while (env->file_content[i])
 	{
-		// ft_printf("[%s]\n",env->file_content[i]);
-		if (env->file_content[i][0] == '.')
+		if (cpt < 2)// && env->file_content[i][0] == '.')
+		{
 			ft_recover_champ_infos(env, i);
-		else
+			cpt++;
+		}
+		else if (cpt >= 2 && ft_strchr(env->file_content[i], '.') == NULL)
 			ft_get_size(env, i);
+		else
+			ft_error_asm(env, ERR_BAD_SRC_FILE, 1);
 		i++;
 	}
 	if (ft_detect_errors(env) == 0)
