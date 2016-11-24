@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/23 16:07:14 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/24 11:08:09 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/11/24 13:44:31 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ char			*ft_strtrim(char const *s)
 	if (s == NULL)
 		return (NULL);
 	spaces = count_spaces_st(s) + count_spaces_nd(s);
+	if (spaces >= (int)ft_strlen(s))
+		return (NULL);
 	str = ft_strsub(s, count_spaces_st(s), ft_strlen(s) - count_spaces_nd(s));
 	str[ft_strlen(s) - spaces] = '\0';
 	return (str);
