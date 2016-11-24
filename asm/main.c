@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 16:03:50 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/24 13:32:33 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/24 13:35:34 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_clear_all(t_asm *env)
 {
-	ft_dbstrdel(env->file_content);
+	(env->file_content) ? ft_dbstrdel(env->file_content) : 0;
 	ft_strdel(&env->filename);
 	ft_strdel(&env->filename_noext);
 	ft_strdel(&env->champ_name);
