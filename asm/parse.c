@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 17:46:27 by quroulon          #+#    #+#             */
-/*   Updated: 2016/11/22 15:48:38 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/11/22 16:44:02 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void		ft_recover_comment(t_asm *env, char *line, int i, int j)
 	ft_printf("[%s]\n", env->champ_comment);
 	if (ft_strlen(env->champ_comment) == 0)
 		ft_error_asm(env, ERR_NOCHAMP_COMMENT, 1);
-	else if (ft_strlen(env->champ_comment) == COMMENT_LENGTH)
+	else if (ft_strlen(env->champ_comment) > COMMENT_LENGTH)
 		ft_error_asm(env, ERR_CHAMP_COMMENT_TOO_LONG, 1);
 	i++;
 	while (line[i])
@@ -58,7 +58,7 @@ void		ft_recover_name(t_asm *env, char *line, int i, int j)
 	env->champ_name = ft_strsub(line, j, i - j);
 	if (ft_strlen(env->champ_name) == 0)
 		ft_error_asm(env, ERR_NOCHAMP_NAME, 1);
-	else if (ft_strlen(env->champ_name) == PROG_NAME_LENGTH)
+	else if (ft_strlen(env->champ_name) > PROG_NAME_LENGTH)
 		ft_error_asm(env, ERR_CHAMP_NAME_TOO_LONG, 1);
 	i++;
 	while (line[i])
