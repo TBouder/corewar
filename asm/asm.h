@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/24 14:50:13 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/24 15:30:34 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct	s_asm
 
 	char		**file_content;
 	t_btree		*file_labels;
+	char		**args;
 	int			file_len;
 	// t_op		op_tab[17];
 }				t_asm;
@@ -75,7 +76,7 @@ void			ft_transform_size(int content, int fd);
 ** ft_get_size.c
 */
 void			ft_get_size(t_asm *env, int i);
-int				ft_verif_label(char *str);
+int				ft_verif_label(t_asm *env, char *str);
 int				ft_get_opcode(char *opname);
 
 /*
@@ -87,16 +88,16 @@ char			**ft_split_instruct(char const *s, char c);
 /*
 ** ft_opweight_part{1..2}.c
 */
-int				ft_opweight_1(char *arg1, char *arg2, char *arg3);
-int				ft_opweight_2(char *arg1, char *arg2, char *arg3);
-int				ft_opweight_3(char *arg1, char *arg2, char *arg3);
-int				ft_opweight_4_5(char *arg1, char *arg2, char *arg3);
-int				ft_opweight_6_7_8(char *arg1, char *arg2, char *arg3);
-int				ft_opweight_9_12_15(char *arg1, char *arg2, char *arg3);
-int				ft_opweight_10_14(char *arg1, char *arg2, char *arg3);
-int				ft_opweight_11(char *arg1, char *arg2, char *arg3);
-int				ft_opweight_13(char *arg1, char *arg2, char *arg3);
-int				ft_opweight_16(char *arg1, char *arg2, char *arg3);
+int				ft_opweight_1(t_asm *env, char *arg1, char *arg2, char *arg3);
+int				ft_opweight_2(t_asm *env, char *arg1, char *arg2, char *arg3);
+int				ft_opweight_3(t_asm *env, char *arg1, char *arg2, char *arg3);
+int				ft_opweight_4_5(t_asm *env, char *arg1, char *arg2, char *arg3);
+int				ft_opweight_6_7_8(t_asm *env, char *arg1, char *arg2, char *arg3);
+int				ft_opweight_9_12_15(t_asm *env, char *arg1, char *arg2, char *arg3);
+int				ft_opweight_10_14(t_asm *env, char *arg1, char *arg2, char *arg3);
+int				ft_opweight_11(t_asm *env, char *arg1, char *arg2, char *arg3);
+int				ft_opweight_13(t_asm *env, char *arg1, char *arg2, char *arg3);
+int				ft_opweight_16(t_asm *env, char *arg1, char *arg2, char *arg3);
 
 
 #endif

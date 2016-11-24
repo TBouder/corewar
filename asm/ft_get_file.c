@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 15:27:33 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/24 14:56:50 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/24 17:12:47 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ void	ft_get_file_content(t_asm *env)
 	char	*tmp2;
 
 	lst = NULL;
-	while (get_next_line(env->fd, &line))
+	while (get_next_line(env->fd, &line) > 0)
 	{
 		if (DIFF(line, ""))
 		{
@@ -153,7 +153,7 @@ void	ft_get_file_content(t_asm *env)
 			if (env->error_int == 1)
 				ft_printf("{9}Error{0} : redefinition of {14}%s{0}", env->error_val);
 			else if (env->error_int == 2)
-				ft_printf("{9}Error{0} : Syntax error at token {14}%s{0}", env->error_val);
+				ft_printf("{9}Error{0} : Syntax error at token {14}[%s]{0}", env->error_val);
 			ft_lstclr(&lst);
 			ft_error_asm(env, "", 1);
 		}

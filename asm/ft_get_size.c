@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 15:19:07 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/24 14:14:32 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/24 15:38:28 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,19 +57,40 @@ int				ft_get_opcode(char *opname)
 	return (opcode);
 }
 
-int				ft_verif_label_direct(char *str, int type)
+void			ft_btreeequ(t_btree *node, char *content, int *ret)
+{
+	if (node)
+	{
+		ft_btreeequ(node->left, content, ret);
+		if (EQU(node->content, content))
+		{
+			*ret = 1;
+			return ;
+		}
+		ft_btreeequ(node->right, content, ret);
+	}
+}
+
+int				ft_verif_label_direct(t_asm *env, char *str, int type)
 {
 	int		i;
+	int		ret;
+	char	*verif_label;
 
-	i = 0;
+	ret = 0;
 	if (type == 0)
 	{
 		i = 2;
-		while ((str[i] >= 97 && str[i] <= 122) || ft_isnumber(str[i]) ||
-				str[i] == '-' || str[i] == '_')
-			i++;
-		if (!str[i])
-			return (1);
+		verif_label = ft_strjoin(str + 2, ":");
+		ft_btreeequ(env->file_labels, verif_label, &ret);
+		if (ret == 0)
+		{
+			ft_printf("{9}ERROR{0} : No such label {14}%s{0}", verif_label);
+			ft_strdel(&verif_label);
+			ft_error_asm(env, "", 1);
+		}
+		ft_strdel(&verif_label);
+		return (1);
 	}
 	else
 	{
@@ -107,21 +128,20 @@ int				ft_verif_label_indirect(char *str, int type)
 	return (0);
 }
 
-int				ft_verif_label(char *str)
+int				ft_verif_label(t_asm *env, char *str)
 {
 	int		i;
 	int		reg_nb;
 
 	i = 0;
 	if (str && str[i] == DIRECT_CHAR && str[i + 1] == LABEL_CHAR)
-		return (ft_verif_label_direct(str, 0));
+		return (ft_verif_label_direct(env, str, 0));
 	else if (str && str[i] == DIRECT_CHAR && str[i + 1] != LABEL_CHAR)
-		return (ft_verif_label_direct(str, 1));
+		return (ft_verif_label_direct(env, str, 1));
 	else if (str && (ft_isnumber(str[i]) || str[i] == '-'))
 		return (ft_verif_label_indirect(str, 0));
 	else if (str && str[i] == LABEL_CHAR)
 		return (ft_verif_label_indirect(str, 1));
-
 	else if (str && str[i] == 'r')
 	{
 		if (!ft_isstrnum(str + 1))
@@ -135,26 +155,26 @@ int				ft_verif_label(char *str)
 
 void			ft_get_size(t_asm *env, int i)
 {
-	char		**content;
-	int			(*tab[17])(char *, char *, char *);
+	int			(*tab[17])(t_asm *env, char *, char *, char *);
 	int			opcode;
 	int			arg_value = 0;
 
-	content = ft_split_args(env->file_content[i], ' ');
-	opcode = ft_get_opcode(content[0]);
+	env->args = ft_split_args(env->file_content[i], ' ');
+	opcode = ft_get_opcode(env->args[0]);
 
 	ft_init_function_tab(tab);
 
 	if (opcode != 0)
-		arg_value = tab[(int)opcode](content[1], content[2], content[3]);
+		arg_value = tab[(int)opcode](env, env->args[1], env->args[2], env->args[3]);
 	if (arg_value < 0)
 	{
 		if (arg_value == -1)
 			ft_printf("{9}ERROR{0} : One argument of this line is falty [%s]", env->file_content[i]);
 		if (arg_value == -2)
-			ft_printf("{9}ERROR{0} : Too many arguments for [%s]", content[0]);
+			ft_printf("{9}ERROR{0} : Too many arguments for [%s]", env->args[0]);
 		ft_error_asm(env, "", 1);
 	}
 	env->instruct_size += arg_value;
-	ft_dbstrdel(content);
+	ft_dbstrdel(env->args);
+	env->args = NULL;
 }

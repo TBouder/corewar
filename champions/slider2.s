@@ -29,11 +29,11 @@
 		sti	r1,%:live,%86
 		sti	r1,%:live,%91
 		sti	r1,%:live,%96
-		sti	r1,%:live,%101	
+		sti	r1,%:live,%101
 		sti	r1,%:live,%106
 		sti	r1,%:live,%111
 		sti	r1,%:live,%116
-		ld	%48,r14	
+		ld	%48,r14
 		ld      %4,r4
 		ld      %48,r6
 		ld	%48,r13
@@ -48,7 +48,7 @@ fork2:		live	%42
 		fork	%:leon
 fork3:		live	%42
 		fork	%:roger
-		ld	%0,r15	
+		ld	%0,r15
 		zjmp	%:torp
 leon:		ld      %0,r2
 leon_live:	live    %42
@@ -68,7 +68,7 @@ roger_live:	live	%42
 		zjmp	%-361
 		ld	%0,r15
 roger_ecrit:	zjmp	%:roger_live
-torp:		live	%42	
+torp:		live	%42
 		fork	%:leon
 torp_:		live	%42
 		fork	%:roger
@@ -97,13 +97,12 @@ live:		live	%42
 		live	%42
 		live	%42
 		live	%42
-		live	%42	
+		live	%42
 		zjmp	%:live
 fork_live:	live	%42
 		fork	%:live
 		ld	%0,r15
 		zjmp	%:fork_live
-	
 
 
 
@@ -114,3 +113,5 @@ fork_live:	live	%42
 
 
 
+
+		

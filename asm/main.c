@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 16:03:50 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/24 14:57:24 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/24 15:59:26 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	ft_clear_all(t_asm *env)
 	ft_strdel(&env->champ_comment);
 	ft_btreedel(env->file_labels);
 	ft_strdel(&env->error_val);
+	ft_dbstrdel(env->args);
 }
 
 void	ft_init_env(t_asm *env)
@@ -29,6 +30,7 @@ void	ft_init_env(t_asm *env)
 
 	env->file_content = NULL;
 	env->file_labels = NULL;
+	env->args = NULL;
 	env->file_len = 0;
 
 	env->error_val = NULL;
@@ -106,8 +108,6 @@ int		main(int ac, char **av)
 			ft_printf("{11}%-17s{0} : [{10}%x{0}]\n", "Hex Size", env.instruct_size);
 			ft_printf("----------------------------------------------------\n");
 			ft_printf("Writing output program to {10}%s{0}.cor\n", env.filename_noext);
-
-			ft_btree_print_inorder(env.file_labels);
 
 			ft_clear_all(&env);
 		}

@@ -16,7 +16,6 @@ code:		live %42			# 5
 		live %42			# 5
 		sti  r15,%0,r14			# 6
 		zjmp %-200			# 3
-		; gtrew
 		live %42			# 5
 		sti  r15,%0,r14			# 6
 		zjmp %-200			# 3
@@ -38,8 +37,8 @@ init:		ld   %393216,r4		 	#7
 		ld   %917504,r12		#7
 		ld   %1,r11			#7
 		ld   %6,r10			#7
-debt:		live %42			#5
-debt:		live %42			#5
+; debt:		live %42			#5
+debwt:		live %42			#5
 		sti  r4,%:label,%1		#7
 		add  r4,r12,r4			#5
 		sub  r10,r11,r10		#5
