@@ -6,11 +6,29 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 15:27:33 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/24 13:47:17 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/24 14:31:53 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
+
+void	ft_btreecmp_asm(t_btree **tree, void const *content, size_t c_size, int *err)
+{
+    if (!(*tree))
+	{
+		(*tree) = ft_btreenew(content, c_size);
+		return ;
+	}
+    if (CMP((char *)content, (char *)(*tree)->content) < 0)
+        ft_btreecmp_asm(&(*tree)->left, content, c_size, err);
+	else if (CMP((char *)content, (char *)(*tree)->content) > 0)
+        ft_btreecmp_asm(&(*tree)->right, content, c_size, err);
+	else
+	{
+		*err += 1;
+		// return ;
+	}
+}
 
 /*
 ** This function is used to remove all the stuff after [;] or [#] and the white
@@ -65,19 +83,31 @@ char	*ft_remove_end(char *str)
 
 void	ft_get_file_content_helper(t_asm *env, char *final_line, t_list **lst)
 {
+	int		err;
 	int		len;
 	char	**split;
-	char	*command;
+	char	*label;
 	char	*args;
 
 	len = 0;
+	err = 0;
 	while (final_line[len] && final_line[len] != ' ')
 		len++;
 	split = NULL;
-	command = ft_strsub(final_line, 0, len);
+	label = ft_strsub(final_line, 0, len);
 	args = ft_strsub(final_line, len, ft_strlen_asm(final_line));
-	if (command[len - 1] == ':')
+	if (label[len - 1] == ':')
 	{
+		ft_btreecmp_asm(&env->file_labels, (char *)label, ft_strlen(label) + 1, &err);//ON MET LE LABEL DANS LE BTREE
+		if (err != 0)
+		{
+			ft_printf("{9}Error{0} : redefinition of {11}%s{0}", label);
+			ft_strdel(&label);
+			ft_strdel(&args);
+			ft_lstclr(lst);
+			ft_strdel(&final_line);
+			ft_error_asm(env, "", 0);
+		}
 		split = ft_split_instruct(final_line, ' ');
 		if (DIFF(split[1], ""))
 		{
@@ -89,12 +119,12 @@ void	ft_get_file_content_helper(t_asm *env, char *final_line, t_list **lst)
 			ft_lstend(lst, final_line, ft_strlen_asm(final_line) + 1);
 		ft_dbstrdel(split);
 	}
-	else if (ft_get_opcode(command) != 0 || ft_strstr(command, ".name") || ft_strstr(command, ".comment"))
+	else if (ft_get_opcode(label) != 0 || ft_strstr(label, ".name") || ft_strstr(label, ".comment"))
 		ft_lstend(lst, final_line, ft_strlen_asm(final_line) + 1);
 	else
 	{
-		ft_printf("{9}Error{0} : Syntax error at token %s", command);
-		ft_strdel(&command);
+		ft_printf("{9}Error{0} : Syntax error at token %s", label);
+		ft_strdel(&label);
 		ft_strdel(&args);
 		ft_lstclr(lst);
 		ft_strdel(&final_line);
@@ -102,7 +132,7 @@ void	ft_get_file_content_helper(t_asm *env, char *final_line, t_list **lst)
 	}
 
 	env->file_len++;
-	ft_strdel(&command);
+	ft_strdel(&label);
 	ft_strdel(&args);
 }
 

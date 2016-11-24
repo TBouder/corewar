@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 15:19:07 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/24 13:31:36 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/24 14:14:32 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,10 +146,7 @@ void			ft_get_size(t_asm *env, int i)
 	ft_init_function_tab(tab);
 
 	if (opcode != 0)
-	{
 		arg_value = tab[(int)opcode](content[1], content[2], content[3]);
-		// ft_printf("{9}%d : %s{0}\n", arg_value, env->file_content[i]);
-	}
 	if (arg_value < 0)
 	{
 		if (arg_value == -1)
