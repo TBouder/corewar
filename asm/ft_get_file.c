@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 15:27:33 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/24 14:20:46 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/11/24 14:33:01 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,12 @@ void	ft_get_file_content(t_asm *env)
 		ft_strdel(&line);
 		if (err != 0)
 		{
+			while (get_next_line(env->fd, &line))
+			{
+				ft_strdel(&line);
+			}
+			ft_strdel(&line);
+
 			ft_printf("{9}Error{0} : Syntax error at line %d", env->file_len);
 			ft_lstclr(&lst);
 			ft_error_asm(env, "", 1);
