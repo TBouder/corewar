@@ -1,8 +1,8 @@
-.name "LEGENDARY"
+.name  "LEGENDARY"
 .comment "THIS IS AN AWESOME COMMENT"
 
 sti	r1, %:live, %1			;change live by the right value
-sti	r1, %1, %1			;change live by the right value
+sti	r1, %1, %1			;change live by the right valu.namee
 # sti	r1, %:yolololol, %1			#change live by the right value
 # ld	%1, r3
 # ld	%33, r6

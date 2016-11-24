@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 15:19:07 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/24 10:06:02 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/11/24 11:04:48 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ void			ft_get_size(t_asm *env, int i)
 	if (opcode != 0)
 	{
 		arg_value = tab[(int)opcode](content[1], content[2], content[3]);
-		// ft_printf("{9}%d : %s{0}\n", arg_value, env->file_content[i]);
+		ft_printf("{9}%d : %s{0}\n", arg_value, env->file_content[i]);
 	}
 	if (arg_value < 0)
 	{
