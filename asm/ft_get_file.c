@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 15:27:33 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/24 13:35:47 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/24 13:47:17 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	*ft_remove_end(char *str)
 	char	*buff;
 
 	i = 0;
-	while (str[i] && str[i] != ';' && str[i] != '#')
+	while (str && str[i] && str[i] != ';' && str[i] != '#')
 		i++;
 	if (i != 0)
 	{
@@ -119,9 +119,7 @@ void	ft_get_file_content(t_asm *env)
 		if (DIFF(line, ""))
 		{
 			ft_strreplace_space(line);
-			ft_printf("PART1 : [%s]\n", line);
 			tmp1 = ft_strtrim(line);
-			ft_printf("PART2\n");
 			tmp2 = ft_remove_end(tmp1);
 			ft_strdel(&tmp1);
 			if (tmp2)
