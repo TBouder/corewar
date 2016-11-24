@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 16:03:50 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/22 16:01:56 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/24 10:46:47 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ int		main(int ac, char **av)
 			ft_printf("{11}%-17s{0} : [{10}%s{0}]\n", "Champion Name", env.champ_name);
 			ft_printf("{11}%-17s{0} : [{10}%s{0}]\n", "Champion Comment", env.champ_comment);
 			ft_printf("{11}%-17s{0} : [{10}%d{0}]\n", "File Size", env.instruct_size);
+			ft_printf("{11}%-17s{0} : [{10}%x{0}]\n", "Hex Size", env.instruct_size);
 			ft_printf("----------------------------------------------------\n");
 			ft_printf("Writing output program to {10}%s{0}.cor\n", env.filename_noext);
 
