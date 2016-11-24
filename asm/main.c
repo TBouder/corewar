@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 16:03:50 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/24 13:58:51 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/11/24 14:57:24 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	ft_clear_all(t_asm *env)
 	ft_strdel(&env->filename_noext);
 	ft_strdel(&env->champ_name);
 	ft_strdel(&env->champ_comment);
+	ft_btreedel(env->file_labels);
+	ft_strdel(&env->error_val);
 }
 
 void	ft_init_env(t_asm *env)
@@ -26,7 +28,11 @@ void	ft_init_env(t_asm *env)
 	env->options = NULL;
 
 	env->file_content = NULL;
+	env->file_labels = NULL;
 	env->file_len = 0;
+
+	env->error_val = NULL;
+	env->error_int = 0;
 
 	env->champ_name = NULL;
 	env->champ_comment = NULL;
@@ -97,8 +103,11 @@ int		main(int ac, char **av)
 			ft_printf("{11}%-17s{0} : [{10}%s{0}]\n", "Champion Name", env.champ_name);
 			ft_printf("{11}%-17s{0} : [{10}%s{0}]\n", "Champion Comment", env.champ_comment);
 			ft_printf("{11}%-17s{0} : [{10}%d{0}]\n", "File Size", env.instruct_size);
+			ft_printf("{11}%-17s{0} : [{10}%x{0}]\n", "Hex Size", env.instruct_size);
 			ft_printf("----------------------------------------------------\n");
 			ft_printf("Writing output program to {10}%s{0}.cor\n", env.filename_noext);
+
+			ft_btree_print_inorder(env.file_labels);
 
 			ft_clear_all(&env);
 		}

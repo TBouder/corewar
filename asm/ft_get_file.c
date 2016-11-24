@@ -6,11 +6,29 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 15:27:33 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/24 14:33:01 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/11/24 15:00:08 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
+
+void	ft_btreecmp_asm(t_asm *env, t_btree **tree, void const *content, size_t c_size)
+{
+    if (!(*tree))
+	{
+		(*tree) = ft_btreenew(content, c_size);
+		return ;
+	}
+    if (CMP((char *)content, (char *)(*tree)->content) < 0)
+        ft_btreecmp_asm(env, &(*tree)->left, content, c_size);
+	else if (CMP((char *)content, (char *)(*tree)->content) > 0)
+        ft_btreecmp_asm(env, &(*tree)->right, content, c_size);
+	else
+	{
+		env->error_int = 1;
+		env->error_val = ft_strinit((char *)content);
+	}
+}
 
 /*
 ** This function is used to remove all the stuff after [;] or [#] and the white
@@ -53,7 +71,7 @@ char	*ft_remove_end(char *str)
 	char	*buff;
 
 	i = 0;
-	while (str[i] && str[i] != ';' && str[i] != '#')
+	while (str && str[i] && str[i] != ';' && str[i] != '#')
 		i++;
 	if (i != 0)
 	{
@@ -63,21 +81,22 @@ char	*ft_remove_end(char *str)
 	return (NULL);
 }
 
-void	ft_get_file_content_helper(t_asm *env, char *final_line, t_list **lst, int *err)
+void	ft_get_file_content_helper(t_asm *env, char *final_line, t_list **lst)
 {
 	int		len;
 	char	**split;
-	char	*command;
+	char	*label;
 	char	*args;
 
 	len = 0;
 	while (final_line[len] && final_line[len] != ' ')
 		len++;
 	split = NULL;
-	command = ft_strsub(final_line, 0, len);
+	label = ft_strsub(final_line, 0, len);
 	args = ft_strsub(final_line, len, ft_strlen_asm(final_line));
-	if (command[len - 1] == ':')
+	if (label[len - 1] == ':')
 	{
+		ft_btreecmp_asm(env, &env->file_labels, (char *)label, ft_strlen(label) + 1);//ON MET LE LABEL DANS LE BTREE
 		split = ft_split_instruct(final_line, ' ');
 		if (DIFF(split[1], ""))
 		{
@@ -89,24 +108,25 @@ void	ft_get_file_content_helper(t_asm *env, char *final_line, t_list **lst, int 
 			ft_lstend(lst, final_line, ft_strlen_asm(final_line) + 1);
 		ft_dbstrdel(split);
 	}
-	else if (ft_get_opcode(command) != 0 || ft_strstr(command, ".name") || ft_strstr(command, ".comment"))
+	else if (ft_get_opcode(label) != 0 || ft_strstr(label, ".name") || ft_strstr(label, ".comment"))
 		ft_lstend(lst, final_line, ft_strlen_asm(final_line) + 1);
 	else
-		(*err)++;
+	{
+		env->error_int = 2;
+		env->error_val = ft_strinit(label);
+	}
 	env->file_len++;
-	ft_strdel(&command);
+	ft_strdel(&label);
 	ft_strdel(&args);
 }
 
 void	ft_get_file_content(t_asm *env)
 {
-	int		err;
 	t_list	*lst;
 	char	*line;
 	char	*tmp1;
 	char	*tmp2;
 
-	err = 0;
 	lst = NULL;
 	while (get_next_line(env->fd, &line))
 	{
@@ -120,20 +140,20 @@ void	ft_get_file_content(t_asm *env)
 			{
 				tmp1 = ft_strtrim(tmp2);
 				ft_strdel(&tmp2);
-				ft_get_file_content_helper(env, tmp1, &lst, &err);
+				ft_get_file_content_helper(env, tmp1, &lst);
 				ft_strdel(&tmp1);
 			}
 		}
 		ft_strdel(&line);
-		if (err != 0)
+		if (env->error_val)
 		{
 			while (get_next_line(env->fd, &line))
-			{
 				ft_strdel(&line);
-			}
 			ft_strdel(&line);
-
-			ft_printf("{9}Error{0} : Syntax error at line %d", env->file_len);
+			if (env->error_int == 1)
+				ft_printf("{9}Error{0} : redefinition of {14}%s{0}", env->error_val);
+			else if (env->error_int == 2)
+				ft_printf("{9}Error{0} : Syntax error at token {14}%s{0}", env->error_val);
 			ft_lstclr(&lst);
 			ft_error_asm(env, "", 1);
 		}
@@ -141,11 +161,4 @@ void	ft_get_file_content(t_asm *env)
 	env->file_content = ft_dbstrnew(env->file_len);
 	ft_dbstrassign(env->file_content, lst, env->file_len);
 	ft_lstclr(&lst);
-
-	int i = 0;
-	while (env->file_content[i])
-	{
-		ft_printf("%s\n", env->file_content[i]);
-		i++;
-	}
 }
