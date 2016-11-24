@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 17:46:27 by quroulon          #+#    #+#             */
-/*   Updated: 2016/11/22 16:44:02 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/11/24 09:34:25 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,6 @@ void		ft_put_data(t_asm *env)
 	write(fd, hex_string, PROG_NAME_LENGTH);
 	ft_strdel(&hex_string);
 
-	ft_printf("[{10}%d{0}]\n", env->instruct_size);
 	ft_transform_size(env->instruct_size, fd);
 
 	hex_string = ft_transform_champ_infos(env->champ_comment, COMMENT_LENGTH);
@@ -135,6 +134,7 @@ void		ft_parse_file(t_asm *env)
 	i = 0;
 	while (env->file_content[i])
 	{
+		// ft_printf("[%s]\n",env->file_content[i]);
 		if (env->file_content[i][0] == '.')
 			ft_recover_champ_infos(env, i);
 		else

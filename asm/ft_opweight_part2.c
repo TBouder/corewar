@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 11:55:28 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/22 12:31:04 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/22 16:19:33 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,19 +58,25 @@ int		ft_opweight_11(char *arg1, char *arg2, char *arg3)
 		count += 2;
 	else if (ft_verif_label(arg1) == 2)
 		count += 2;
-	if (count != 0 && ft_verif_label(arg2) == 3)
+	else
+		return (-1);
+
+	if (ft_verif_label(arg2) == 3)
 		count += 1;
-	else if (count != 0 && ft_verif_label(arg2) == 1)
-		count += 4;
-	else if (count != 0 && ft_verif_label(arg2) == 2)
+	else if (ft_verif_label(arg2) == 1)
 		count += 2;
+	else if (ft_verif_label(arg2) == 2)
+		count += 2;
+	else
+		return (-1);
+
 	if (count != 0 && ft_verif_label(arg3) == 3)
 		count += 1;
 	else if (count != 0 && ft_verif_label(arg3) == 1)
 		count += 4;
 	else
 		return (-1);
-	return (count + 1);
+	return (count);
 }
 
 int		ft_opweight_13(char *arg1, char *arg2, char *arg3)

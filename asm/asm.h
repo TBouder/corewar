@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/22 15:51:13 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/11/22 16:23:32 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,11 @@ char			*ft_strinit_asm(char *str);
 void			ft_error_asm(t_asm *env, char *msg, int err);
 
 /*
+** ft_get_file.c
+*/
+void			ft_get_file_content(t_asm *env);
+
+/*
 ** parse.c
 */
 void			ft_parse_file(t_asm *env);
@@ -72,11 +77,13 @@ void			ft_transform_size(int content, int fd);
 */
 void			ft_get_size(t_asm *env, int i);
 int				ft_verif_label(char *str);
+int				ft_get_opcode(char *opname);
 
 /*
 ** ft_tools.c
 */
 char			**ft_split_args(char const *s, char c);
+char			**ft_split_instruct(char const *s, char c);
 
 /*
 ** ft_opweight_part{1..2}.c
