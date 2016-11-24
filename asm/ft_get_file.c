@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_get_file.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 15:27:33 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/24 11:40:59 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/11/24 13:34:41 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,9 @@ void	ft_get_file_content(t_asm *env)
 		if (DIFF(line, ""))
 		{
 			ft_strreplace_space(line);
+			ft_printf("PART1 : [%s]\n", line);
 			tmp1 = ft_strtrim(line);
+			ft_printf("PART2\n");
 			tmp2 = ft_remove_end(tmp1);
 			ft_strdel(&tmp1);
 			if (tmp2)
@@ -126,11 +128,4 @@ void	ft_get_file_content(t_asm *env)
 	env->file_content = ft_dbstrnew(env->file_len);
 	ft_dbstrassign(env->file_content, lst, env->file_len);
 	ft_lstclr(&lst);
-
-	int i = 0;
-	while (env->file_content[i])
-	{
-		ft_printf("%s\n", env->file_content[i]);
-		i++;
-	}
 }
