@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 15:27:33 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/24 15:00:08 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/11/24 15:18:59 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,26 +40,20 @@ void	ft_strreplace_space(char *str)
 	int		cpt;
 
 	i = 0;
-	cpt = -1;
+	cpt = 0;
 	while (str[i])
 	{
 		if (str[i] == ';')
-		{
-			cpt = i;
 			break ;
-		}
-		i++;
+		cpt = i++;
 	}
 	i = 0;
 	while (str[i])
 	{
 		if (ft_isspace(str[i]))
 			str[i] = ' ';
-		if (str[i] == ',' && cpt > 0 && (ft_strnstr(str, ".name", cpt) == NULL
-			|| ft_strnstr(str, ".comment", cpt) == NULL))
-			str[i] = ' ';
-		else if (str[i] == ',' && (ft_strstr(str, ".name") == NULL
-			|| ft_strnstr(str, ".comment", cpt) == NULL))
+		if (str[i] == ',' && ft_strnstr(str, ".name", cpt) == NULL
+			&& ft_strnstr(str, ".comment", cpt) == NULL)
 			str[i] = ' ';
 		i++;
 	}
