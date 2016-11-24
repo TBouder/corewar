@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
+/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 16:03:50 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/24 14:57:24 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/24 15:50:03 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ void	ft_init_env(t_asm *env)
 	env->filename = NULL;
 	env->filename_noext = NULL;
 	env->instruct_size = 0;
+
+	env->hash = NULL;
 }
 
 void	ft_usage_asm(char *prog_name)
