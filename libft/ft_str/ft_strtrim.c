@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/23 16:07:14 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/24 14:33:15 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/24 15:53:12 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 */
 
 #include "../libft.h"
-#include <stdlib.h>
 
 static int		count_spaces_st(char const *s)
 {
@@ -25,7 +24,7 @@ static int		count_spaces_st(char const *s)
 
 	i = 0;
 	spaces = 0;
-	while (ft_isspace(s[i]))
+	while (s[i] && ft_isspace(s[i]))
 	{
 		i++;
 		spaces++;
@@ -35,14 +34,14 @@ static int		count_spaces_st(char const *s)
 
 static int		count_spaces_nd(char const *s)
 {
-	int		j;
 	int		spaces;
+	int		len;
 
-	j = 1;
 	spaces = 0;
-	while (ft_isspace(s[ft_strlen(s) - j]))
+	len = ft_strlen(s) - 1;
+	while (len && s[len] && ft_isspace(s[len]))
 	{
-		j++;
+		len--;
 		spaces++;
 	}
 	return (spaces);

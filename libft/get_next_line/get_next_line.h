@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/17 11:59:39 by tbouder           #+#    #+#             */
-/*   Updated: 2016/09/24 12:13:27 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/24 16:34:52 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_H
 
 # include "../libft.h"
-# define BUFF_SIZE	1
+# define BUFF_SIZE	10000
 
 int					get_next_line(int const fd, char **line);
 
