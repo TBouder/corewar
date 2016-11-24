@@ -16,6 +16,7 @@ code:		live %42			# 5
 		live %42			# 5
 		sti  r15,%0,r14			# 6
 		zjmp %-200			# 3
+		; gtrew
 		live %42			# 5
 		sti  r15,%0,r14			# 6
 		zjmp %-200			# 3

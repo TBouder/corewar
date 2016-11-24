@@ -6,13 +6,13 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 15:27:33 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/24 14:31:53 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/24 14:56:50 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-void	ft_btreecmp_asm(t_btree **tree, void const *content, size_t c_size, int *err)
+void	ft_btreecmp_asm(t_asm *env, t_btree **tree, void const *content, size_t c_size)
 {
     if (!(*tree))
 	{
@@ -20,13 +20,13 @@ void	ft_btreecmp_asm(t_btree **tree, void const *content, size_t c_size, int *er
 		return ;
 	}
     if (CMP((char *)content, (char *)(*tree)->content) < 0)
-        ft_btreecmp_asm(&(*tree)->left, content, c_size, err);
+        ft_btreecmp_asm(env, &(*tree)->left, content, c_size);
 	else if (CMP((char *)content, (char *)(*tree)->content) > 0)
-        ft_btreecmp_asm(&(*tree)->right, content, c_size, err);
+        ft_btreecmp_asm(env, &(*tree)->right, content, c_size);
 	else
 	{
-		*err += 1;
-		// return ;
+		env->error_int = 1;
+		env->error_val = ft_strinit((char *)content);
 	}
 }
 
@@ -83,14 +83,12 @@ char	*ft_remove_end(char *str)
 
 void	ft_get_file_content_helper(t_asm *env, char *final_line, t_list **lst)
 {
-	int		err;
 	int		len;
 	char	**split;
 	char	*label;
 	char	*args;
 
 	len = 0;
-	err = 0;
 	while (final_line[len] && final_line[len] != ' ')
 		len++;
 	split = NULL;
@@ -98,16 +96,7 @@ void	ft_get_file_content_helper(t_asm *env, char *final_line, t_list **lst)
 	args = ft_strsub(final_line, len, ft_strlen_asm(final_line));
 	if (label[len - 1] == ':')
 	{
-		ft_btreecmp_asm(&env->file_labels, (char *)label, ft_strlen(label) + 1, &err);//ON MET LE LABEL DANS LE BTREE
-		if (err != 0)
-		{
-			ft_printf("{9}Error{0} : redefinition of {11}%s{0}", label);
-			ft_strdel(&label);
-			ft_strdel(&args);
-			ft_lstclr(lst);
-			ft_strdel(&final_line);
-			ft_error_asm(env, "", 0);
-		}
+		ft_btreecmp_asm(env, &env->file_labels, (char *)label, ft_strlen(label) + 1);//ON MET LE LABEL DANS LE BTREE
 		split = ft_split_instruct(final_line, ' ');
 		if (DIFF(split[1], ""))
 		{
@@ -123,14 +112,9 @@ void	ft_get_file_content_helper(t_asm *env, char *final_line, t_list **lst)
 		ft_lstend(lst, final_line, ft_strlen_asm(final_line) + 1);
 	else
 	{
-		ft_printf("{9}Error{0} : Syntax error at token %s", label);
-		ft_strdel(&label);
-		ft_strdel(&args);
-		ft_lstclr(lst);
-		ft_strdel(&final_line);
-		ft_error_asm(env, "", 1);
+		env->error_int = 2;
+		env->error_val = ft_strinit(label);
 	}
-
 	env->file_len++;
 	ft_strdel(&label);
 	ft_strdel(&args);
@@ -161,6 +145,18 @@ void	ft_get_file_content(t_asm *env)
 			}
 		}
 		ft_strdel(&line);
+		if (env->error_val)
+		{
+			while (get_next_line(env->fd, &line))
+				ft_strdel(&line);
+			ft_strdel(&line);
+			if (env->error_int == 1)
+				ft_printf("{9}Error{0} : redefinition of {14}%s{0}", env->error_val);
+			else if (env->error_int == 2)
+				ft_printf("{9}Error{0} : Syntax error at token {14}%s{0}", env->error_val);
+			ft_lstclr(&lst);
+			ft_error_asm(env, "", 1);
+		}
 	}
 	env->file_content = ft_dbstrnew(env->file_len);
 	ft_dbstrassign(env->file_content, lst, env->file_len);
