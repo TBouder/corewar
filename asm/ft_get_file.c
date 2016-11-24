@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 15:27:33 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/24 15:18:59 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/11/24 19:13:26 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ void	ft_get_file_content_helper(t_asm *env, char *final_line, t_list **lst)
 	if (label[len - 1] == ':')
 	{
 		ft_btreecmp_asm(env, &env->file_labels, (char *)label, ft_strlen(label) + 1);//ON MET LE LABEL DANS LE BTREE
+		ft_printf("%s\n", env->hash[ft_hash(label)]);
 		split = ft_split_instruct(final_line, ' ');
 		if (DIFF(split[1], ""))
 		{
@@ -121,7 +122,6 @@ void	ft_get_file_content(t_asm *env)
 	char	*tmp1;
 	char	*tmp2;
 
-	lst = NULL;
 	while (get_next_line(env->fd, &line))
 	{
 		if (DIFF(line, ""))
