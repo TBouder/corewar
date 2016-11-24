@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_get_size.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 15:19:07 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/24 11:04:48 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/11/24 14:14:32 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int				ft_verif_label_direct(char *str, int type)
 	{
 		i = 2;
 		while ((str[i] >= 97 && str[i] <= 122) || ft_isnumber(str[i]) ||
-				str[i] == '-')
+				str[i] == '-' || str[i] == '_')
 			i++;
 		if (!str[i])
 			return (1);
@@ -82,6 +82,31 @@ int				ft_verif_label_direct(char *str, int type)
 	return (0);
 }
 
+int				ft_verif_label_indirect(char *str, int type)
+{
+	int		i;
+
+	i = 0;
+	if (type == 0)
+	{
+		i = 1;
+		while (ft_isnumber(str[i]))
+			i++;
+		if (!str[i])
+			return (2);
+	}
+	else
+	{
+		i = 1;
+		while ((str[i] >= 97 && str[i] <= 122) || ft_isnumber(str[i]) ||
+				str[i] == '-')
+			i++;
+		if (!str[i])
+			return (2);
+	}
+	return (0);
+}
+
 int				ft_verif_label(char *str)
 {
 	int		i;
@@ -93,19 +118,15 @@ int				ft_verif_label(char *str)
 	else if (str && str[i] == DIRECT_CHAR && str[i + 1] != LABEL_CHAR)
 		return (ft_verif_label_direct(str, 1));
 	else if (str && (ft_isnumber(str[i]) || str[i] == '-'))
-	{
-		i = 1;
-		while (ft_isnumber(str[i]))
-			i++;
-		if (!str[i])
-			return (2);
-	}
+		return (ft_verif_label_indirect(str, 0));
+	else if (str && str[i] == LABEL_CHAR)
+		return (ft_verif_label_indirect(str, 1));
+
 	else if (str && str[i] == 'r')
 	{
 		if (!ft_isstrnum(str + 1))
 			return (0);
 		reg_nb = ft_atoi(str);
-		i = 1;
 		if (reg_nb <= REG_NUMBER)
 			return (3);
 	}
@@ -125,10 +146,7 @@ void			ft_get_size(t_asm *env, int i)
 	ft_init_function_tab(tab);
 
 	if (opcode != 0)
-	{
 		arg_value = tab[(int)opcode](content[1], content[2], content[3]);
-		ft_printf("{9}%d : %s{0}\n", arg_value, env->file_content[i]);
-	}
 	if (arg_value < 0)
 	{
 		if (arg_value == -1)

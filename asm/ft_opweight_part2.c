@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 11:55:28 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/22 16:19:33 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/24 11:50:51 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,19 @@ int		ft_opweight_10_14(char *arg1, char *arg2, char *arg3)
 		count += 2;
 	else
 		return (-1);
+
 	if (ft_verif_label(arg2) == 3)
-		count += 1;
+		count += 3;
 	else if (ft_verif_label(arg2) == 1)
 		count += 4;
 	else
 		return (-1);
+
 	if (ft_verif_label(arg3) == 3)
 		count += 1;
 	else
 		return (-1);
-	return (count + 1);
+	return (count);
 }
 
 int		ft_opweight_11(char *arg1, char *arg2, char *arg3)
@@ -52,28 +54,24 @@ int		ft_opweight_11(char *arg1, char *arg2, char *arg3)
 	int		count;
 
 	count = 0;
-	if (ft_verif_label(arg1) == 3)
+	if (ft_verif_label(arg1) == 3) // 'r
 		count += 1;
-	else if (ft_verif_label(arg1) == 1)
-		count += 2;
-	else if (ft_verif_label(arg1) == 2)
-		count += 2;
 	else
 		return (-1);
 
-	if (ft_verif_label(arg2) == 3)
-		count += 1;
+	if (ft_verif_label(arg2) == 3) // 'r
+		count += 1 + 2; // AU LIEU DE 1 ???
 	else if (ft_verif_label(arg2) == 1)
-		count += 2;
+		count += 4;
 	else if (ft_verif_label(arg2) == 2)
 		count += 2;
 	else
 		return (-1);
 
-	if (count != 0 && ft_verif_label(arg3) == 3)
+	if (ft_verif_label(arg3) == 3) // 'r
 		count += 1;
-	else if (count != 0 && ft_verif_label(arg3) == 1)
-		count += 4;
+	else if (ft_verif_label(arg3) == 1)
+		count += 2;
 	else
 		return (-1);
 	return (count);

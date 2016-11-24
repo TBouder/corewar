@@ -107,3 +107,50 @@ echo "\n\033[41m\033[1m ---> ./asm tests/error_name15.s (.name \"\"name\")\033[0
 echo "\n\033[42m\033[1m ---> ./asm tests/valid_strange_name00.s (.name "''")\033[0m"
 ./asm tests/valid_strange_name00.s
 # sh /Volumes/USB/.files/valgrind/vg-in-place --leak-check=full --suppressions=/Volumes/USB/.files/valgrind/osx.supp --show-leak-kinds=all -q ./asm tests/valid_strange_name00.s
+
+# ---------------------------------------------------------------------------- #
+echo "\n\n\033[44m\033[1mTEST HEX VALUE\033[0m"
+echo "\n\033[42m\033[1m ---> ./asm ../champions/42.s\033[0m => \033[45m\033[1m 3dd \033[0m"
+./asm ../champions/42.s
+echo "\n\033[42m\033[1m ---> ./asm ../champions/Backward.s\033[0m => \033[45m\033[1m 34 \033[0m"
+./asm ../champions/Backward.s
+echo "\n\033[42m\033[1m ---> ./asm ../champions/Car.s\033[0m => \033[45m\033[1m 119 \033[0m"
+./asm ../champions/Car.s
+echo "\n\033[42m\033[1m ---> ./asm ../champions/Death.s\033[0m => \033[45m\033[1m a8 \033[0m"
+./asm ../champions/Death.s
+echo "\n\033[42m\033[1m ---> ./asm ../champions/Gagnant.s\033[0m => \033[45m\033[1m 145 \033[0m"
+./asm ../champions/Gagnant.s
+echo "\n\033[42m\033[1m ---> ./asm ../champions/Octobre_Rouge_V4.2.s\033[0m => \033[45m\033[1m 261 \033[0m"
+./asm ../champions/Octobre_Rouge_V4.2.s
+echo "\n\033[42m\033[1m ---> ./asm ../champions/Survivor.s\033[0m => \033[45m\033[1m 27 \033[0m"
+./asm ../champions/Survivor.s
+echo "\n\033[42m\033[1m ---> ./asm ../champions/Torpille.s\033[0m => \033[45m\033[1m 96 \033[0m"
+./asm ../champions/Torpille.s
+echo "\n\033[42m\033[1m ---> ./asm ../champions/barriere.s\033[0m => \033[45m\033[1m 3ff \033[0m"
+./asm ../champions/barriere.s
+echo "\n\033[42m\033[1m ---> ./asm ../champions/ex.s\033[0m => \033[45m\033[1m 17 \033[0m"
+./asm ../champions/ex.s
+echo "\n\033[42m\033[1m ---> ./asm ../champions/jumper.s\033[0m => \033[45m\033[1m 140 \033[0m"
+./asm ../champions/jumper.s
+echo "\n\033[42m\033[1m ---> ./asm ../champions/lde.s\033[0m => \033[45m\033[1m 341 \033[0m"
+./asm ../champions/lde.s
+echo "\n\033[42m\033[1m ---> ./asm ../champions/leeloo.s\033[0m => \033[45m\033[1m 385 \033[0m"
+./asm ../champions/leeloo.s
+echo "\n\033[42m\033[1m ---> ./asm ../champions/mat.s\033[0m => \033[45m\033[1m 387 \033[0m"
+./asm ../champions/mat.s
+echo "\n\033[42m\033[1m ---> ./asm ../champions/maxidef.s\033[0m => \033[45m\033[1m 12d \033[0m"
+./asm ../champions/maxidef.s
+echo "\n\033[42m\033[1m ---> ./asm ../champions/mortel.s\033[0m => \033[45m\033[1m ee \033[0m"
+./asm ../champions/mortel.s
+echo "\n\033[42m\033[1m ---> ./asm ../champions/new.s\033[0m => \033[45m\033[1m 38c \033[0m"
+./asm ../champions/new.s
+echo "\n\033[42m\033[1m ---> ./asm ../champions/slider2.s\033[0m => \033[45m\033[1m 240 \033[0m"
+./asm ../champions/slider2.s
+echo "\n\033[42m\033[1m ---> ./asm ../champions/tdc2.s\033[0m => \033[45m\033[1m c3 \033[0m"
+./asm ../champions/tdc2.s
+echo "\n\033[42m\033[1m ---> ./asm ../champions/tdc3.s\033[0m => \033[45m\033[1m 74 \033[0m"
+./asm ../champions/tdc3.s
+echo "\n\033[42m\033[1m ---> ./asm ../champions/tdc4.s\033[0m => \033[45m\033[1m 4c \033[0m"
+./asm ../champions/tdc4.s
+echo "\n\033[42m\033[1m ---> ./asm ../champions/toto.s\033[0m => \033[45m\033[1m 145 \033[0m"
+./asm ../champions/toto.s
