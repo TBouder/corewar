@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 15:19:07 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/24 11:58:56 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/24 12:22:45 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,4 +159,5 @@ void			ft_get_size(t_asm *env, int i)
 		ft_error_asm(env, "", 1);
 	}
 	env->instruct_size += arg_value;
+	ft_dbstrdel(content);
 }
