@@ -4,16 +4,16 @@ echo "\033[41m\033[1m ---> ./asm\033[0m"
 # ~/.brew/bin/valgrind --leak-check=full --suppressions=.valgrind.supp --show-leak-kinds=all -q ./asm
 echo "\n\033[41m\033[1m ---> ./asm ..\033[0m"
 ./asm ..
-# ~/.brew/bin/valgrind --leak-check=full --suppressions=.valgrind.supp --show-leak-kinds=all -q ./asm
+# ~/.brew/bin/valgrind --leak-check=full --suppressions=.valgrind.supp --show-leak-kinds=all -q ./asm ..
 echo "\n\033[41m\033[1m ---> ./asm 1\033[0m"
 ./asm 1
-# ~/.brew/bin/valgrind --leak-check=full --suppressions=.valgrind.supp --show-leak-kinds=all -q ./asm
+# ~/.brew/bin/valgrind --leak-check=full --suppressions=.valgrind.supp --show-leak-kinds=all -q ./asm 1
 echo "\n\033[41m\033[1m ---> ./asm empty\033[0m"
 ./asm empty
-# ~/.brew/bin/valgrind --leak-check=full --suppressions=.valgrind.supp --show-leak-kinds=all -q ./asm
+# ~/.brew/bin/valgrind --leak-check=full --suppressions=.valgrind.supp --show-leak-kinds=all -q ./asm empty
 echo "\n\033[41m\033[1m ---> ./asm /dev/null\033[0m"
 ./asm /dev/null
-# ~/.brew/bin/valgrind --leak-check=full --suppressions=.valgrind.supp --show-leak-kinds=all -q ./asm
+# ~/.brew/bin/valgrind --leak-check=full --suppressions=.valgrind.supp --show-leak-kinds=all -q ./asm /dev/null
 echo "\n\033[41m\033[1m ---> ./asm /dev/random\033[0m"
 ./asm /dev/random
 # ~/.brew/bin/valgrind --leak-check=full --suppressions=.valgrind.supp --show-leak-kinds=all -q ./asm /dev/random
@@ -50,6 +50,9 @@ echo "\n\033[42m\033[1m ---> ./asm tests/valid.s\033[0m"
 # ~/.brew/bin/valgrind --leak-check=full --suppressions=.valgrind.supp --show-leak-kinds=all -q ./asm tests/valid.s
 
 # ---------------------------------------------------------------------------- #
+
+# Rajouter plusieurs .name
+# name max et sup
 
 echo "\n\n\033[44m\033[1mCHAMPION ERROR (name or comment)\033[0m"
 echo "\n\033[41m\033[1m ---> ./asm tests/error_name00.s (no name line)\033[0m"
