@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 17:46:27 by quroulon          #+#    #+#             */
-/*   Updated: 2016/11/25 14:28:57 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/25 14:32:29 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,23 +45,21 @@ void		ft_put_data(t_asm *env)
 
 void		ft_parse_file(t_asm *env)
 {
-	int		i;
 	int		cpt;
 
-	i = 0;
 	cpt = 0;
-	while (env->file_content[i])
+	while (env->file_content[env->line_nb])
 	{
 		if (cpt < 2)// && env->file_content[i][0] == '.')
 		{
-			ft_get_champ_infos(env, i);
+			ft_get_champ_infos(env, env->line_nb);
 			cpt++;
 		}
-		else if (cpt >= 2 && ft_strchr(env->file_content[i], '.') == NULL)
-			ft_get_size(env, i);
+		else if (cpt >= 2 && ft_strchr(env->file_content[env->line_nb], '.') == NULL)
+			ft_get_size(env, env->line_nb);
 		else
 			ft_error_asm(env, ERR_BAD_SRC_FILE, 1);
-		i++;
+		env->line_nb++;
 	}
 	if (ft_detect_errors(env) == 0)
 		ft_put_data(env);
