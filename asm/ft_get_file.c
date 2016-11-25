@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 15:27:33 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/24 17:51:32 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/25 23:10:52 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,26 +40,20 @@ void	ft_strreplace_space(char *str)
 	int		cpt;
 
 	i = 0;
-	cpt = -1;
+	cpt = 0;
 	while (str[i])
 	{
 		if (str[i] == ';')
-		{
-			cpt = i;
 			break ;
-		}
-		i++;
+		cpt = i++;
 	}
 	i = 0;
 	while (str[i])
 	{
 		if (ft_isspace(str[i]))
 			str[i] = ' ';
-		if (str[i] == ',' && cpt > 0 && (ft_strnstr(str, ".name", cpt) == NULL
-			|| ft_strnstr(str, ".comment", cpt) == NULL))
-			str[i] = ' ';
-		else if (str[i] == ',' && (ft_strstr(str, ".name") == NULL
-			|| ft_strnstr(str, ".comment", cpt) == NULL))
+		if (str[i] == ',' && ft_strnstr(str, ".name", cpt) == NULL
+			&& ft_strnstr(str, ".comment", cpt) == NULL)
 			str[i] = ' ';
 		i++;
 	}
@@ -97,6 +91,7 @@ void	ft_get_file_content_helper(t_asm *env, char *final_line, t_list **lst)
 	if (label[len - 1] == ':')
 	{
 		ft_btreecmp_asm(env, &env->file_labels, (char *)label, ft_strlen(label) + 1);//ON MET LE LABEL DANS LE BTREE
+		// ft_printf("%s\n", env->hash[ft_hash(label)]);
 		split = ft_split_instruct(final_line, ' ');
 		if (DIFF(split[1], ""))
 		{
