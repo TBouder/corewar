@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/25 13:42:46 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/25 14:28:25 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,15 @@ typedef struct	s_asm
 
 	char		*filename;
 	char		*filename_noext;
+	char		*filename_new;
+
 	char		*champ_name;
 	char		*champ_comment;
 	int			instruct_size;
 
 	char		**file_content;
+	int			line_nb;
+
 	t_btree		*file_labels;
 	char		**args;
 	int			file_len;
@@ -73,9 +77,12 @@ int				ft_verif_label(t_asm *env, char *str);
 
 
 /*
-** ft_get_file.c
+** GET : ft_get_champion.c, ft_get_file.c, ft_get_size.c
 */
+void			ft_get_champ_infos(t_asm *env, int i);
 void			ft_get_file_content(t_asm *env);
+void			ft_get_size(t_asm *env, int i);
+int				ft_get_opcode(char *opname);
 
 /*
 ** parse.c
@@ -91,11 +98,6 @@ char			*ft_transform_magic(void);
 char			*ft_transform_champ_infos(char *content, size_t content_size);
 void			ft_transform_size(int content, int fd);
 
-/*
-** ft_get_size.c
-*/
-void			ft_get_size(t_asm *env, int i);
-int				ft_get_opcode(char *opname);
 
 /*
 ** ft_tools.c

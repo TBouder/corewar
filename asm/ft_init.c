@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 13:02:29 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/25 13:12:54 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/25 14:25:30 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 ** options :		contains all the flags (if -a, options->flags['a'] == 1)
 ** file_content :	contains all the usefull lines (without empty ones and all
 **					the comments)
+** line_nb :		interator that is the current line number
 ** file_labels :	contains all the labels of the file ("hello:")
 ** args :			char ** var usefull because of the norm
 ** error_val :		contains the error message
@@ -36,6 +37,7 @@ void	ft_init_env(t_asm *env)
 	env->file_labels = NULL;
 	env->args = NULL;
 	env->file_len = 0;
+	env->line_nb = 0;
 
 	env->error_val = NULL;
 	env->error_int = 0;
