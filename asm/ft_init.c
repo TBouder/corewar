@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 13:02:29 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/25 14:25:30 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/25 15:18:00 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	ft_init_env(t_asm *env)
 
 	env->file_content = NULL;
 	env->file_labels = NULL;
+	env->instruct_weight = NULL;
 	env->args = NULL;
 	env->file_len = 0;
 	env->line_nb = 0;

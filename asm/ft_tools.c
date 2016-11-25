@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 12:38:11 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/22 14:35:09 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/25 16:19:11 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,8 @@ char			**ft_split_args(char const *s, char c)
 	char	**str;
 	int		n_words;
 	int		i;
-	char	n_c[1];
 
 	i = 0;
-	n_c[0] = c;
 	if (s == NULL)
 		return (NULL);
 	n_words = 4;
@@ -59,10 +57,8 @@ char			**ft_split_instruct(char const *s, char c)
 	char	**str;
 	int		n_words;
 	int		i;
-	char	n_c[1];
 
 	i = 0;
-	n_c[0] = c;
 	if (s == NULL)
 		return (NULL);
 	n_words = 3;
