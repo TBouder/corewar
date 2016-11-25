@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 16:03:50 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/25 13:34:57 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/25 16:40:21 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,15 @@ void	ft_print_on_success(t_asm env)
 	ft_printf("{14}%-17s{0} : [{10}%x{0}]\n", "Hex Size", env.instruct_size);
 	ft_printf("----------------------------------------------------\n");
 	ft_printf("Writing output program to {10}%s{0}.cor\n", env.filename_noext);
+
+	// int		i;
+	//
+	// i = 0;
+	// while (i < env.file_len)
+	// {
+	// 	ft_printf("[{10}%s{0}] -> [{14}%d{0}]\n", env.file_content[i], env.instruct_weight[i]);
+	// 	i++;
+	// }
 }
 
 void	ft_launcher(t_asm *env, char **av, int i)

@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/25 14:28:25 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/25 16:13:17 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct	s_asm
 	int			line_nb;
 
 	t_btree		*file_labels;
+	int			*instruct_weight;
 	char		**args;
 	int			file_len;
 	// t_op		op_tab[17];
@@ -108,6 +109,7 @@ char			**ft_split_instruct(char const *s, char c);
 /*
 ** ft_opweight_part{1..2}.c
 */
+int				ft_get_line_weight(t_asm *env, int opcode, int value, int ret);
 int				ft_opweight_1(t_asm *env, char *arg1, char *arg2, char *arg3);
 int				ft_opweight_2(t_asm *env, char *arg1, char *arg2, char *arg3);
 int				ft_opweight_3(t_asm *env, char *arg1, char *arg2, char *arg3);
