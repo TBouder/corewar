@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/17 15:55:50 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/25 13:50:34 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -231,6 +231,7 @@ void 				ft_btreecmp(t_btree **tree, void const *content,
 						size_t c_size);
 t_btree				*ft_btreenew(void const *content, size_t c_size);
 void 				ft_btreedel(t_btree *tree);
+void				ft_btreesearch(t_btree *node, char *content, int *ret);
 
 /*
 ** Others (Flags in str)

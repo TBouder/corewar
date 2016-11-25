@@ -6,32 +6,11 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 15:19:07 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/24 18:44:31 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/25 13:54:09 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
-
-void			ft_init_function_tab(int (*tab[17])())
-{
-	tab[0] = NULL;
-	tab[1] = &ft_opweight_1;
-	tab[2] = &ft_opweight_2;
-	tab[3] = &ft_opweight_3;
-	tab[4] = &ft_opweight_4_5;
-	tab[5] = &ft_opweight_4_5;
-	tab[6] = &ft_opweight_6_7_8;
-	tab[7] = &ft_opweight_6_7_8;
-	tab[8] = &ft_opweight_6_7_8;
-	tab[9] = &ft_opweight_9_12_15;
-	tab[10] = &ft_opweight_10_14;
-	tab[11] = &ft_opweight_11;
-	tab[12] = &ft_opweight_9_12_15;
-	tab[13] = &ft_opweight_13;
-	tab[14] = &ft_opweight_10_14;
-	tab[15] = &ft_opweight_9_12_15;
-	tab[16] = &ft_opweight_16;
-}
 
 int				ft_get_opcode(char *opname)
 {
@@ -55,102 +34,6 @@ int				ft_get_opcode(char *opname)
 	opcode == 0 && EQU(opname, "lfork") ? opcode = 15 : 0;
 	opcode == 0 && EQU(opname, "aff") ? opcode = 16 : 0;
 	return (opcode);
-}
-
-void			ft_btreeequ(t_btree *node, char *content, int *ret)
-{
-	if (node)
-	{
-		ft_btreeequ(node->left, content, ret);
-		if (EQU(node->content, content))
-		{
-			*ret = 1;
-			return ;
-		}
-		ft_btreeequ(node->right, content, ret);
-	}
-}
-
-int				ft_verif_label_direct(t_asm *env, char *str, int type)
-{
-	int		i;
-	int		ret;
-	char	*verif_label;
-
-	ret = 0;
-	if (type == 0)
-	{
-		i = 2;
-		verif_label = ft_strjoin(str + 2, ":");
-		ft_btreeequ(env->file_labels, verif_label, &ret);
-		if (ret == 0)
-		{
-			ft_printf("{9}ERROR{0} : No such label {14}%s{0}", verif_label);
-			ft_strdel(&verif_label);
-			ft_error_asm(env, "", 1);
-		}
-		ft_strdel(&verif_label);
-		return (1);
-	}
-	else
-	{
-		i = 1;
-		while (ft_isnumber(str[i]) || str[i] == '-')
-			i++;
-		if (!str[i])
-			return (1);
-	}
-	return (0);
-}
-
-int				ft_verif_label_indirect(char *str, int type)
-{
-	int		i;
-
-	i = 0;
-	if (type == 0)
-	{
-		i = 1;
-		while (ft_isnumber(str[i]))
-			i++;
-		if (!str[i])
-			return (2);
-	}
-	else
-	{
-		i = 1;
-		while ((str[i] >= 97 && str[i] <= 122) || ft_isnumber(str[i]) ||
-				str[i] == '-')
-			i++;
-		if (!str[i])
-			return (2);
-	}
-	return (0);
-}
-
-int				ft_verif_label(t_asm *env, char *str)
-{
-	int		i;
-	int		reg_nb;
-
-	i = 0;
-	if (str && str[i] == DIRECT_CHAR && str[i + 1] == LABEL_CHAR)
-		return (ft_verif_label_direct(env, str, 0));
-	else if (str && str[i] == DIRECT_CHAR && str[i + 1] != LABEL_CHAR)
-		return (ft_verif_label_direct(env, str, 1));
-	else if (str && (ft_isnumber(str[i]) || str[i] == '-'))
-		return (ft_verif_label_indirect(str, 0));
-	else if (str && str[i] == LABEL_CHAR)
-		return (ft_verif_label_indirect(str, 1));
-	else if (str && str[i] == 'r')
-	{
-		if (!ft_isstrnum(str + 1))
-			return (0);
-		reg_nb = ft_atoi(str);
-		if (reg_nb <= REG_NUMBER)
-			return (3);
-	}
-	return (0);
 }
 
 void			ft_get_size(t_asm *env, int i)
