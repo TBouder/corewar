@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/24 15:30:34 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/25 13:42:46 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,25 @@ char			*ft_strinit_asm(char *str);
 void			ft_error_asm(t_asm *env, char *msg, int err);
 
 /*
+** ft_init.c
+*/
+void			ft_init_env(t_asm *env);
+void			ft_init_function_tab(int (*tab[17])());
+
+/*
+** fr_free.c
+*/
+void			ft_clear_all(t_asm *env);
+
+/*
+** ft_verif.c
+*/
+char			ft_verif_extension(t_asm *env, char *source);
+int				ft_verif_label(t_asm *env, char *str);
+
+
+
+/*
 ** ft_get_file.c
 */
 void			ft_get_file_content(t_asm *env);
@@ -76,7 +95,6 @@ void			ft_transform_size(int content, int fd);
 ** ft_get_size.c
 */
 void			ft_get_size(t_asm *env, int i);
-int				ft_verif_label(t_asm *env, char *str);
 int				ft_get_opcode(char *opname);
 
 /*
