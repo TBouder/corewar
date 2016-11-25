@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 17:46:27 by quroulon          #+#    #+#             */
-/*   Updated: 2016/11/25 15:17:48 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/25 23:06:26 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int			ft_detect_errors(t_asm *env)
 	if (!env->champ_name)
 		ft_error_asm(env, ERR_NOCHAMP_NAME, 1);
 	else if (!env->champ_comment)
-		return (1); //ERROR NO CHAMP COMMENT
+		ft_error_asm(env, ERR_NOCHAMP_COMMENT, 1);
 	return (0);
 }
 
@@ -51,7 +51,7 @@ void		ft_parse_file(t_asm *env)
 	env->instruct_weight = ft_nbrnew(env->file_len);
 	while (env->file_content[env->line_nb])
 	{
-		if (cpt < 2)// && env->file_content[i][0] == '.')
+		if (cpt < 2)
 		{
 			ft_get_champ_infos(env, env->line_nb);
 			cpt++;
