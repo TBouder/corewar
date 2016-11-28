@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 16:03:50 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/28 14:39:00 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/28 19:31:30 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,10 @@ void	ft_print_on_success(t_asm env)
 	i = 0;
 	while (i < env.file_len)
 	{
-		ft_printf("[{10}%s{0}] -> [{14}%d{0}] ([{11}%d{0}] + [{11}%d{0}] + [{11}%d{0}] + [{11}%d{0}])\n",
-		env.file_content[i], env.instruct_weight[i], env.arg_weight[i][0], env.arg_weight[i][1], env.arg_weight[i][2], env.arg_weight[i][3]);
+		ft_printf("[{10}%s{0}] -> [{11}%d{0}] + [{11}%d{0}] + [{11}%d{0}] + [{11}%d{0}]\n",
+		env.file_content[i], env.arg_weight[i][0], env.arg_weight[i][1], env.arg_weight[i][2], env.arg_weight[i][3]);
+		int	op_next_val = ft_atoi_base(env.opcode_next[i], 2);
+		ft_printf("[{10}%s{0}] -> [%d]\n\n", env.file_content[i], op_next_val);
 		i++;
 	}
 }

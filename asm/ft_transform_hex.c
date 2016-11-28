@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 15:52:08 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/24 19:02:16 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/28 18:42:44 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,18 +43,15 @@ char		*ft_transform_magic(void)
 char		*ft_transform_champ_infos(char *content, size_t content_size)
 {
 	int		i;
-	char	*magic;
 	char	*magic_hex;
 
 	i = 0;
-	magic = ft_strinit(content);
 	magic_hex = ft_strnew_hex(content_size);
-	while (magic[i])
+	while (content[i])
 	{
-		magic_hex[i] += magic[i];
+		magic_hex[i] += content[i];
 		i += 1;
 	}
-	ft_strdel(&magic);
 	return (magic_hex);
 }
 
