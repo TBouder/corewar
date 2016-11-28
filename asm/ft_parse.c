@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 17:46:27 by quroulon          #+#    #+#             */
-/*   Updated: 2016/11/28 16:55:54 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/11/28 19:41:09 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,19 @@ void		ft_parse_file(t_asm *env)
 	int		cpt;
 
 	cpt = 0;
-	// Contient X case (X = nombre de ligne) et chaque ligne a un poids
-	env->instruct_weight = ft_nbrnew(env->file_len);
 	// Contient X case (X = nombre de ligne) et chaque ligne contient 4 cases
 	//	[Poids OPCODE][POIDS ARG1][POIDS ARG2][POIDS ARG3]
 	env->arg_weight = ft_dbnbrnew(env->file_len, 4);
+	// Contient X case (X = nombre de ligne) et chaque ligne a la valeur apres l'opcode
+	int i = 0;
+	env->opcode_next = ft_dbstrnew(env->file_len);
+	while (i < env->file_len)
+	{
+		env->opcode_next[i] = ft_strnew(8);
+		i++;
+	}
+
+
 	while (env->file_content[env->line_nb])
 	{
 		if (cpt < 2)
