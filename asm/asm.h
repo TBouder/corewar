@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/25 23:09:17 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/28 14:34:54 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,29 +28,31 @@ typedef struct		s_label
 
 typedef struct		s_asm
 {
-	t_options		*options;
-	int				fd;
-	int				fd_cor;
+	t_options		*options;			//Flags
+	int				fd;					//FD
+	int				fd_cor;				//FD pour le fichier final
 
-	char			*error_val;
-	int				error_int;
+	char			*error_val;			//Contenu de l'erreur a afficher
+	int				error_int;			//Valeur de l'errur
 
-	char			*filename;
-	char			*filename_noext;
-	char			*filename_new;
+	char			*filename;			//Nom du fichier
+	char			*filename_noext;	//Nom du fichier sans extension
+	char			*filename_new;		//Nom du fichier avec l'ext .cor
 
-	char			*champ_name;
-	char			*champ_comment;
-	int				instruct_size;
+	char			*champ_name;		//Nom du champion
+	char			*champ_comment;		//Comment du champion
+	int				instruct_size;		//Taille totale du fichier
 
-	char			**file_content;
-	int				line_nb;
+	char			**file_content;		//Toutes les lignes valides
+	int				file_len;			//Nombre de ligne du fichier
+	int				line_nb;			//Ligne courante
 
-	t_btree			*file_labels;
-	int				*instruct_weight;
-	char			**args;
-	int				file_len;
-	// t_op			op_tab[17];
+	t_btree			*file_labels;		//Liste de tous les labels custom
+	int				*instruct_weight;	//Poids de chaque lignes
+	int				**arg_weight;		//Poids de chaque arg de chaque ligne
+
+	char			**args;				//Buffer temp pour les args (norme)
+	int				opcode;				//Buffer temp pour les poids (norme)
 	t_label			**hash;
 }					t_asm;
 
@@ -115,7 +117,7 @@ char				**ft_split_instruct(char const *s, char c);
 /*
 ** ft_opweight_part{1..2}.c
 */
-int				ft_get_line_weight(t_asm *env, int opcode, int value, int ret);
+int				ft_get_line_weight(t_asm *env, int value, int ret, int pos);
 int				ft_opweight_1(t_asm *env, char *arg1, char *arg2, char *arg3);
 int				ft_opweight_2(t_asm *env, char *arg1, char *arg2, char *arg3);
 int				ft_opweight_3(t_asm *env, char *arg1, char *arg2, char *arg3);

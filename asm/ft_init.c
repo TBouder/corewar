@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 13:02:29 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/25 15:18:00 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/28 14:16:56 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,21 +33,26 @@ void	ft_init_env(t_asm *env)
 {
 	env->options = NULL;
 
-	env->file_content = NULL;
-	env->file_labels = NULL;
-	env->instruct_weight = NULL;
-	env->args = NULL;
-	env->file_len = 0;
-	env->line_nb = 0;
-
 	env->error_val = NULL;
 	env->error_int = 0;
 
-	env->champ_name = NULL;
-	env->champ_comment = NULL;
 	env->filename = NULL;
 	env->filename_noext = NULL;
+	env->filename_new = NULL;
+
+	env->champ_name = NULL;
+	env->champ_comment = NULL;
 	env->instruct_size = 0;
+
+	env->file_content = NULL;
+	env->file_len = 0;
+	env->line_nb = 0;
+
+	env->file_labels = NULL;
+	env->instruct_weight = NULL;
+	env->arg_weight = NULL;
+	
+	env->args = NULL;
 }
 
 /*

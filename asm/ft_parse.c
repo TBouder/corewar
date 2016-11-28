@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 17:46:27 by quroulon          #+#    #+#             */
-/*   Updated: 2016/11/25 23:06:26 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/28 14:21:10 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,32 @@ void		ft_put_data(t_asm *env)
 	ft_strdel(&hex_string);
 }
 
+int		**ft_dbnbrnew(size_t size, size_t sub_size)
+{
+	int			**buffer;
+	size_t		i;
+
+	i = 0;
+	if (!(buffer = (int **)malloc(sizeof(int *) * size)))
+		return (NULL);
+	while (i < size)
+	{
+		buffer[i] = ft_nbrnew(sub_size);
+		i++;
+	}
+	return (buffer);
+}
+
 void		ft_parse_file(t_asm *env)
 {
 	int		cpt;
 
 	cpt = 0;
+	// Contient X case (X = nombre de ligne) et chaque ligne a un poids
 	env->instruct_weight = ft_nbrnew(env->file_len);
+	// Contient X case (X = nombre de ligne) et chaque ligne contient 4 cases
+	//	[Poids OPCODE][POIDS ARG1][POIDS ARG2][POIDS ARG3]
+	env->arg_weight = ft_dbnbrnew(env->file_len, 4);
 	while (env->file_content[env->line_nb])
 	{
 		if (cpt < 2)
