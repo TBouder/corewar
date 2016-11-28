@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_transform_hex.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
+/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 15:52:08 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/24 19:02:16 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/28 18:47:37 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char		*ft_transform_champ_infos(char *content, size_t content_size)
 	return (magic_hex);
 }
 
-static char	*ft_transform_size_helper(int content, size_t content_size)
+char		*ft_transform_size_helper(int content, size_t content_size)
 {
 	int		i;
 	int		y;
@@ -70,11 +70,14 @@ static char	*ft_transform_size_helper(int content, size_t content_size)
 	i = 0;
 	y = 0;
 	magic = ft_itox(content);
+	ft_printf("content %d\n", content);
+	ft_printf("magic %s\n", magic);
 	magic_hex = ft_strnew_hex(content_size);
 	odd = ft_strlen(magic) % 2;
 	while (magic[i])
 	{
 		tmp = ft_strsub(magic, i, (i == 0 && odd) ? 1 : 2);
+		ft_printf("tmp %s\n", tmp);
 		magic_hex[y] += ft_atoi_hexa(tmp);
 		ft_strdel(&tmp);
 		y++;

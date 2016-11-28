@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 17:46:27 by quroulon          #+#    #+#             */
-/*   Updated: 2016/11/28 14:21:10 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/28 16:55:54 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void		ft_put_data(t_asm *env)
 	char	*hex_string;
 
 	fd = open("test.cor", O_WRONLY, O_CREAT, 0600);
+	env->fd = fd;
 
 	hex_string = ft_transform_magic();
 	write(fd, hex_string, MAGIC_LEN);
