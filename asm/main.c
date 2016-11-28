@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
+/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 16:03:50 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/28 14:39:00 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/28 16:55:04 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	ft_launcher(t_asm *env, char **av, int i)
 		if (env->file_len <= 2)
 			ft_error_asm(env, ERR_EMPTY_FILE, 1);
 		ft_parse_file(env);
+		ft_write_instructions(env);
 		ft_print_on_success(*env);
 		ft_clear_all(env);
 	}
