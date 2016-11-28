@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 15:19:07 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/25 22:44:29 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/28 14:43:18 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int				ft_get_opcode(char *opname)
 
 void			ft_get_opweight(t_asm *env, int opcode)
 {
+	/*POUR LA LIGNE TOTAL (USELESS ?)*/
 	opcode == 1 ? env->instruct_weight[env->line_nb] += 1 : 0;
 	opcode == 2 ? env->instruct_weight[env->line_nb] += 2 : 0;
 	opcode == 3 ? env->instruct_weight[env->line_nb] += 2 : 0;
@@ -54,6 +55,24 @@ void			ft_get_opweight(t_asm *env, int opcode)
 	opcode == 14 ? env->instruct_weight[env->line_nb] += 2 : 0;
 	opcode == 15 ? env->instruct_weight[env->line_nb] += 1 : 0;
 	opcode == 16 ? env->instruct_weight[env->line_nb] += 2 : 0;
+
+	/*POUR LA CASE 0 DE LA LIGNE COURANTE */
+	opcode == 1 ? env->arg_weight[env->line_nb][0] += 1 : 0;
+	opcode == 2 ? env->arg_weight[env->line_nb][0] += 2 : 0;
+	opcode == 3 ? env->arg_weight[env->line_nb][0] += 2 : 0;
+	opcode == 4 ? env->arg_weight[env->line_nb][0] += 2 : 0;
+	opcode == 5 ? env->arg_weight[env->line_nb][0] += 2 : 0;
+	opcode == 6 ? env->arg_weight[env->line_nb][0] += 2 : 0;
+	opcode == 7 ? env->arg_weight[env->line_nb][0] += 2 : 0;
+	opcode == 8 ? env->arg_weight[env->line_nb][0] += 2 : 0;
+	opcode == 9 ? env->arg_weight[env->line_nb][0] += 1 : 0;
+	opcode == 10 ? env->arg_weight[env->line_nb][0] += 2 : 0;
+	opcode == 11 ? env->arg_weight[env->line_nb][0] += 2 : 0;
+	opcode == 12 ? env->arg_weight[env->line_nb][0] += 1 : 0;
+	opcode == 13 ? env->arg_weight[env->line_nb][0] += 2 : 0;
+	opcode == 14 ? env->arg_weight[env->line_nb][0] += 2 : 0;
+	opcode == 15 ? env->arg_weight[env->line_nb][0] += 1 : 0;
+	opcode == 16 ? env->arg_weight[env->line_nb][0] += 2 : 0;
 }
 
 void			ft_get_size(t_asm *env, int i)
@@ -71,6 +90,7 @@ void			ft_get_size(t_asm *env, int i)
 	if (opcode != 0)
 	{
 		arg_value = tab[(int)opcode](env, env->args[1], env->args[2], env->args[3]);
+		//ICI WESH MAGGLE
 	}
 	if (arg_value < 0)
 	{
