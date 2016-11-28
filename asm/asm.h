@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/28 18:43:30 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/11/28 19:41:51 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include "errors.h"
 
 # define	MAGIC_LEN 4
-# define	TMP_SIZE 77fmana
 
 typedef struct		s_asm
 {
@@ -42,7 +41,7 @@ typedef struct		s_asm
 	int				line_nb;			//Ligne courante
 
 	t_btree			*file_labels;		//Liste de tous les labels custom
-	int				*instruct_weight;	//Poids de chaque lignes
+	char			**opcode_next;		//Machin apres l'opcode
 	int				**arg_weight;		//Poids de chaque arg de chaque ligne
 
 	char			**args;				//Buffer temp pour les args (norme)
