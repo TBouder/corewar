@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/25 13:50:34 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/28 19:26:39 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,7 @@ void				ft_putdbstr(char **tab, size_t size);
 int					ft_atoi(const char *str);
 int					ft_atoi_part(const char *str, int i);
 int					ft_atoi_hexa(const char *str);
+long				ft_atoi_base(char *str, int base);
 int					ft_nbrsmallest(int *nbr, int len);
 int					ft_nbrlargest(int *nbr, int len);
 int					ft_next_prime(int nb);
