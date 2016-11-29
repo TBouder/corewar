@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/29 17:52:35 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/29 20:06:06 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,8 @@
 # define VM_H
 
 # include "../libft/libft.h"
+# include "op.h"
 # include <errno.h>
-
-# define PROG_NAME_LENGTH		(128)
-# define COMMENT_LENGTH			(2048)
-# define COREWAR_EXEC_MAGIC		0xea83f3
-
-typedef struct		header_s
-{
-	unsigned int	magic;
-	char			prog_name[PROG_NAME_LENGTH + 1];
-	unsigned int	prog_size;
-	char			comment[COMMENT_LENGTH + 1];
-}					header_t;
 
 typedef struct		s_champions
 {
@@ -35,6 +24,7 @@ typedef struct		s_champions
 	unsigned int	magic;
 	unsigned int	prog_size;
 	char			*content;
+	unsigned int	starting_pos;
 }					t_champions;
 
 typedef struct		s_vm
@@ -44,7 +34,9 @@ typedef struct		s_vm
 	char			**filename;
 	int				nb_champ;
 	t_champions		*champions;
+	int				total_size;
 	header_t		*header;
+	char			*map;
 }					t_vm;
 
 /*
