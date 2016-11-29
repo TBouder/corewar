@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 17:46:27 by quroulon          #+#    #+#             */
-/*   Updated: 2016/11/28 18:43:07 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/29 13:07:56 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ void		ft_parse_file(t_asm *env)
 		env->opcode_next[i] = ft_strnew(8);
 		i++;
 	}
+
 
 
 	while (env->file_content[env->line_nb])
