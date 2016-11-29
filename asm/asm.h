@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/28 19:41:51 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/11/29 15:02:24 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void				ft_recover_name(t_asm *env, char *line, int i, int j);
 */
 char				*ft_transform_magic(void);
 char				*ft_transform_champ_infos(char *content, size_t content_size);
-void				ft_transform_size(int content, int fd);
+void				ft_transform_size(int content, int fd, int len);
 char				*ft_transform_size_helper(int content, size_t content_size);
 
 /*
