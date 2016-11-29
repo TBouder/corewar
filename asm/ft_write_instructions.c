@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 16:31:46 by quroulon          #+#    #+#             */
-/*   Updated: 2016/11/29 19:11:09 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/11/29 19:43:19 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static int		ft_jump_to_label(t_asm *env, char *str, int line, int arg)
 	i = 0;
 	cpt = 0;
 	found = 0;
+	arg = 0;
 	str = ft_strjoin(str, ":");
 	while (env->file_content[i])
 	{
@@ -34,49 +35,20 @@ static int		ft_jump_to_label(t_asm *env, char *str, int line, int arg)
 			found = -1;
 		}
 		j = 0;
-		if (line == i && found == 0)
+		if (line == i)// && found == 0)
+		{
+			if (found < 0)
+				return ((USHRT_MAX + 1) - cpt);
 			found = 1;
+		}
 		while (j <= 3 && env->arg_weight[i][j] > 0)
 		{
-			if (line == i && arg == j)
-			{
-				if (found < 0)
-					return (cpt * found);
-			}
 			cpt += (found != 0) ? env->arg_weight[i][j] : 0;
 			j++;
 		}
 		ft_dbstrdel(tab);
 		i++;
 	}
-
-	// int			cpt;
-	// int			tmp;
-	// char		**tab;
-
-	// cpt = 0;
-	// tmp = arg;
-	// str = ft_strjoin(str, ":");
-	// ft_printf("HERE\n");
-	// while (env->file_content[line])
-	// {
-	// 	tab = ft_strsplit(env->file_content[line], ' ');
-	// 	if (ft_isstrstr(tab[0], str) == 1)
-	// 	{
-	// 		ft_dbstrdel(tab);
-	// 		return (cpt);
-	// 	}
-	// 	ft_dbstrdel(tab);
-	// 	arg = 0;
-	// 	while (arg <= 3 && env->arg_weight[line][arg] > 0)
-	// 	{
-	// 		ft_printf("%d, %d\n", line, arg);
-	// 		cpt += env->arg_weight[line][arg];
-	// 		arg++;
-	// 	}
-	// 	line++;
-	// }
-
 
 	return (0);
 }
@@ -113,7 +85,7 @@ static void		ft_write_opcode(t_asm *env, char *inst, int pds, char *op_next)
 
 	// TODO voir si on peut utiliser poids
 	pds = 0;
-	
+
 	real_hex = ft_strnew_hex(1);
 	real_hex[0] += opcode;
 	// ft_printf("int %d\n", opcode);
