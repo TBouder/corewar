@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 17:46:27 by quroulon          #+#    #+#             */
-/*   Updated: 2016/11/28 20:24:24 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/11/29 12:47:45 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,24 +24,24 @@ int			ft_detect_errors(t_asm *env)
 void		ft_put_data(t_asm *env)
 {
 	int		fd;
-	char	*hex_string;
+	// char	*hex_string;
 
 	fd = open("test.cor", O_CREAT | O_WRONLY, 0600);
 	env->fd = fd;
+	0 ? env = NULL : 0;
+	// hex_string = ft_transform_magic();
+	// write(fd, hex_string, MAGIC_LEN);
+	// ft_strdel(&hex_string);
 
-	hex_string = ft_transform_magic();
-	write(fd, hex_string, MAGIC_LEN);
-	ft_strdel(&hex_string);
+	// hex_string = ft_transform_champ_infos(env->champ_name, PROG_NAME_LENGTH);
+	// write(fd, hex_string, PROG_NAME_LENGTH);
+	// ft_strdel(&hex_string);
 
-	hex_string = ft_transform_champ_infos(env->champ_name, PROG_NAME_LENGTH);
-	write(fd, hex_string, PROG_NAME_LENGTH);
-	ft_strdel(&hex_string);
+	// ft_transform_size(env->instruct_size, fd);
 
-	ft_transform_size(env->instruct_size, fd);
-
-	hex_string = ft_transform_champ_infos(env->champ_comment, COMMENT_LENGTH);
-	write(fd, hex_string, COMMENT_LENGTH);
-	ft_strdel(&hex_string);
+	// hex_string = ft_transform_champ_infos(env->champ_comment, COMMENT_LENGTH);
+	// write(fd, hex_string, COMMENT_LENGTH);
+	// ft_strdel(&hex_string);
 }
 
 int		**ft_dbnbrnew(size_t size, size_t sub_size)
