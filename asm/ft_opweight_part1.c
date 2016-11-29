@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_opweight_part1.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
+/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 11:55:28 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/28 19:16:47 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/29 19:09:40 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		ft_get_line_weight(t_asm *env, int value, int ret, int pos)
 	(value == 2) ? env->arg_weight[env->line_nb][pos] += 2 : 0;
 	(value == 3) ? env->arg_weight[env->line_nb][pos] += 1 : 0;
 
-	if (env->opcode != 1 && env->opcode != 9 && env->opcode != 12 && env->opcode != 15)
+	if (env->opcode != 1 && env->opcode != 9 && env->opcode != 12 && env->opcode != 15 && env->opcode != 16) // TODO vérifier pour 16
 	{
 		(value == 1) ? ft_strcat(env->opcode_next[env->line_nb], "10") : 0;
 		(value == 2) ? ft_strcat(env->opcode_next[env->line_nb], "11") : 0;
