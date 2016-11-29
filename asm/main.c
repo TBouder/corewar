@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 16:03:50 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/28 19:40:55 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/11/29 18:19:15 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	ft_error_asm(t_asm *env, char *msg, int clear)
 
 void	ft_print_on_success(t_asm env)
 {
+	if (0) {env.fd = 0;}
 	ft_printf("----------------------------------------------------\n");
 	ft_printf("{14}%-17s{0} : [{10}%s{0}]\n", "Champion Name", env.champ_name);
 	ft_printf("{14}%-17s{0} : [{10}%s{0}]\n", "Champion Comment", env.champ_comment);
