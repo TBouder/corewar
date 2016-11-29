@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/28 18:18:54 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/28 19:41:42 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include "errors.h"
 
 # define	MAGIC_LEN 4
-# define	TMP_SIZE 77
 
 typedef struct		s_label
 {
