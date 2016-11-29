@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 16:31:46 by quroulon          #+#    #+#             */
-/*   Updated: 2016/11/29 18:51:03 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/11/29 19:11:09 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,18 +110,24 @@ static void		ft_write_opcode(t_asm *env, char *inst, int pds, char *op_next)
 	char		*real_hex;
 
 	opcode = ft_get_opcode(inst);
+
+	// TODO voir si on peut utiliser poids
+	pds = 0;
 	
-	real_hex = ft_strnew_hex(pds / 2);
+	real_hex = ft_strnew_hex(1);
 	real_hex[0] += opcode;
 	// ft_printf("int %d\n", opcode);
-	write(env->fd, real_hex, pds / 2);
+	write(env->fd, real_hex, 1);
 	ft_strdel(&real_hex);
 
-	real_hex = ft_strnew_hex(pds / 2);
-	real_hex[0] += ft_atoi_base(op_next, 2);
-	// ft_printf("opnext [%s], int %d\n", op_next, ft_atoi_base(op_next, 2));
-	write(env->fd, real_hex, pds / 2);
-	ft_strdel(&real_hex);
+	if (opcode != 1 && opcode != 9 && opcode != 12 && opcode != 15 && opcode != 16)
+	{
+		real_hex = ft_strnew_hex(1);
+		real_hex[0] += ft_atoi_base(op_next, 2);
+		// ft_printf("opnext [%s], int %d\n", op_next, ft_atoi_base(op_next, 2));
+		write(env->fd, real_hex, 1);
+		ft_strdel(&real_hex);
+	}
 }
 
 static void		ft_write_empty(t_asm *env, int *i)
