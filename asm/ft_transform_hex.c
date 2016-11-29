@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 15:52:08 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/28 19:40:43 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/11/29 12:21:19 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void		ft_transform_size(int content, int fd)
 	len_size = ft_strlen(content_str);
 	odd = len_size % 2 ? 1 : 0;
 	len_size = (len_size / 2) + odd;
-	len_buffer = 8 - len_size;
+	len_buffer = 8 - len_size; // TODO remplacer 8 par macro
 	write(fd, "\x00", len_buffer);
 	hex_string = ft_transform_size_helper(content, len_size);
 	write(fd, hex_string, len_size);
