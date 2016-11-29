@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 19:42:02 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/29 18:19:20 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/29 20:11:34 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,22 +62,11 @@ void			ft_clear_champions(t_champions *champions, int size)
 	}
 }
 
-void			ft_clear_filename(t_vm *env)
-{
-	int		i;
-
-	i = 0;
-	while (i < env->nb_champ)
-	{
-		ft_strdel(&env->filename[i]);
-		i++;
-	}
-}
-
 void			ft_clear_all(t_vm *env)
 {
 	ft_dbstrdel(env->filename);
 	ft_clear_champions(env->champions, env->nb_champ);
+	ft_strdel(&env->map);
 	free(env->header);
 	free(env->champions);
 	free(env->fd);
@@ -120,12 +109,54 @@ void			ft_verif_extension(t_vm *env, char **av, int i)
 	}
 }
 
+void			ft_find_start_champion_pos(t_vm *env)
+{
+	int		i;
+	int		pos;
+
+	i = 0;
+	pos = 0;
+	while (i < env->nb_champ)
+	{
+		env->champions[i].starting_pos = pos;
+		pos += MEM_SIZE / env->nb_champ; //DOIT ON GARDER MEM_SIZE OU DOIT ON FAIRE MEM_SIZE * NOMBRE DE CHAMPIONS ?
+		i++;
+	}
+}
+
+void			ft_put_champion_map(t_vm *env)
+{
+	t_champions		champion;
+	int				i; //CHAMPION NUMBER
+	unsigned int	y; //POS IN MAP
+	unsigned int	z; //CONTENT OF CHAMP
+
+	i = 0;
+	while (i < env->nb_champ)
+	{
+		champion = env->champions[i];
+		y = champion.starting_pos;
+		z = 0;
+		ft_printf("[{10}%d{0}] - [{11}%d{0}]\n", champion.prog_size, y);
+		while (z < champion.prog_size)
+		{
+			env->map[y] = champion.content[z];
+			z++;
+			y++;
+		}
+		i++;
+	}
+}
+
 static void		ft_launcher(t_vm *env, char **av, int i)
 {
 	ft_verif_extension(env, av, i);
-	ft_corewar_func();
 	ft_extract_champion(env);
+	ft_find_start_champion_pos(env);
+	ft_put_champion_map(env); //CAUSE SEGFAULT
 
+
+	// ft_corewar_func(); //USELESS RIGHT NOW
 	int		x = 0;
 	while (x < env->nb_champ)
 	{
@@ -134,8 +165,11 @@ static void		ft_launcher(t_vm *env, char **av, int i)
 		ft_printf("\t[%s]\n", env->champions[x].comment);
 		ft_printf("\t[%x]\n", env->champions[x].magic);
 		ft_printf("\t[%d]\n", env->champions[x].prog_size);
+		ft_printf("\t[%d]\n", env->champions[x].starting_pos);
 		x++;
 	}
+	ft_print_memory(env->map, MEM_SIZE);
+
 }
 
 int				main(int ac, char **av)

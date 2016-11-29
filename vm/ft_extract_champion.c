@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 17:46:14 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/29 18:13:40 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/29 19:51:20 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,9 @@ static void		ft_extract_header(t_vm *env, int i)
 		hex = ft_itoa_base(env->header[i].prog_size, 16);
 		env->champions[i].prog_size = ft_rev_hex(hex);
 		ft_strdel(&hex);
+		if (env->champions[i].prog_size > CHAMP_MAX_SIZE)
+			ft_error_asm(env, "{9}Error{0} : Champion size is over 682", 1);
+		env->total_size += env->champions[i].prog_size;
 	}
 	else
 		ft_error_asm(env, "{9}Error{0} : The magic doesn't work with the header ...", 1);
