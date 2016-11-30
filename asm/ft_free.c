@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 13:02:26 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/30 12:18:11 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/30 13:45:07 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,5 @@ void	ft_clear_all(t_asm *env)
 	ft_dbstrdel(env->opcode_next);
 	ft_dbnbrdel(env->arg_weight, env->file_len);
 	free(env->instruct_weight);
+	ft_strdel(&env->filename_new);
 }

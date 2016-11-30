@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 16:31:46 by quroulon          #+#    #+#             */
-/*   Updated: 2016/11/30 13:37:51 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/30 13:49:37 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ static int		ft_jump_to_label(t_asm *env, char *str, int line, int arg)
 		{
 			if (found != 0)
 			{
-				ft_strdel(&str);
-				ft_dbstrdel(tab);
+				// ft_strdel(&str);
+				// ft_dbstrdel(tab);
 				return (cpt * found);
 			}
 			found = -1;
@@ -43,8 +43,8 @@ static int		ft_jump_to_label(t_asm *env, char *str, int line, int arg)
 		{
 			if (found < 0)
 			{
-				ft_strdel(&str);
-				ft_dbstrdel(tab);
+				// ft_strdel(&str);
+				// ft_dbstrdel(tab);
 				return ((USHRT_MAX + 1) - cpt);
 			}
 			found = 1;
@@ -70,23 +70,23 @@ static void		ft_write_args(t_asm *env, char **args, int *pds, int line)
 	while (i <= 3 && pds[i] > 0)
 	{
 		if (args[i][0] && args[i][0] == 'r')
-			ft_transform_size(ft_atoi_hexa(&args[i][1]), env->fd, pds[i]);
+			ft_transform_size(ft_atoi_hexa(&args[i][1]), env->fd_cor, pds[i]);
 		else if (args[i][0] && args[i][0] == '%')
 		{
 			if (args[i][1] && args[i][1] == ':')
 				ft_transform_size(ft_jump_to_label(env, &args[i][2], line, i),
-								env->fd, pds[i]);
+								env->fd_cor, pds[i]);
 			else
 			{
 				//ATTENTION, DE TEMPS EN TEMPS, ON SE RETROUVE AVEC, DANS TRANSFORME SIZE, [content < 0] (donc pds[i] < 0)
 				// J'ai ajoute une condition pour bloquer et eviter les leaks et invalid rights si c'est le cas, mais faudra
 				// surveiller
 				ft_printf("[%s : %d]\n", args[i], ft_atoi_hexa(&args[i][1]));
-				ft_transform_size(ft_atoi_hexa(&args[i][1]), env->fd, pds[i]);
+				ft_transform_size(ft_atoi_hexa(&args[i][1]), env->fd_cor, pds[i]);
 			}
 		}
 		else
-			ft_transform_size(ft_atoi_hexa(&args[i][1]), env->fd, pds[i]);
+			ft_transform_size(ft_atoi_hexa(&args[i][1]), env->fd_cor, pds[i]);
 		i++;
 	}
 }
@@ -104,7 +104,7 @@ static void		ft_write_opcode(t_asm *env, char *inst, int pds, char *op_next)
 	real_hex = ft_strnew_hex(1);
 	real_hex[0] += opcode;
 	// ft_printf("int %d\n", opcode);
-	write(env->fd, real_hex, 1);
+	write(env->fd_cor, real_hex, 1);
 	ft_strdel(&real_hex);
 
 	if (opcode != 1 && opcode != 9 && opcode != 12 && opcode != 15 && opcode != 16)
@@ -112,7 +112,7 @@ static void		ft_write_opcode(t_asm *env, char *inst, int pds, char *op_next)
 		real_hex = ft_strnew_hex(1);
 		real_hex[0] += ft_atoi_base(op_next, 2);
 		// ft_printf("opnext [%s], int %d\n", op_next, ft_atoi_base(op_next, 2));
-		write(env->fd, real_hex, 1);
+		write(env->fd_cor, real_hex, 1);
 		ft_strdel(&real_hex);
 	}
 }
@@ -124,7 +124,7 @@ static void		ft_write_empty(t_asm *env, int *i)
 	while (env->file_content[(*i)][0] == '.')
 		(*i)++;
 	real_hex = ft_strnew_hex(4);
-	write(env->fd, real_hex, 4);
+	write(env->fd_cor, real_hex, 4);
 	ft_strdel(&real_hex);
 }
 
@@ -148,9 +148,9 @@ void			ft_write_instructions(t_asm *env)
 	}
 
 	// real_hex = ft_transform_size_helper(opcode, env->arg_weight[i][0]);
-	// write(env->fd, real_hex, env->arg_weight[i][0]);
+	// write(env->fd_cor, real_hex, env->arg_weight[i][0]);
 
-	// ft_transform_size(opcode, env->fd);
+	// ft_transform_size(opcode, env->fd_cor);
 
 
 }
