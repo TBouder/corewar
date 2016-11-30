@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 19:42:02 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/29 20:11:34 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/30 00:37:10 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,100 @@ void			ft_put_champion_map(t_vm *env)
 	}
 }
 
+/******************************************************************************/
+void			ft_print_map_color(t_vm *env, t_champions *champions, int *i)
+{
+	char			*hex;
+
+	hex = ft_strinit("0123456789abcdef");
+	if (*i >= (int)(champions[0].starting_pos) &&
+		*i <= (int)(champions[0].starting_pos + champions[0].prog_size))
+			ft_printf("{10}");
+	else if (env->nb_champ >= 2 &&
+		*i >= (int)(champions[1].starting_pos) &&
+		*i <= (int)(champions[1].starting_pos + champions[1].prog_size))
+			ft_printf("{11}");
+	else if (env->nb_champ >= 3 &&
+		*i >= (int)(champions[2].starting_pos) &&
+		*i <= (int)(champions[2].starting_pos + champions[2].prog_size))
+			ft_printf("{12}");
+	else if (env->nb_champ >= 4 &&
+		*i >= (int)(champions[3].starting_pos) &&
+		*i <= (int)(champions[3].starting_pos + champions[3].prog_size))
+			ft_printf("{13}");
+	ft_printf("%c", hex[(int)((unsigned char)env->map[*i]) / 16]);
+	ft_printf("%c", hex[(int)((unsigned char)env->map[*i]) % 16]);
+	*i += 1;
+	ft_printf("%c", hex[(int)((unsigned char)env->map[*i]) / 16]);
+	ft_printf("%c {0}", hex[(int)((unsigned char)env->map[*i]) % 16]);
+	*i += 1;
+	ft_strdel(&hex);
+}
+
+void			ft_print_map(t_vm *env)
+{
+	t_champions		*champions;
+	int				i;
+	int				y;
+
+	champions = (t_champions *)malloc(sizeof(t_champions) * env->nb_champ);
+	y = 0;
+	while (y < env->nb_champ)
+	{
+		champions[y] = env->champions[y];
+		y++;
+	}
+	i = 0;
+	while (i < MEM_SIZE)
+	{
+		ft_print_map_color(env, champions, &i);
+		if (i % 64 == 0 && i != 0)
+			ft_putchar('\n');
+	}
+}
+/******************************************************************************/
+
+
+/******************************************************************************/
+static void		ft_print_hex_mem(char *add, size_t size)
+{
+	size_t		i;
+	char		*hex;
+
+	hex = ft_strinit("0123456789abcdef");
+	i = 0;
+	while (i < 64)
+	{
+		if (i < size)
+		{
+			ft_putchar(hex[(int)((unsigned char)add[i]) / 16]);
+			ft_putchar(hex[(int)((unsigned char)add[i]) % 16]);
+		}
+		if (i % 2)
+			ft_putchar(' ');
+		i++;
+	}
+	ft_strdel(&hex);
+}
+
+void			ft_print_memory_hex(const void *addr, size_t size)
+{
+	int		offset;
+
+	offset = 0;
+	while (size > 16)
+	{
+		ft_print_hex_mem((char *)addr + offset, 64);
+		ft_putchar('\n');
+		offset += 64;
+		size -= 64;
+	}
+	ft_print_hex_mem((char *)addr + offset, size);
+	ft_putchar('\n');
+}
+/******************************************************************************/
+
+
 static void		ft_launcher(t_vm *env, char **av, int i)
 {
 	ft_verif_extension(env, av, i);
@@ -168,8 +262,7 @@ static void		ft_launcher(t_vm *env, char **av, int i)
 		ft_printf("\t[%d]\n", env->champions[x].starting_pos);
 		x++;
 	}
-	ft_print_memory(env->map, MEM_SIZE);
-
+	ft_print_map(env); //CAUSE SEGFAULT
 }
 
 int				main(int ac, char **av)
