@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 16:31:46 by quroulon          #+#    #+#             */
-/*   Updated: 2016/11/29 19:43:19 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/11/30 13:20:28 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,22 @@ static int		ft_jump_to_label(t_asm *env, char *str, int line, int arg)
 		if (ft_isstrstr(tab[0], str) == 1)
 		{
 			if (found != 0)
+			{
+				ft_strdel(&str);
+				ft_dbstrdel(tab);
 				return (cpt * found);
+			}
 			found = -1;
 		}
 		j = 0;
 		if (line == i)// && found == 0)
 		{
 			if (found < 0)
+			{
+				ft_strdel(&str);
+				ft_dbstrdel(tab);
 				return ((USHRT_MAX + 1) - cpt);
+			}
 			found = 1;
 		}
 		while (j <= 3 && env->arg_weight[i][j] > 0)
@@ -49,6 +57,7 @@ static int		ft_jump_to_label(t_asm *env, char *str, int line, int arg)
 		ft_dbstrdel(tab);
 		i++;
 	}
+	ft_strdel(&str);
 
 	return (0);
 }

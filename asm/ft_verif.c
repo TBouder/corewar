@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 13:34:46 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/30 12:58:03 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/30 13:14:58 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,9 @@ char			ft_verif_extension(t_asm *env, char *source)
 		len_source = ft_strlen_asm(source);
 		env->filename = ft_strinit_asm(source);
 		env->filename_noext = ft_strsub(source, 0, len_source - 2);
+		env->filename_new = ft_strjoin(env->filename_noext, ".cor");
+		ft_strdel(&env->filename_new);
+		// ft_printf("[%s] vs [%s]\n", env->filename_noext, env->filename_new);
 	}
 	ft_strdel(&extension);
 	return (result);
