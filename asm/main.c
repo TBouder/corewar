@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
+/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 16:03:50 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/30 13:02:22 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/30 18:56:04 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	ft_print_on_success(t_asm env)
 		ft_printf("[{10}%s{0}] -> [{14}%d{0}] ([{11}%d{0}] + [{11}%d{0}] + [{11}%d{0}] + [{11}%d{0}])\n",
 		env.file_content[i], env.instruct_weight[i], env.arg_weight[i][0], env.arg_weight[i][1], env.arg_weight[i][2], env.arg_weight[i][3]);
 		op_next_val = ft_atoi_base(env.opcode_next[i], 2);
-		ft_printf("[{10}%s{0}] -> [%d]\n\n", env.file_content[i], op_next_val);
+		// ft_printf("[{10}%s{0}] -> [%d]\n\n", env.file_content[i], op_next_val);
 		i++;
 	}
 	ft_btree_print_inorder_asm(env.file_labels);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_transform_hex.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
+/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 15:52:08 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/30 13:37:58 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/30 17:51:01 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char		*ft_transform_champ_infos(char *content, size_t content_size)
 	return (magic_hex);
 }
 
-static char	*ft_transform_size_helper(int content, size_t content_size, int i)
+static char	*ft_transform_size_helper(unsigned int content, size_t content_size, int i)
 {
 	int		y;
 	char	*magic;
@@ -79,7 +79,7 @@ static char	*ft_transform_size_helper(int content, size_t content_size, int i)
 	return (magic_hex);
 }
 
-void		ft_transform_size(int content, int fd, int len)
+void		ft_transform_size(unsigned int content, int fd, int len)
 {
 	char		*hex_string;
 	char		*content_str;
