@@ -27,7 +27,7 @@ and %1, %2, r3
 # endwhile:
 # 	ld	%0, r4			;carry = 1
 
-sti	r1, %:live, r1			; 1 + 4 + 1 = 6
+sti	r1, %:live, r5			; 1 + 4 + 1 = 6
 yolololol: live %5
 # 	zjmp %:live
 

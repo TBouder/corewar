@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/30 12:53:24 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/30 13:06:00 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,12 @@ void					ft_parse_file(t_asm *env);
 char					*ft_transform_magic(int i);
 char					*ft_transform_champ_infos(char *content,
 							size_t content_size);
-void					ft_transform_size(int content, int fd);
+void					ft_transform_size(int content, int fd, int len);
+
+/*
+** ft_write_instructions.c
+*/
+void					ft_write_instructions(t_asm *env);
 
 /*
 ** ft_tools.c

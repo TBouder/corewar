@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnew_hex.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
+/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/23 15:54:18 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/17 15:50:14 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/29 14:13:46 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char				*ft_strnew_hex(size_t size)
 
 	hex = ft_strnew(size);
 	i = 0;
-	while (hex[i])
+	while (i < (int)size)
 	{
 		hex[i] = '\x00';
 		i++;

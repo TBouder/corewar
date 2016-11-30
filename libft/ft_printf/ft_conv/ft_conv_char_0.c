@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_conv_char_0.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
+/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 15:39:27 by tbouder           #+#    #+#             */
-/*   Updated: 2016/03/25 15:59:36 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/28 19:35:37 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,6 @@
 
 void	ft_before_c(t_flags *flags, int v_len)
 {
-	int		i;
-
-	i = 0;
 	if (flags->spaces && flags->spaces - v_len > 0)
 	{
 		while (flags->spaces - v_len != 0)
@@ -47,9 +44,6 @@ void	ft_before_c(t_flags *flags, int v_len)
 
 void	ft_after_c(t_flags *flags, int v_len)
 {
-	int		i;
-
-	i = 0;
 	if (flags->spaces + v_len < 0)
 	{
 		flags->spaces_count = 0;
