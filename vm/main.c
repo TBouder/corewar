@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 19:42:02 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/30 00:37:10 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/30 14:01:05 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,7 @@ void			ft_put_champion_map(t_vm *env)
 		champion = env->champions[i];
 		y = champion.starting_pos;
 		z = 0;
-		ft_printf("[{10}%d{0}] - [{11}%d{0}]\n", champion.prog_size, y);
+		// ft_printf("[{10}%d{0}] - [{11}%d{0}]\n", champion.prog_size, y);
 		while (z < champion.prog_size)
 		{
 			env->map[y] = champion.content[z];
@@ -251,18 +251,18 @@ static void		ft_launcher(t_vm *env, char **av, int i)
 
 
 	// ft_corewar_func(); //USELESS RIGHT NOW
-	int		x = 0;
-	while (x < env->nb_champ)
-	{
-		ft_printf("[{10}%s{0}][{14}%d{0}]\n", env->filename[x], env->fd[x]);
-		ft_printf("\t[%s]\n", env->champions[x].name);
-		ft_printf("\t[%s]\n", env->champions[x].comment);
-		ft_printf("\t[%x]\n", env->champions[x].magic);
-		ft_printf("\t[%d]\n", env->champions[x].prog_size);
-		ft_printf("\t[%d]\n", env->champions[x].starting_pos);
-		x++;
-	}
-	ft_print_map(env); //CAUSE SEGFAULT
+	// int		x = 0;
+	// while (x < env->nb_champ)
+	// {
+	// 	ft_printf("[{10}%s{0}][{14}%d{0}]\n", env->filename[x], env->fd[x]);
+	// 	ft_printf("\t[%s]\n", env->champions[x].name);
+	// 	ft_printf("\t[%s]\n", env->champions[x].comment);
+	// 	ft_printf("\t[%x]\n", env->champions[x].magic);
+	// 	ft_printf("\t[%d]\n", env->champions[x].prog_size);
+	// 	ft_printf("\t[%d]\n", env->champions[x].starting_pos);
+	// 	x++;
+	// }
+	// ft_print_map(env); //CAUSE SEGFAULT
 }
 
 int				main(int ac, char **av)
