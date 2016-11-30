@@ -6,15 +6,14 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 15:52:08 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/28 18:42:44 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/30 12:53:55 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-char		*ft_transform_magic(void)
+char		*ft_transform_magic(int i)
 {
-	int		i;
 	int		y;
 	char	*magic;
 	char	*magic_hex;
@@ -55,9 +54,8 @@ char		*ft_transform_champ_infos(char *content, size_t content_size)
 	return (magic_hex);
 }
 
-static char	*ft_transform_size_helper(int content, size_t content_size)
+static char	*ft_transform_size_helper(int content, size_t content_size, int i)
 {
-	int		i;
 	int		y;
 	char	*magic;
 	char	*magic_hex;
@@ -95,7 +93,7 @@ void		ft_transform_size(int content, int fd)
 	len_size = (len_size / 2) + odd;
 	len_buffer = 8 - len_size;
 	write(fd, "\x00", len_buffer);
-	hex_string = ft_transform_size_helper(content, len_size);
+	hex_string = ft_transform_size_helper(content, len_size, 0);
 	write(fd, hex_string, len_size);
 	ft_strdel(&hex_string);
 	ft_strdel(&content_str);
