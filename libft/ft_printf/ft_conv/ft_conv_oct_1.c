@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_conv_oct_1.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
+/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/19 15:49:50 by Tbouder           #+#    #+#             */
-/*   Updated: 2016/03/25 23:51:50 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/28 19:34:35 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,7 @@ void	ft_put_precision_oct(t_flags *flags, long long local_pa)
 {
 	char	*s;
 	int		len;
-	int		i;
 
-	i = 0;
 	s = ft_itoa_base_ull(local_pa, 8);
 	len = ft_strlen(s);
 	while (flags->preci - len - flags->diaiz > 0)

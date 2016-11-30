@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_conv_uni_1.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
+/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/18 14:48:44 by Tbouder           #+#    #+#             */
-/*   Updated: 2016/03/25 23:52:28 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/28 19:34:58 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,7 @@
 void	ft_put_preci_uni(t_flags *flags, long long local_pa)
 {
 	int		len;
-	int		i;
 
-	i = 0;
 	len = (ft_nbrlen_ll(local_pa) == 0) ? 1 : ft_nbrlen_ll(local_pa);
 	while (flags->preci - len - flags->diaiz > 0)
 	{

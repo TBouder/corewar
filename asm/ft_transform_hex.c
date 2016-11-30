@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 15:52:08 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/30 12:53:55 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/30 13:05:36 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static char	*ft_transform_size_helper(int content, size_t content_size, int i)
 	return (magic_hex);
 }
 
-void		ft_transform_size(int content, int fd)
+void		ft_transform_size(int content, int fd, int len)
 {
 	char		*hex_string;
 	char		*content_str;
@@ -91,7 +91,7 @@ void		ft_transform_size(int content, int fd)
 	len_size = ft_strlen(content_str);
 	odd = len_size % 2 ? 1 : 0;
 	len_size = (len_size / 2) + odd;
-	len_buffer = 8 - len_size;
+	len_buffer = len - len_size; // TODO remplacer 8 par macro
 	write(fd, "\x00", len_buffer);
 	hex_string = ft_transform_size_helper(content, len_size, 0);
 	write(fd, hex_string, len_size);
