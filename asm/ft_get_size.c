@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 15:19:07 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/28 19:27:16 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/30 12:56:36 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,29 @@ int				ft_get_opcode(char *opname)
 	return (opcode);
 }
 
+void			ft_get_opweight_helper(t_asm *env, int opcode)
+{
+	opcode == 1 ? env->instruct_weight[env->line_nb] += 1 : 0;
+	opcode == 2 ? env->instruct_weight[env->line_nb] += 2 : 0;
+	opcode == 3 ? env->instruct_weight[env->line_nb] += 2 : 0;
+	opcode == 4 ? env->instruct_weight[env->line_nb] += 2 : 0;
+	opcode == 5 ? env->instruct_weight[env->line_nb] += 2 : 0;
+	opcode == 6 ? env->instruct_weight[env->line_nb] += 2 : 0;
+	opcode == 7 ? env->instruct_weight[env->line_nb] += 2 : 0;
+	opcode == 8 ? env->instruct_weight[env->line_nb] += 2 : 0;
+	opcode == 9 ? env->instruct_weight[env->line_nb] += 1 : 0;
+	opcode == 10 ? env->instruct_weight[env->line_nb] += 2 : 0;
+	opcode == 11 ? env->instruct_weight[env->line_nb] += 2 : 0;
+	opcode == 12 ? env->instruct_weight[env->line_nb] += 1 : 0;
+	opcode == 13 ? env->instruct_weight[env->line_nb] += 2 : 0;
+	opcode == 14 ? env->instruct_weight[env->line_nb] += 2 : 0;
+	opcode == 15 ? env->instruct_weight[env->line_nb] += 1 : 0;
+	opcode == 16 ? env->instruct_weight[env->line_nb] += 2 : 0;
+}
+
 void			ft_get_opweight(t_asm *env, int opcode)
 {
-	/*POUR LA CASE 0 DE LA LIGNE COURANTE */
+	ft_get_opweight_helper(env, opcode);
 	opcode == 1 ? env->arg_weight[env->line_nb][0] += 1 : 0;
 	opcode == 2 ? env->arg_weight[env->line_nb][0] += 2 : 0;
 	opcode == 3 ? env->arg_weight[env->line_nb][0] += 2 : 0;
@@ -61,13 +81,13 @@ void			ft_get_size(t_asm *env, int i)
 {
 	int			(*tab[17])(t_asm *env, char *, char *, char *);
 	int			opcode;
-	int			arg_value = 0;
+	int			arg_value;
 
+	arg_value = 0;
 	env->args = ft_split_args(env->file_content[i], ' ');
 	opcode = ft_get_opcode(env->args[0]);
 	ft_get_opweight(env, opcode);
 	ft_init_function_tab(tab);
-
 	if (opcode != 0)
 	{
 		arg_value = tab[(int)opcode](env, env->args[1], env->args[2], env->args[3]);

@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 13:02:29 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/29 14:24:08 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/30 12:54:53 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,36 +29,64 @@
 ** filename_noext :	contains the full path, minus the extension
 ** filename_new :	contains the full path, with the .cor extension
 */
-void	ft_init_env(t_asm *env)
+
+void			ft_init_env(t_asm *env)
 {
 	env->options = NULL;
-
 	env->error_val = NULL;
 	env->error_int = 0;
-
 	env->filename = NULL;
 	env->filename_noext = NULL;
 	env->filename_new = NULL;
-
 	env->champ_name = NULL;
 	env->champ_comment = NULL;
 	env->instruct_size = 0;
-
 	env->file_content = NULL;
 	env->file_len = 0;
 	env->line_nb = 0;
-
 	env->file_labels = NULL;
 	env->opcode_next = NULL;
+	env->instruct_weight = NULL;
 	env->arg_weight = NULL;
-
 	env->args = NULL;
+}
+
+static int		**ft_dbnbrnew(size_t size, size_t sub_size)
+{
+	int			**buffer;
+	size_t		i;
+
+	i = 0;
+	if (!(buffer = (int **)malloc(sizeof(int *) * size)))
+		return (NULL);
+	while (i < size)
+	{
+		buffer[i] = ft_nbrnew(sub_size);
+		i++;
+	}
+	return (buffer);
+}
+
+void			ft_init_parse(t_asm *env)
+{
+	int		i;
+
+	i = 0;
+	env->instruct_weight = ft_nbrnew(env->file_len);
+	env->arg_weight = ft_dbnbrnew(env->file_len, 4);
+	env->opcode_next = ft_dbstrnew(env->file_len);
+	while (i < env->file_len)
+	{
+		env->opcode_next[i] = ft_strnew(8);
+		i++;
+	}
 }
 
 /*
 ** Init a table of function to avoid if forest and to improve perfs
 */
-void	ft_init_function_tab(int (*tab[17])())
+
+void			ft_init_function_tab(int (*tab[17])())
 {
 	tab[0] = NULL;
 	tab[1] = &ft_opweight_1;

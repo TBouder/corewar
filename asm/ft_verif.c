@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 13:34:46 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/25 13:50:50 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/30 12:58:03 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 ** This function will check if the file extension is correctly .s or send an
 ** error if it's not.
 */
+
 char			ft_verif_extension(t_asm *env, char *source)
 {
 	int		result;
@@ -23,7 +24,8 @@ char			ft_verif_extension(t_asm *env, char *source)
 	char	*extension;
 
 	errno = 0;
-	if (source == NULL || (env->fd = open(source, O_RDONLY)) == -1 || errno != 0)
+	if (source == NULL || (env->fd = open(source, O_RDONLY)) == -1
+		|| errno != 0)
 		ft_error_asm(env, ERR_BAD_SRC_FILE, 0);
 	if (open(source, O_DIRECTORY) != -1)
 		ft_error_asm(env, ERR_DIR, 0);
@@ -64,7 +66,7 @@ static int		ft_verif_label_direct(t_asm *env, char *str, int type)
 	{
 		i = 2;
 		verif_label = ft_strjoin(str + 2, ":");
-		ft_btreesearch(env->file_labels, verif_label, &ret);
+		ft_btreesearch_asm(env->file_labels, verif_label, &ret);
 		if (ret == 0)
 			ft_verif_label_direct_err(env, verif_label);
 		ft_strdel(&verif_label);
