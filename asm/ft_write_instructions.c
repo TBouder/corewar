@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 16:31:46 by quroulon          #+#    #+#             */
-/*   Updated: 2016/11/30 13:20:28 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/30 13:37:51 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,13 @@ static void		ft_write_args(t_asm *env, char **args, int *pds, int line)
 				ft_transform_size(ft_jump_to_label(env, &args[i][2], line, i),
 								env->fd, pds[i]);
 			else
+			{
+				//ATTENTION, DE TEMPS EN TEMPS, ON SE RETROUVE AVEC, DANS TRANSFORME SIZE, [content < 0] (donc pds[i] < 0)
+				// J'ai ajoute une condition pour bloquer et eviter les leaks et invalid rights si c'est le cas, mais faudra
+				// surveiller
+				ft_printf("[%s : %d]\n", args[i], ft_atoi_hexa(&args[i][1]));
 				ft_transform_size(ft_atoi_hexa(&args[i][1]), env->fd, pds[i]);
+			}
 		}
 		else
 			ft_transform_size(ft_atoi_hexa(&args[i][1]), env->fd, pds[i]);
