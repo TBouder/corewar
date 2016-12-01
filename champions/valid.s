@@ -1,15 +1,17 @@
 .name  "A"
 .comment "THIS IS AN AWESOME COMMENT"
 
-sti	r1, %:live, r1			; 1 + 4 + 1 = 6
-sti	r1, %:live, %1			; 1 + 4 + 4 = 9
-sti	r1, %:live, %1			; 1 + 4 + 4 = 9
-sti	r1, %1, %1				; 1 + 4 + 4 = 9
+# ld %4294902082 r3
+
+# sti	r1, 19, r1			; 1 + 4 + 1 = 6
+# sti	r1, %:live, %15			; 1 + 4 + 4 = 9
+# sti	r1, %:live, %1			; 1 + 4 + 4 = 9
+# sti	r1, %1, %1				; 1 + 4 + 4 = 9
 
 
 
-and r1, r2, r3
-and %1, %2, r3
+# and r1, r2, r3
+# and %1, %2, r3
 # sti	r1, %:yolololol, %1			#change live by the right value
 # ld	%1, r3
 # ld	%33, r6
@@ -27,13 +29,15 @@ and %1, %2, r3
 # endwhile:
 # 	ld	%0, r4			;carry = 1
 
-sti	r1, %:live, r5			; 1 + 4 + 1 = 6
-yolololol: live %5
+# sti	r1, %:live, r5			; 1 + 4 + 1 = 6
+# yolololol: live %5
 # 	zjmp %:live
 
-sti	r1, %:live, r1			; 1 + 4 + 1 = 6
+# sti	r1, %:live, r1			; 1 + 4 + 1 = 6
 live:
-	add	r2, r3, r2		;increment r2
+	# add	r2, r3, r2		;increment r2
+	# zjmp	%-5
+	ldi %:live, r2, r3
 	zjmp	%:live
 
 
