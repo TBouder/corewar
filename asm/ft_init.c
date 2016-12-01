@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 13:02:29 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/30 12:54:53 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/01 13:54:30 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,22 @@ static int		**ft_dbnbrnew(size_t size, size_t sub_size)
 	return (buffer);
 }
 
+static char		***ft_trpstrnew(size_t size)
+{
+	char		***buffer;
+	size_t		i;
+
+	i = 0;
+	if (!(buffer = (char ***)malloc(sizeof(char **) * size)))
+		return (NULL);
+	while (i < size)
+	{
+		buffer[i] = NULL;
+		i++;
+	}
+	return (buffer);
+}
+
 void			ft_init_parse(t_asm *env)
 {
 	int		i;
@@ -75,6 +91,7 @@ void			ft_init_parse(t_asm *env)
 	env->instruct_weight = ft_nbrnew(env->file_len);
 	env->arg_weight = ft_dbnbrnew(env->file_len, 4);
 	env->opcode_next = ft_dbstrnew(env->file_len);
+	env->args = ft_trpstrnew(env->file_len);
 	while (i < env->file_len)
 	{
 		env->opcode_next[i] = ft_strnew(8);

@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 12:38:11 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/30 12:55:27 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/01 13:26:26 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int		count_l(char const *s, char c)
 	return (letter);
 }
 
-char			**ft_split_args(char const *s, char c)
+char			**ft_split_args(char const *s, char c, int size)
 {
 	char	**str;
 	int		n_words;
@@ -36,8 +36,8 @@ char			**ft_split_args(char const *s, char c)
 	i = 0;
 	if (s == NULL)
 		return (NULL);
-	n_words = 4;
-	str = ft_dbstrnew(4);
+	n_words = size;
+	str = ft_dbstrnew(size);
 	if (s[0] == '\0')
 		str[i] = ft_strsub(s, 0, count_l(s, c));
 	while (n_words-- && s[0] != '\0')
@@ -99,9 +99,9 @@ void			ft_strreplace_space(char *str)
 	{
 		if (ft_isspace(str[i]))
 			str[i] = ' ';
-		if (str[i] == ',' && ft_strnstr(str, ".name", cpt) == NULL
-			&& ft_strnstr(str, ".comment", cpt) == NULL)
-			str[i] = ' ';
+		// if (str[i] == ',' && ft_strnstr(str, ".name", cpt) == NULL
+			// && ft_strnstr(str, ".comment", cpt) == NULL)
+			// str[i] = ' ';
 		i++;
 	}
 }
