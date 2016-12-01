@@ -6,13 +6,13 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 16:31:46 by quroulon          #+#    #+#             */
-/*   Updated: 2016/12/01 11:57:32 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/01 12:52:08 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-long		ft_atoi_l(const char *str)
+long			ft_atoi_l(const char *str)
 {
 	long	result;
 	int		sign;
@@ -34,8 +34,7 @@ long		ft_atoi_l(const char *str)
 	return (result / 10 * sign);
 }
 
-
-long				ft_calcul_jump(t_asm *env, char *str, int line, int pds)
+long			ft_calcul_jump(t_asm *env, char *str, int line, int pds)
 {
 	long		cpt;
 	int			match;

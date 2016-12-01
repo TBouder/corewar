@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/30 17:50:58 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/01 13:37:43 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ typedef struct			s_asm
 	int					*instruct_weight;
 	int					**arg_weight;
 
-	char				**args;
+	char				***args;
 	int					opcode;
 }						t_asm;
 
@@ -127,7 +127,8 @@ void					ft_write_instructions(t_asm *env);
 /*
 ** ft_tools.c
 */
-char					**ft_split_args(char const *s, char c);
+char					**ft_split_args(char const *s, char c, int size);
+// char					**ft_split_args(char const *s, char c);
 char					**ft_split_instruct(char const *s, char c);
 void					ft_strreplace_space(char *str);
 char					*ft_remove_end(char *str);
