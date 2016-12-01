@@ -6,12 +6,12 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 14:37:54 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/15 14:38:17 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/15 17:05:15 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
-** The ft_dbstrassign() function print all the cells of the tab [tab]
+** The ft_putdbstr() function print all the cells of the tab [tab]
 */
 
 #include "../libft.h"

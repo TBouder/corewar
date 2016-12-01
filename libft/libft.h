@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/15 14:57:34 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/28 19:26:39 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ int					ft_dbstrlen(char **str);
 */
 
 char				*ft_strnew(size_t size);
+char				*ft_strnew_hex(size_t size);
 char				*ft_strinit(char *s1);
 void				ft_strdel(char **as);
 void				ft_strclr(char *s);
@@ -133,6 +134,7 @@ char				**ft_strsplit(char const *s, char c);
 
 char				*ft_itoa(int n);
 char				*ft_itoa_base(long long n, int base);
+char				*ft_itox(unsigned long long n);
 int					ft_toupper(int c);
 int					ft_tolower(int c);
 
@@ -153,6 +155,7 @@ void				ft_putdbstr(char **tab, size_t size);
 int					ft_atoi(const char *str);
 int					ft_atoi_part(const char *str, int i);
 int					ft_atoi_hexa(const char *str);
+long				ft_atoi_base(char *str, int base);
 int					ft_nbrsmallest(int *nbr, int len);
 int					ft_nbrlargest(int *nbr, int len);
 int					ft_next_prime(int nb);
@@ -229,6 +232,7 @@ void 				ft_btreecmp(t_btree **tree, void const *content,
 						size_t c_size);
 t_btree				*ft_btreenew(void const *content, size_t c_size);
 void 				ft_btreedel(t_btree *tree);
+void				ft_btreesearch(t_btree *node, char *content, int *ret);
 
 /*
 ** Others (Flags in str)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsub.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
+/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/23 16:07:03 by tbouder           #+#    #+#             */
-/*   Updated: 2016/04/26 15:09:44 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/01 12:24:11 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*ft_strsub(char const *s, unsigned int start, size_t len)
 	char	*buffer;
 
 	i = 0;
-	if (s == NULL || !(buffer = ft_strnew(len)) || len > ft_strlen(s))
+	if (s == NULL || len > ft_strlen(s) || !(buffer = ft_strnew(len)))
 		return (NULL);
 	while (i < len && ((char *)s)[start])
 	{
