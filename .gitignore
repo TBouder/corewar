@@ -43,4 +43,4 @@ pretty_test
 Icon?
 README.md
 champions/*.cor
-champions.o/*.cor
+champions_o/*.cor
