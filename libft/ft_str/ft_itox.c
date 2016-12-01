@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/23 15:28:57 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/01 13:32:18 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/01 15:40:54 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char			*ft_itox(unsigned long long n)
 	int		k;
 
 	k = 0;
-	len = ft_printf("%!x", n);
+	len = ft_nbrlen_base(n, 16);
 	s = ft_strnew(len + 1);
 	ft_convert(n, s, &k);
 	return (s);
