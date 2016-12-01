@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 16:31:46 by quroulon          #+#    #+#             */
-/*   Updated: 2016/11/30 18:52:21 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/01 13:43:22 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ long				ft_calcul_jump(t_asm *env, char *str, int line, int pds)
 		else if (pds == 4)
 			cpt = (cpt != 0) ? (UINT_MAX + 1) - cpt : 0;
 	}
+	ft_strdel(&label);
 	return (cpt);
 }
 
@@ -86,9 +87,6 @@ static void		ft_write_args(t_asm *env, char **args, int *pds, int line)
 				ft_transform_size(ft_calcul_jump(env, &args[i][2], line, pds[i]), env->fd_cor, pds[i]);
 			else
 			{
-				//ATTENTION, DE TEMPS EN TEMPS, ON SE RETROUVE AVEC, DANS TRANSFORME SIZE, [content < 0] (donc pds[i] < 0)
-				// J'ai ajoute une condition pour bloquer et eviter les leaks et invalid rights si c'est le cas, mais faudra
-				// surveiller
 				if (pds[i] == 2)
 				{
 					tmp = ft_atoi(&args[i][1]);

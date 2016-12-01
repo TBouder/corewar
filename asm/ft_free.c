@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
+/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 13:02:26 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/30 12:18:11 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/01 13:44:44 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	ft_clear_all(t_asm *env)
 {
 	ft_dbstrdel(env->file_content);
 	ft_strdel(&env->filename);
+	ft_strdel(&env->filename_new);
 	ft_strdel(&env->filename_noext);
 	ft_strdel(&env->champ_name);
 	ft_strdel(&env->champ_comment);

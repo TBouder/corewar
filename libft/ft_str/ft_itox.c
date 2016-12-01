@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itox.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
+/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/23 15:28:57 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/18 13:23:17 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/01 13:32:18 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char			*ft_itox(unsigned long long n)
 	int		k;
 
 	k = 0;
-	len = ft_nbrlen(n);
+	len = ft_printf("%!x", n);
 	s = ft_strnew(len + 1);
 	ft_convert(n, s, &k);
 	return (s);
