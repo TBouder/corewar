@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 16:03:50 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/01 15:38:01 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/01 15:48:02 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,8 @@ void	ft_error_asm(t_asm *env, char *msg, int clear)
 void	ft_print_on_success(t_asm env)
 {
 	int		i;
-	int		match;
-	int		op_next_val;
 
 	i = 0;
-	match = -1; //important pour eviter faux positifs
 	ft_printf("----------------------------------------------------\n");
 	ft_printf("{14}%-17s{0} : [{10}%s{0}]\n", "Champion Name", env.champ_name);
 	ft_printf("{14}%-17s{0} : [{10}%s{0}]\n", "Champion Comment", env.champ_comment);
@@ -41,16 +38,12 @@ void	ft_print_on_success(t_asm env)
 	ft_printf("{14}%-17s{0} : [{10}%x{0}]\n", "Hex Size", env.instruct_size);
 	ft_printf("----------------------------------------------------\n");
 	ft_printf("Writing output program to {10}%s{0}.cor\n", env.filename_noext);
-	while (i < env.file_len)
-	{
-		ft_printf("[{10}%s{0}] -> [{14}%d{0}] ([{11}%d{0}] + [{11}%d{0}] + [{11}%d{0}] + [{11}%d{0}])\n",
-		env.file_content[i], env.instruct_weight[i], env.arg_weight[i][0], env.arg_weight[i][1], env.arg_weight[i][2], env.arg_weight[i][3]);
-		op_next_val = ft_atoi_base(env.opcode_next[i], 2);
-		i++;
-	}
-	ft_btree_print_inorder_asm(env.file_labels);
-	ft_btreesearch_asm(env.file_labels, "live:", &match);
-	ft_printf("golive: [{9}%d{0}]\n", match);
+	// while (i < env.file_len)
+	// {
+	// 	ft_printf("[{10}%s{0}] -> [{14}%d{0}] ([{11}%d{0}] + [{11}%d{0}] + [{11}%d{0}] + [{11}%d{0}])\n",
+	// 	env.file_content[i], env.instruct_weight[i], env.arg_weight[i][0], env.arg_weight[i][1], env.arg_weight[i][2], env.arg_weight[i][3]);
+	// 	i++;
+	// }
 }
 
 void	ft_launcher(t_asm *env, char **av, int i)
@@ -62,7 +55,7 @@ void	ft_launcher(t_asm *env, char **av, int i)
 			ft_error_asm(env, ERR_EMPTY_FILE, 1);
 		ft_parse_file(env);
 		ft_write_instructions(env);
-		// ft_print_on_success(*env);
+		ft_print_on_success(*env);
 		ft_clear_all(env);
 	}
 	else
