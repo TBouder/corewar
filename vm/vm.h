@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/29 20:06:06 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/30 16:33:32 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,26 +17,42 @@
 # include "op.h"
 # include <errno.h>
 
+typedef		int	bool;
+
 typedef struct		s_champions
 {
-	char			*name;
-	char			*comment;
-	unsigned int	magic;
-	unsigned int	prog_size;
-	char			*content;
-	unsigned int	starting_pos;
+	char			*name;				//name
+	char			*comment;			//comment
+	unsigned int	magic;				//magic number
+	unsigned int	prog_size;			//total size
+	char			*content;			//instructions
+	unsigned int	starting_pos;		//position de depart dans la map
+
+	char			reg[REG_NUMBER];	//Los registros
+	int				pc;					//el pc
+	void			*pc_void;			//el pc de trump
+	bool			carry;				//bool for carry fisher
+	int				is_alive;			//Le champion a t'il dit qu'il etait en vie ?
+	bool			exist;				//Le champion existe t'il encore ?
+	int				cycle;				//Ya une histoire de cycle
 }					t_champions;
 
 typedef struct		s_vm
 {
 	t_options		*options;			//Flags
-	int				*fd;
-	char			**filename;
-	int				nb_champ;
-	t_champions		*champions;
-	int				total_size;
-	header_t		*header;
-	char			*map;
+
+	t_champions		*champions;			//Struct for each champion
+	int				*fd;				//Each champion
+	char			**filename;			//Each champion name
+	int				nb_champ;			//Number of champion
+	int				total_size;			//Total size of the champions
+
+	int				to_die;
+	int				detla;
+	int				nbr_live;
+
+	header_t		*header;			//header struct
+	char			*map;				//Total map
 }					t_vm;
 
 /*

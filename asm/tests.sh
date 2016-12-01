@@ -23,7 +23,7 @@ rm ../champions/*.cor
 ./asm ../champions/tdc4.s
 ./asm ../champions/test.s
 ./asm ../champions/toto.s
-./asm ../champions/valid.s
+# ./asm ../champions/valid.s
 
 diff ../champions/Backward.cor ../champions_o/Backward.cor
 diff ../champions/Car.cor ../champions_o/Car.cor
@@ -47,7 +47,7 @@ diff ../champions/tdc3.cor ../champions_o/tdc3.cor
 diff ../champions/tdc4.cor ../champions_o/tdc4.cor
 diff ../champions/test.cor ../champions_o/test.cor
 diff ../champions/toto.cor ../champions_o/toto.cor
-diff ../champions/valid.cor ../champions_o/valid.cor
+# diff ../champions/valid.cor ../champions_o/valid.cor
 
 # echo "\033[44m\033[1mFILE ERROR (empty, not valid, not file, not .s, dev/null, etc.)\033[0m"
 # echo "\033[41m\033[1m ---> ./asm\033[0m"

@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 16:03:50 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/01 13:45:14 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/01 15:13:29 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	ft_print_on_success(t_asm env)
 		i++;
 	}
 	ft_btree_print_inorder_asm(env.file_labels);
-	ft_btreesearch_asm(env.file_labels, "golive:", &match);
+	ft_btreesearch_asm(env.file_labels, "live:", &match);
 	ft_printf("golive: [{9}%d{0}]\n", match);
 }
 
@@ -62,7 +62,7 @@ void	ft_launcher(t_asm *env, char **av, int i)
 			ft_error_asm(env, ERR_EMPTY_FILE, 1);
 		ft_parse_file(env);
 		ft_write_instructions(env);
-		ft_print_on_success(*env);
+		// ft_print_on_success(*env);
 		ft_clear_all(env);
 	}
 	else
