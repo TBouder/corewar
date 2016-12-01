@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 13:02:26 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/01 14:59:09 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/01 15:42:03 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_dbnbrdel(int **nbr, size_t size)
 	size_t		i;
 
 	i = 0;
-	while (i < size)
+	while (i < size && nbr && nbr[i])
 	{
 		free(nbr[i]);
 		i++;
