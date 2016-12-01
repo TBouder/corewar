@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 19:42:02 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/30 00:37:10 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/30 17:06:32 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ void			ft_find_start_champion_pos(t_vm *env)
 	while (i < env->nb_champ)
 	{
 		env->champions[i].starting_pos = pos;
+		env->champions[i].pc = pos;
 		pos += MEM_SIZE / env->nb_champ; //DOIT ON GARDER MEM_SIZE OU DOIT ON FAIRE MEM_SIZE * NOMBRE DE CHAMPIONS ?
 		i++;
 	}
@@ -137,7 +138,7 @@ void			ft_put_champion_map(t_vm *env)
 		champion = env->champions[i];
 		y = champion.starting_pos;
 		z = 0;
-		ft_printf("[{10}%d{0}] - [{11}%d{0}]\n", champion.prog_size, y);
+		// ft_printf("[{10}%d{0}] - [{11}%d{0}]\n", champion.prog_size, y);
 		while (z < champion.prog_size)
 		{
 			env->map[y] = champion.content[z];
@@ -201,47 +202,6 @@ void			ft_print_map(t_vm *env)
 }
 /******************************************************************************/
 
-
-/******************************************************************************/
-static void		ft_print_hex_mem(char *add, size_t size)
-{
-	size_t		i;
-	char		*hex;
-
-	hex = ft_strinit("0123456789abcdef");
-	i = 0;
-	while (i < 64)
-	{
-		if (i < size)
-		{
-			ft_putchar(hex[(int)((unsigned char)add[i]) / 16]);
-			ft_putchar(hex[(int)((unsigned char)add[i]) % 16]);
-		}
-		if (i % 2)
-			ft_putchar(' ');
-		i++;
-	}
-	ft_strdel(&hex);
-}
-
-void			ft_print_memory_hex(const void *addr, size_t size)
-{
-	int		offset;
-
-	offset = 0;
-	while (size > 16)
-	{
-		ft_print_hex_mem((char *)addr + offset, 64);
-		ft_putchar('\n');
-		offset += 64;
-		size -= 64;
-	}
-	ft_print_hex_mem((char *)addr + offset, size);
-	ft_putchar('\n');
-}
-/******************************************************************************/
-
-
 static void		ft_launcher(t_vm *env, char **av, int i)
 {
 	ft_verif_extension(env, av, i);
@@ -262,7 +222,7 @@ static void		ft_launcher(t_vm *env, char **av, int i)
 		ft_printf("\t[%d]\n", env->champions[x].starting_pos);
 		x++;
 	}
-	ft_print_map(env); //CAUSE SEGFAULT
+	// ft_print_map(env);
 }
 
 int				main(int ac, char **av)

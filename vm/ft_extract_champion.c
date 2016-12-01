@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 17:46:14 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/29 19:51:20 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/30 15:06:45 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ static void		ft_extract_header(t_vm *env, int i)
 		hex = ft_itoa_base(env->header[i].magic, 16);
 		env->champions[i].magic = ft_rev_hex(hex);
 		ft_strdel(&hex);
+		if (env->champions[i].magic != COREWAR_EXEC_MAGIC)
+			ft_error_asm(env, "{9}Error{0} : This is a bad magic ...", 1);
 		hex = ft_itoa_base(env->header[i].prog_size, 16);
 		env->champions[i].prog_size = ft_rev_hex(hex);
 		ft_strdel(&hex);
