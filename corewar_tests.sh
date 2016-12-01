@@ -6,7 +6,7 @@
 #    By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/05/17 19:19:25 by tbouder           #+#    #+#              #
-#    Updated: 2016/12/01 16:18:04 by tbouder          ###   ########.fr        #
+#    Updated: 2016/12/01 16:21:33 by tbouder          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,12 +22,6 @@ ft_arg ()
 			name="OK"
 		elif [ "$1" = "comment" ]; then
 			comment="OK"
-		# elif [ $1 = "norme" ]; then
-		# 	ft_norme
-		# elif [ $1 = "all" ]; then
-		# 	ft_author
-		# 	ft_makefile
-		# 	ft_norme
 		fi
 		shift
 	done
@@ -39,7 +33,6 @@ ft_leaks()
 	shift
 	if [[ $leaks = "OK" ]]; then
 		sh /Volumes/USB/.files/valgrind/vg-in-place --leak-check=full --suppressions=/Volumes/USB/.files/valgrind/osx.supp -q $ASM $@
-		#valgrind -q --leak-check=full --error-exitcode=42 --suppressions=src/false_pos_valgrind.supp $1
 	else
 		$ASM $@
 	fi
