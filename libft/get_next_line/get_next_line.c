@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/17 11:59:39 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/24 20:46:35 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/01 15:51:18 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int				ft_return_value(t_gnl *gnl)
 	else if (gnl->i == 0)
 	{
 		gnl->tmp = ft_strchr(gnl->str, '\0');
-		if (ft_strequ(gnl->tmp, gnl->str))
+		if (ft_strequ((gnl->tmp), gnl->str))
 			return (0);
 	}
 	else if (gnl->i < 0)
