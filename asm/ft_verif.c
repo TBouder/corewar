@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 13:34:46 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/01 11:57:47 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/02 13:16:47 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ char			ft_verif_extension(t_asm *env, char *source)
 		env->filename = ft_strinit_asm(source);
 		env->filename_noext = ft_strsub(source, 0, len_source - 2);
 		env->filename_new = ft_strjoin(env->filename_noext, ".cor");
-		// ft_printf("[%s] vs [%s]\n", env->filename_noext, env->filename_new);
 	}
 	ft_strdel(&extension);
 	return (result);
@@ -68,9 +67,10 @@ static int		ft_verif_label_direct(t_asm *env, char *str, int type)
 	{
 		i = 2;
 		verif_label = ft_strjoin(str + 2, ":");
+		if (ft_strchr(verif_label, ' '))
+			return (-1);
 		ft_btreesearch_asm(env->file_labels, verif_label, &ret);
-		if (ret == 0)
-			ft_verif_label_direct_err(env, verif_label);
+		ret == 0 ? ft_verif_label_direct_err(env, verif_label) : 0;
 		ft_strdel(&verif_label);
 		return (1);
 	}
@@ -99,8 +99,7 @@ static int		ft_verif_label_indirect(char *str, int type)
 	}
 	else
 	{
-		while ((str[i] >= 97 && str[i] <= 122) || ft_isnumber(str[i]) ||
-				str[i] == '-')
+		while ((str[i] >= 97 && str[i] <= 122) || ft_isnumber(str[i]))
 			i++;
 		if (!str[i])
 			return (2);

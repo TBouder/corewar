@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tools.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
+/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 12:38:11 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/01 13:26:26 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/02 18:47:29 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static int		count_l(char const *s, char c)
 {
-	int		letter;
-	int		i;
+	int			letter;
+	int			i;
 
 	letter = 0;
 	i = 0;
@@ -29,9 +29,9 @@ static int		count_l(char const *s, char c)
 
 char			**ft_split_args(char const *s, char c, int size)
 {
-	char	**str;
-	int		n_words;
-	int		i;
+	char		**str;
+	int			n_words;
+	int			i;
 
 	i = 0;
 	if (s == NULL)
@@ -54,9 +54,9 @@ char			**ft_split_args(char const *s, char c, int size)
 
 char			**ft_split_instruct(char const *s, char c)
 {
-	char	**str;
-	int		n_words;
-	int		i;
+	char		**str;
+	int			n_words;
+	int			i;
 
 	i = 0;
 	if (s == NULL)
@@ -83,8 +83,8 @@ char			**ft_split_instruct(char const *s, char c)
 
 void			ft_strreplace_space(char *str)
 {
-	int		i;
-	int		cpt;
+	int			i;
+	int			cpt;
 
 	i = 0;
 	cpt = 0;
@@ -99,17 +99,14 @@ void			ft_strreplace_space(char *str)
 	{
 		if (ft_isspace(str[i]))
 			str[i] = ' ';
-		// if (str[i] == ',' && ft_strnstr(str, ".name", cpt) == NULL
-			// && ft_strnstr(str, ".comment", cpt) == NULL)
-			// str[i] = ' ';
 		i++;
 	}
 }
 
 char			*ft_remove_end(char *str)
 {
-	int		i;
-	char	*buff;
+	int			i;
+	char		*buff;
 
 	i = 0;
 	while (str && str[i] && str[i] != ';' && str[i] != '#')

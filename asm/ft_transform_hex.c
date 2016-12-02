@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 15:52:08 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/01 13:33:45 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/02 18:48:48 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char		*ft_transform_champ_infos(char *content, size_t content_size)
 	return (magic_hex);
 }
 
-static char	*ft_transform_size_helper(unsigned int content, size_t content_size, int i)
+static char	*ft_transform_size_helper(U_INT content, size_t content_size, int i)
 {
 	int		y;
 	char	*magic;
