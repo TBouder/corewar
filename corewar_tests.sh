@@ -6,7 +6,7 @@
 #    By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/05/17 19:19:25 by tbouder           #+#    #+#              #
-#    Updated: 2016/12/01 19:48:45 by tbouder          ###   ########.fr        #
+#    Updated: 2016/12/02 13:11:28 by tbouder          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,8 @@ ft_arg ()
 		elif [ "$1" = "arg" ]; then
 			arg_ok="OK"
 			ARG=$2
+		elif [ "$1" = "offi" ]; then
+			offi="OK"
 		fi
 		shift
 	done
@@ -117,11 +119,14 @@ if [ "$content_instruct" = "OK" ]; then
 fi
 
 if [ "$arg_ok" = "OK" ]; then
-
 	i="0"
-	while [ $i -lt 155 ]; do
-		# echo "\n\033[41m\033[1m ---> ./asm tests/args/$ARG/test_$(echo $ARG)_$(echo $i).s \033[0m"
-		ft_leaks $ASM asm/tests/args/$ARG/test_$(echo $ARG)_$(echo $i).s | grep "Writing"
+	while [ $i -lt 1110 ]; do
+
+		if [ "$offi" = "OK" ]; then
+			./corewar-exemple/asm asm/tests/args/$ARG/test_$(echo $ARG)_$(echo $i).s | grep "Writing"
+		else
+			ft_leaks $ASM asm/tests/args/$ARG/test_$(echo $ARG)_$(echo $i).s | grep "Writing"
+		fi
 		i=$[$i+1]
 	done
 fi

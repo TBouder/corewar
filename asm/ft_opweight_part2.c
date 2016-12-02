@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 11:55:28 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/30 12:44:00 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/02 13:16:50 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,12 +86,12 @@ int		ft_opweight_13(t_asm *env, char *arg1, char *arg2, char *arg3)
 		return (-2);
 	if (ft_verif_label(env, arg1) == 1)
 		count += ft_get_weight(env, 1, 4, 1);
+	else if (ft_verif_label(env, arg1) == 2)
+		count += ft_get_weight(env, 2, 2, 1);
 	else
 		return (-1);
 	if (ft_verif_label(env, arg2) == 3)
 		count += ft_get_weight(env, 3, 1, 2);
-	else if (ft_verif_label(env, arg2) == 2)
-		count += ft_get_weight(env, 2, 2, 2);
 	else
 		return (-1);
 	return (count + 2);

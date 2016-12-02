@@ -23,7 +23,32 @@ rm ../champions/*.cor
 ./asm ../champions/tdc4.s
 ./asm ../champions/test.s
 ./asm ../champions/toto.s
-# ./asm ../champions/valid.s
+./asm ../champions/valid.s
+
+../corewar-exemple/asm ../champions_o/Backward.s
+../corewar-exemple/asm ../champions_o/Car.s
+../corewar-exemple/asm ../champions_o/Death.s
+../corewar-exemple/asm ../champions_o/Gagnant.s
+../corewar-exemple/asm ../champions_o/Octobre_Rouge_V4.2.s
+../corewar-exemple/asm ../champions_o/Survivor.s
+# ../corewar-exemple/asm ../champions_o/Torpille.s
+../corewar-exemple/asm ../champions_o/barriere.s
+../corewar-exemple/asm ../champions_o/ex.s
+../corewar-exemple/asm ../champions_o/jumper.s
+../corewar-exemple/asm ../champions_o/lde.s
+../corewar-exemple/asm ../champions_o/leeloo.s
+../corewar-exemple/asm ../champions_o/mat.s
+../corewar-exemple/asm ../champions_o/maxidef.s
+../corewar-exemple/asm ../champions_o/mortel.s
+../corewar-exemple/asm ../champions_o/new.s
+../corewar-exemple/asm ../champions_o/octobre_rouge2.s
+../corewar-exemple/asm ../champions_o/slider2.s
+../corewar-exemple/asm ../champions_o/tdc2.s
+../corewar-exemple/asm ../champions_o/tdc3.s
+../corewar-exemple/asm ../champions_o/tdc4.s
+../corewar-exemple/asm ../champions_o/test.s
+../corewar-exemple/asm ../champions_o/toto.s
+# ../corewar-exemple/asm ../champions_o/valid.s
 
 diff ../champions/Backward.cor ../champions_o/Backward.cor
 diff ../champions/Car.cor ../champions_o/Car.cor
