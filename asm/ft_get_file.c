@@ -6,11 +6,33 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 15:27:33 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/01 17:05:37 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/02 13:25:32 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
+
+# define LABEL_CHARS			"abcdefghijklmnopqrstuvwxyz_0123456789"
+
+int			ft_valid_label(char *str)
+{
+	int		i;
+
+	i = 0;
+	ft_printf("%s\n", str);
+	while (str[i])
+	{
+		if ((str[i] >= 'a' && str[i] <= 'z') || (str[i] >= '0' && str[i] <= '9')
+			|| (str[i] == '_'))
+			;
+		else if (str[i] == ':' && str[i + 1] == '\0')
+			;
+		else
+			return (0);
+		i++;
+	}
+	return (1);
+}
 
 static void	ft_get_file_content_label(t_asm *env, char *label, char *final_line,
 			t_list **lst)
@@ -20,6 +42,11 @@ static void	ft_get_file_content_label(t_asm *env, char *label, char *final_line,
 	split = NULL;
 	ft_btreecmp_asm(env, &env->file_labels, label, ft_strlen(label) + 1);
 	split = ft_split_instruct(final_line, ' ');
+	if (ft_valid_label(split[0]) == 0)
+	{
+		ft_dbstrdel(split);
+		ft_error_asm(env, "{9}Err{0} : Incorrect label", 1);
+	}
 	if (DIFF(split[1], ""))
 	{
 		ft_lstend(lst, split[0], ft_strlen(split[0]) + 1);
