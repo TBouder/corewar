@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 13:34:46 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/01 11:57:47 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/01 16:47:53 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,10 @@ static int		ft_verif_label_direct(t_asm *env, char *str, int type)
 	{
 		i = 2;
 		verif_label = ft_strjoin(str + 2, ":");
+		if (ft_strchr(verif_label, ' '))
+			return (-1);
 		ft_btreesearch_asm(env->file_labels, verif_label, &ret);
-		if (ret == 0)
-			ft_verif_label_direct_err(env, verif_label);
+		ret == 0 ? ft_verif_label_direct_err(env, verif_label) : 0;
 		ft_strdel(&verif_label);
 		return (1);
 	}

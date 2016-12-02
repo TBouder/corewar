@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 15:19:07 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/01 13:45:10 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/01 16:56:05 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,11 +85,12 @@ char			**ft_get_args(t_asm *env, int i)
 	char		*elem_1;
 	char		*elem_2;
 
+	if (env->file_content[i][ft_strlen(env->file_content[i]) - 1] == ',')
+		ft_error_asm(env, "{9}Err{0} : Comma at the end of the line", 1);
  	elems = ft_split_args(env->file_content[i], ',', 3);
 	elem_0 = ft_split_args(elems[0], ' ', 2);
 	elem_1 = ft_strtrim(elems[1]);
 	elem_2 = ft_strtrim(elems[2]);
-
 	args = ft_dbstrnew(5);
 	args[0] = ft_strinit(elem_0[0]);
 	args[1] = ft_strinit(elem_0[1]);
@@ -129,9 +130,9 @@ void			ft_get_size(t_asm *env, int i)
 	if (arg_value < 0)
 	{
 		if (arg_value == -1)
-			ft_printf("{9}ERROR{0} : One argument of this line is falty [%s]", env->file_content[i]);
+			ft_printf("{9}Err{0} : One argument of this line is falty [%s]", env->file_content[i]);
 		if (arg_value == -2)
-			ft_printf("{9}ERROR{0} : Too many arguments for [%s]", env->args[i][1]);
+			ft_printf("{9}Err{0} : Too many arguments for [%s]", env->args[i][1]);
 		ft_error_asm(env, "", 1);
 	}
 	env->instruct_size += arg_value;

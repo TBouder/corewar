@@ -6,7 +6,7 @@
 #    By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/05/17 19:19:25 by tbouder           #+#    #+#              #
-#    Updated: 2016/12/01 16:21:33 by tbouder          ###   ########.fr        #
+#    Updated: 2016/12/01 19:48:45 by tbouder          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,13 @@ ft_arg ()
 			name="OK"
 		elif [ "$1" = "comment" ]; then
 			comment="OK"
+		elif [ "$1" = "content_comma" ]; then
+			content_comma="OK"
+		elif [ "$1" = "content_instruct" ]; then
+			content_instruct="OK"
+		elif [ "$1" = "arg" ]; then
+			arg_ok="OK"
+			ARG=$2
 		fi
 		shift
 	done
@@ -86,4 +93,35 @@ if [ "$comment" = "OK" ]; then
 	echo "\n\033[41m\033[1m ---> ./asm tests/error_name13.s (.name name\")\033[0m"			&& ft_leaks $ASM asm/tests/error_name13.s
 	echo "\n\033[41m\033[1m ---> ./asm tests/error_name14.s (.name \"\" \"name\")\033[0m"	&& ft_leaks $ASM asm/tests/error_name14.s
 	echo "\n\033[41m\033[1m ---> ./asm tests/error_name15.s (.name \"\"name\")\033[0m"		&& ft_leaks $ASM asm/tests/error_name15.s
+fi
+
+if [ "$content_comma" = "OK" ]; then
+	echo "\n\033[41m\033[1m ---> ./asm tests/content/error_comma_00.s  \033[0m"				&& ft_leaks $ASM asm/tests/content/error_comma_00.s
+	echo "\n\033[41m\033[1m ---> ./asm tests/content/error_comma_01.s  \033[0m"				&& ft_leaks $ASM asm/tests/content/error_comma_01.s
+	echo "\n\033[41m\033[1m ---> ./asm tests/content/error_comma_02.s  \033[0m"				&& ft_leaks $ASM asm/tests/content/error_comma_02.s
+	echo "\n\033[41m\033[1m ---> ./asm tests/content/error_comma_03.s  \033[0m"				&& ft_leaks $ASM asm/tests/content/error_comma_03.s
+	echo "\n\033[41m\033[1m ---> ./asm tests/content/error_comma_04.s  \033[0m"				&& ft_leaks $ASM asm/tests/content/error_comma_04.s
+	echo "\n\033[41m\033[1m ---> ./asm tests/content/error_comma_05.s  \033[0m"				&& ft_leaks $ASM asm/tests/content/error_comma_05.s
+	echo "\n\033[41m\033[1m ---> ./asm tests/content/error_comma_06.s  \033[0m"				&& ft_leaks $ASM asm/tests/content/error_comma_06.s
+	echo "\n\033[41m\033[1m ---> ./asm tests/content/error_comma_07.s  \033[0m"				&& ft_leaks $ASM asm/tests/content/error_comma_07.s
+fi
+
+if [ "$content_instruct" = "OK" ]; then
+	echo "\n\033[41m\033[1m ---> ./asm tests/content/error_instruct_00.s  \033[0m"			&& ft_leaks $ASM asm/tests/content/error_instruct_00.s
+	echo "\n\033[41m\033[1m ---> ./asm tests/content/error_instruct_01.s  \033[0m"			&& ft_leaks $ASM asm/tests/content/error_instruct_01.s
+	echo "\n\033[41m\033[1m ---> ./asm tests/content/error_instruct_02.s  \033[0m"			&& ft_leaks $ASM asm/tests/content/error_instruct_02.s
+	echo "\n\033[41m\033[1m ---> ./asm tests/content/error_instruct_03.s  \033[0m"			&& ft_leaks $ASM asm/tests/content/error_instruct_03.s
+	echo "\n\033[41m\033[1m ---> ./asm tests/content/error_instruct_04.s  \033[0m"			&& ft_leaks $ASM asm/tests/content/error_instruct_04.s
+	echo "\n\033[41m\033[1m ---> ./asm tests/content/error_instruct_05.s  \033[0m"			&& ft_leaks $ASM asm/tests/content/error_instruct_05.s
+	echo "\n\033[41m\033[1m ---> ./asm tests/content/error_instruct_06.s  \033[0m"			&& ft_leaks $ASM asm/tests/content/error_instruct_06.s
+fi
+
+if [ "$arg_ok" = "OK" ]; then
+
+	i="0"
+	while [ $i -lt 155 ]; do
+		# echo "\n\033[41m\033[1m ---> ./asm tests/args/$ARG/test_$(echo $ARG)_$(echo $i).s \033[0m"
+		ft_leaks $ASM asm/tests/args/$ARG/test_$(echo $ARG)_$(echo $i).s | grep "Writing"
+		i=$[$i+1]
+	done
 fi

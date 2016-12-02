@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 15:27:33 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/01 12:51:32 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/01 17:05:37 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,10 @@ static void	ft_get_file_content_error(t_asm *env, t_list **lst)
 
 	while (get_next_line(env->fd, &line))
 		ft_strdel(&line);
-	ft_strdel(&line);
 	if (env->error_int == 1)
-		ft_printf("{9}Error{0} : redefinition of {14}%s{0}", env->error_val);
+		ft_printf("{9}Err{0} : redefinition of {14}%s{0}", env->error_val);
 	else if (env->error_int == 2)
-		ft_printf("{9}Error{0} : Syntax error at token {14}[%s]{0}",
+		ft_printf("{9}Err{0} : Syntax error at token {14}[%s]{0}",
 			env->error_val);
 	ft_lstclr(lst);
 	ft_error_asm(env, "", 1);
