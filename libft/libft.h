@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
+/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/28 19:26:39 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/02 15:35:42 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,7 @@ void				ft_putdbstr(char **tab, size_t size);
 */
 
 int					ft_atoi(const char *str);
+long				ft_atoi_l(const char *str);
 int					ft_atoi_part(const char *str, int i);
 int					ft_atoi_hexa(const char *str);
 long				ft_atoi_base(char *str, int base);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
+/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/01 13:37:43 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/02 18:59:53 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "errors.h"
 
 # define MAGIC_LEN 4
+# define U_INT unsigned int
 
 typedef struct			s_btree_asm
 {
@@ -98,6 +99,17 @@ void					ft_btreesearch_asm(t_btree_asm *node, char *content,
 							int *ret);
 
 /*
+** ft_calcul_jump.c
+*/
+long					ft_calcul_jump(t_asm *env, char *str, int line,
+										int pds);
+
+/*
+** ft_valid_file.c
+*/
+int						ft_valid_label(char *str);
+
+/*
 ** GET : ft_get_champion.c, ft_get_file.c, ft_get_size.c
 */
 void					ft_get_champ_infos(t_asm *env, int i);
@@ -117,7 +129,8 @@ void					ft_parse_file(t_asm *env);
 char					*ft_transform_magic(int i);
 char					*ft_transform_champ_infos(char *content,
 							size_t content_size);
-void					ft_transform_size(unsigned int content, int fd, int len);
+void					ft_transform_size(unsigned int content, int fd,
+											int len);
 
 /*
 ** ft_write_instructions.c
@@ -128,7 +141,6 @@ void					ft_write_instructions(t_asm *env);
 ** ft_tools.c
 */
 char					**ft_split_args(char const *s, char c, int size);
-// char					**ft_split_args(char const *s, char c);
 char					**ft_split_instruct(char const *s, char c);
 void					ft_strreplace_space(char *str);
 char					*ft_remove_end(char *str);

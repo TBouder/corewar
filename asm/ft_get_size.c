@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_get_size.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
+/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 15:19:07 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/01 13:45:10 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/02 18:52:45 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int				ft_get_opcode(char *opname)
 {
-	int		opcode;
+	int			opcode;
 
 	opcode = 0;
 	opcode == 0 && EQU(opname, "live") ? opcode = 1 : 0;
@@ -85,11 +85,12 @@ char			**ft_get_args(t_asm *env, int i)
 	char		*elem_1;
 	char		*elem_2;
 
- 	elems = ft_split_args(env->file_content[i], ',', 3);
+	if (env->file_content[i][ft_strlen(env->file_content[i]) - 1] == ',')
+		ft_error_asm(env, "{9}Err{0} : Comma at the end of the line", 1);
+	elems = ft_split_args(env->file_content[i], ',', 3);
 	elem_0 = ft_split_args(elems[0], ' ', 2);
 	elem_1 = ft_strtrim(elems[1]);
 	elem_2 = ft_strtrim(elems[2]);
-
 	args = ft_dbstrnew(5);
 	args[0] = ft_strinit(elem_0[0]);
 	args[1] = ft_strinit(elem_0[1]);
@@ -104,37 +105,35 @@ char			**ft_get_args(t_asm *env, int i)
 
 void			ft_get_size(t_asm *env, int i)
 {
-
 	int			(*tab[17])(t_asm *env, char *, char *, char *);
 	int			opcode;
 	int			arg_value;
 
 	arg_value = 0;
 	env->args[i] = ft_get_args(env, i);
-
 	opcode = ft_get_opcode(env->args[i][0]);
 	ft_get_opweight(env, opcode);
 	ft_init_function_tab(tab);
 	if (opcode != 0)
 	{
-		arg_value = tab[(int)opcode](env, env->args[i][1], env->args[i][2], env->args[i][3]);
+		arg_value = tab[(int)opcode](env, env->args[i][1], env->args[i][2],
+						env->args[i][3]);
 		if (ft_strlen(env->opcode_next[i]) == 2)
 			ft_strcat(env->opcode_next[i], "000000");
 		if (ft_strlen(env->opcode_next[i]) == 4)
 			ft_strcat(env->opcode_next[i], "0000");
 		if (ft_strlen(env->opcode_next[i]) == 6)
 			ft_strcat(env->opcode_next[i], "00");
-		//ICI WESH MAGGLE
 	}
 	if (arg_value < 0)
 	{
 		if (arg_value == -1)
-			ft_printf("{9}ERROR{0} : One argument of this line is falty [%s]", env->file_content[i]);
+			ft_printf("{9}Err{0} : One argument of this line is falty [%s]",
+						env->file_content[i]);
 		if (arg_value == -2)
-			ft_printf("{9}ERROR{0} : Too many arguments for [%s]", env->args[i][1]);
+			ft_printf("{9}Err{0} : Too many arguments for [%s]",
+						env->args[i][1]);
 		ft_error_asm(env, "", 1);
 	}
 	env->instruct_size += arg_value;
-	// ft_dbstrdel(env->args[i]);
-	// env->args = NULL;
 }
