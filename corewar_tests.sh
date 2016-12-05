@@ -6,7 +6,7 @@
 #    By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/05/17 19:19:25 by tbouder           #+#    #+#              #
-#    Updated: 2016/12/02 13:11:28 by tbouder          ###   ########.fr        #
+#    Updated: 2016/12/05 11:58:27 by tbouder          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,8 @@ ft_arg ()
 	while [ $# -ne 0 ];do
 		if [ "$1" = "leaks" ]; then
 			leaks="OK"
+		elif [ "$1" = "file" ]; then
+			file="OK"
 		elif [ "$1" = "name" ]; then
 			name="OK"
 		elif [ "$1" = "comment" ]; then
@@ -58,7 +60,7 @@ echo 'quroulon@student.42.fr      tbouder@student.42.fr'
 ft_arg $@
 
 ASM=./asm/asm
-if [ "$name" = "OK" ]; then
+if [ "$file" = "OK" ]; then
 	echo "\033[44m\033[1mFILE ERROR (empty, not valid, not file, not .s, dev/null, etc.)\033[0m"
 	echo "\033[41m\033[1m ---> ./asm\033[0m"															&& ft_leaks $ASM
 	echo "\n\033[41m\033[1m ---> ./asm ..\033[0m" 														&& ft_leaks $ASM ..

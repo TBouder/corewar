@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/30 16:33:32 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/05 16:30:07 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ typedef struct		s_champions
 	unsigned int	prog_size;			//total size
 	char			*content;			//instructions
 	unsigned int	starting_pos;		//position de depart dans la map
+	int				champ_id;
+
 
 	char			reg[REG_NUMBER];	//Los registros
 	int				pc;					//el pc
@@ -35,6 +37,7 @@ typedef struct		s_champions
 	int				is_alive;			//Le champion a t'il dit qu'il etait en vie ?
 	bool			exist;				//Le champion existe t'il encore ?
 	int				cycle;				//Ya une histoire de cycle
+	int				next_cycle;
 }					t_champions;
 
 typedef struct		s_vm
@@ -42,14 +45,19 @@ typedef struct		s_vm
 	t_options		*options;			//Flags
 
 	t_champions		*champions;			//Struct for each champion
+	t_champions		*winner;			//WINNER
 	int				*fd;				//Each champion
 	char			**filename;			//Each champion name
 	int				nb_champ;			//Number of champion
 	int				total_size;			//Total size of the champions
 
-	int				to_die;
-	int				detla;
-	int				nbr_live;
+	int				cycle_to_die;
+	int				cpt_to_die;
+	int				cycle_check;
+	int				cycle;
+
+	// int				detla;
+	// int				nbr_live;
 
 	header_t		*header;			//header struct
 	char			*map;				//Total map
@@ -59,6 +67,8 @@ typedef struct		s_vm
 ** main.c
 */
 void			ft_error_asm(t_vm *env, char *msg, int clear);
+
+void			ft_fight(t_vm *env);
 
 /*
 ** ft_init.c
@@ -75,23 +85,21 @@ void			ft_extract_champion(t_vm *env);
 /*
 ** ft_func_part1
 */
-void		ft_corewar_live(void);
-void		ft_corewar_ld(void);
-void		ft_corewar_st(void);
-void		ft_corewar_add(void);
-void		ft_corewar_sub(void);
-void		ft_corewar_and(void);
-void		ft_corewar_or(void);
-void		ft_corewar_xor(void);
-void		ft_corewar_zjmp(void);
-void		ft_corewar_ldi(void);
-void		ft_corewar_sti(void);
-void		ft_corewar_fork(void);
-void		ft_corewar_lld(void);
-void		ft_corewar_lldi(void);
-void		ft_corewar_lfork(void);
-void		ft_corewar_aff(void);
-
-
+int				ft_corewar_live(t_vm *env, t_champions *champ);
+int				ft_corewar_ld(t_vm *env, t_champions *champ);
+int				ft_corewar_st(t_vm *env, t_champions *champ);
+int				ft_corewar_add(t_vm *env, t_champions *champ);
+int				ft_corewar_sub(t_vm *env, t_champions *champ);
+int				ft_corewar_and(t_vm *env, t_champions *champ);
+int				ft_corewar_or(t_vm *env, t_champions *champ);
+int				ft_corewar_xor(t_vm *env, t_champions *champ);
+int				ft_corewar_zjmp(t_vm *env, t_champions *champ);
+int				ft_corewar_ldi(t_vm *env, t_champions *champ);
+int				ft_corewar_sti(t_vm *env, t_champions *champ);
+int				ft_corewar_fork(t_vm *env, t_champions *champ);
+int				ft_corewar_lld(t_vm *env, t_champions *champ);
+int				ft_corewar_lldi(t_vm *env, t_champions *champ);
+int				ft_corewar_lfork(t_vm *env, t_champions *champ);
+int				ft_corewar_aff(t_vm *env, t_champions *champ);
 
 #endif
