@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_get_file.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 15:27:33 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/02 18:43:20 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/05 15:45:19 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
-
-#define LABEL_CHARS		"abcdefghijklmnopqrstuvwxyz_0123456789"
 
 static void	ft_get_file_content_label(t_asm *env, char *label, char *final_line,
 			t_list **lst)

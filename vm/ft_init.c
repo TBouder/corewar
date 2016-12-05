@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 17:48:28 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/30 16:33:08 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/05 16:37:17 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static void		ft_init_champions(t_vm *env)
 		env->champions[i].prog_size = 0;
 		env->champions[i].content = NULL;
 		env->champions[i].starting_pos = 0;
+		env->champions[i].champ_id = i;
 		/*REG_NUMBER registres qui font chacun une taille de REG_SIZE octets*/
 		reg_nb = 0;
 		while (reg_nb <= REG_NUMBER)
@@ -62,8 +63,13 @@ void			ft_init_env(t_vm *env, int part)
 		env->total_size = 0;
 		env->map = ft_strnew(MEM_SIZE);
 		ft_init_champions(env);
-		env->to_die = CYCLE_TO_DIE;
-		env->detla = CYCLE_DELTA;
-		env->nbr_live = NBR_LIVE;
+		env->winner = NULL;
+
+		env->cycle_to_die = CYCLE_TO_DIE;
+		env->cpt_to_die = 0;
+		env->cycle_check = 0;
+		env->cycle = 0;
+		// env->detla = CYCLE_DELTA;
+		// env->nbr_live = NBR_LIVE;
 	}
 }

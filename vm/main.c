@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 19:42:02 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/30 17:06:32 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/05 15:40:15 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,35 +17,10 @@
 # define	ERR_NOT_COR					"{9}Error{0} : File extension is not .cor"
 
 /******************************************************************************/
-void	ft_init_corewar_func(void (*tab[17])())
-{
-	tab[0] = NULL;
-	tab[1] = &ft_corewar_live;
-	tab[2] = &ft_corewar_ld;
-	tab[3] = &ft_corewar_st;
-	tab[4] = &ft_corewar_add;
-	tab[5] = &ft_corewar_sub;
-	tab[6] = &ft_corewar_and;
-	tab[7] = &ft_corewar_or;
-	tab[8] = &ft_corewar_xor;
-	tab[9] = &ft_corewar_zjmp;
-	tab[10] = &ft_corewar_ldi;
-	tab[11] = &ft_corewar_sti;
-	tab[12] = &ft_corewar_fork;
-	tab[13] = &ft_corewar_lld;
-	tab[14] = &ft_corewar_lldi;
-	tab[15] = &ft_corewar_lfork;
-	tab[16] = &ft_corewar_aff;
-}
-void	ft_corewar_func()
-{
-	void		(*tab[17])();
-	// void		(*tab[17])(t_vm *env, char *, char *, char *);
-	ft_init_corewar_func(tab);
 
-}
 /******************************************************************************/
 
+/******************************************************************************/
 void			ft_clear_champions(t_champions *champions, int size)
 {
 	int		i;
@@ -108,22 +83,7 @@ void			ft_verif_extension(t_vm *env, char **av, int i)
 		y++;
 	}
 }
-
-void			ft_find_start_champion_pos(t_vm *env)
-{
-	int		i;
-	int		pos;
-
-	i = 0;
-	pos = 0;
-	while (i < env->nb_champ)
-	{
-		env->champions[i].starting_pos = pos;
-		env->champions[i].pc = pos;
-		pos += MEM_SIZE / env->nb_champ; //DOIT ON GARDER MEM_SIZE OU DOIT ON FAIRE MEM_SIZE * NOMBRE DE CHAMPIONS ?
-		i++;
-	}
-}
+/******************************************************************************/
 
 void			ft_put_champion_map(t_vm *env)
 {
@@ -141,6 +101,7 @@ void			ft_put_champion_map(t_vm *env)
 		// ft_printf("[{10}%d{0}] - [{11}%d{0}]\n", champion.prog_size, y);
 		while (z < champion.prog_size)
 		{
+			//SI env->map[y] != 0 -> ERROR
 			env->map[y] = champion.content[z];
 			z++;
 			y++;
@@ -206,8 +167,7 @@ static void		ft_launcher(t_vm *env, char **av, int i)
 {
 	ft_verif_extension(env, av, i);
 	ft_extract_champion(env);
-	ft_find_start_champion_pos(env);
-	ft_put_champion_map(env); //CAUSE SEGFAULT
+	ft_put_champion_map(env);
 
 
 	// ft_corewar_func(); //USELESS RIGHT NOW
@@ -222,7 +182,8 @@ static void		ft_launcher(t_vm *env, char **av, int i)
 		ft_printf("\t[%d]\n", env->champions[x].starting_pos);
 		x++;
 	}
-	// ft_print_map(env);
+	ft_print_map(env);
+	ft_fight(env);
 }
 
 int				main(int ac, char **av)
