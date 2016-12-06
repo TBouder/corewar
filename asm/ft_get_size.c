@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_get_size.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 15:19:07 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/02 18:52:45 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/06 13:36:42 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,5 +135,5 @@ void			ft_get_size(t_asm *env, int i)
 						env->args[i][1]);
 		ft_error_asm(env, "", 1);
 	}
-	env->instruct_size += arg_value;
+	env->instruct_size += env->instruct_weight[i];
 }

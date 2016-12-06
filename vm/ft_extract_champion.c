@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 17:46:14 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/30 15:06:45 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/06 13:37:10 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,24 @@ static int		ft_rev_hex(char *hex)
 {
 	char	*new_hex;
 	long	ret_value;
+	int		hex_len;
 	int		i;
 	int		y;
 
-	new_hex = ft_strnew(8);
-	i = 8;
+	hex_len = ft_strlen(hex);
+	new_hex = ft_strnew(hex_len);
+	i = hex_len;
 	y = 0;
-	while (y < 8)
+	while (y < hex_len)
 	{
-		new_hex[y] = hex[i - 2];
-		y++;
-		new_hex[y] = hex[i - 1];
-		y++;
-		i -= 2;
+		if (i - 2 >= 0)
+		{
+			new_hex[y++] = hex[i - 2];
+			new_hex[y++] = hex[i - 1];
+		}
+		else
+			new_hex[y++] = hex[i - 1];
+		i -= (i - 2 >= 0) ? 2 : 1;
 	}
 	ret_value = ft_atoi_base(new_hex, 16);
 	ft_strdel(&new_hex);
@@ -77,15 +82,26 @@ static void		ft_extract_header(t_vm *env, int i)
 		ft_error_asm(env, "{9}Error{0} : The magic doesn't work with the header ...", 1);
 }
 
+static void		ft_extract_starting_pos(t_champions *champion, int pos)
+{
+	champion->starting_pos = pos;
+	champion->pc = pos;
+	champion->next_cycle = 0;
+}
+
 void			ft_extract_champion(t_vm *env)
 {
 	int		i;
+	int		pos;
 
 	i = 0;
+	pos = 0;
 	while (i < env->nb_champ)
 	{
 		ft_extract_header(env, i);
 		ft_extract_content(env, i);
+		ft_extract_starting_pos(&env->champions[i], pos);
+		pos += MEM_SIZE / env->nb_champ;
 		i++;
 	}
 }
