@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 19:42:02 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/06 13:37:19 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/06 15:03:00 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,8 +169,6 @@ static void		ft_launcher(t_vm *env, char **av, int i)
 	ft_extract_champion(env);
 	ft_put_champion_map(env);
 
-
-	// ft_corewar_func(); //USELESS RIGHT NOW
 	int		x = 0;
 	while (x < env->nb_champ)
 	{
@@ -182,7 +180,8 @@ static void		ft_launcher(t_vm *env, char **av, int i)
 		ft_printf("\t[%d]\n", env->champions[x].starting_pos);
 		x++;
 	}
-	ft_print_map(env);
+	// ft_print_map(env);
+
 	ft_fight(env);
 }
 

@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 16:31:46 by quroulon          #+#    #+#             */
-/*   Updated: 2016/12/02 18:59:08 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/06 17:38:22 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,7 @@ static void		ft_write_opcode(t_asm *env, int line)
 	real_hex[0] += opcode;
 	write(env->fd_cor, real_hex, 1);
 	ft_strdel(&real_hex);
-	if (opcode != 1 && opcode != 9 && opcode != 12 && opcode != 15 &&
-		opcode != 16)
+	if (opcode != 1 && opcode != 9 && opcode != 12 && opcode != 15)
 	{
 		real_hex = ft_strnew_hex(1);
 		real_hex[0] += ft_atoi_base(env->opcode_next[line], 2);
