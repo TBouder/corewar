@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 15:58:23 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/05 16:35:32 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/06 13:21:09 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,38 @@ void	ft_exec_instruct(t_vm *env, t_champions *champion)
 	champ_pc = champion->pc;
 	champion->next_cycle = env->cycle;
 	// ft_printf("{10}%d{0}\n", env->cycle);
+
+/*
+0370 0100 0102 9000 0000 0403 0100 0000 0102 d000 0102 0ad4 0003 0204 0b74 0400 0202 0454 0203 0209 0001 0854 0404 0409 0003 0000
+0370 0100 0102 9000 0000 0403 0100 0000 0102 d000 0102 0ad4 0003 0204 0b74 0400 0202 0454 0203 0209 0001 0854 0404 0409 0000
+
+
+	ST ->	0370	01			0001
+	LD ->	0290	0000 0004	03
+	LIVE ->	01		0000		0001
+	LD ->	02D0	0001		02
+	LDI ->	0AD4	0003		02		04
+	STI ->	0B74	04			0002	02
+	ADD ->	0454	02			03		02
+	ZJMP ->	0900	0001
+	XOR ->	0854	04			04		04
+	ZJMP ->	09		0000
+
+	ST				  LD							LIVE			  LD
+	0370	0100	0102	9000	0000	0403	0100	0000	0102	d000
+	0001	0203	0405	0607	0809	1011	1213	1415	1617	1819
+
+			LDI						STI						ADD				  ZJMP
+	0102	0ad4	0003	0204	0b74	0400	0202	0454	0203	0209
+	2021	2223	2425	2627	2829	3031	3233	3435	3637	3839
+	  LIVE
+	0001	0854	0404	0409	0000
+	4041	4243	4445	4647	4849
+*/
+
+	ft_printf("--[%x]--\n", env->map[17]);
 	champion->next_cycle += tab[(int)env->map[champ_pc]](env, champion);
-	ft_printf("%d\n", champion->next_cycle);
+	ft_printf("Next action in {11}%d{0} loops\n", champion->next_cycle);
 }
 
 void	ft_foreach_champ(t_vm *env)
@@ -116,11 +146,9 @@ void	ft_foreach_champ(t_vm *env)
 void	ft_fight(t_vm *env)
 {
 	int v = 0;
-	while (ft_one_isalive(env) && v++ < 50)
+	while (ft_one_isalive(env) && v++ < 200)
 	{
 
-		// ft_printf("HELLO\n");
-		// FAIREJOUERCHAMPIONS
 		ft_foreach_champ(env);
 
 		if (env->cpt_to_die == env->cycle_to_die)
