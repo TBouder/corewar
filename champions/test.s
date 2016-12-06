@@ -7,7 +7,7 @@ label00:
 	ld    %-272,r3
 	live  %0
 	fork  %:label00
-	ld    %-272,r3
+	ld    %-272, r3
 	fork  %:label00
 	ld    %0,r2
 	ld    %0,r4
