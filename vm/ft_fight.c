@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 15:58:23 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/07 12:26:33 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/07 15:04:19 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ void			ft_init_corewar_func(int (*tab[17])(t_vm *env, t_champions *champ, int op
 	tab[1] = &ft_corewar_live;
 	// tab[2] = &ft_corewar_ld;
 	tab[2] = &ft_corewar_ld_ldi;
-	tab[3] = &ft_corewar_st;
+	// tab[3] = &ft_corewar_st;
+	tab[3] = &ft_corewar_st_sti;
 
 	// tab[4] = &ft_corewar_add;
 	// tab[5] = &ft_corewar_sub;
@@ -44,7 +45,9 @@ void			ft_init_corewar_func(int (*tab[17])(t_vm *env, t_champions *champ, int op
 	// tab[10] = &ft_corewar_ldi;
 	tab[10] = &ft_corewar_ld_ldi;
 
-	tab[11] = &ft_corewar_sti;
+	// tab[11] = &ft_corewar_sti;
+	tab[11] = &ft_corewar_st_sti;
+
 	// tab[12] = &ft_corewar_fork;
 	tab[12] = &ft_corewar_forks;
 	tab[13] = &ft_corewar_lld;
