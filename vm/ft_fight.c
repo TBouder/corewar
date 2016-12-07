@@ -6,13 +6,13 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 15:58:23 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/07 15:53:25 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/07 23:44:30 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-/******************************************************************************/
+/******************************************************************************
 void			ft_init_corewar_func(int (*tab[17])(t_vm *env, t_champions *champ, int op))
 {
 	tab[0] = NULL;
@@ -36,7 +36,7 @@ void			ft_init_corewar_func(int (*tab[17])(t_vm *env, t_champions *champ, int op
 	tab[15] = &ft_corewar_forks;
 	tab[16] = &ft_corewar_aff;
 }
-/******************************************************************************/
+******************************************************************************/
 
 int		ft_one_isalive(t_vm *env)
 {
@@ -86,15 +86,19 @@ void	ft_print_winner(t_vm *env)
 void	ft_exec_instruct(t_vm *env, t_champions *champion)
 {
 	int		champ_pc;
-	int		(*tab[17])();
+	// int		(*tab[17])();
 
-	ft_init_corewar_func(tab);
+	// ft_init_corewar_func(tab);
 	champ_pc = champion->pc;
 	champion->next_cycle = env->cycle;
 	if (champ_pc < (int)champion->prog_size)
-		champion->next_cycle += tab[(int)env->map[champ_pc]](env, champion, (int)env->map[champ_pc]);
+	{
+		champion->next_cycle += ft_get_args(env, champion, (int)env->map[champ_pc]);
 
-	ft_printf("Next action in {11}%d{0} loops\n", champion->next_cycle);
+		// champion->next_cycle += tab[(int)env->map[champ_pc]](env, champion, (int)env->map[champ_pc]);
+		ft_printf("Next action in {11}%d{0} loops\n\n", champion->next_cycle);
+	}
+
 }
 
 void	ft_foreach_champ(t_vm *env)
