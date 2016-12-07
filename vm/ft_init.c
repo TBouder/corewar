@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 17:48:28 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/06 19:30:46 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/07 20:38:06 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void		ft_init_champions(t_vm *env)
 		env->champions[i].prog_size = 0;
 		env->champions[i].content = NULL;
 		env->champions[i].starting_pos = 0;
-		env->champions[i].champ_id = i;
+		env->champions[i].champ_id = i + 1;
 		/*REG_NUMBER registres qui font chacun une taille de REG_SIZE octets*/
 		reg_nb = 0;
 		while (reg_nb <= REG_NUMBER)
