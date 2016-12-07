@@ -6,31 +6,51 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 15:58:23 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/06 18:19:07 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/07 12:26:33 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
 /******************************************************************************/
-void			ft_init_corewar_func(int (*tab[17])(t_vm *env, t_champions *champ))
+void			ft_init_corewar_func(int (*tab[17])(t_vm *env, t_champions *champ, int op))
 {
 	tab[0] = NULL;
+	//LIVE + AFF
+	//LD + LDI
+	//LLD + LLDI
+	//ST + STI
+	//ZJMP
+
 	tab[1] = &ft_corewar_live;
-	tab[2] = &ft_corewar_ld;
+	// tab[2] = &ft_corewar_ld;
+	tab[2] = &ft_corewar_ld_ldi;
 	tab[3] = &ft_corewar_st;
-	tab[4] = &ft_corewar_add;
-	tab[5] = &ft_corewar_sub;
-	tab[6] = &ft_corewar_and;
-	tab[7] = &ft_corewar_or;
-	tab[8] = &ft_corewar_xor;
+
+	// tab[4] = &ft_corewar_add;
+	// tab[5] = &ft_corewar_sub;
+	tab[4] = &ft_corewar_add_sub;
+	tab[5] = &ft_corewar_add_sub;
+
+	// tab[6] = &ft_corewar_and;
+	// tab[7] = &ft_corewar_or;
+	// tab[8] = &ft_corewar_xor;
+	tab[6] = &ft_corewar_and_or_xor;
+	tab[7] = &ft_corewar_and_or_xor;
+	tab[8] = &ft_corewar_and_or_xor;
+
 	tab[9] = &ft_corewar_zjmp;
-	tab[10] = &ft_corewar_ldi;
+
+	// tab[10] = &ft_corewar_ldi;
+	tab[10] = &ft_corewar_ld_ldi;
+
 	tab[11] = &ft_corewar_sti;
-	tab[12] = &ft_corewar_fork;
+	// tab[12] = &ft_corewar_fork;
+	tab[12] = &ft_corewar_forks;
 	tab[13] = &ft_corewar_lld;
 	tab[14] = &ft_corewar_lldi;
-	tab[15] = &ft_corewar_lfork;
+	// tab[15] = &ft_corewar_lfork;
+	tab[15] = &ft_corewar_forks;
 	tab[16] = &ft_corewar_aff;
 }
 /******************************************************************************/
@@ -101,7 +121,7 @@ void	ft_exec_instruct(t_vm *env, t_champions *champion)
 		ZJMP ->	09		0003
 	*/
 	if (champ_pc < (int)champion->prog_size)
-		champion->next_cycle += tab[(int)env->map[champ_pc]](env, champion);
+		champion->next_cycle += tab[(int)env->map[champ_pc]](env, champion, (int)env->map[champ_pc]);
 
 	ft_printf("Next action in {11}%d{0} loops\n", champion->next_cycle);
 }

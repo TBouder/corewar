@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/06 20:14:49 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/07 12:26:22 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,21 +93,32 @@ int		ft_byte_to_str(char *str, int len);
 // int		ft_byte_to_str(unsigned char c, int len);
 
 
-int				ft_corewar_live(t_vm *env, t_champions *champ);
-int				ft_corewar_ld(t_vm *env, t_champions *champ);
-int				ft_corewar_st(t_vm *env, t_champions *champ);
-int				ft_corewar_add(t_vm *env, t_champions *champ);
-int				ft_corewar_sub(t_vm *env, t_champions *champ);
-int				ft_corewar_and(t_vm *env, t_champions *champ);
-int				ft_corewar_or(t_vm *env, t_champions *champ);
-int				ft_corewar_xor(t_vm *env, t_champions *champ);
-int				ft_corewar_zjmp(t_vm *env, t_champions *champ);
-int				ft_corewar_ldi(t_vm *env, t_champions *champ);
-int				ft_corewar_sti(t_vm *env, t_champions *champ);
-int				ft_corewar_fork(t_vm *env, t_champions *champ);
-int				ft_corewar_lld(t_vm *env, t_champions *champ);
-int				ft_corewar_lldi(t_vm *env, t_champions *champ);
-int				ft_corewar_lfork(t_vm *env, t_champions *champ);
-int				ft_corewar_aff(t_vm *env, t_champions *champ);
+int				ft_corewar_live(t_vm *env, t_champions *champ, int op);
+int				ft_corewar_st(t_vm *env, t_champions *champ, int op);
+
+int				ft_corewar_add_sub(t_vm *env, t_champions *champ, int op);
+// int			ft_corewar_add(t_vm *env, t_champions *champ, int op);
+// int			ft_corewar_sub(t_vm *env, t_champions *champ, int op);
+
+int				ft_corewar_and_or_xor(t_vm *env, t_champions *champ, int op);
+// int			ft_corewar_and(t_vm *env, t_champions *champ, int op);
+// int			ft_corewar_or(t_vm *env, t_champions *champ, int op);
+// int			ft_corewar_xor(t_vm *env, t_champions *champ, int op);
+
+int				ft_corewar_forks(t_vm *env, t_champions *champ, int op);
+// int			ft_corewar_fork(t_vm *env, t_champions *champ, int op);
+// int			ft_corewar_lfork(t_vm *env, t_champions *champ, int op);
+
+int				ft_corewar_zjmp(t_vm *env, t_champions *champ, int op);
+// int			ft_corewar_zjmp(t_vm *env, t_champions *champ, int op);
+
+int				ft_corewar_ld_ldi(t_vm *env, t_champions *champ, int op);
+// int			ft_corewar_ld(t_vm *env, t_champions *champ, int op);
+// int			ft_corewar_ldi(t_vm *env, t_champions *champ, int op);
+
+int				ft_corewar_sti(t_vm *env, t_champions *champ, int op);
+int				ft_corewar_lld(t_vm *env, t_champions *champ, int op);
+int				ft_corewar_lldi(t_vm *env, t_champions *champ, int op);
+int				ft_corewar_aff(t_vm *env, t_champions *champ, int op);
 
 #endif
