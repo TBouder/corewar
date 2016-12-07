@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 17:48:28 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/05 16:37:17 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/06 19:30:46 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ static void		ft_init_champions(t_vm *env)
 		reg_nb = 0;
 		while (reg_nb <= REG_NUMBER)
 		{
-			env->champions[i].reg[reg_nb] = (char)malloc(REG_SIZE);
-			env->champions[i].reg[reg_nb] = '0';
+			// env->champions[i].reg[reg_nb] = (char)malloc(REG_SIZE);
+			env->champions[i].reg[reg_nb] = 0;
 			reg_nb++;
 		}
-		env->champions[i].reg[1] = i + '0';
+		env->champions[i].reg[1] = i + 1;
 		/*Un PC est un registre spécial, qui contient juste l’adresse, dans la mémoire de la machine virtuelle, de la prochaine instruction à décoder et exécuter*/
 		env->champions[i].pc = 0;
 		env->champions[i].pc_void = 0;
