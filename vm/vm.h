@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
+/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/07 15:38:37 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/07 17:15:22 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,10 @@ void			ft_extract_champion(t_vm *env);
 /*
 ** ft_func_part1
 */
-int		*ft_send_args(char *bin);
-int		*ft_get_size(t_vm *env, t_champions *champ, int is_not_live);
-int		ft_count_to_next(int *nbr, int op);
-int		ft_byte_to_str(char *str, int len);
+int				*ft_send_args(char *bin);
+int				*ft_get_size(t_vm *env, t_champions *champ, int is_not_live);
+int				ft_count_to_next(int *nbr, int op);
+int				ft_byte_to_str(char *str, int len);
 
 int				ft_corewar_live(t_vm *env, t_champions *champ, int op);
 int				ft_corewar_aff(t_vm *env, t_champions *champ, int op);
