@@ -3,21 +3,21 @@
 
 ; ; TEST DE LD DIRECT ET INDIRECT
 ; ################################
-; ld %68, r2			#Met %68 dans r2 -> D
-; ld 11, r7			#Met 11 dans r7 -> 0
-; aff r2				#Affiche r2 -> 'D'
-; aff r7				#Affiche r7 -> ''
-; add r2, r7, r3		#r3 = r2 - r7 ->
-; aff r3				#Affiche r3
+ld %68, r2			#Met %68 dans r2 -> D
+ld 11, r7			#Met 11 dans r7 -> 0
+aff r2				#Affiche r2 -> 'D'
+aff r7				#Affiche r7 -> ''
+add r2, r7, r3		#r3 = r2 - r7 ->
+aff r3				#Affiche r3
 
 ; ; TEST DE LLD DIRECT ET INDIRECT
 ; ################################
-lld %580, r2			#Met %580 dans r2
-lld 523, r7			#Met 523 dans r7
-aff r2				#Affiche r2
-aff r7				#Affiche r7
-sub r2, r7, r3		#r2 = r7 + r3
-aff r3				#Affiche r3
+; lld %68, r2			#Met %68 dans r2 -> D
+; lld 11, r7			#Met 11 dans r7
+; aff r2				#Affiche r2
+; aff r7				#Affiche r7
+; sub r2, r7, r3		#r2 = r7 + r3
+; aff r3				#Affiche r3
 
 ; ; TEST DE ST REG
 ; ################################
