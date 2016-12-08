@@ -1,35 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_func_forks.c                                    :+:      :+:    :+:   */
+/*   ft_putendl.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/08 18:38:27 by tbouder          ###   ########.fr       */
+/*   Created: 2015/11/23 15:32:20 by tbouder           #+#    #+#             */
+/*   Updated: 2016/12/08 17:34:03 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vm.h"
+#include "../libft.h"
 
-void	ft_corewar_fork(t_vm *env, t_champions *champ, int *nbr)
+void	OVERLOAD ft_putendl(int nbr)
 {
-	if (0)
-	{
-		env = 0;
-		champ = 0;
-		nbr = 0;
-	}
-	ft_put("{9}----FORK----{0}\n");
+	ft_nbrendl(nbr);
 }
 
-void	ft_corewar_lfork(t_vm *env, t_champions *champ, int *nbr)
+void	OVERLOAD ft_putendl(char c)
 {
-	if (0)
-	{
-		env = 0;
-		champ = 0;
-		nbr = 0;
-	}
-	ft_put("{9}----LFORK----{0}\n");
+	ft_putcendl(c);
+}
+
+void	OVERLOAD ft_putendl(const char *format, ...)
+{
+	ft_put(format);
+	ft_put('\n');
 }

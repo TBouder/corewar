@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/08 00:58:16 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/08 18:38:45 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int			ft_set_buffer(int nbr)
 */
 void	ft_corewar_st(t_vm *env, t_champions *champ, int *nbr)
 {
-	ft_printf("{9}----ST----{0}\n");
+	ft_put("{9}----ST----{0}\n");
 	int		buffer;
 	int		arg1;
 	int		arg2;
@@ -39,10 +39,19 @@ void	ft_corewar_st(t_vm *env, t_champions *champ, int *nbr)
 		arg1 = ft_byte_to_str(&env->map[champ->pc + 1], 1);
 		arg2 = ft_byte_to_str(&env->map[champ->pc + 2], buffer);
 
+
 		if (IS_REG(nbr[1]))
+		{
+			ft_put("{10}r%d{0} = {10}r%d{0}\n", arg2, arg1);
+			ft_put("{10}r%d{0} = {10}%d{0}\n", arg2, champ->reg[arg1]);
 			champ->reg[arg2] = champ->reg[arg1];
+		}
 		else if (IS_IND(nbr[1]))
+		{
+			ft_put("env->map[{10}%d{0}] = {10}r%d{0}\n", champ->pc + buffer + (arg2 % IDX_MOD), arg1);
+			ft_put("env->map[{10}%d{0}] = {10}%d{0}\n", champ->pc + buffer + (arg2 % IDX_MOD), champ->reg[arg1]);
 			env->map[champ->pc + buffer + (arg2 % IDX_MOD)] = champ->reg[arg1];
+		}
 	}
 }
 
@@ -51,7 +60,7 @@ void	ft_corewar_st(t_vm *env, t_champions *champ, int *nbr)
 */
 void	ft_corewar_sti(t_vm *env, t_champions *champ, int *nbr)
 {
-	ft_printf("{9}----STI----{0}\n");
+	ft_put("{9}----STI----{0}\n");
 	int		pc;
 	int		buffer;
 	int		arg1;
@@ -76,11 +85,11 @@ void	ft_corewar_sti(t_vm *env, t_champions *champ, int *nbr)
 
 		sum_idx = arg2 + arg3;
 
-		ft_printf("\033[104mMAP[%d + %d] == [%c]{0}\n", pc, (sum_idx % IDX_MOD), env->map[pc + (sum_idx % IDX_MOD)]);
+		ft_put("\033[104mMAP[%d + %d] == [%c]{0}\n", pc, (sum_idx % IDX_MOD), env->map[pc + (sum_idx % IDX_MOD)]);
 
 		env->map[pc + (sum_idx % IDX_MOD)] = champ->reg[arg1];
 
-		ft_printf("\033[104mMAP[%d + %d] == [%c]{0}\n", pc, (sum_idx % IDX_MOD), env->map[pc + (sum_idx % IDX_MOD)]);
+		ft_put("\033[104mMAP[%d + %d] == [%c]{0}\n", pc, (sum_idx % IDX_MOD), env->map[pc + (sum_idx % IDX_MOD)]);
 
 	}
 }

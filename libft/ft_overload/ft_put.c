@@ -1,43 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_put.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/08 16:02:47 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/08 19:15:34 by tbouder          ###   ########.fr       */
+/*   Created: 2016/12/08 16:19:36 by tbouder           #+#    #+#             */
+/*   Updated: 2016/12/08 19:15:33 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../libft.h"
 
-int				ft_undef(const char *str, int i)
+void	OVERLOAD ft_put(int nbr)
 {
-	while (str[i])
-	{
-		if (ft_is_printf(str[i]) == 1 || ft_is_printf(str[i]) == 2)
-			return (1);
-		i++;
-	}
-	return (0);
+	ft_putnbr(nbr);
 }
 
-int				ft_is_printf(char c)
+void	OVERLOAD ft_put(char c)
 {
-	if (c == '%' || c == 'd' || c == 'D' || c == 'i' || c == 'x' || c == 'X'
-		|| c == 's' || c == 'S' || c == 'p' || c == 'c' || c == 'C' || c == 'o'
-		|| c == 'O' || c == 'u' || c == 'U' || c == 'f' || c == 'F' || c == 'b'
-		|| c == 'B')
-		return (1);
-	if (c == '.' || ft_isnumber(c) || c == '#' || c == '-' || c == '+'
-		|| c == ' ' || c == 'l' || c == 'h' || c == 'j' || c == 'z' || c == '!'
-		|| c == '*')
-		return (0);
-	return (2);
+	ft_putchar(c);
 }
 
-int				ft_printf(const char *format, ...)
+int		OVERLOAD ft_put(const char *format, ...)
 {
 	va_list		pa;
 	int			i;

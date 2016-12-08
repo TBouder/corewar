@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 14:16:55 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/07 21:07:14 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/08 18:38:55 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int		*ft_get_size(t_vm *env, t_champions *champ, int is_not_live)
 	if (is_not_live)
 		champ->pc += 1;
 	int tmp = ft_byte_to_str(&env->map[champ->pc], 1);
-	// ft_printf("INT {10}%ld{0}\n", tmp);
+	// ft_put("INT {10}%ld{0}\n", tmp);
 	char *tmp2 = ft_itoa_base(tmp, 2);
 	// ft_printf("BIN {10}%s{0}\n", tmp2);
 
@@ -118,8 +118,8 @@ void		ft_print_arg_count(int *nbr, int count, int pc)
 {
 	if (0)
 	{
-		ft_printf("ARG N_1 -> {13}%d{0} || ARG N_2 -> {13}%d{0} || ARG N_3 -> {13}%d{0}\n",
+		ft_put("ARG N_1 -> {13}%d{0} || ARG N_2 -> {13}%d{0} || ARG N_3 -> {13}%d{0}\n",
 		nbr[0], nbr[1], nbr[2]);
-		ft_printf("COUNT -> {13}%d{0} || PC -> {13}%d{0}\n", count, pc);
+		ft_put("COUNT -> {13}%d{0} || PC -> {13}%d{0}\n", count, pc);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 13:11:54 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/10 11:50:30 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/08 17:32:11 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 #include "../libft.h"
 
-void ft_btreedel(t_btree *tree)
+void	ft_btreedel(t_btree *tree)
 {
 	if (tree)
 	{

@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/08 15:59:36 by tbouder           #+#    #+#             */
-/*   Updated: 2016/08/23 00:22:43 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/08 19:15:45 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct		s_flags
 }					t_flags;
 
 int					ft_printf(const char *restrict format, ...);
+int					ft_undef(const char *str, int i);
 int					ft_printf_conv(char *str, va_list *pa, int *r_value,
 						int index);
 int					ft_is_printf(char c);
