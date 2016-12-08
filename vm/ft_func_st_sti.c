@@ -6,13 +6,13 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/07 23:43:11 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/08 00:58:16 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-int			ft_set_buffer(int nbr)
+static int			ft_set_buffer(int nbr)
 {
 	if (IS_REG(nbr))
 		return (1);
@@ -30,21 +30,19 @@ void	ft_corewar_st(t_vm *env, t_champions *champ, int *nbr)
 {
 	ft_printf("{9}----ST----{0}\n");
 	int		buffer;
-	int		arg_reg;
-	int		arg_reg_ind;
+	int		arg1;
+	int		arg2;
 
 	if (IS_REG(nbr[0]) && (IS_REG(nbr[1]) || IS_IND(nbr[1])))
 	{
-		//Permet d'avancer jusqu'a la fin du premier argument
-		buffer = IS_IND(nbr[1]) ? 2 : 1;
-		//Recupere le premier argument (Reg)
-		arg_reg = ft_byte_to_str(&env->map[champ->pc + 1], 1);
-		//Recupere le second argument (Reg ou Indir)
-		arg_reg_ind = ft_byte_to_str(&env->map[champ->pc + 2], buffer);
+		buffer = ft_set_buffer(nbr[1]);
+		arg1 = ft_byte_to_str(&env->map[champ->pc + 1], 1);
+		arg2 = ft_byte_to_str(&env->map[champ->pc + 2], buffer);
+
 		if (IS_REG(nbr[1]))
-			champ->reg[arg_reg_ind] = champ->reg[arg_reg];
+			champ->reg[arg2] = champ->reg[arg1];
 		else if (IS_IND(nbr[1]))
-			env->map[champ->pc + buffer + (arg_reg_ind % IDX_MOD)] = champ->reg[arg_reg];
+			env->map[champ->pc + buffer + (arg2 % IDX_MOD)] = champ->reg[arg1];
 	}
 }
 

@@ -6,57 +6,117 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/07 23:42:56 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/08 02:23:43 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
+int			ft_set_buffer(int nbr)
+{
+	if (IS_REG(nbr))
+		return (1);
+	if (IS_DIR(nbr))
+		return (4);
+	if (IS_IND(nbr))
+		return (2);
+	return (0);
+}
+
+/*
+**FONCTIONNEL MAIS WHY (Rapport au corewar de gens)
+*/
 void	ft_corewar_lld(t_vm *env, t_champions *champ, int *nbr)
 {
 	ft_printf("{9}----LLD----{0}\n");
 	int		buffer;
-	int		arg_dir_ind;
-	int		arg_reg;
+	int		arg1;
+	int		arg2;
 
-	if ((nbr[0] == 11 || nbr[0] == 10) && nbr[1] == 1)
+	if ((IS_IND(nbr[0]) || IS_DIR(nbr[0])) && IS_REG(nbr[1]))
 	{
-		buffer = nbr[0] == 11 ? 2 : 4; //Permet d'avancer jusqu'a la fin du premier argument
-		arg_dir_ind = ft_byte_to_str(&env->map[champ->pc + 1], buffer); //Recupere le premier argument (Dir ou Indir)
-		arg_reg = ft_byte_to_str(&env->map[champ->pc + buffer + 1], 1); //Recupere le second argument (Reg)
-		if (nbr[0] == 10)
-			champ->reg[arg_reg] += arg_dir_ind; //Si direct
-		else if (nbr[0] == 11)
-			champ->reg[arg_reg] += env->map[champ->pc + buffer + arg_dir_ind]; //Si indirect
-		champ->carry = champ->reg[arg_reg] == 0 ? 1 : 0;
+		buffer = ft_set_buffer(nbr[0]);
+		arg1 = ft_byte_to_str(&env->map[champ->pc + 1], buffer);
+
+		arg2 = ft_byte_to_str(&env->map[champ->pc + buffer + 1], 1);
+
+		ft_printf("{10}r%d{0} = [{10}%c{0}] ([{10}0x%x{0}])\n", arg2, champ->reg[arg2], champ->reg[arg2]);
+		if (IS_DIR(nbr[0]))
+		{
+			champ->reg[arg2] += arg1;
+			ft_printf("{10}r%d{0} = [{10}%c{0}] ([{10}0x%x{0}])\n", arg2, arg1, arg1);
+		}
+		else if (IS_IND(nbr[0]))
+		{
+			champ->reg[arg2] += env->map[champ->pc + buffer + arg1];
+			ft_printf("{10}r%d{0} = [{10}%c{0}] ([{10}0x%x{0}])\n", arg2, env->map[champ->pc + buffer + arg1], env->map[champ->pc + buffer + arg1]);
+		}
+
+		champ->carry = champ->reg[arg2] == 0 ? 1 : 0;
 	}
 }
+
+/*
+** Devrait etre le fonctionnement correct en avancant dans le pc en meme temps
+*/
+/*
+void	ft_corewar_lld(t_vm *env, t_champions *champ, int *nbr)
+{
+ft_printf("{9}----LLD----{0}\n");
+int		pc;
+int		buffer;
+int		arg1;
+int		arg2;
+
+pc = champ->pc + 1;
+if ((IS_IND(nbr[0]) || IS_DIR(nbr[0])) && IS_REG(nbr[1]))
+{
+	buffer = ft_set_buffer(nbr[0]);
+	arg1 = ft_byte_to_str(&env->map[pc], buffer);
+	pc += buffer;
+
+	arg2 = ft_byte_to_str(&env->map[pc], 1);
+	pc++;
+
+	if (IS_DIR(nbr[0]))
+		champ->reg[arg2] = arg1;
+	else if (IS_IND(nbr[0]))
+		champ->reg[arg2] = env->map[ + arg1];
+
+	champ->carry = champ->reg[arg2] == 0 ? 1 : 0;
+}
+}
+*/
+
 
 void	ft_corewar_ld(t_vm *env, t_champions *champ, int *nbr)
 {
 	ft_printf("{9}----LD----{0}\n");
 	int		buffer;
-	int		arg_dir_ind;
-	int		arg_reg;
+	int		arg1;
+	int		arg2;
 
-	if ((nbr[0] == 11 || nbr[0] == 10) && nbr[1] == 1)
+	if ((IS_IND(nbr[0]) || IS_DIR(nbr[0])) && IS_REG(nbr[1]))
 	{
-		buffer = nbr[0] == 11 ? 2 : 4; //Permet d'avancer jusqu'a la fin du premier argument
-		arg_dir_ind = ft_byte_to_str(&env->map[champ->pc + 1], buffer); //Recupere le premier argument (Dir ou Indir)
-		arg_reg = ft_byte_to_str(&env->map[champ->pc + buffer + 1], 1); //Recupere le second argument (Reg)
+		buffer = ft_set_buffer(nbr[0]);
+		arg1 = ft_byte_to_str(&env->map[champ->pc + 1], buffer);
+		arg2 = ft_byte_to_str(&env->map[champ->pc + buffer + 1], 1);
 
-		if (nbr[0] == 10)
-			champ->reg[arg_reg] = arg_dir_ind % IDX_MOD;
-		else if (nbr[0] == 11)
+
+		ft_printf("{10}r%d{0} = [{10}%c{0}] ([{10}0x%x{0}])\n", arg2, champ->reg[arg2], champ->reg[arg2]);
+
+		if (IS_DIR(nbr[0]))
 		{
-			ft_printf("\033[104mREG [%d] => POS [%d] -> [%c]{0}\n", arg_reg, champ->pc + buffer + (arg_dir_ind % IDX_MOD), champ->reg[arg_reg]);
-
-			champ->reg[arg_reg] = env->map[champ->pc + buffer + (arg_dir_ind % IDX_MOD)];
-
-			ft_printf("\033[104mREG [%d] => POS [%d] -> [%c]{0}\n", arg_reg, champ->pc + buffer + (arg_dir_ind % IDX_MOD), champ->reg[arg_reg]);
+			champ->reg[arg2] = arg1 % IDX_MOD;
+			ft_printf("{10}r%d{0} = [{10}%c{0}] ([{10}0x%x{0}])\n", arg2, arg1 % IDX_MOD, arg1 % IDX_MOD);
+		}
+		else if (IS_IND(nbr[0]))
+		{
+			champ->reg[arg2] = env->map[champ->pc + buffer + (arg1 % IDX_MOD)];
+			ft_printf("{10}r%d{0} = [{10}%c{0}] ([{10}0x%x{0}])\n", arg2, env->map[champ->pc + buffer + (arg1 % IDX_MOD)], env->map[champ->pc + buffer + (arg1 % IDX_MOD)]);
 		}
 			// OR ???
-			// champ->reg[arg_reg] += env->map[champ->pc + ((buffer + arg_dir_ind) % IDX_MOD)];
-		champ->carry = champ->reg[arg_reg] == 0 ? 1 : 0;
+			// champ->reg[arg2] += env->map[champ->pc + ((buffer + arg1) % IDX_MOD)];
+		champ->carry = champ->reg[arg2] == 0 ? 1 : 0;
 	}
 }
