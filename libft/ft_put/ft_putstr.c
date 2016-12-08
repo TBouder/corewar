@@ -1,35 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_func_forks.c                                    :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/08 18:38:27 by tbouder          ###   ########.fr       */
+/*   Created: 2015/11/23 15:34:40 by tbouder           #+#    #+#             */
+/*   Updated: 2016/12/08 18:29:29 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vm.h"
+/*
+** The ft_putstr() function prints the string str to STDIN.
+*/
 
-void	ft_corewar_fork(t_vm *env, t_champions *champ, int *nbr)
-{
-	if (0)
-	{
-		env = 0;
-		champ = 0;
-		nbr = 0;
-	}
-	ft_put("{9}----FORK----{0}\n");
-}
+#include "../libft.h"
 
-void	ft_corewar_lfork(t_vm *env, t_champions *champ, int *nbr)
+void		ft_putstr(char const *str)
 {
-	if (0)
-	{
-		env = 0;
-		champ = 0;
-		nbr = 0;
-	}
-	ft_put("{9}----LFORK----{0}\n");
+	if (str)
+		write(1, str, ft_strlen(str));
 }

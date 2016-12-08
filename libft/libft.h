@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/02 15:35:42 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/08 19:14:58 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,13 @@
 # include "get_next_line/get_next_line.h"
 # include "ft_printf/ft_printf.h"
 
-# define PI		3.141592653589793
-# define EQU	ft_strequ
-# define DIFF	!ft_strequ
-# define CMP	ft_strcmp
-# define FALSE	0
-# define TRUE	1
+# define OVERLOAD	__attribute__((overloadable))
+# define PI			3.141592653589793
+# define EQU		ft_strequ
+# define DIFF		!ft_strequ
+# define CMP		ft_strcmp
+# define FALSE		0
+# define TRUE		1
 
 typedef struct		s_list
 {
@@ -164,14 +165,15 @@ int					*ft_nbrnew(size_t size);
 int					ft_nbrcmp(int nb1, int nb2);
 
 /*
-** Prints
+** Put
 */
 
 void				ft_putchar(char c);
 void				ft_putchar_fd(char c, int fd);
+void				ft_putcendl(char c);
 void				ft_putstr(char const *s);
 void				ft_putstr_fd(char const *s, int fd);
-void				ft_putendl(char const *s);
+void				ft_put_endl(char const *s);
 void				ft_putendl_fd(char const *s, int fd);
 void				ft_putnbr(int n);
 void				ft_putnbr_base(long long nb, int base, int maj);
@@ -240,5 +242,18 @@ void				ft_btreesearch(t_btree *node, char *content, int *ret);
 */
 int					ft_extract_options(char **av, t_options *options);
 
+
+void				OVERLOAD ft_put(int nbr);
+void				OVERLOAD ft_put(char c);
+// void				OVERLOAD ft_put(const char *format, ...);
+int					OVERLOAD ft_put(const char *format, ...);
+
+void				OVERLOAD ft_put_fd(int nbr, int fd);
+void				OVERLOAD ft_put_fd(char c, int fd);
+void				OVERLOAD ft_put_fd(char *str, int fd);
+
+void				OVERLOAD ft_putendl(int nbr);
+void				OVERLOAD ft_putendl(char c);
+void				OVERLOAD ft_putendl(const char *format, ...);
 
 #endif

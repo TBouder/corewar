@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/14 16:11:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/22 12:03:22 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/08 17:36:05 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,6 @@ void			ft_flag_star(va_list pa, t_flags *flag, int index)
 	}
 	else if (flag->spaces <= 0)
 		flag->spaces = flag->minus == 1 ? -value : value;
-
 	flag->star -= 1;
 }
 

@@ -6,7 +6,7 @@
 #    By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/10/05 20:24:05 by tbouder           #+#    #+#              #
-#    Updated: 2016/11/18 17:58:20 by tbouder          ###   ########.fr        #
+#    Updated: 2016/12/08 17:24:52 by tbouder          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,14 +28,15 @@ FT_LEN		= 	$(wildcard ft_len/*.c)
 FT_LST		= 	$(wildcard ft_lst/*.c)
 FT_MEM		= 	$(wildcard ft_mem/*.c)
 FT_NB		= 	$(wildcard ft_nb/*.c)
-FT_PRINT	= 	$(wildcard ft_print/*.c)
+FT_PUT		= 	$(wildcard ft_put/*.c)
 FT_STR		= 	$(wildcard ft_str/*.c)
 FT_DBSTR	= 	$(wildcard ft_dbstr/*.c)
 FT_MATH		= 	$(wildcard ft_math/*.c)
 FT_HASH		= 	$(wildcard ft_hash/*.c)
 FT_BTREE	= 	$(wildcard ft_btree/*.c)
-LIBFT		=	$(FT_IS) $(FT_LEN) $(FT_LST) $(FT_MEM) $(FT_NB) $(FT_PRINT) \
-				$(FT_STR) $(FT_DBSTR) $(FT_MATH) $(FT_HASH) $(FT_BTREE)
+FT_OVER		= 	$(wildcard ft_overload/*.c)
+LIBFT		=	$(FT_IS) $(FT_LEN) $(FT_LST) $(FT_MEM) $(FT_NB) $(FT_PUT) \
+				$(FT_STR) $(FT_DBSTR) $(FT_MATH) $(FT_HASH) $(FT_BTREE) $(FT_OVER)
 
 ################################################################################
 #	GET_NEXT_LINE
