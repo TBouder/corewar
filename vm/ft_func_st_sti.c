@@ -6,14 +6,14 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/09 11:54:40 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/09 12:26:27 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
 #define ST_IND_1		pc + (arg2 % IDX_MOD) //Depart de l'instruction suivant
-#define ST_IND_2		pc - 1 + (arg2 % IDX_MOD) //PC sur le dernier argument
+#define ST_IND_2		pc - buffer + (arg2 % IDX_MOD) //PC sur le dernier argument
 #define ST_IND_3		(arg2 % IDX_MOD) //Position sans prendre en compte le PC
 #define ST_IND_4		champ->pc + 1 + (arg2 % IDX_MOD) //Depart du premier arg
 #define ST_IND_5		champ->pc - 1 + (arg2 % IDX_MOD) //Depart de l'instruction courante
@@ -112,8 +112,6 @@ void	ft_corewar_sti(t_vm *env, t_champions *champ, int *nbr)
 		if (IS_REG(nbr[2]))
 			arg3 = champ->reg[arg3];
 		sum_idx = arg2 + arg3;
-
-		ft_put("0x%x + 0x%x\n", arg2, arg3);
 
 		ft_put("\033[104mMAP[%d + %d] == [%c]{0}\n", champ->pc - 1, (sum_idx % IDX_MOD), env->map[STI_IND_5]);
 		env->map[STI_IND_5] = champ->reg[arg1];
