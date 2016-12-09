@@ -6,66 +6,98 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/07 15:51:24 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/08 19:48:12 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-static void	ft_lld_helper(t_vm *env, t_champions *champ, int *nbr)
-{
-	int		buffer;
-	int		arg_dir_ind;
-	int		arg_reg;
+#define LLD_IND_1		pc + 1 + arg1 //PC sur l'instruction suivante
+#define LLD_IND_2		pc + arg1 //PC sur le dernier argument
+#define LLD_IND_3		arg1 //Position sans prendre en compte le PC
+#define LLD_IND_4		champ->pc + arg1 //Depart du premier arg
+#define LLD_IND_5		champ->pc - 1 + arg1 //Depart de l'instruction courante
 
-	if ((nbr[0] == 11 || nbr[0] == 10) && nbr[1] == 1)
+#define LD_IND_1		pc + 1 + (arg1 % IDX_MOD) //PC sur l'instruction suivante
+#define LD_IND_2		pc + (arg1 % IDX_MOD) //PC sur le dernier argument
+#define LD_IND_3		(arg1 % IDX_MOD) //Position sans prendre en compte le PC
+#define LD_IND_4		champ->pc + (arg1 % IDX_MOD) //Depart du premier arg
+#define LD_IND_5		champ->pc - 1 + (arg1 % IDX_MOD) //Depart de l'instruction courante
+
+int			ft_set_buffer(int nbr)
+{
+	if (IS_REG(nbr))
+		return (1);
+	if (IS_DIR(nbr))
+		return (4);
+	if (IS_IND(nbr))
+		return (2);
+	return (0);
+}
+
+void		ft_corewar_lld(t_vm *env, t_champions *champ, int *nbr)
+{
+	ft_put("{9}----LLD----{0}\n");
+	int		pc;
+	int		buffer;
+	int		arg1;
+	int		arg2;
+
+	pc = champ->pc + 1;
+	if ((IS_IND(nbr[0]) || IS_DIR(nbr[0])) && IS_REG(nbr[1]))
 	{
-		buffer = nbr[0] == 11 ? 2 : 4; //Permet d'avancer jusqu'a la fin du premier argument
-		arg_dir_ind = ft_byte_to_str(&env->map[champ->pc + 1], buffer); //Recupere le premier argument (Dir ou Indir)
-		arg_reg = ft_byte_to_str(&env->map[champ->pc + buffer + 1], 1); //Recupere le second argument (Reg)
-		if (nbr[0] == 10)
-			champ->reg[arg_reg] += arg_dir_ind; //Si direct
-		else if (nbr[0] == 11)
-			champ->reg[arg_reg] += env->map[champ->pc + buffer + arg_dir_ind]; //Si indirect
-		champ->carry = champ->reg[arg_reg] == 0 ? 1 : 0;
+		buffer = ft_set_buffer(nbr[0]);
+		arg1 = ft_byte_to_str(&env->map[pc], buffer);
+		pc += buffer;
+		arg2 = ft_byte_to_str(&env->map[pc], 1);
+
+		ft_put("{10}r%d{0} = [{10}%c{0}] ([{10}0x%x{0}])\n", arg2, champ->reg[arg2], champ->reg[arg2]);
+		if (IS_DIR(nbr[0]))
+		{
+			champ->reg[arg2] = arg1;
+			ft_put("{10}r%d{0} = [{10}%c{0}] ([{10}0x%x{0}])\n", arg2, arg1, arg1);
+		}
+		else if (IS_IND(nbr[0]))
+		{
+			champ->reg[arg2] = env->map[LLD_IND_1];
+			ft_put("{10}r%d{0} = env->map[{10}%d{0}]\n", arg2, LLD_IND_1);
+			ft_put("{10}r%d{0} = [{10}%c{0}] ([{10}0x%x{0}])\n",
+			arg2, env->map[LLD_IND_1], env->map[LLD_IND_1]);
+		}
+		champ->carry = champ->reg[arg2] == 0 ? 1 : 0;
 	}
 }
 
-static void	ft_ld_helper(t_vm *env, t_champions *champ, int *nbr)
+void		ft_corewar_ld(t_vm *env, t_champions *champ, int *nbr)
 {
+	ft_put("{9}----LD----{0}\n");
+	int		pc;
 	int		buffer;
-	int		arg_dir_ind;
-	int		arg_reg;
+	int		arg1;
+	int		arg2;
 
-	if ((nbr[0] == 11 || nbr[0] == 10) && nbr[1] == 1)
+	pc = champ->pc + 1;
+	if ((IS_IND(nbr[0]) || IS_DIR(nbr[0])) && IS_REG(nbr[1]))
 	{
-		buffer = nbr[0] == 11 ? 2 : 4; //Permet d'avancer jusqu'a la fin du premier argument
-		arg_dir_ind = ft_byte_to_str(&env->map[champ->pc + 1], buffer); //Recupere le premier argument (Dir ou Indir)
-		arg_reg = ft_byte_to_str(&env->map[champ->pc + buffer + 1], 1); //Recupere le second argument (Reg)
-		if (nbr[0] == 10)
-			champ->reg[arg_reg] += arg_dir_ind % IDX_MOD; //Si direct
-		else if (nbr[0] == 11)
-			champ->reg[arg_reg] += env->map[champ->pc + (buffer + arg_dir_ind) % IDX_MOD]; //Si indirect
-		champ->carry = champ->reg[arg_reg] == 0 ? 1 : 0;
+		buffer = ft_set_buffer(nbr[0]);
+		arg1 = ft_byte_to_str(&env->map[pc], buffer);
+		pc += buffer;
+		arg2 = ft_byte_to_str(&env->map[pc], 1);
+
+		ft_put("{10}r%d{0} = [{10}%c{0}] ([{10}0x%x{0}])\n", arg2, champ->reg[arg2], champ->reg[arg2]);
+		if (IS_DIR(nbr[0]))
+		{
+			champ->reg[arg2] = arg1 % IDX_MOD;
+			ft_put("{10}r%d{0} = [{10}%c{0}] ([{10}0x%x{0}])\n", arg2, arg1 % IDX_MOD, arg1 % IDX_MOD);
+		}
+		else if (IS_IND(nbr[0]))
+		{
+			champ->reg[arg2] = env->map[LD_IND_1];
+			ft_put("{10}r%d{0} = env->map[{10}%d{0}]\n", arg2, LD_IND_1);
+			ft_put("{10}r%d{0} = [{10}%c{0}] ([{10}0x%x{0}])\n", arg2, env->map[LD_IND_1], env->map[LD_IND_1]);
+		}
+			// OR ???
+			// champ->reg[arg2] += env->map[champ->pc + ((buffer + arg1) % IDX_MOD)];
+		champ->carry = champ->reg[arg2] == 0 ? 1 : 0;
 	}
-}
-
-int			ft_corewar_ld_lld(t_vm *env, t_champions *champ, int op)
-{
-	op == 2 ? ft_printf("{9}----ld----{0}\n") : ft_printf("{9}----lld----{0}\n");
-
-	int		*nbr;
-	int		count;
-
-	nbr = ft_get_size(env, champ, 1);
-	count = ft_count_to_next(nbr, op);
-	if (op == 2)
-		ft_ld_helper(env, champ, nbr);
-	else
-		ft_lld_helper(env, champ, nbr);
-	champ->pc += count;
-	ft_printf("ARG N_1 -> {13}%d{0} || ARG N_2 -> {13}%d{0} || ARG N_3 -> {13}%d{0}\n",
-	nbr[0], nbr[1], nbr[2]);
-	ft_printf("COUNT -> {13}%d{0} || PC -> {13}%d{0}\n", count, champ->pc);
-	return (op == 2 ? 5 : 25);
 }

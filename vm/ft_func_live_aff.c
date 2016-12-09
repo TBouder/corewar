@@ -1,31 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_func_part2.c                                    :+:      :+:    :+:   */
+/*   ft_func_live_aff.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 14:16:55 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/07 12:15:23 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/08 18:38:42 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-int		ft_corewar_ldi(t_vm *env, t_champions *champ, int op)
+void	ft_corewar_live(t_vm *env, t_champions *champ, int *nbr)
 {
-	op = 0;
-	int		*nbr;
-	int		count;
+	if (0)
+	{
+		env = 0;
+		champ = 0;
+		nbr = 0;
+	}
+	ft_put("{9}----LIVE----{0}\n");
+}
 
-	ft_printf("{9}----ldi----{0}\n");
-	nbr = ft_get_size(env, champ, 1);
-	count = ft_count_to_next(nbr, 10);
-	ft_printf("ARG N_1 -> {13}%d{0}\n", nbr[0]);
-	ft_printf("ARG N_2 -> {13}%d{0}\n", nbr[1]);
-	ft_printf("ARG N_3 -> {13}%d{0}\n", nbr[2]);
-	ft_printf("COUNT -> {13}%d{0}\n", count);
-	champ->pc += count; //(+1 pour l'oct avec le poids ds args, +1 pour passer a l'arg suivant)
-	ft_printf("PC -> {13}%d{0}\n", champ->pc);
-	return (25);
+void	ft_corewar_aff(t_vm *env, t_champions *champ, int *nbr)
+{
+	int		value;
+
+	ft_put("{9}----AFF----{0}\n");
+	if (IS_REG(nbr[0]))
+	{
+		value = ft_byte_to_str(&env->map[champ->pc + 1], 1);
+		ft_put("Champion {14}%d{0} ({14}%s{0}) ask to print {10}r%d{0} : [{10}%c{0}] [{10}0x%x{0}]\n",
+		champ->champ_id, champ->name, value, champ->reg[value] % 256, champ->reg[value] % 256);
+	}
 }

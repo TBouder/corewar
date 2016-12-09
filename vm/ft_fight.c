@@ -6,37 +6,11 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 15:58:23 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/07 15:53:25 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/08 18:38:01 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
-
-/******************************************************************************/
-void			ft_init_corewar_func(int (*tab[17])(t_vm *env, t_champions *champ, int op))
-{
-	tab[0] = NULL;
-	tab[1] = &ft_corewar_live;
-	tab[2] = &ft_corewar_ld_lld;
-	tab[3] = &ft_corewar_st_sti;
-	tab[4] = &ft_corewar_add_sub;
-	tab[5] = &ft_corewar_add_sub;
-	tab[6] = &ft_corewar_and_or_xor;
-	tab[7] = &ft_corewar_and_or_xor;
-	tab[8] = &ft_corewar_and_or_xor;
-	tab[9] = &ft_corewar_zjmp;
-
-	tab[10] = &ft_corewar_ldi_lldi;
-	tab[14] = &ft_corewar_ldi_lldi;
-
-	tab[11] = &ft_corewar_st_sti;
-	tab[12] = &ft_corewar_forks;
-	tab[13] = &ft_corewar_ld_lld;
-
-	tab[15] = &ft_corewar_forks;
-	tab[16] = &ft_corewar_aff;
-}
-/******************************************************************************/
 
 int		ft_one_isalive(t_vm *env)
 {
@@ -79,22 +53,24 @@ int		ft_which_isalive(t_vm *env)
 
 void	ft_print_winner(t_vm *env)
 {
-	ft_printf("Le joueur %d(%s) a gagne\n", env->winner->champ_id, env->winner->name);
+	ft_put("Le joueur %d(%s) a gagne\n", env->winner->champ_id, env->winner->name);
 	exit(1);
 }
 
 void	ft_exec_instruct(t_vm *env, t_champions *champion)
 {
 	int		champ_pc;
-	int		(*tab[17])();
+	// int		(*tab[17])();
 
-	ft_init_corewar_func(tab);
+	// ft_init_corewar_func(tab);
 	champ_pc = champion->pc;
 	champion->next_cycle = env->cycle;
 	if (champ_pc < (int)champion->prog_size)
-		champion->next_cycle += tab[(int)env->map[champ_pc]](env, champion, (int)env->map[champ_pc]);
+	{
+		champion->next_cycle += ft_get_args(env, champion, (int)env->map[champ_pc]);
+		ft_put("Next action in {11}%d{0} loops\n\n", champion->next_cycle);
+	}
 
-	ft_printf("Next action in {11}%d{0} loops\n", champion->next_cycle);
 }
 
 void	ft_foreach_champ(t_vm *env)
