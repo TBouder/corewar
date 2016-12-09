@@ -1,5 +1,26 @@
+# clear && make -C ../asm/ && rm test.cor && ../asm/asm test.s && make && ./corewar test.cor
 .name    "Survivor"
 .comment "Invincible"
+
+
+;TEST DE AND OR XOR IND
+ld %65, r2 #; Met A dans r2
+st r2, 45 #; Stocke du reg vers le second param
+and r2, 40, r3
+or 35, r1, r4
+xor 13, r1, r5
+aff r3
+aff r4
+aff r5
+
+# ;TEST DE AND OR XOR DIR
+# #############################
+# or	%68, r1, r2
+# and %69, r2, r3
+# xor	%69, r1, r4
+# aff r2
+# aff r3
+# aff r4
 
 # ;TEST DE LD DIRECT ET INDIRECT
 ###############################

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_func_st_sti.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
+/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/08 18:38:45 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/09 16:25:01 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,11 @@ void	ft_corewar_st(t_vm *env, t_champions *champ, int *nbr)
 		}
 		else if (IS_IND(nbr[1]))
 		{
-			ft_put("env->map[{10}%d{0}] = {10}r%d{0}\n", champ->pc + buffer + (arg2 % IDX_MOD), arg1);
-			ft_put("env->map[{10}%d{0}] = {10}%d{0}\n", champ->pc + buffer + (arg2 % IDX_MOD), champ->reg[arg1]);
+			ft_put("env->map[{10}%d{0}] = {10}r%d{0}\n",
+				champ->pc + buffer + (arg2 % IDX_MOD), arg1);
+			ft_put("env->map[{10}%d{0}] = {10}%d{0}\n",
+				champ->pc + buffer + (arg2 % IDX_MOD), champ->reg[arg1]);
+			ft_printf("%d, %d, %d, %d\n", champ->pc, buffer, arg2, arg2 % IDX_MOD);
 			env->map[champ->pc + buffer + (arg2 % IDX_MOD)] = champ->reg[arg1];
 		}
 	}
