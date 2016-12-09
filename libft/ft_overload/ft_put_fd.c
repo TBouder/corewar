@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_put_fd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Tbouder <Tbouder@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/23 15:34:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/02/24 12:47:49 by Tbouder          ###   ########.fr       */
+/*   Created: 2016/12/08 16:19:36 by tbouder           #+#    #+#             */
+/*   Updated: 2016/12/08 17:33:56 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-** The ft_putstr() function prints the string str to STDIN.
-*/
-
 #include "../libft.h"
-#include <unistd.h>
 
-void		ft_putstr(char const *str)
+void	OVERLOAD ft_put_fd(int nbr, int fd)
 {
-	if (str)
-		write(1, str, ft_strlen(str));
+	ft_putnbr_fd(nbr, fd);
+}
+
+void	OVERLOAD ft_put_fd(char c, int fd)
+{
+	ft_putchar_fd(c, fd);
+}
+
+void	OVERLOAD ft_put_fd(char *str, int fd)
+{
+	ft_putstr_fd(str, fd);
 }
