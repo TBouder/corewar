@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_func_ld_lld.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
+/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/08 19:48:12 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/09 11:04:12 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 #define LD_IND_4		champ->pc + (arg1 % IDX_MOD) //Depart du premier arg
 #define LD_IND_5		champ->pc - 1 + (arg1 % IDX_MOD) //Depart de l'instruction courante
 
-int			ft_set_buffer(int nbr)
+static int	ft_set_buffer(int nbr)
 {
 	if (IS_REG(nbr))
 		return (1);
