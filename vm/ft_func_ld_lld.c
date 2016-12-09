@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/08 19:48:12 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/09 11:20:52 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,10 @@ void		ft_corewar_lld(t_vm *env, t_champions *champ, int *nbr)
 		}
 		else if (IS_IND(nbr[0]))
 		{
-			champ->reg[arg2] = env->map[LLD_IND_1];
-			ft_put("{10}r%d{0} = env->map[{10}%d{0}]\n", arg2, LLD_IND_1);
+			champ->reg[arg2] = env->map[LLD_IND_5];
+			ft_put("{10}r%d{0} = env->map[{10}%d{0}]\n", arg2, LLD_IND_5);
 			ft_put("{10}r%d{0} = [{10}%c{0}] ([{10}0x%x{0}])\n",
-			arg2, env->map[LLD_IND_1], env->map[LLD_IND_1]);
+			arg2, env->map[LLD_IND_5], env->map[LLD_IND_5]);
 		}
 		champ->carry = champ->reg[arg2] == 0 ? 1 : 0;
 	}
@@ -92,9 +92,9 @@ void		ft_corewar_ld(t_vm *env, t_champions *champ, int *nbr)
 		}
 		else if (IS_IND(nbr[0]))
 		{
-			champ->reg[arg2] = env->map[LD_IND_1];
-			ft_put("{10}r%d{0} = env->map[{10}%d{0}]\n", arg2, LD_IND_1);
-			ft_put("{10}r%d{0} = [{10}%c{0}] ([{10}0x%x{0}])\n", arg2, env->map[LD_IND_1], env->map[LD_IND_1]);
+			champ->reg[arg2] = env->map[LD_IND_5];
+			ft_put("{10}r%d{0} = env->map[{10}%d{0}]\n", arg2, LD_IND_5);
+			ft_put("{10}r%d{0} = [{10}%c{0}] ([{10}0x%x{0}])\n", arg2, env->map[LD_IND_5], env->map[LD_IND_5]);
 		}
 			// OR ???
 			// champ->reg[arg2] += env->map[champ->pc + ((buffer + arg1) % IDX_MOD)];
