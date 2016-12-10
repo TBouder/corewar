@@ -6,31 +6,31 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/10 20:25:16 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/10 21:41:40 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-#define ST_IND_1		pc + (arg2 % IDX_MOD) //Depart de l'instruction suivant
-#define ST_IND_2		pc - buffer + (arg2 % IDX_MOD) //PC sur le dernier argument
-#define ST_IND_3		(arg2 % IDX_MOD) //Position sans prendre en compte le PC
-#define ST_IND_4		champ->pc + 1 + (arg2 % IDX_MOD) //Depart du premier arg
-#define ST_IND_5		champ->pc - 1 + (arg2 % IDX_MOD) //Depart de l'instruction courante
-#define ST_IND_OLD		champ->pc + buffer + (arg2 % IDX_MOD) //Avant ces defines
+#define ST_IND_1		(pc + (arg2 % IDX_MOD)) //Depart de l'instruction suivant
+#define ST_IND_2		(pc - buffer + (arg2 % IDX_MOD)) //PC sur le dernier argument
+#define ST_IND_3		((arg2 % IDX_MOD)) //Position sans prendre en compte le PC
+#define ST_IND_4		(champ->pc + 1 + (arg2 % IDX_MOD)) //Depart du premier arg
+#define ST_IND_5		(champ->pc - 1 + (arg2 % IDX_MOD)) //Depart de l'instruction courante
+#define ST_IND_OLD		(champ->pc + buffer + (arg2 % IDX_MOD)) //Avant ces defines
 
-#define STI_IND_1		pc + (sum_idx % IDX_MOD) //Depart de l'instruction suivant
-#define STI_IND_2		pc - buffer + (sum_idx % IDX_MOD) //PC sur le dernier argument
-#define STI_IND_3		(sum_idx % IDX_MOD) //Position sans prendre en compte le PC
-#define STI_IND_4		champ->pc + 1 + (sum_idx % IDX_MOD) //Depart du premier arg
-#define STI_IND_5		champ->pc - 1 + (sum_idx % IDX_MOD) //Depart de l'instruction courante
-#define STI_IND_OLD		pc + (sum_idx % IDX_MOD) //Avant ces defines
+#define STI_IND_1		(pc + (sum_idx % IDX_MOD)) //Depart de l'instruction suivant
+#define STI_IND_2		(pc - buffer + (sum_idx % IDX_MOD)) //PC sur le dernier argument
+#define STI_IND_3		((sum_idx % IDX_MOD)) //Position sans prendre en compte le PC
+#define STI_IND_4		(champ->pc + 1 + (sum_idx % IDX_MOD)) //Depart du premier arg
+#define STI_IND_5		(champ->pc - 1 + (sum_idx % IDX_MOD)) //Depart de l'instruction courante
+#define STI_IND_OLD		(pc + (sum_idx % IDX_MOD)) //Avant ces defines
 
-#define STI_ARG_1		pc + (arg2 % IDX_MOD) //Depart de l'instruction suivant
-#define STI_ARG_2		pc - buffer + (arg2 % IDX_MOD) //PC sur le dernier argument
-#define STI_ARG_3		(arg2 % IDX_MOD) //Position sans prendre en compte le PC
-#define STI_ARG_4		champ->pc + 1 + (arg2 % IDX_MOD) //Depart du premier arg
-#define STI_ARG_5		champ->pc - 1 + (arg2 % IDX_MOD) //Depart de l'instruction courante
+#define STI_ARG_1		(pc + (arg2 % IDX_MOD)) //Depart de l'instruction suivant
+#define STI_ARG_2		(pc - buffer + (arg2 % IDX_MOD)) //PC sur le dernier argument
+#define STI_ARG_3		((arg2 % IDX_MOD)) //Position sans prendre en compte le PC
+#define STI_ARG_4		(champ->pc + 1 + (arg2 % IDX_MOD)) //Depart du premier arg
+#define STI_ARG_5		(champ->pc - 1 + (arg2 % IDX_MOD)) //Depart de l'instruction courante
 
 
 static int			ft_set_buffer(int nbr)
@@ -74,7 +74,7 @@ void	ft_corewar_st(t_vm *env, t_champions *champ, int *nbr)
 		{
 			ft_put("env->map[{10}%d{0}] = {10}r%d{0}\n", ST_IND_5, arg1);
 			ft_put("env->map[{10}%d{0}] = {10}%d{0}\n", ST_IND_5, champ->reg[arg1]);
-			env->map[ST_IND_5] = champ->reg[arg1];
+			env->map[ST_IND_5 % MEM_SIZE] = champ->reg[arg1];
 		}
 	}
 }
@@ -113,8 +113,8 @@ void	ft_corewar_sti(t_vm *env, t_champions *champ, int *nbr)
 			arg3 = champ->reg[arg3];
 		sum_idx = arg2 + arg3;
 
-		ft_put("\033[104mMAP[%d + %d] == [%c]{0}\n", champ->pc - 1, (sum_idx % IDX_MOD), env->map[STI_IND_5]);
-		env->map[STI_IND_5] = champ->reg[arg1];
-		ft_put("\033[104mMAP[%d + %d] == [%c]{0}\n", champ->pc - 1, (sum_idx % IDX_MOD), env->map[STI_IND_5]);
+		ft_put("\033[104mMAP[%d + %d] == [%c]{0}\n", champ->pc - 1, (sum_idx % IDX_MOD), env->map[STI_IND_5 % MEM_SIZE]);
+		env->map[STI_IND_5 % MEM_SIZE] = champ->reg[arg1];
+		ft_put("\033[104mMAP[%d + %d] == [%c]{0}\n", champ->pc - 1, (sum_idx % IDX_MOD), env->map[STI_IND_5 % MEM_SIZE]);
 	}
 }

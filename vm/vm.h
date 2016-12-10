@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/09 10:29:49 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/10 21:24:04 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,7 @@
 # include "../libft/libft.h"
 # include "op.h"
 # include <errno.h>
-
-#define IS_REG(x) x == 1 ? 1 : 0
-#define IS_DIR(x) x == 10 ? 1 : 0
-#define IS_IND(x) x == 11 ? 1 : 0
-#define IS_DIR_REG(x) x == 11 || x == 1 ? 1 : 0
-#define IS_DIR_IND(x) x == 11 || x == 10 ? 1 : 0
-#define IS_ALL(x) x == 11 || x == 10 || x == 1 ? 1 : 0
-
-typedef		int	bool;
+# include "ft_macro.h"
 
 typedef struct		s_champions
 {
@@ -36,8 +28,6 @@ typedef struct		s_champions
 	unsigned int	starting_pos;		//position de depart dans la map
 	int				champ_id;
 
-
-	// char			reg[REG_NUMBER];	//Los registros
 	int				reg[REG_NUMBER];	//Los registros
 	int				pc;					//el pc
 	void			*pc_void;			//el pc de trump

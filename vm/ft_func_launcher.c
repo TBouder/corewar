@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 23:27:37 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/09 14:23:24 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/10 21:30:44 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,30 @@
 
 static int	ft_ret_cycle(int op)
 {
-	if (op == 16)
+	if (op == AFF)
 		return (2);
-	else if (op == 2 || op == 3)
+	else if (op == LD || op == ST)
 		return (5);
-	else if (op == 6 || op == 7 || op == 8)
+	else if (op == AND || op == OR || op == XOR)
 		return (6);
-	else if (op == 1 || op == 4 || op == 5 || op == 13)
+	else if (op == LIVE || op == ADD || op == SUB || op == LLD)
 		return (10);
-	else if (op == 9)
+	else if (op == ZJMP)
 		return (20);
-	else if (op == 10 || op == 11)
+	else if (op == LDI || op == STI)
 		return (25);
-	else if (op == 14)
+	else if (op == LLDI)
 		return (50);
-	else if (op == 12)
+	else if (op == FORK)
 		return (800);
-	else if (op == 15)
+	else if (op == LFORK)
 		return (1000);
 	return (0);
 }
 
 static int	ft_has_next(int op)
 {
-	if (op == 1 || op == 9 || op == 12 || op == 15)
+	if (op == LIVE || op == ZJMP || op == FORK || op == LFORK)
 		return (0);
 	return (1);
 }
@@ -51,22 +51,22 @@ int			ft_get_args(t_vm *env, t_champions *champ, int op)
 	count = ft_count_to_next(nbr, op);
 	ft_print_arg_count(nbr, count, champ->pc); ////DEBUG
 
-	op == 1 ? ft_corewar_live(env, champ, nbr) : 0;		//LIVE
-	op == 2 ? ft_corewar_ld(env, champ, nbr) : 0;		//LD
-	op == 3 ? ft_corewar_st(env, champ, nbr) : 0;		//ST
-	op == 4 ? ft_corewar_add(env, champ, nbr) : 0;		//ADD
-	op == 5 ? ft_corewar_sub(env, champ, nbr) : 0;		//SUB
-	op == 6 ? ft_corewar_and(env, champ, nbr) : 0;		//AND
-	op == 7 ? ft_corewar_or(env, champ, nbr) : 0;		//OR
-	op == 8 ? ft_corewar_xor(env, champ, nbr) : 0;		//XOR
-	op == 9 ? ft_corewar_zjmp(env, champ, nbr) : 0;		//ZJMP
-	op == 10 ? ft_corewar_ldi(env, champ, nbr) : 0;		//LDI
-	op == 11 ? ft_corewar_sti(env, champ, nbr) : 0;		//STI
-	op == 12 ? ft_corewar_fork(env, champ, nbr) : 0;	//FORK
-	op == 13 ? ft_corewar_lld(env, champ, nbr) : 0;		//LLD
-	op == 14 ? ft_corewar_lldi(env, champ, nbr) : 0;	//LLDI
-	op == 15 ? ft_corewar_fork(env, champ, nbr) : 0;	//LFORK
-	op == 16 ? ft_corewar_aff(env, champ, nbr) : 0;		//AFF
+	op == LIVE ? ft_corewar_live(env, champ, nbr) : 0;
+	op == LD ? ft_corewar_ld(env, champ, nbr) : 0;
+	op == ST ? ft_corewar_st(env, champ, nbr) : 0;
+	op == ADD ? ft_corewar_add(env, champ, nbr) : 0;
+	op == SUB ? ft_corewar_sub(env, champ, nbr) : 0;
+	op == AND ? ft_corewar_and(env, champ, nbr) : 0;
+	op == OR ? ft_corewar_or(env, champ, nbr) : 0;
+	op == XOR ? ft_corewar_xor(env, champ, nbr) : 0;
+	op == ZJMP ? ft_corewar_zjmp(env, champ, nbr) : 0;
+	op == LDI ? ft_corewar_ldi(env, champ, nbr) : 0;
+	op == STI ? ft_corewar_sti(env, champ, nbr) : 0;
+	op == FORK ? ft_corewar_fork(env, champ, nbr) : 0;
+	op == LLD ? ft_corewar_lld(env, champ, nbr) : 0;
+	op == LLDI ? ft_corewar_lldi(env, champ, nbr) : 0;
+	op == LFORK ? ft_corewar_fork(env, champ, nbr) : 0;
+	op == AFF ? ft_corewar_aff(env, champ, nbr) : 0;
 	champ->pc += count;
 
 	return (ft_ret_cycle(op));
