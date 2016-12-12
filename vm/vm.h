@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/09 10:29:49 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/11 17:12:35 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,11 @@ typedef struct		s_vm
 	int				cpt_to_die;
 	int				cycle_check;
 	int				cycle;
+
+	int				arg1;
+	int				arg2;
+	int				arg3;
+	int				buf;
 
 	// int				detla;
 	// int				nbr_live;
