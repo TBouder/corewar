@@ -2,6 +2,7 @@
 .name    "Survivor"
 .comment "Invincible"
 
+
 #LD#############################################################################
 	; ; TEST DE LD DIRECT ET INDIRECT
 	; ################################
@@ -13,11 +14,12 @@
 	; aff r3				#Affiche r3 -> 'H'
 	; ; TEST DE LLD DIRECT ET INDIRECT
 	; ################################
-	; lld %68, r2			#Met %68 dans r2 -> D
-	; lld 11, r7			#Met 11 dans r7 -> 0
-	; aff r2				#Affiche r2 -> 'd'
-	; aff r7				#Affiche r7 -> ''
-	; sub r2, r7, r3		#r2 = r7 - r3 -> 0x5 + 0x44 -> '?'
+	lld %68, r2			#Met %68 dans r2 -> D
+	lld 11, r7			#Met 11 dans r7 -> 0
+	aff r2				#Affiche r2 -> 'd'
+	aff r7				#Affiche r7 -> ''
+	; add r2, r7, r3		#r3 = r2 + r7 -> 0x4 + 0x44 -> 'H'
+	sub r2, r7, r3		#r2 = r7 - r3 -> 0x5 + 0x44 -> '?'
 	; aff r3				#Affiche r3 -> '?'
 
 #ST#############################################################################
