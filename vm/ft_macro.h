@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_macro.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zaz <zaz@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2016/12/10 21:35:12 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/12 20:28:10 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,8 @@
 	# define LLDI 14
 	# define LFORK 15
 	# define AFF 16
+
+	# define M MEM_SIZE
+	# define I IDX_MOD
 
 #endif
