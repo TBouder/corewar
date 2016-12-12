@@ -6,13 +6,13 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 14:16:55 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/12 20:13:23 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/12 21:05:10 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-t_list		*ft_find_live(t_vm *env, int id)
+static t_list	*ft_find_live(t_vm *env, int id)
 {
 	t_list	*list;
 
@@ -26,7 +26,7 @@ t_list		*ft_find_live(t_vm *env, int id)
 	return (NULL);
 }
 
-void	ft_corewar_live(t_vm *env, t_champions *champ, int *nbr)
+void			ft_corewar_live(t_vm *env, t_champions *champ, int *nbr)
 {
 	int				player_alive;
 	t_list			*list;
@@ -45,7 +45,7 @@ void	ft_corewar_live(t_vm *env, t_champions *champ, int *nbr)
 	}
 }
 
-void	ft_corewar_aff(t_vm *env, t_champions *champ, int *nbr)
+void			ft_corewar_aff(t_vm *env, t_champions *champ, int *nbr)
 {
 	int		value;
 
