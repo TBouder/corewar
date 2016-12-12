@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 23:27:37 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/10 21:30:44 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/12 18:50:34 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,13 @@ int			ft_get_args(t_vm *env, t_champions *champ, int op)
 	int		*nbr;
 	int		count;
 
-	nbr = ft_get_size(env, champ, ft_has_next(op)); //Va, entre autre, faire +1 au pc si needed
+	if (op != LIVE)
+		nbr = ft_get_size(env, champ, ft_has_next(op)); //Va, entre autre, faire +1 au pc si needed
+	else
+	{
+		nbr = ft_nbrnew(1);
+		nbr[0] = 10;
+	}
 	count = ft_count_to_next(nbr, op);
 	ft_print_arg_count(nbr, count, champ->pc); ////DEBUG
 

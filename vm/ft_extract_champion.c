@@ -6,11 +6,13 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 17:46:14 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/10 20:26:00 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/12 20:19:16 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
+
+#define CHAMPIONS	((t_champions *)champion->content)
 
 static int		ft_rev_hex(char *hex)
 {
@@ -40,23 +42,27 @@ static int		ft_rev_hex(char *hex)
 	return (ret_value);
 }
 
-static void		ft_extract_content(t_vm *env, int i)
+static void		ft_extract_starting_pos_lst(t_list *champion, int pos)
+{
+	CHAMPIONS->starting_pos = pos;
+	CHAMPIONS->pc = pos;
+	CHAMPIONS->next_cycle = 0;
+}
+
+static void		ft_extract_content_lst(t_vm *env, int i, t_list *champion)
 {
 	int read_success;
 
 	read_success = 0;
-	env->champions[i].content = ft_strnew(env->champions[i].prog_size);
-	read_success = read(env->fd[i], env->champions[i].content, env->champions[i].prog_size);
+	CHAMPIONS->content = ft_strnew(CHAMPIONS->prog_size);
+	read_success = read(env->fd[i], CHAMPIONS->content, CHAMPIONS->prog_size);
 	if (read_success)
-	{
-		//DEBUG
-		ft_print_memory(env->champions[i].content, env->champions[i].prog_size);
-	}
+		ft_print_memory(CHAMPIONS->content, CHAMPIONS->prog_size); //DEBUG
 	else
 		ft_error_asm(env, "{9}Error{0} : The magic doesn't work with the content ...", 1);
 }
 
-static void		ft_extract_header(t_vm *env, int i)
+static void		ft_extract_header_lst(t_vm *env, int i, t_list *champion)
 {
 	int		read_success;
 	char	*hex;
@@ -64,44 +70,41 @@ static void		ft_extract_header(t_vm *env, int i)
 	read_success = read(env->fd[i], &env->header[i], sizeof(header_t));
 	if (read_success)
 	{
-		env->champions[i].name = ft_strinit(env->header[i].prog_name);
-		env->champions[i].comment = ft_strinit(env->header[i].comment);
+		CHAMPIONS->name = ft_strinit(env->header[i].prog_name);
+		CHAMPIONS->comment = ft_strinit(env->header[i].comment);
 		hex = ft_itoa_base(env->header[i].magic, 16);
-		env->champions[i].magic = ft_rev_hex(hex);
+		CHAMPIONS->magic = ft_rev_hex(hex);
 		ft_strdel(&hex);
-		if (env->champions[i].magic != COREWAR_EXEC_MAGIC)
+		if (CHAMPIONS->magic != COREWAR_EXEC_MAGIC)
 			ft_error_asm(env, "{9}Error{0} : This is a bad magic ...", 1);
 		hex = ft_itoa_base(env->header[i].prog_size, 16);
-		env->champions[i].prog_size = ft_rev_hex(hex);
+		CHAMPIONS->prog_size = ft_rev_hex(hex);
 		ft_strdel(&hex);
-		if (env->champions[i].prog_size > CHAMP_MAX_SIZE)
+		if (CHAMPIONS->prog_size > CHAMP_MAX_SIZE)
 			ft_error_asm(env, "{9}Error{0} : Champion size is over 682", 1);
-		env->total_size += env->champions[i].prog_size;
+		env->total_size += CHAMPIONS->prog_size;
 	}
 	else
 		ft_error_asm(env, "{9}Error{0} : The magic doesn't work with the header ...", 1);
 }
 
-static void		ft_extract_starting_pos(t_champions *champion, int pos)
-{
-	champion->starting_pos = pos;
-	champion->pc = pos;
-	champion->next_cycle = 0;
-}
 
 void			ft_extract_champion(t_vm *env)
 {
 	int		i;
 	int		pos;
+	t_list	*list;
 
 	i = 0;
 	pos = 0;
+	list = env->list_champions;
 	while (i < env->nb_champ)
 	{
-		ft_extract_header(env, i);
-		ft_extract_content(env, i);
-		ft_extract_starting_pos(&env->champions[i], pos);
+		ft_extract_header_lst(env, i, list);
+		ft_extract_content_lst(env, i, list);
+		ft_extract_starting_pos_lst(list, i);
 		pos += MEM_SIZE / env->nb_champ;
 		i++;
+		list = list->next;
 	}
 }

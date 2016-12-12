@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/12 15:39:30 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/12 20:18:42 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ typedef struct		s_vm
 {
 	t_options		*options;			//Flags
 
-	t_champions		*champions;			//Struct for each champion
 	t_champions		*winner;			//WINNER
+	t_list			*list_champions;
 	int				*fd;				//Each champion
 	char			**filename;			//Each champion name
 	int				nb_champ;			//Number of champion
