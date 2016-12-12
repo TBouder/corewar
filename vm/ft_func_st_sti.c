@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/12 20:35:47 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/12 21:06:10 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,6 @@ void	ft_corewar_sti(t_vm *env, t_champions *champ, int *nbr)
 			env->arg3 = champ->reg[env->arg3];
 		sum_idx = env->arg2 + env->arg3;
 
-		env->map[sum_idx] = champ->reg[env->arg1];
+		env->map[(sum_idx % I) % M] = champ->reg[env->arg1];
 	}
 }
