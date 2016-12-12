@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
+/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 17:48:28 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/09 14:28:44 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/12 15:37:03 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,12 @@ void			ft_init_env(t_vm *env, int part)
 		env->cpt_to_die = 0;
 		env->cycle_check = 0;
 		env->cycle = 0;
+
+		env->arg1 = 0;
+		env->arg2 = 0;
+		env->arg3 = 0;
+		env->buf = 0;
+
 		// env->detla = CYCLE_DELTA;
 		// env->nbr_live = NBR_LIVE;
 	}

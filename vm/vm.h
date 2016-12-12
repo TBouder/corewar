@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/12 11:15:28 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/12 15:39:30 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,11 @@ typedef struct		s_vm
 	int				cpt_to_die;
 	int				cycle_check;
 	int				cycle;
+
+	int				arg1;
+	int				arg2;
+	int				arg3;
+	int				buf;
 
 	// int				detla;
 	// int				nbr_live;
