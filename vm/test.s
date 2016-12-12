@@ -2,24 +2,30 @@
 .name    "Survivor"
 .comment "Invincible"
 
+; live %1
+; live %3
+; live %3
+; live %3
 #LD#############################################################################
 	; ; TEST DE LD DIRECT ET INDIRECT
 	; ################################
-	; ld %68, r2			#Met %68 dans r2 -> 'D'
-	; ld 11, r7			#Met 11 dans r7 -> 0
-	; aff r2				#Affiche r2 -> 'D'
-	; aff r7				#Affiche r7 -> ''
-	; add r2, r7, r3		#r3 = r2 + r7 -> 0x4 + 0x44 -> 'H'
-	; aff r3				#Affiche r3 -> 'H'
+	ld %68, r2			#Met %68 dans r2 -> 'D'
+	ld 11, r7			#Met 11 dans r7 -> 0
+	aff r2				#Affiche r2 -> 'D'
+	aff r7				#Affiche r7 -> ''
+	add r2, r7, r3		#r3 = r2 + r7 -> 0x4 + 0x44 -> 'H'
+	aff r3				#Affiche r3 -> 'H'
+	live %1
+	live %5
 	; ; TEST DE LLD DIRECT ET INDIRECT
 	; ################################
-	lld %68, r2			#Met %68 dans r2 -> D
-	lld 11, r7			#Met 11 dans r7 -> 0
-	aff r2				#Affiche r2 -> 'd'
-	aff r7				#Affiche r7 -> ''
+	; lld %68, r2			#Met %68 dans r2 -> D
+	; lld 11, r7			#Met 11 dans r7 -> 0
+	; aff r2				#Affiche r2 -> 'd'
+	; aff r7				#Affiche r7 -> ''
 	; add r2, r7, r3		#r3 = r2 + r7 -> 0x4 + 0x44 -> 'H'
-	sub r2, r7, r3		#r2 = r7 - r3 -> 0x5 + 0x44 -> '?'
 	; aff r3				#Affiche r3 -> '?'
+	; sub r2, r3, r7		#r2 = r7 - r3 -> 0x5 + 0x44 -> '?'
 
 #ST#############################################################################
 	; ; TEST DE ST REG
@@ -174,7 +180,6 @@
 	; aff r2				#Affiche r2 -> 'D'
 	; lldi -8, r1, r7		#On va chercher ce qu'il y a a l'adresse de (PC - 8 -> 18 + 01), on prend la valeur, on additionne avec la valeur dans R1 [map[pc + 01] + R1] et on met dans r7
 	; aff r7				#Affiche r7 -> 'ÿ'
-
 
 	################################################################################
 	################################################################################

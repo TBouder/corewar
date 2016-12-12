@@ -6,18 +6,18 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/10 21:41:40 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/12 17:47:34 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-#define ST_IND_1		(pc + (arg2 % IDX_MOD)) //Depart de l'instruction suivant
-#define ST_IND_2		(pc - buffer + (arg2 % IDX_MOD)) //PC sur le dernier argument
-#define ST_IND_3		((arg2 % IDX_MOD)) //Position sans prendre en compte le PC
-#define ST_IND_4		(champ->pc + 1 + (arg2 % IDX_MOD)) //Depart du premier arg
-#define ST_IND_5		(champ->pc - 1 + (arg2 % IDX_MOD)) //Depart de l'instruction courante
-#define ST_IND_OLD		(champ->pc + buffer + (arg2 % IDX_MOD)) //Avant ces defines
+#define ST_IND_1		(pc + (env->arg2 % IDX_MOD)) //Depart de l'instruction suivant
+#define ST_IND_2		(pc - env->buf + (env->arg2 % IDX_MOD)) //PC sur le dernier argument
+#define ST_IND_3		((env->arg2 % IDX_MOD)) //Position sans prendre en compte le PC
+#define ST_IND_4		(champ->pc + 1 + (env->arg2 % IDX_MOD)) //Depart du premier arg
+#define ST_IND_5		(champ->pc - 1 + (env->arg2 % IDX_MOD)) //Depart de l'instruction courante
+#define ST_IND_OLD		(champ->pc + env->buf + (env->arg2 % IDX_MOD)) //Avant ces defines
 
 #define STI_IND_1		(pc + (sum_idx % IDX_MOD)) //Depart de l'instruction suivant
 #define STI_IND_2		(pc - buffer + (sum_idx % IDX_MOD)) //PC sur le dernier argument
@@ -51,31 +51,20 @@ void	ft_corewar_st(t_vm *env, t_champions *champ, int *nbr)
 {
 	ft_put("{9}----ST----{0}\n");
 	int		pc;
-	int		buffer;
-	int		arg1;
-	int		arg2;
 
 	pc = champ->pc + 1;
 	if (IS_REG(nbr[0]) && (IS_REG(nbr[1]) || IS_IND(nbr[1])))
 	{
-		arg1 = ft_byte_to_str(&env->map[pc], 1);
+		env->arg1 = ft_byte_to_str(&env->map[pc], 1);
 		pc++;
-		buffer = ft_set_buffer(nbr[1]);
-		arg2 = ft_byte_to_str(&env->map[pc], buffer);
-		pc += buffer;
+		env->buf = ft_set_buffer(nbr[1]);
+		env->arg2 = ft_byte_to_str(&env->map[pc], env->buf);
+		pc += env->buf;
 
-		if (IS_REG(nbr[1]))
-		{
-			ft_put("{10}r%d{0} = {10}r%d{0}\n", arg2, arg1);
-			ft_put("{10}r%d{0} = {10}%d{0}\n", arg2, champ->reg[arg1]);
-			champ->reg[arg2] = champ->reg[arg1];
-		}
-		else if (IS_IND(nbr[1]))
-		{
-			ft_put("env->map[{10}%d{0}] = {10}r%d{0}\n", ST_IND_5, arg1);
-			ft_put("env->map[{10}%d{0}] = {10}%d{0}\n", ST_IND_5, champ->reg[arg1]);
-			env->map[ST_IND_5 % MEM_SIZE] = champ->reg[arg1];
-		}
+		if (IS_IND(nbr[1]))
+			env->arg2 = ST_IND_4 % MEM_SIZE;
+
+		champ->reg[env->arg2] = champ->reg[env->arg1];
 	}
 }
 

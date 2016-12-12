@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 15:58:23 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/09 14:21:51 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/12 20:07:16 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,39 +14,43 @@
 
 int		ft_one_isalive(t_vm *env)
 {
-	int		i;
+	t_champions 	*champion;
+	t_list			*list;
 
-	i = 0;
-	while (i < env->nb_champ)
+	list = env->list_champions;
+	while (list)
 	{
-		if (env->champions[i].exist == TRUE)
+		champion = ((t_champions *)list->content);
+		if (champion->exist == TRUE)
 		{
-			if (env->champions[i].is_alive > 0)
+			if (champion->is_alive > 0)
 				return (1);
 		}
-		i++;
+		list = list->next;
 	}
 	return (0);
 }
 
 int		ft_which_isalive(t_vm *env)
 {
-	int		i;
-	int		nb_live;
+	t_champions *champion;
+	t_list		*list;
+	int			nb_live;
 
-	i = 0;
 	nb_live = 0;
-	while (i < env->nb_champ)
+	list = env->list_champions;
+	while (list)
 	{
-		if (env->champions[i].exist == TRUE)
+		champion = ((t_champions *)list->content);
+		if (champion->exist == TRUE)
 		{
-			if (env->champions[i].is_alive <= 0)
-				env->champions[i].exist = FALSE; //MORT DU PROGRAMME
+			if (champion->is_alive <= 0)
+				champion->exist = FALSE; //MORT DU PROGRAMME
 			else
-				nb_live += env->champions[i].is_alive;
-			env->champions[i].is_alive = 0;
+				nb_live += champion->is_alive;
+			champion->is_alive = 0;
 		}
-		i++;
+		list = list->next;
 	}
 	return (nb_live);
 }
@@ -60,9 +64,7 @@ void	ft_print_winner(t_vm *env)
 void	ft_exec_instruct(t_vm *env, t_champions *champion)
 {
 	int		champ_pc;
-	// int		(*tab[17])();
 
-	// ft_init_corewar_func(tab);
 	champ_pc = champion->pc;
 	champion->next_cycle = env->cycle;
 	if (champ_pc < (int)champion->prog_size)
@@ -75,13 +77,13 @@ void	ft_exec_instruct(t_vm *env, t_champions *champion)
 
 void	ft_foreach_champ(t_vm *env)
 {
-	int			i;
 	t_champions *champion;
+	t_list		*list;
 
-	i = 0;
-	while (i < env->nb_champ)
+	list = env->list_champions;
+	while (list)
 	{
-		champion = &env->champions[i];
+		champion = ((t_champions *)list->content);
 		if (champion->exist == TRUE)
 		{
 			if (env->cycle == champion->next_cycle)
@@ -89,7 +91,7 @@ void	ft_foreach_champ(t_vm *env)
 				ft_exec_instruct(env, champion);
 			}
 		}
-		i++;
+		list = list->next;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 14:16:55 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/12 11:54:13 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/12 18:45:37 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,7 @@ int		*ft_get_size(t_vm *env, t_champions *champ, int is_not_live)
 	if (is_not_live)
 		champ->pc += 1;
 	int tmp = ft_byte_to_str(&env->map[champ->pc], 1);
-	// ft_put("INT {10}%ld{0}\n", tmp);
 	char *tmp2 = ft_itoa_base(tmp, 2);
-	// ft_printf("BIN {10}%s{0}\n", tmp2);
 
 	char *bin = ft_strnew(8);
 	int len = ft_strlen(tmp2);
@@ -78,7 +76,6 @@ int		*ft_get_size(t_vm *env, t_champions *champ, int is_not_live)
 		x--;
 		len--;
 	}
-	// ft_printf("BIN {10}%s{0}\n", bin);
 
 	return (ft_send_args(bin));
 }
