@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/12 20:18:42 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/12 20:35:03 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ typedef struct		s_champions
 	int				reg[REG_NUMBER];	//Los registros
 	int				pc;					//el pc
 	void			*pc_void;			//el pc de trump
-	bool			carry;				//bool for carry fisher
+	int				carry;				//bool for carry fisher
 	int				is_alive;			//Le champion a t'il dit qu'il etait en vie ?
-	bool			exist;				//Le champion existe t'il encore ?
+	int				exist;				//Le champion existe t'il encore ?
 	int				cycle;				//Ya une histoire de cycle
 	int				next_cycle;
 }					t_champions;
