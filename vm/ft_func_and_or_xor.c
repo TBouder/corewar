@@ -6,17 +6,11 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/12 14:03:04 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/12 20:30:52 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
-
-// #define LDI_IND_1	pc + (sum_idx % IDX_MOD) //PC sur l'instruction suivante
-// #define LDI_IND_2	pc - 1 + (sum_idx % IDX_MOD) //PC sur le dernier argument
-// #define LDI_IND_3	(sum_idx % IDX_MOD) //Position sans prendre en compte le PC
-// #define LDI_IND_4	champ->pc + (sum_idx % IDX_MOD) //Depart du premier arg
-// #define LDI_IND_5	champ->pc - 1 + (sum_idx % IDX_MOD) //Depart de l'instruction courante
 
 static int	ft_set_buffer(int nbr)
 {
@@ -33,29 +27,32 @@ void	ft_and_or_xor_helper(t_vm *env, t_champions *champ, int *nbr, int op)
 {
 	int		pc;
 
-	env->buf = 0;
 	pc = champ->pc + 1;
 	if (IS_ALL(nbr[0]) && IS_ALL(nbr[1]) && IS_REG(nbr[2]))
 	{
-		env->arg1 = ft_byte_to_str(&env->map[pc], ft_set_buffer(nbr[0]));
+		env->buf = ft_set_buffer(nbr[0]);
+		env->arg1 = ft_byte_to_str(&env->map[pc], env->buf);
+		pc += env->buf;
+		env->buf = ft_set_buffer(nbr[1]);
+		env->arg2 = ft_byte_to_str(&env->map[pc], env->buf);
+		pc += env->buf;
+		env->buf = ft_set_buffer(nbr[2]);
+		env->arg3 = ft_byte_to_str(&env->map[pc], env->buf);
+
 		if (IS_IND(nbr[0]) == 1)
-			env->arg1 = env->map[pc + env->buf + (env->arg1 % IDX_MOD)];
+			env->arg1 = env->map[(champ->pc - 1 + (env->arg1 % I)) % M];
 		else if (IS_REG(nbr[0]))
 			env->arg1 = champ->reg[env->arg1];
-		env->buf = ft_set_buffer(nbr[0]);
 
-		env->arg2 = ft_byte_to_str(&env->map[pc + env->buf], ft_set_buffer(nbr[1]));
 		if (IS_IND(nbr[1]) == 1)
-			env->arg2 = env->map[pc + env->buf + (env->arg2 % IDX_MOD)];
+			env->arg2 = env->map[(champ->pc - 1 + (env->arg2 % I)) % M];
 		else if (IS_REG(nbr[1]))
 			env->arg2 = champ->reg[env->arg2];
-		env->buf += ft_set_buffer(nbr[1]);
 
-		env->arg3 = ft_byte_to_str(&env->map[pc + env->buf], ft_set_buffer(nbr[2]));
 		op == 6 ? champ->reg[env->arg3] = env->arg1 & env->arg2 : 0;
 		op == 7 ? champ->reg[env->arg3] = env->arg1 | env->arg2 : 0;
 		op == 8 ? champ->reg[env->arg3] = env->arg1 ^ env->arg2 : 0;
-		champ->carry = champ->reg[env->arg3] == 0 ? 1 : 0;
+		champ->carry = champ->reg[env->arg3] != 0 ? 1 : 0;
 	}
 }
 

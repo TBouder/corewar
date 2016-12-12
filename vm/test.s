@@ -2,14 +2,16 @@
 .name    "Survivor"
 .comment "Invincible"
 
-;TEST DE ZAZ
-#############################
-ld %100, r2
-add r2, r3, r4
-aff r1
-aff r2
-aff r3
-aff r4
+# ;TEST DE ZAZ
+# #############################
+# ld 10, r5
+# ld %100, r2
+# add r2, r3, r4
+# aff r1
+# aff r2
+# aff r3
+# aff r4
+# aff r5
 
 
 # # ;TEST DE ZJUMP
@@ -24,15 +26,24 @@ aff r4
 # # aff r4
 
 
-# ;TEST DE AND OR XOR IND
-# ld %65, r2 #; Met A dans r2
-# st r2, 45 #; Stocke du reg vers le second param
-# and r2, 40, r3 #; mettre la différence entre les adresses a partir de la valeur indirecte jusqu'a celle d'apres
-# or 35, r1, r4
-# xor 29, r1, r5
-# aff r3
-# aff r4
-# aff r5
+;TEST DE AND OR XOR IND
+ld %65, r2 #; Met A dans r2
+st r2, 44 #; Stocke du reg vers le second param
+and r2, 39, r3 #; mettre la différence entre les adresses a partir 
+#;de la valeur indirecte jusqu'a celle d'apres
+or 34, r1, r4
+xor 28, r1, r5
+aff r3
+aff r4
+aff r5
+aff r6
+aff r6
+aff r6
+aff r6
+aff r6
+aff r6
+aff r6
+aff r6
 
 # ;TEST DE AND OR XOR DIR
 # #############################
