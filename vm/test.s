@@ -2,15 +2,27 @@
 .name    "Survivor"
 .comment "Invincible"
 
+;TEST DE ZAZ
+#############################
+ld %100, r2
+add r2, r3, r4
+aff r1
+aff r2
+aff r3
+aff r4
 
-# ;TEST DE ZJUMP
-add %64, r1, r2
-st r2, 20
-aff r2
-zjmp %-16
-# ici:
-ld %68, r2
-aff r2
+
+# # ;TEST DE ZJUMP
+# ld %64, r2
+# st r2, 20
+# aff r2
+# zjmp %-16
+# # ici:
+# ld %68, r2
+# aff r2
+# aff r3
+# # aff r4
+
 
 # ;TEST DE AND OR XOR IND
 # ld %65, r2 #; Met A dans r2
