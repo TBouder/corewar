@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 15:58:23 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/08 18:38:01 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/09 14:21:51 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,5 +119,6 @@ void	ft_fight(t_vm *env)
 		}
 		env->cycle++;
 	}
+
 	// ft_print_winner(env);
 }

@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/08 19:14:58 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/09 13:12:44 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -245,7 +245,6 @@ int					ft_extract_options(char **av, t_options *options);
 
 void				OVERLOAD ft_put(int nbr);
 void				OVERLOAD ft_put(char c);
-// void				OVERLOAD ft_put(const char *format, ...);
 int					OVERLOAD ft_put(const char *format, ...);
 
 void				OVERLOAD ft_put_fd(int nbr, int fd);
