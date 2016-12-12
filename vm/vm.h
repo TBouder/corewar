@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/10 21:24:04 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/12 11:15:28 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include "op.h"
 # include <errno.h>
 # include "ft_macro.h"
+
+typedef int		bool;
 
 typedef struct		s_champions
 {
