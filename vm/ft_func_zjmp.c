@@ -3,22 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   ft_func_zjmp.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
+/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/08 18:38:49 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/11 17:53:10 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
+static int	ft_set_buffer(int nbr)
+{
+	if (IS_REG(nbr))
+		return (1);
+	else if (IS_DIR(nbr))
+		return (2);
+	else if (IS_IND(nbr))
+		return (2);
+	return (0);
+}
+
 void	ft_corewar_zjmp(t_vm *env, t_champions *champ, int *nbr)
 {
-	if (0)
+	int		pc;
+
+	pc = champ->pc + 1;
+	if (champ->carry == 1 && IS_DIR(nbr[0]))
 	{
-		env = 0;
-		champ = 0;
-		nbr = 0;
+		ft_printf("{10}CARRY == 1{0}\n");
+		champ->pc += ft_byte_to_str(&env->map[pc], ft_set_buffer(nbr[0]));
 	}
 	ft_put("{9}----ZJMP----{0}\n");
 }
