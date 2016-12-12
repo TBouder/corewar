@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/11 17:53:10 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/12 14:19:46 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	ft_corewar_zjmp(t_vm *env, t_champions *champ, int *nbr)
 	int		pc;
 
 	pc = champ->pc + 1;
+	ft_printf("CARRY == %d\n", champ->carry);
 	if (champ->carry == 1 && IS_DIR(nbr[0]))
 	{
 		ft_printf("{10}CARRY == 1{0}\n");
