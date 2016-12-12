@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/12 14:30:56 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/12 14:44:32 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void		ft_corewar_ldi(t_vm *env, t_champions *champ, int *nbr)
 		arg3 = ft_byte_to_str(&env->map[pc], 1);
 		pc++;
 
-		ft_put("{9}%d\n{0}", LDI_ARG_5); //POSITION DE L'ADRESSE
+		ft_put("{9}%d\n{0}", (arg1 % IDX_MOD)); //POSITION DE L'ADRESSE
 
 		if (IS_IND(nbr[0]))
 			arg1 = env->map[LDI_ARG_5];
