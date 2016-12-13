@@ -6,11 +6,11 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/08 18:38:27 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/13 12:48:25 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vm.h"
+#include "../vm.h"
 
 void	ft_corewar_fork(t_vm *env, t_champions *champ, int *nbr)
 {
