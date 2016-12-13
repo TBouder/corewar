@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/12 15:40:24 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/12 20:35:03 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include "op.h"
 # include <errno.h>
 # include "ft_macro.h"
+
+typedef int		bool;
 
 typedef struct		s_champions
 {
@@ -42,8 +44,8 @@ typedef struct		s_vm
 {
 	t_options		*options;			//Flags
 
-	t_champions		*champions;			//Struct for each champion
 	t_champions		*winner;			//WINNER
+	t_list			*list_champions;
 	int				*fd;				//Each champion
 	char			**filename;			//Each champion name
 	int				nb_champ;			//Number of champion

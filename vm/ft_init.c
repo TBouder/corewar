@@ -3,45 +3,51 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 17:48:28 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/12 15:37:03 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/12 20:17:21 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-static void		ft_init_champions(t_vm *env)
+void		ft_init_lst_champions(t_vm *env)
 {
-	int		i;
-	int		reg_nb;
+	int			i;
+	int			reg_nb;
+	t_champions	*champion;
 
 	i = 0;
 	while (i < env->nb_champ)
 	{
-		env->champions[i].name = NULL;
-		env->champions[i].comment = NULL;
-		env->champions[i].magic = 0;
-		env->champions[i].prog_size = 0;
-		env->champions[i].content = NULL;
-		env->champions[i].starting_pos = 0;
-		env->champions[i].champ_id = i + 1;
-		/*REG_NUMBER registres qui font chacun une taille de REG_SIZE octets*/
+		champion = (t_champions *)malloc(sizeof(t_champions));
+		champion->name = NULL;
+		champion->comment = NULL;
+		champion->magic = 0;
+		champion->prog_size = 0;
+		champion->content = NULL;
+		champion->starting_pos = 0;
+		champion->champ_id = i + 1;
 		reg_nb = 0;
 		while (reg_nb <= REG_NUMBER)
 		{
-			// env->champions[i].reg[reg_nb] = (char)malloc(REG_SIZE);
-			env->champions[i].reg[reg_nb] = 0;
+			champion->reg[reg_nb] = 0;
 			reg_nb++;
 		}
-		env->champions[i].reg[1] = i + 1;
-		/*Un PC est un registre spécial, qui contient juste l’adresse, dans la mémoire de la machine virtuelle, de la prochaine instruction à décoder et exécuter*/
-		env->champions[i].pc = 0;
-		env->champions[i].pc_void = 0;
-		env->champions[i].carry = FALSE;
-		env->champions[i].is_alive = 1;
-		env->champions[i].exist = TRUE;
+		champion->reg[1] = i + 1;
+		champion->pc = 0;
+		champion->pc_void = 0;
+		champion->carry = FALSE;
+		champion->is_alive = 1;
+		champion->exist = TRUE;
+		champion->cycle = 0;
+		champion->next_cycle = 0;
+
+		if (i == 0)
+			env->list_champions = ft_lstnew(champion, sizeof(t_champions));
+		else
+			ft_lstend(&env->list_champions, champion, sizeof(t_champions));
 		i++;
 	}
 }
@@ -59,10 +65,11 @@ void			ft_init_env(t_vm *env, int part)
 		env->fd = ft_nbrnew(part);
 		env->filename = ft_dbstrnew(part);
 		env->header = (header_t *)malloc(sizeof(header_t) * part);
-		env->champions = (t_champions *)malloc(sizeof(t_champions) * part);
+
+		ft_init_lst_champions(env);
+
 		env->total_size = 0;
 		env->map = ft_strnew(MEM_SIZE);
-		ft_init_champions(env);
 		env->winner = NULL;
 
 		env->cycle_to_die = CYCLE_TO_DIE;

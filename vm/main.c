@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 19:42:02 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/09 15:43:39 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/12 20:19:00 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,18 @@
 /******************************************************************************/
 
 /******************************************************************************/
-void			ft_clear_champions(t_champions *champions, int size)
+void			ft_clear_champions(t_champions **champions, int size)
 {
 	int		i;
 
 	i = 0;
 	while (i < size)
 	{
-		ft_strdel(&champions[i].name);
-		ft_strdel(&champions[i].comment);
-		ft_strdel(&champions[i].content);
-		champions[i].magic = 0;
-		champions[i].prog_size = 0;
+		ft_strdel(&champions[i]->name);
+		ft_strdel(&champions[i]->comment);
+		ft_strdel(&champions[i]->content);
+		champions[i]->magic = 0;
+		champions[i]->prog_size = 0;
 		i++;
 	}
 }
@@ -40,10 +40,10 @@ void			ft_clear_champions(t_champions *champions, int size)
 void			ft_clear_all(t_vm *env)
 {
 	ft_dbstrdel(env->filename);
-	ft_clear_champions(env->champions, env->nb_champ);
+	// ft_clear_champions(env->champions, env->nb_champ);
 	ft_strdel(&env->map);
 	free(env->header);
-	free(env->champions);
+	// free(env->champions);
 	free(env->fd);
 }
 
@@ -87,97 +87,104 @@ void			ft_verif_extension(t_vm *env, char **av, int i)
 
 void			ft_put_champion_map(t_vm *env)
 {
-	t_champions		champion;
+	t_list			*list;
+	t_champions		*champion;
 	int				i; //CHAMPION NUMBER
 	unsigned int	y; //POS IN MAP
 	unsigned int	z; //CONTENT OF CHAMP
 
 	i = 0;
+	list = env->list_champions;
 	while (i < env->nb_champ)
 	{
-		champion = env->champions[i];
-		y = champion.starting_pos;
+		champion = ((t_champions *)list->content);
+		// champion = env->champions[i];
+		y = champion->starting_pos;
 		z = 0;
-		// ft_printf("[{10}%d{0}] - [{11}%d{0}]\n", champion.prog_size, y);
-		while (z < champion.prog_size)
+		// ft_printf("[{10}%d{0}] - [{11}%d{0}]\n", champion->prog_size, y);
+		while (z < champion->prog_size)
 		{
 			//SI env->map[y] != 0 -> ERROR
-			env->map[y] = champion.content[z];
+			env->map[y] = champion->content[z];
 			z++;
 			y++;
 		}
 		i++;
+		list = list->next;
 	}
 }
 
 /******************************************************************************/
-void			ft_print_map_color(t_vm *env, t_champions *champions, int *i)
-{
-	char			*hex;
-
-	hex = ft_strinit("0123456789abcdef");
-	if (*i >= (int)(champions[0].starting_pos) &&
-		*i <= (int)(champions[0].starting_pos + champions[0].prog_size))
-			ft_printf("{10}");
-	else if (env->nb_champ >= 2 &&
-		*i >= (int)(champions[1].starting_pos) &&
-		*i <= (int)(champions[1].starting_pos + champions[1].prog_size))
-			ft_printf("{11}");
-	else if (env->nb_champ >= 3 &&
-		*i >= (int)(champions[2].starting_pos) &&
-		*i <= (int)(champions[2].starting_pos + champions[2].prog_size))
-			ft_printf("{12}");
-	else if (env->nb_champ >= 4 &&
-		*i >= (int)(champions[3].starting_pos) &&
-		*i <= (int)(champions[3].starting_pos + champions[3].prog_size))
-			ft_printf("{13}");
-	ft_printf("%c", hex[(int)((unsigned char)env->map[*i]) / 16]);
-	ft_printf("%c", hex[(int)((unsigned char)env->map[*i]) % 16]);
-	*i += 1;
-	ft_printf("%c", hex[(int)((unsigned char)env->map[*i]) / 16]);
-	ft_printf("%c {0}", hex[(int)((unsigned char)env->map[*i]) % 16]);
-	*i += 1;
-	ft_strdel(&hex);
-}
-
-void			ft_print_map(t_vm *env)
-{
-	t_champions		*champions;
-	int				i;
-	int				y;
-
-	champions = (t_champions *)malloc(sizeof(t_champions) * env->nb_champ);
-	y = 0;
-	while (y < env->nb_champ)
-	{
-		champions[y] = env->champions[y];
-		y++;
-	}
-	i = 0;
-	while (i < MEM_SIZE)
-	{
-		ft_print_map_color(env, champions, &i);
-		if (i % 64 == 0 && i != 0)
-			ft_putchar('\n');
-	}
-}
+// void			ft_print_map_color(t_vm *env, t_champions *champions, int *i)
+// {
+// 	char			*hex;
+//
+// 	hex = ft_strinit("0123456789abcdef");
+// 	if (*i >= (int)(champions[0].starting_pos) &&
+// 		*i <= (int)(champions[0].starting_pos + champions[0].prog_size))
+// 			ft_printf("{10}");
+// 	else if (env->nb_champ >= 2 &&
+// 		*i >= (int)(champions[1].starting_pos) &&
+// 		*i <= (int)(champions[1].starting_pos + champions[1].prog_size))
+// 			ft_printf("{11}");
+// 	else if (env->nb_champ >= 3 &&
+// 		*i >= (int)(champions[2].starting_pos) &&
+// 		*i <= (int)(champions[2].starting_pos + champions[2].prog_size))
+// 			ft_printf("{12}");
+// 	else if (env->nb_champ >= 4 &&
+// 		*i >= (int)(champions[3].starting_pos) &&
+// 		*i <= (int)(champions[3].starting_pos + champions[3].prog_size))
+// 			ft_printf("{13}");
+// 	ft_printf("%c", hex[(int)((unsigned char)env->map[*i]) / 16]);
+// 	ft_printf("%c", hex[(int)((unsigned char)env->map[*i]) % 16]);
+// 	*i += 1;
+// 	ft_printf("%c", hex[(int)((unsigned char)env->map[*i]) / 16]);
+// 	ft_printf("%c {0}", hex[(int)((unsigned char)env->map[*i]) % 16]);
+// 	*i += 1;
+// 	ft_strdel(&hex);
+// }
+//
+// void			ft_print_map(t_vm *env)
+// {
+// 	t_champions		*champions;
+// 	int				i;
+// 	int				y;
+//
+// 	champions = (t_champions *)malloc(sizeof(t_champions) * env->nb_champ);
+// 	y = 0;
+// 	while (y < env->nb_champ)
+// 	{
+// 		champions[y] = *env->champions[y];
+// 		y++;
+// 	}
+// 	i = 0;
+// 	while (i < MEM_SIZE)
+// 	{
+// 		ft_print_map_color(env, champions, &i);
+// 		if (i % 64 == 0 && i != 0)
+// 			ft_putchar('\n');
+// 	}
+// }
 /******************************************************************************/
 
 static void		ft_launcher(t_vm *env, char **av, int i)
 {
+	t_list		*list;
 	ft_verif_extension(env, av, i);
 	ft_extract_champion(env);
 	ft_put_champion_map(env);
 
 	int		x = 0;
-	while (x < env->nb_champ)
+	list = env->list_champions;
+	while (list)
 	{
 		ft_printf("[{10}%s{0}][{14}%d{0}]\n", env->filename[x], env->fd[x]);
-		ft_printf("\t[%s]\n", env->champions[x].name);
-		ft_printf("\t[%s]\n", env->champions[x].comment);
-		ft_printf("\t[%x]\n", env->champions[x].magic);
-		ft_printf("\t[%d]\n", env->champions[x].prog_size);
-		ft_printf("\t[%d]\n", env->champions[x].starting_pos);
+		ft_printf("\t[%s]\n", ((t_champions *)list->content)->name);
+		ft_printf("\t[%s]\n", ((t_champions *)list->content)->comment);
+		ft_printf("\t[%x]\n", ((t_champions *)list->content)->magic);
+		ft_printf("\t[%d]\n", ((t_champions *)list->content)->prog_size);
+		ft_printf("\t[%d]\n", ((t_champions *)list->content)->starting_pos);
+		list = list->next;
 		x++;
 	}
 	// ft_print_map(env);

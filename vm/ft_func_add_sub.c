@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_func_add_sub.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/12 20:31:28 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/12 20:36:55 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	ft_corewar_add(t_vm *env, t_champions *champ, int *nbr)
 
 		champ->reg[env->arg3] = (champ->reg[env->arg1] + champ->reg[env->arg2]) % I;
 		champ->carry = (champ->reg[env->arg3] != 0) ? 1 : 0;
-
 	}
 }
 
