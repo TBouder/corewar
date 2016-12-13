@@ -6,53 +6,14 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 23:27:37 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/13 17:48:38 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/13 18:25:23 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-static void		ft_print_hex_mem(char *add, size_t size)
-{
-	size_t		i;
-	char		*hex;
-
-	hex = ft_strinit("0123456789abcdef");
-	i = 0;
-	while (i < 64)
-	{
-		if (i < size)
-		{
-			ft_putchar(hex[(int)((unsigned char)add[i]) / 16]);
-			ft_putchar(hex[(int)((unsigned char)add[i]) % 16]);
-		}
-		else
-		{
-			ft_putchar(' ');
-			ft_putchar(' ');
-		}
-		if (i % 2)
-			ft_putchar(' ');
-		i++;
-	}
-	ft_strdel(&hex);
-}
-
-void			ft_dump(const void *addr, size_t size)
-{
-	int		offset;
-
-	offset = 0;
-	while (size > 16)
-	{
-		ft_print_hex_mem((char *)addr + offset, 64);
-		ft_put("\n");
-		offset += 64;
-		size -= 64;
-	}
-	ft_print_hex_mem((char *)addr + offset, size);
-	ft_put("\n");
-}
+#define IS_GRAPH env->options->flags['g']
+#define IS_VERBOSE env->options->flags['v']
 
 /*
 ** The ft_ret_cycle() function takes an opcode as paramater and according to it,
@@ -81,24 +42,41 @@ static int	ft_ret_cycle(int op)
 	return (0);
 }
 
-void	ft_print_instruct(int op)
+char		*ft_instruct_name(int op)
 {
-	op == LIVE ? ft_put("{10}LIVE{0}") : 0;
-	op == LD ? ft_put("{10}LD{0}") : 0;
-	op == ST ? ft_put("{10}ST{0}") : 0;
-	op == ADD ? ft_put("{10}ADD{0}") : 0;
-	op == SUB ? ft_put("{10}SUB{0}") : 0;
-	op == AND ? ft_put("{10}AND{0}") : 0;
-	op == OR ? ft_put("{10}OR{0}") : 0;
-	op == XOR ? ft_put("{10}XOR{0}") : 0;
-	op == ZJMP ? ft_put("{10}ZJMP{0}") : 0;
-	op == LDI ? ft_put("{10}LDI{0}") : 0;
-	op == STI ? ft_put("{10}STI{0}") : 0;
-	op == FORK ? ft_put("{10}FORK{0}") : 0;
-	op == LLD ? ft_put("{10}LLD{0}") : 0;
-	op == LLDI ? ft_put("{10}LLDI{0}") : 0;
-	op == LFORK ? ft_put("{10}LFORK{0}") : 0;
-	op == AFF ? ft_put("{10}AFF{0}") : 0;
+	if (op == LIVE)
+		return ("LIVE");
+	else if (op == LD)
+		return ("LD");
+	else if (op == ST)
+		return ("ST");
+	else if (op == ADD)
+		return ("ADD");
+	else if (op == SUB)
+		return ("SUB");
+	else if (op == AND)
+		return ("AND");
+	else if (op == OR)
+		return ("OR");
+	else if (op == XOR)
+		return ("XOR");
+	else if (op == ZJMP)
+		return ("ZJMP");
+	else if (op == LDI)
+		return ("LDI");
+	else if (op == STI)
+		return ("STI");
+	else if (op == FORK)
+		return ("FORK");
+	else if (op == LLD)
+		return ("LLD");
+	else if (op == LLDI)
+		return ("LLDI");
+	else if (op == LFORK)
+		return ("LFORK");
+	else if (op == AFF)
+		return ("AFF");
+	return ("INVALID INSTRUCTION");
 }
 
 int			ft_get_args(t_vm *env, t_champions *champ, int op)
@@ -115,10 +93,7 @@ int			ft_get_args(t_vm *env, t_champions *champ, int op)
 	}
 	count = ft_count_to_next(nbr, op);
 
-	// ft_put((char)'[');
-	// ft_print_instruct(op);
-	// ft_put("]\n");
-	// ft_put(" [%d] [%d] [%d]\n", nbr[0], nbr[1], nbr[2]);
+	!IS_GRAPH && IS_VERBOSE ? ft_put("[{10}%s{0}]\n", ft_instruct_name(op)) : 0;
 
 	op == LIVE ? ft_corewar_live(env, champ, nbr) : 0;
 	op == LD ? ft_corewar_ld(env, champ, nbr) : 0;

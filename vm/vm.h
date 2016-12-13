@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/13 18:13:23 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/13 18:18:44 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,15 +135,15 @@ void			ft_corewar_xor(t_vm *env, t_champions *champ, int *nbr);
 ** NCURSE
 */
 void			ft_init_ncurse(t_vm *env);
-void			ft_dump_ncurse(t_vm *env, const void *addr, size_t size);
 void			ft_clear_ncurse(t_vm *env);
+void			ft_reload_windows(t_vm *env);
 
 
 
 /*
-** TMP
+** DUMP
 */
-void	ft_DEBUG_display_champions(t_vm *env);
 void			ft_dump(const void *addr, size_t size);
+void			ft_dump_ncurse(t_vm *env, const void *addr, size_t size);
 
 #endif
