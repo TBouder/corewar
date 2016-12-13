@@ -6,13 +6,14 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 15:58:23 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/13 18:10:36 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/13 18:18:28 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
 #define IS_GRAPH env->options->flags['g']
+#define IS_VERBOSE env->options->flags['v']
 
 void	ft_verbose(t_vm *env, t_champions *champion, int part)
 {
@@ -29,19 +30,6 @@ void	ft_verbose(t_vm *env, t_champions *champion, int part)
 		ft_put("New PC : {14}%d{0}\n", champion->pc);
 		ft_put("The next cycle : {14}%d{0}\n\n\n", champion->next_cycle);
 	}
-}
-
-void	ft_reload_windows(t_vm *env)
-{
-	wclear(env->main);
-	wclear(env->info);
-	ft_dump_ncurse(env, env->map, MEM_SIZE);
-	wprintw(env->info, "Cycle : %d", env->cycle);
-
-	wrefresh(env->main);
-	wrefresh(env->info);
-	usleep(12000);
-	// getch();                // On attend que l'utilisateur appui sur une touche pour quitter
 }
 
 int		ft_one_isalive(t_vm *env)
@@ -117,9 +105,9 @@ void	ft_foreach_champ(t_vm *env)
 		{
 			if (env->cycle == champion->next_cycle)
 			{
-				!IS_GRAPH ? ft_verbose(env, champion, 1) : 0;
+				!IS_GRAPH && IS_VERBOSE ? ft_verbose(env, champion, 1) : 0;
 				ft_exec_instruct(env, champion);
-				!IS_GRAPH ? ft_verbose(env, champion, 2) : 0;
+				!IS_GRAPH && IS_VERBOSE ? ft_verbose(env, champion, 2) : 0;
 			}
 		}
 		list = list->next;
@@ -132,6 +120,7 @@ void	ft_fight(t_vm *env)
 	while (ft_one_isalive(env) && v++ < 100000)
 	{
 		IS_GRAPH ? ft_reload_windows(env) : 0;
+
 		ft_foreach_champ(env);
 
 		if (env->cpt_to_die == env->cycle_to_die)
