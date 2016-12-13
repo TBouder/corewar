@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/13 12:38:02 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/13 12:51:25 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void		ft_corewar_ldi(t_vm *env, t_champions *champ, int *nbr)
 		env->buf = ft_set_buffer(nbr[2]);
 		env->arg3 = ft_byte_to_str(&env->map[pc], env->buf);
 
+		ft_put("{9}%d\n{0}", (arg1 % IDX_MOD)); //POSITION DE L'ADRESSE
+
 		if (IS_IND(nbr[0]))
 			env->arg1 = env->map[(champ->pc - 1 + env->arg1) % M];
 		if (IS_REG(nbr[0]))
@@ -50,7 +52,7 @@ void		ft_corewar_ldi(t_vm *env, t_champions *champ, int *nbr)
 
 		sum_idx = env->arg1 + env->arg2; //SERA UNE ADRESSE DANS LAQUELLE ON VA LIRE UNE VALEUR DE LA TAILLE D'UN REGISTRE QU'ON MET DANS REG[env->arg3]
 
-		ft_print_memory(env->map, 160);
+		ft_print_memory(env->map, 80);
 
 		champ->reg[env->arg3] = ft_byte_to_str(&env->map[sum_idx % M], 1);
 		ft_put("\033[104mr%d = 0x%x{0}\n", env->arg3, champ->reg[env->arg3]);
@@ -84,7 +86,7 @@ void		ft_corewar_lldi(t_vm *env, t_champions *champ, int *nbr)
 
 		sum_idx = env->arg1 + env->arg2; //SERA UNE ADRESSE DANS LAQUELLE ON VA LIRE UNE VALEUR DE LA TAILLE D'UN REGISTRE QU'ON MET DANS REG[env->arg3]
 
-		ft_print_memory(env->map, 160);
+		ft_print_memory(env->map, 80);
 
 		champ->reg[env->arg3] = ft_byte_to_str(&env->map[(sum_idx % I) % M], 1);
 		ft_put("\033[104mr%d = 0x%x{0}\n", env->arg3, champ->reg[env->arg3]);
