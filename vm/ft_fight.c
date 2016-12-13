@@ -6,11 +6,43 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 15:58:23 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/12 20:07:16 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/13 18:10:36 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
+
+#define IS_GRAPH env->options->flags['g']
+
+void	ft_verbose(t_vm *env, t_champions *champion, int part)
+{
+	if (part == 1)
+	{
+		ft_put("{9}------{0} Champion {14}%d{0} ({14}%s{0}) %s{9}------{0}\n",
+		champion->champ_id, champion->name,
+		champion->is_fork ? "({11}Forked champion{0}) " : "");
+		ft_put("Current cycle : {14}%d{0}\n", env->cycle);
+		ft_put("Current PC : {14}%d{0}\n", champion->pc);
+	}
+	if (part == 2)
+	{
+		ft_put("New PC : {14}%d{0}\n", champion->pc);
+		ft_put("The next cycle : {14}%d{0}\n\n\n", champion->next_cycle);
+	}
+}
+
+void	ft_reload_windows(t_vm *env)
+{
+	wclear(env->main);
+	wclear(env->info);
+	ft_dump_ncurse(env, env->map, MEM_SIZE);
+	wprintw(env->info, "Cycle : %d", env->cycle);
+
+	wrefresh(env->main);
+	wrefresh(env->info);
+	usleep(12000);
+	// getch();                // On attend que l'utilisateur appui sur une touche pour quitter
+}
 
 int		ft_one_isalive(t_vm *env)
 {
@@ -68,10 +100,7 @@ void	ft_exec_instruct(t_vm *env, t_champions *champion)
 	champ_pc = champion->pc;
 	champion->next_cycle = env->cycle;
 	if (champ_pc < (int)champion->prog_size)
-	{
 		champion->next_cycle += ft_get_args(env, champion, (int)env->map[champ_pc]);
-		ft_put("Next action in {11}%d{0} loops\n\n", champion->next_cycle);
-	}
 
 }
 
@@ -88,7 +117,9 @@ void	ft_foreach_champ(t_vm *env)
 		{
 			if (env->cycle == champion->next_cycle)
 			{
+				!IS_GRAPH ? ft_verbose(env, champion, 1) : 0;
 				ft_exec_instruct(env, champion);
+				!IS_GRAPH ? ft_verbose(env, champion, 2) : 0;
 			}
 		}
 		list = list->next;
@@ -98,9 +129,9 @@ void	ft_foreach_champ(t_vm *env)
 void	ft_fight(t_vm *env)
 {
 	int v = 0;
-	while (ft_one_isalive(env) && v++ < 1000)
+	while (ft_one_isalive(env) && v++ < 100000)
 	{
-
+		IS_GRAPH ? ft_reload_windows(env) : 0;
 		ft_foreach_champ(env);
 
 		if (env->cpt_to_die == env->cycle_to_die)

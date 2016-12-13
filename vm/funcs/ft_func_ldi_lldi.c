@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/13 12:48:32 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/13 15:32:34 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ static int	ft_set_buffer(int nbr)
 
 void		ft_corewar_ldi(t_vm *env, t_champions *champ, int *nbr)
 {
-	ft_put("{9}----LDI----{0}\n");
 	int		pc;
 	int		buffer;
 	int		arg1;
@@ -108,7 +107,6 @@ void		ft_corewar_ldi(t_vm *env, t_champions *champ, int *nbr)
 
 void		ft_corewar_lldi(t_vm *env, t_champions *champ, int *nbr)
 {
-	ft_put("{9}----LLDI----{0}\n");
 	int		pc;
 	int		buffer;
 	int		arg1;

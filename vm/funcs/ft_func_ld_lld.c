@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/13 12:48:28 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/13 15:32:28 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ static int	ft_set_buffer(int nbr)
 
 void		ft_corewar_lld(t_vm *env, t_champions *champ, int *nbr)
 {
-	ft_put("{9}----LLD----{0}\n");
 	int		pc;
 
 	pc = champ->pc + 1;
@@ -47,7 +46,6 @@ void		ft_corewar_lld(t_vm *env, t_champions *champ, int *nbr)
 
 void		ft_corewar_ld(t_vm *env, t_champions *champ, int *nbr)
 {
-	ft_put("{9}----LD----{0}\n");
 	int		pc;
 
 	pc = champ->pc + 1;

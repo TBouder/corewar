@@ -17,7 +17,33 @@
 	add r2, r7, r3		#r3 = r2 + r7 -> 0x4 + 0x44 -> 'H'
 	aff r3				#Affiche r3 -> 'H'
 	live %1
-	live %5
+	; 1 CHAMP
+	st r2, r3			#Stock r2 dans r3
+	st r2, 42			#Stock r2 dans l'adresse PC + (42 % IDX_MOD)
+
+	fork %3
+	; 2 CHAMP
+	fork %10
+	; 3 CHAMP
+	fork %-5
+	st r2, 79			#Stock r2 dans r3
+	; 4 CHAMP
+	; fork %5
+	; 5 CHAMP
+	; live %5
+
+
+# 30 + 3 = 43
+
+# 36 + 3 = 39
+# 36 +
+
+# 39 +
+# 39 +
+# 39 +
+# 39 +
+
+
 	; ; TEST DE LLD DIRECT ET INDIRECT
 	; ################################
 	; lld %68, r2			#Met %68 dans r2 -> D
