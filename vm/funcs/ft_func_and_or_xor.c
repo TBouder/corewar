@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/13 12:48:21 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/13 15:32:18 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,18 +58,15 @@ void	ft_and_or_xor_helper(t_vm *env, t_champions *champ, int *nbr, int op)
 
 void		ft_corewar_and(t_vm *env, t_champions *champ, int *nbr)
 {
-	ft_put("{9}----AND----{0}\n");
 	ft_and_or_xor_helper(env, champ, nbr, 6);
 }
 
 void		ft_corewar_or(t_vm *env, t_champions *champ, int *nbr)
 {
-	ft_put("{9}----OR----{0}\n");
 	ft_and_or_xor_helper(env, champ, nbr, 7);
 }
 
 void		ft_corewar_xor(t_vm *env, t_champions *champ, int *nbr)
 {
-	ft_put("{9}----XOR----{0}\n");
 	ft_and_or_xor_helper(env, champ, nbr, 8);
 }

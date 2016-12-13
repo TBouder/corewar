@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/13 12:48:44 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/13 15:32:46 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,4 @@ void	ft_corewar_zjmp(t_vm *env, t_champions *champ, int *nbr)
 		ft_printf("{10}CARRY == 1{0}\n");
 		champ->pc += ft_byte_to_str(&env->map[pc], ft_set_buffer(nbr[0]));
 	}
-	ft_put("{9}----ZJMP----{0}\n");
 }

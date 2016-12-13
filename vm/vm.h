@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/13 13:00:48 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/13 18:13:23 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@
 # include "op.h"
 # include <errno.h>
 # include "ft_macro.h"
+# include <ncurses.h>
 
-typedef int		bool;
+// typedef int		bool;
 
 typedef struct		s_champions
 {
@@ -38,6 +39,8 @@ typedef struct		s_champions
 	int				exist;				//Le champion existe t'il encore ?
 	int				cycle;				//Ya une histoire de cycle
 	int				next_cycle;
+
+	int				is_fork;
 }					t_champions;
 
 typedef struct		s_vm
@@ -66,12 +69,17 @@ typedef struct		s_vm
 
 	header_t		*header;			//header struct
 	char			*map;				//Total map
+
+//NCURSE
+	WINDOW	*main;
+	WINDOW	*info;
+
 }					t_vm;
 
 /*
 ** main.c
 */
-void			ft_error_asm(t_vm *env, char *msg, int clear);
+void			ft_error_vm(t_vm *env, char *msg, int clear);
 
 void			ft_fight(t_vm *env);
 
@@ -79,6 +87,7 @@ void			ft_fight(t_vm *env);
 ** ft_init.c
 */
 void			ft_init_env(t_vm *env, int part);
+void			ft_add_champion(t_vm *env, t_champions *champion, int id, int pc);
 
 
 /*
@@ -91,7 +100,7 @@ void			ft_extract_champion(t_vm *env);
 ** ft_func_part1
 */
 int				*ft_send_args(char *bin);
-int				*ft_get_size(t_vm *env, t_champions *champ, int is_not_live);
+int				*ft_get_size(t_vm *env, t_champions *champ);
 int				ft_count_to_next(int *nbr, int op);
 int				ft_byte_to_str(char *str, int len);
 
@@ -120,5 +129,21 @@ void			ft_corewar_sub(t_vm *env, t_champions *champ, int *nbr);
 void			ft_corewar_and(t_vm *env, t_champions *champ, int *nbr);
 void			ft_corewar_or(t_vm *env, t_champions *champ, int *nbr);
 void			ft_corewar_xor(t_vm *env, t_champions *champ, int *nbr);
+
+
+/*
+** NCURSE
+*/
+void			ft_init_ncurse(t_vm *env);
+void			ft_dump_ncurse(t_vm *env, const void *addr, size_t size);
+void			ft_clear_ncurse(t_vm *env);
+
+
+
+/*
+** TMP
+*/
+void	ft_DEBUG_display_champions(t_vm *env);
+void			ft_dump(const void *addr, size_t size);
 
 #endif
