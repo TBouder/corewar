@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 17:48:28 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/13 17:00:43 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/13 18:37:52 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void			ft_init_env(t_vm *env, int part)
 	{
 		env->options = NULL;
 		env->nb_champ = 0;
+		env->dump_cycle = 0;
 	}
 	else
 	{

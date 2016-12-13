@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/13 18:18:44 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/14 00:06:28 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct		s_champions
 typedef struct		s_vm
 {
 	t_options		*options;			//Flags
+	int				dump_cycle;
 
 	t_champions		*winner;			//WINNER
 	t_list			*list_champions;
@@ -136,7 +137,7 @@ void			ft_corewar_xor(t_vm *env, t_champions *champ, int *nbr);
 */
 void			ft_init_ncurse(t_vm *env);
 void			ft_clear_ncurse(t_vm *env);
-void			ft_reload_windows(t_vm *env);
+void			ft_reload_windows(t_vm *env, int part);
 
 
 

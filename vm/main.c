@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 19:42:02 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/13 18:13:15 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/14 00:02:13 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,51 @@ void			ft_verif_extension(t_vm *env, char **av, int i)
 }
 /******************************************************************************/
 
+static void		ft_init_options(t_options *options)
+{
+	int		k;
+
+	k = 0;
+	while (k < 122)
+		options->flags[k++] = FALSE;
+}
+
+static void		ft_extract_dump(t_vm *env, char **av, t_options *flag, int *i)
+{
+	flag->flags['d'] = TRUE;
+	*i += 1;
+	if (ft_isstrnum(av[*i]))
+		env->dump_cycle = ft_atoi(av[*i]);
+	else
+		*i -= 1;
+}
+
+static int		ft_get_flags(t_vm *env, char **av, t_options *options)
+{
+	int		i;
+	int		j;
+	int		value;
+
+	i = 1;
+	ft_init_options(options);
+	while (av[i] && av[i][0] == '-' && ft_isalnum(av[i][1]))
+	{
+		j = 1;
+		if (ft_isstrstr(av[i], "-dump") || ft_isstrstr(av[i], "-d"))
+			ft_extract_dump(env, av, options, &i);
+		else
+		{
+			while (av[i][j] != '\0' && ft_isalnum(av[i][j]))
+			{
+				value = av[i][j++];
+				options->flags[value] = TRUE;
+			}
+		}
+		i++;
+	}
+	return (i);
+}
+
 static void		ft_put_champion_map(t_vm *env)
 {
 	t_list			*list;
@@ -139,7 +184,7 @@ int				main(int ac, char **av)
 
 	ft_init_env(&env, 0);
 	env.options = (t_options *)malloc(sizeof(t_options));
-	i = ft_extract_options(av, env.options);
+	i = ft_get_flags(&env, av, env.options);
 	if (i == ac)
 		ft_error_vm(&env, "{9}Error{0} : No champions", 1);
 	else if (ac - i >= 1 && ac - i <= 4)
