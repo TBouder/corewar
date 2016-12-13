@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/12 21:33:54 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/13 12:38:02 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void		ft_corewar_lldi(t_vm *env, t_champions *champ, int *nbr)
 		env->arg3 = ft_byte_to_str(&env->map[pc], env->buf);
 
 		if (IS_IND(nbr[0]))
-			env->arg1 = env->map[LLDI_ARG_5 % M];
+			env->arg1 = env->map[(champ->pc - 1 + env->arg1) % M];
 		if (IS_REG(nbr[0]))
 			env->arg1 = champ->reg[env->arg1];
 		if (IS_REG(nbr[1]))
