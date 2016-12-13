@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/12 20:35:03 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/13 13:00:48 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,11 +120,5 @@ void			ft_corewar_sub(t_vm *env, t_champions *champ, int *nbr);
 void			ft_corewar_and(t_vm *env, t_champions *champ, int *nbr);
 void			ft_corewar_or(t_vm *env, t_champions *champ, int *nbr);
 void			ft_corewar_xor(t_vm *env, t_champions *champ, int *nbr);
-
-/*
-** TMP
-*/
-void		ft_print_arg_count(int *nbr, int count, int pc);
-
 
 #endif
