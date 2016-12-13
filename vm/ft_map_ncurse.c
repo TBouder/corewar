@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 16:20:23 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/13 18:18:27 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/14 00:16:13 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,20 @@ void			ft_clear_ncurse(t_vm *env)
 	free(env->info);
 }
 
-void			ft_reload_windows(t_vm *env)
+void			ft_reload_windows(t_vm *env, int part)
 {
-	wclear(env->main);
-	wclear(env->info);
-	ft_dump_ncurse(env, env->map, MEM_SIZE);
-	wprintw(env->info, "Cycle : %d", env->cycle);
-
-	wrefresh(env->main);
-	wrefresh(env->info);
-	usleep(12000);
-	// getch();                // On attend que l'utilisateur appui sur une touche pour quitter
+	if (part == 1)
+	{
+		wclear(env->main);
+		ft_dump_ncurse(env, env->map, MEM_SIZE);
+		usleep(12000);
+		wrefresh(env->main);
+	}
+	else if (part == 2)
+	{
+		wclear(env->info);
+		wprintw(env->info, "Cycle : %d", env->cycle);
+		usleep(12000);
+		wrefresh(env->info);
+	}
 }

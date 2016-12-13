@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 23:27:37 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/13 18:25:23 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/13 23:51:33 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int			ft_get_args(t_vm *env, t_champions *champ, int op)
 	int		count;
 
 	if (op != LIVE && op != FORK)
-		nbr = ft_get_size(env, champ); //Va, entre autre, faire +1 au pc si needed
+		nbr = ft_get_size(env, champ);
 	else
 	{
 		nbr = ft_nbrnew(3);

@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 15:58:23 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/13 18:18:28 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/14 00:14:29 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 #define IS_GRAPH env->options->flags['g']
 #define IS_VERBOSE env->options->flags['v']
+#define IS_DUMP env->options->flags['d']
 
 void	ft_verbose(t_vm *env, t_champions *champion, int part)
 {
@@ -117,9 +118,19 @@ void	ft_foreach_champ(t_vm *env)
 void	ft_fight(t_vm *env)
 {
 	int v = 0;
+
+	IS_GRAPH ? ft_reload_windows(env, 1) : 0; //CREATION OF THE MAP
+	IS_GRAPH ? ft_reload_windows(env, 2) : 0; //CREATION OF THE INFOS
+
 	while (ft_one_isalive(env) && v++ < 100000)
 	{
-		IS_GRAPH ? ft_reload_windows(env) : 0;
+		if (IS_DUMP && env->cycle == env->dump_cycle)
+		{
+			ft_dump(env->map, MEM_SIZE);
+			break ;
+		}
+
+		IS_GRAPH ? ft_reload_windows(env, 2) : 0;
 
 		ft_foreach_champ(env);
 

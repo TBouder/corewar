@@ -6,11 +6,12 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/13 15:32:42 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/14 00:09:56 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../vm.h"
+#define IS_GRAPH env->options->flags['g']
 
 static int			ft_set_buffer(int nbr)
 {
@@ -44,6 +45,7 @@ void	ft_corewar_st(t_vm *env, t_champions *champ, int *nbr)
 		else if (IS_IND(nbr[1]))
 			env->map[(champ->pc - 1 + (env->arg2 % I)) % M] = champ->reg[env->arg1];
 	}
+	IS_GRAPH ? ft_reload_windows(env, 1) : 0;
 }
 
 /*
@@ -77,4 +79,5 @@ void	ft_corewar_sti(t_vm *env, t_champions *champ, int *nbr)
 
 		env->map[(sum_idx % I) % M] = champ->reg[env->arg1];
 	}
+	IS_GRAPH ? ft_reload_windows(env, 1) : 0;
 }
