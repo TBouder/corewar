@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_func_zjmp.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
+/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/13 12:48:44 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/13 20:56:29 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,17 @@ static int	ft_set_buffer(int nbr)
 
 void	ft_corewar_zjmp(t_vm *env, t_champions *champ, int *nbr)
 {
+	ft_put("{9}----ZJMP----{0}\n");
 	int		pc;
 
 	pc = champ->pc + 1;
-	ft_printf("CARRY == %d\n", champ->carry);
 	if (champ->carry == 1 && IS_DIR(nbr[0]))
 	{
-		ft_printf("{10}CARRY == 1{0}\n");
-		champ->pc += ft_byte_to_str(&env->map[pc], ft_set_buffer(nbr[0]));
+		ft_printf("{10}CARRY %d{0}\n", champ->carry);
+		ft_printf("env->map[%d]\n", (champ->pc + ft_byte_to_str(&env->map[pc], ft_set_buffer(nbr[0]))) % M);
+		champ->pc = (champ->pc + ft_byte_to_str(&env->map[pc], ft_set_buffer(nbr[0]))) % M;
 	}
-	ft_put("{9}----ZJMP----{0}\n");
+	else
+		champ->pc += ft_count_to_next(nbr, ZJMP);
+	// ft_printf("{10}%d{0}\n", champ->pc);
 }
