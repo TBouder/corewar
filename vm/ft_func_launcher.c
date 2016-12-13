@@ -6,12 +6,16 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 23:27:37 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/12 18:50:34 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/13 13:00:37 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
+/*
+** The ft_ret_cycle() function takes an opcode as paramater and according to it,
+** returns the number of cycle to perform before calling the next instruction
+*/
 static int	ft_ret_cycle(int op)
 {
 	if (op == AFF)
@@ -35,6 +39,10 @@ static int	ft_ret_cycle(int op)
 	return (0);
 }
 
+/*
+** The ft_has_next() function takes an opcode as paramater and returns 1 if the
+** instruction has a weigth.
+*/
 static int	ft_has_next(int op)
 {
 	if (op == LIVE || op == ZJMP || op == FORK || op == LFORK)
@@ -55,7 +63,6 @@ int			ft_get_args(t_vm *env, t_champions *champ, int op)
 		nbr[0] = 10;
 	}
 	count = ft_count_to_next(nbr, op);
-	ft_print_arg_count(nbr, count, champ->pc); ////DEBUG
 
 	op == LIVE ? ft_corewar_live(env, champ, nbr) : 0;
 	op == LD ? ft_corewar_ld(env, champ, nbr) : 0;

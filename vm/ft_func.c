@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 14:16:55 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/12 18:45:37 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/13 13:03:34 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,24 +59,26 @@ int		ft_byte_to_str(char *str, int len)
 
 int		*ft_get_size(t_vm *env, t_champions *champ, int is_not_live)
 {
+	char	*size;
+	char	*bin;
+	int		len;
+	int		i;
+
 	if (is_not_live)
 		champ->pc += 1;
-	int tmp = ft_byte_to_str(&env->map[champ->pc], 1);
-	char *tmp2 = ft_itoa_base(tmp, 2);
-
-	char *bin = ft_strnew(8);
-	int len = ft_strlen(tmp2);
-	int x = 7;
-	while (x >= 0)
+	size = ft_itoa_base(ft_byte_to_str(&env->map[champ->pc], 1), 2);
+	bin = ft_strnew(8);
+	len = ft_strlen(size);
+	i = 7;
+	while (i >= 0)
 	{
 		if ((len - 1) >= 0)
-			bin[x] = tmp2[len - 1];
+			bin[i] = size[len - 1];
 		else
-			bin[x] = '0';
-		x--;
+			bin[i] = '0';
+		i--;
 		len--;
 	}
-
 	return (ft_send_args(bin));
 }
 
@@ -109,14 +111,4 @@ int		ft_count_to_next(int *nbr, int op)
 	if (op == 1)
 		count = 4;
 	return (count + 1); //On passe a l'arg suivant
-}
-
-void		ft_print_arg_count(int *nbr, int count, int pc)
-{
-	if (0)
-	{
-		ft_put("ARG N_1 -> {13}%d{0} || ARG N_2 -> {13}%d{0} || ARG N_3 -> {13}%d{0}\n",
-		nbr[0], nbr[1], nbr[2]);
-		ft_put("COUNT -> {13}%d{0} || PC -> {13}%d{0}\n", count, pc);
-	}
 }
