@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 15:58:23 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/14 16:57:58 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/14 17:07:30 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,10 @@ void	ft_exec_instruct(t_vm *env, t_champions *champion)
 	champion->next_cycle = env->cycle;
 	// ft_printf("{10}%d, %d{0}\n", env->cycle, champ_pc);
 	if (champ_pc < (int)champion->prog_size)
+	{
 		champion->next_cycle += ft_get_args(env, champion, (int)env->map[champ_pc]);
+		// ft_put("Next action in {11}%d{0} loops\n\n", champion->next_cycle);
+	}
 }
 
 void	ft_foreach_champ(t_vm *env)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_func_live_aff.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
+/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 14:16:55 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/14 16:13:42 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/14 17:47:10 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void			ft_corewar_aff(t_vm *env, t_champions *champ, int *nbr)
 		}
 		else
 		{
-			ft_put("Champion {14}%d{0} ({14}%s{0}) ask to print",
+			ft_put("Champion {14}%d{0} ({14}%s{0}) ask to print ",
 			champ->champ_id, champ->name);
 			ft_put("{10}r%d{0} : [{10}%C{0}] [{10}0x%x{0}]\n", value,
 			champ->reg[value] % 256, champ->reg[value] % 256);
