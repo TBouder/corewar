@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 16:20:23 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/14 16:19:46 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/14 17:17:01 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,17 @@ void			ft_init_ncurse(t_vm *env)
 	box(env->main_border, ACS_VLINE, ACS_HLINE);
 	box(env->info_border, ACS_VLINE, ACS_HLINE);
 	box(env->notif_border, ACS_VLINE, ACS_HLINE);
-
 	noecho();	//N'affiche pas les char tapes
 	curs_set(FALSE); //N'affiche pas le curseur
 	// cbreak();	//Essaye de catch un char
-	getch(); //TO START
 	nodelay(stdscr, TRUE);	//getch n'est plus bloquant
+
+	start_color();
+	init_color(COLOR_BLACK, 224, 248, 299);
+	init_pair(1, COLOR_CYAN, COLOR_BLACK);
+	init_pair(2, COLOR_WHITE, COLOR_BLACK);
+
+	// getch(); //TO START
 	refresh();
 
 }
@@ -83,8 +88,25 @@ void			ft_reload_windows(t_vm *env, int part)
 	else if (part == 2) //LES INFOS
 	{
 		werase(env->info);
-		wprintw(env->info, "Cycle : %d\n", env->cycle);
-		wprintw(env->info, "Sleep delay : %d\n", env->usleep);
+		wattron(env->info, COLOR_PAIR(1) | A_BOLD);
+		wprintw(env->info, "%*s\n", ((COLS_INFO - 3) / 2) + 11,"-----INFORMATIONS-----");
+		wattroff(env->info, COLOR_PAIR(1) | A_BOLD);
+
+		wprintw(env->info, "Cycle : ");
+		wattron(env->info, COLOR_PAIR(1) | A_BOLD);
+		wprintw(env->info, "%d\n", env->cycle);
+		wattroff(env->info, COLOR_PAIR(1) | A_BOLD);
+
+		wprintw(env->info, "Sleep delay : ", env->usleep);
+		wattron(env->info, COLOR_PAIR(1) | A_BOLD);
+		wprintw(env->info, "%d\n", env->usleep);
+		wattroff(env->info, COLOR_PAIR(1) | A_BOLD);
+
+		wprintw(env->info, "Number of Champion(s) : ");
+		wattron(env->info, COLOR_PAIR(1) | A_BOLD);
+		wprintw(env->info, "%d\n", env->nb_champ);
+		wattroff(env->info, COLOR_PAIR(1) | A_BOLD);
+
 		wnoutrefresh(env->info);
 	}
 	else if (part == 3) //LES NOTIFS

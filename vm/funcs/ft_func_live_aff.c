@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 14:16:55 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/14 17:47:10 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/14 18:42:51 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,17 @@ void			ft_corewar_live(t_vm *env, t_champions *champ, int *nbr)
 		if ((list = ft_find_live(env, player_alive)))
 		{
 			((t_champions *)list->content)->is_alive += 1;
-
-			// ft_printf("Champion {14}%d{0} ({14}%s{0}) is {10}alive{0}\n", player_alive, ((t_champions *)list->content)->name);
+			if (IS_GRAPH)
+			{
+				wprintw(env->notif, "Champion %d (%s) is alive\n",
+				player_alive, ((t_champions *)list->content)->name);
+				ft_reload_windows(env, 3);
+			}
+			else
+			{
+				ft_put("Champion {14}%d{0} ({14}%s{0}) is {10}alive{0}\n",
+				player_alive, ((t_champions *)list->content)->name);
+			}
 		}
 	}
 }
