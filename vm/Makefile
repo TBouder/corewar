@@ -6,7 +6,7 @@
 #    By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/10/05 20:24:05 by tbouder           #+#    #+#              #
-#    Updated: 2016/12/13 12:50:32 by tbouder          ###   ########.fr        #
+#    Updated: 2016/12/13 18:17:05 by tbouder          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ HEADER 		=	vm.h
 #	SRC
 ################################################################################
 SRC			=	main.c ft_extract_champion.c ft_init.c ft_fight.c \
+				ft_dump_mem.c \
 				ft_func.c ft_func_launcher.c \
 				funcs/ft_func_live_aff.c \
 				funcs/ft_func_add_sub.c \
@@ -31,9 +32,11 @@ SRC			=	main.c ft_extract_champion.c ft_init.c ft_fight.c \
 				funcs/ft_func_zjmp.c \
 				funcs/ft_func_ldi_lldi.c \
 				funcs/ft_func_st_sti.c \
-				funcs/ft_func_ld_lld.c
+				funcs/ft_func_ld_lld.c \
+				ft_map_ncurse.c
 
 OBJ			=	main.o ft_extract_champion.o ft_init.o ft_fight.o \
+				ft_dump_mem.o \
 				ft_func.o ft_func_launcher.o \
 				funcs/ft_func_live_aff.o \
 				funcs/ft_func_add_sub.o \
@@ -42,7 +45,8 @@ OBJ			=	main.o ft_extract_champion.o ft_init.o ft_fight.o \
 				funcs/ft_func_zjmp.o \
 				funcs/ft_func_ldi_lldi.o \
 				funcs/ft_func_st_sti.o \
-				funcs/ft_func_ld_lld.o
+				funcs/ft_func_ld_lld.o \
+				ft_map_ncurse.o
 
 ################################################################################
 #	RULES
@@ -54,7 +58,7 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	# $(MAKE) re -C ../libft
 	$(CC) $(CFLAGS) -c $(SRC)
-	$(CC) -o $(NAME) $(OBJ) $(LIB)
+	$(CC) -o $(NAME) $(OBJ) $(LIB) -lncurses
 
 clean:
 	# $(MAKE) clean -C ../libft

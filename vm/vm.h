@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/13 17:48:10 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/14 16:54:35 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@
 # include "op.h"
 # include <errno.h>
 # include "ft_macro.h"
+# include <ncurses.h>
 
-typedef int		bool;
+// typedef int		bool;
 
 typedef struct		s_champions
 {
@@ -38,11 +39,14 @@ typedef struct		s_champions
 	int				exist;				//Le champion existe t'il encore ?
 	int				cycle;				//Ya une histoire de cycle
 	int				next_cycle;
+
+	int				is_fork;
 }					t_champions;
 
 typedef struct		s_vm
 {
 	t_options		*options;			//Flags
+	int				dump_cycle;
 
 	t_champions		*winner;			//WINNER
 	t_list			*list_champions;
@@ -66,12 +70,24 @@ typedef struct		s_vm
 
 	header_t		*header;			//header struct
 	char			*map;				//Total map
+
+//NCURSE
+	WINDOW	*main_border;
+	WINDOW	*main;
+	WINDOW	*info_border;
+	WINDOW	*info;
+	WINDOW	*notif_border;
+	WINDOW	*notif;
+
+	unsigned int	usleep;
+	unsigned int	nb_notif;
+
 }					t_vm;
 
 /*
 ** main.c
 */
-void			ft_error_asm(t_vm *env, char *msg, int clear);
+void			ft_error_vm(t_vm *env, char *msg, int clear);
 
 void			ft_fight(t_vm *env);
 
@@ -79,6 +95,7 @@ void			ft_fight(t_vm *env);
 ** ft_init.c
 */
 void			ft_init_env(t_vm *env, int part);
+void			ft_add_champion(t_vm *env, t_champions *champion, int id, int pc);
 
 
 /*
@@ -120,5 +137,21 @@ void			ft_corewar_sub(t_vm *env, t_champions *champ, int *nbr);
 void			ft_corewar_and(t_vm *env, t_champions *champ, int *nbr);
 void			ft_corewar_or(t_vm *env, t_champions *champ, int *nbr);
 void			ft_corewar_xor(t_vm *env, t_champions *champ, int *nbr);
+
+
+/*
+** NCURSE
+*/
+void			ft_init_ncurse(t_vm *env);
+void			ft_clear_ncurse(t_vm *env);
+void			ft_reload_windows(t_vm *env, int part);
+
+
+
+/*
+** DUMP
+*/
+void			ft_dump(const void *addr, size_t size);
+void			ft_dump_ncurse(t_vm *env, const void *addr, size_t size);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 17:46:14 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/12 20:19:16 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/14 12:38:38 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ static void		ft_extract_content_lst(t_vm *env, int i, t_list *champion)
 	CHAMPIONS->content = ft_strnew(CHAMPIONS->prog_size);
 	read_success = read(env->fd[i], CHAMPIONS->content, CHAMPIONS->prog_size);
 	if (read_success)
-		ft_print_memory(CHAMPIONS->content, CHAMPIONS->prog_size); //DEBUG
+		; // ft_print_memory(CHAMPIONS->content, CHAMPIONS->prog_size); //DEBUG
 	else
-		ft_error_asm(env, "{9}Error{0} : The magic doesn't work with the content ...", 1);
+		ft_error_vm(env, "{9}Error{0} : The magic doesn't work with the content ...", 1);
 }
 
 static void		ft_extract_header_lst(t_vm *env, int i, t_list *champion)
@@ -76,16 +76,16 @@ static void		ft_extract_header_lst(t_vm *env, int i, t_list *champion)
 		CHAMPIONS->magic = ft_rev_hex(hex);
 		ft_strdel(&hex);
 		if (CHAMPIONS->magic != COREWAR_EXEC_MAGIC)
-			ft_error_asm(env, "{9}Error{0} : This is a bad magic ...", 1);
+			ft_error_vm(env, "{9}Error{0} : This is a bad magic ...", 1);
 		hex = ft_itoa_base(env->header[i].prog_size, 16);
 		CHAMPIONS->prog_size = ft_rev_hex(hex);
 		ft_strdel(&hex);
 		if (CHAMPIONS->prog_size > CHAMP_MAX_SIZE)
-			ft_error_asm(env, "{9}Error{0} : Champion size is over 682", 1);
+			ft_error_vm(env, "{9}Error{0} : Champion size is over 682", 1);
 		env->total_size += CHAMPIONS->prog_size;
 	}
 	else
-		ft_error_asm(env, "{9}Error{0} : The magic doesn't work with the header ...", 1);
+		ft_error_vm(env, "{9}Error{0} : The magic doesn't work with the header ...", 1);
 }
 
 
