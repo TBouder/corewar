@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/14 00:06:28 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/14 15:55:22 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,15 @@ typedef struct		s_vm
 	char			*map;				//Total map
 
 //NCURSE
+	WINDOW	*main_border;
 	WINDOW	*main;
+	WINDOW	*info_border;
 	WINDOW	*info;
+	WINDOW	*notif_border;
+	WINDOW	*notif;
+
+	unsigned int	usleep;
+	unsigned int	nb_notif;
 
 }					t_vm;
 

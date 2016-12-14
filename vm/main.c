@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 19:42:02 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/14 00:02:13 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/14 12:38:04 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,24 +155,24 @@ static void		ft_put_champion_map(t_vm *env)
 
 static void		ft_launcher(t_vm *env, char **av, int i)
 {
-	t_list		*list;
+	// t_list		*list;
 	ft_verif_extension(env, av, i);
 	ft_extract_champion(env);
 	ft_put_champion_map(env);
 
-	int		x = 0;
-	list = env->list_champions;
-	while (list)
-	{
-		ft_printf("[{10}%s{0}][{14}%d{0}]\n", env->filename[x], env->fd[x]);
-		ft_printf("\t[%s]\n", ((t_champions *)list->content)->name);
-		ft_printf("\t[%s]\n", ((t_champions *)list->content)->comment);
-		ft_printf("\t[%x]\n", ((t_champions *)list->content)->magic);
-		ft_printf("\t[%d]\n", ((t_champions *)list->content)->prog_size);
-		ft_printf("\t[%d]\n", ((t_champions *)list->content)->starting_pos);
-		list = list->next;
-		x++;
-	}
+	// int		x = 0;
+	// list = env->list_champions;
+	// while (list)
+	// {
+	// 	ft_printf("[{10}%s{0}][{14}%d{0}]\n", env->filename[x], env->fd[x]);
+	// 	ft_printf("\t[%s]\n", ((t_champions *)list->content)->name);
+	// 	ft_printf("\t[%s]\n", ((t_champions *)list->content)->comment);
+	// 	ft_printf("\t[%x]\n", ((t_champions *)list->content)->magic);
+	// 	ft_printf("\t[%d]\n", ((t_champions *)list->content)->prog_size);
+	// 	ft_printf("\t[%d]\n", ((t_champions *)list->content)->starting_pos);
+	// 	list = list->next;
+	// 	x++;
+	// }
 
 	ft_fight(env);
 }

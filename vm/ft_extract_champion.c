@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 17:46:14 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/13 18:13:45 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/14 12:38:38 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static void		ft_extract_content_lst(t_vm *env, int i, t_list *champion)
 	CHAMPIONS->content = ft_strnew(CHAMPIONS->prog_size);
 	read_success = read(env->fd[i], CHAMPIONS->content, CHAMPIONS->prog_size);
 	if (read_success)
-		ft_print_memory(CHAMPIONS->content, CHAMPIONS->prog_size); //DEBUG
+		; // ft_print_memory(CHAMPIONS->content, CHAMPIONS->prog_size); //DEBUG
 	else
 		ft_error_vm(env, "{9}Error{0} : The magic doesn't work with the content ...", 1);
 }
