@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 19:42:02 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/14 12:38:04 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/14 17:21:07 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,13 +130,11 @@ static void		ft_put_champion_map(t_vm *env)
 {
 	t_list			*list;
 	t_champions		*champion;
-	int				i; //CHAMPION NUMBER
 	unsigned int	y; //POS IN MAP
 	unsigned int	z; //CONTENT OF CHAMP
 
-	i = 0;
 	list = env->list_champions;
-	while (i < env->nb_champ)
+	while (list)
 	{
 		champion = ((t_champions *)list->content);
 		y = champion->starting_pos;
@@ -148,7 +146,6 @@ static void		ft_put_champion_map(t_vm *env)
 			z++;
 			y++;
 		}
-		i++;
 		list = list->next;
 	}
 }
