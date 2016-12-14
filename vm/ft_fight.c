@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 15:58:23 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/14 17:19:30 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/14 18:28:08 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,7 @@ void	ft_exec_instruct(t_vm *env, t_champions *champion)
 
 	champ_pc = champion->pc;
 	champion->next_cycle = env->cycle;
-	if (champ_pc < (int)champion->prog_size)
-		champion->next_cycle += ft_get_args(env, champion, (int)env->map[champ_pc]);
-
+	champion->next_cycle += ft_get_args(env, champion, (int)env->map[champ_pc]);
 }
 
 void	ft_foreach_champ(t_vm *env)

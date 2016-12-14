@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/14 00:09:56 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/14 18:44:24 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,10 @@ void	ft_corewar_st(t_vm *env, t_champions *champ, int *nbr)
 		if (IS_REG(nbr[1]))
 			champ->reg[env->arg2] = champ->reg[env->arg1];
 		else if (IS_IND(nbr[1]))
+		{
 			env->map[(champ->pc - 1 + (env->arg2 % I)) % M] = champ->reg[env->arg1];
+			env->map_owner[(champ->pc - 1 + (env->arg2 % I)) % M] = champ->color;
+		}
 	}
 	IS_GRAPH ? ft_reload_windows(env, 1) : 0;
 }
@@ -78,6 +81,7 @@ void	ft_corewar_sti(t_vm *env, t_champions *champ, int *nbr)
 		sum_idx = env->arg2 + env->arg3;
 
 		env->map[(sum_idx % I) % M] = champ->reg[env->arg1];
+		env->map_owner[(sum_idx % I) % M] = champ->color;
 	}
 	IS_GRAPH ? ft_reload_windows(env, 1) : 0;
 }
