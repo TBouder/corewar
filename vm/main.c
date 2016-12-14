@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 19:42:02 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/14 17:21:07 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/14 18:43:41 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,8 @@ static void		ft_put_champion_map(t_vm *env)
 		{
 			//SI env->map[y] != 0 -> ERROR
 			env->map[y] = champion->content[z];
+			env->map_owner[y] = champion->color;
+			// env->map_owner[y * 2 + 1] = champion->color;
 			z++;
 			y++;
 		}
@@ -169,6 +171,26 @@ static void		ft_launcher(t_vm *env, char **av, int i)
 	// 	ft_printf("\t[%d]\n", ((t_champions *)list->content)->starting_pos);
 	// 	list = list->next;
 	// 	x++;
+	// }
+
+	// int x =0;
+	// while (x < MEM_SIZE * 2)
+	// {
+	// 	int j = 0;
+	// 	while (j < 64)
+	// 	{
+	// 		if (env->map_owner[x] == 0)
+	// 			ft_put("00");
+	// 		else
+	// 			ft_put("%d", env->map_owner[x]);
+	// 		x++;
+	// 		if (env->map_owner[x] == 0)
+	// 			ft_put("00 ");
+	// 		else
+	// 			ft_put("%d ", env->map_owner[x]);
+	// 		j++;
+	// 	}
+	// 	ft_put("\n");
 	// }
 
 	ft_fight(env);

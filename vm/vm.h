@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/14 16:54:35 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/14 18:58:10 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct		s_champions
 	int				next_cycle;
 
 	int				is_fork;
+	int				color;
 }					t_champions;
 
 typedef struct		s_vm
@@ -70,6 +71,7 @@ typedef struct		s_vm
 
 	header_t		*header;			//header struct
 	char			*map;				//Total map
+	int				*map_owner; //FOR COLORS
 
 //NCURSE
 	WINDOW	*main_border;
@@ -145,7 +147,7 @@ void			ft_corewar_xor(t_vm *env, t_champions *champ, int *nbr);
 void			ft_init_ncurse(t_vm *env);
 void			ft_clear_ncurse(t_vm *env);
 void			ft_reload_windows(t_vm *env, int part);
-
+void			ft_print_champion_color(t_champions *champion, WINDOW *win);
 
 
 /*
