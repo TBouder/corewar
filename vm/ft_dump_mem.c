@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 18:15:11 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/13 18:16:44 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/14 12:50:17 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,6 @@ static void		ft_print_hex_mem(char *add, size_t size)
 		{
 			ft_putchar(hex[(int)((unsigned char)add[i]) / 16]);
 			ft_putchar(hex[(int)((unsigned char)add[i]) % 16]);
-		}
-		else
-		{
-			ft_putchar(' ');
-			ft_putchar(' ');
 		}
 		if (i % 2)
 			ft_putchar(' ');
@@ -73,11 +68,6 @@ static void		ft_print_hex_mem_ncurse(t_vm *env, char *add, size_t size)
 		{
 			wprintw(env->main, "%c", hex[(int)((unsigned char)add[i]) / 16]);
 			wprintw(env->main, "%c", hex[(int)((unsigned char)add[i]) % 16]);
-		}
-		else
-		{
-			wprintw(env->main, " ");
-			wprintw(env->main, " ");
 		}
 		if (i % 2)
 			wprintw(env->main, " ");
