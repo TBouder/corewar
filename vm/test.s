@@ -202,6 +202,9 @@
 			aff r2
 		add r2, r3, r2
 		zjmp %:laba
+		add r2, r3, r2
+		zjmp %:laba
+		
 
 	#; TEST DE AND OR XOR IND
 		# ld %65, r2 #; Met A dans r2
