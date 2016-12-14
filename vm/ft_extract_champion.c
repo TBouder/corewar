@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 17:46:14 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/14 12:38:38 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/14 17:22:20 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int		ft_rev_hex(char *hex)
 	return (ret_value);
 }
 
-static void		ft_extract_starting_pos_lst(t_list *champion, int pos)
+static void		ft_extract_starting_pos_lst(int pos, t_list *champion)
 {
 	CHAMPIONS->starting_pos = pos;
 	CHAMPIONS->pc = pos;
@@ -102,7 +102,7 @@ void			ft_extract_champion(t_vm *env)
 	{
 		ft_extract_header_lst(env, i, list);
 		ft_extract_content_lst(env, i, list);
-		ft_extract_starting_pos_lst(list, i);
+		ft_extract_starting_pos_lst(pos, list);
 		pos += MEM_SIZE / env->nb_champ;
 		i++;
 		list = list->next;
