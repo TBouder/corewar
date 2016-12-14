@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 18:15:11 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/14 12:50:17 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/14 18:43:10 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void			ft_dump(const void *addr, size_t size)
 /*
 ** The ft_dump_ncurse() function dumps the memory with NCURSE
 */
-static void		ft_print_hex_mem_ncurse(t_vm *env, char *add, size_t size)
+static void		ft_print_hex_mem_ncurse(t_vm *env, char *add, size_t size, int *col)
 {
 	size_t		i;
 	char		*hex;
@@ -66,12 +66,17 @@ static void		ft_print_hex_mem_ncurse(t_vm *env, char *add, size_t size)
 	{
 		if (i < size)
 		{
+			if (env->map_owner[*col])
+				wattron(env->main, COLOR_PAIR(env->map_owner[*col]) | A_BOLD);
 			wprintw(env->main, "%c", hex[(int)((unsigned char)add[i]) / 16]);
 			wprintw(env->main, "%c", hex[(int)((unsigned char)add[i]) % 16]);
+			if (env->map_owner[*col])
+				wattroff(env->main, COLOR_PAIR(env->map_owner[*col]) | A_BOLD);
 		}
 		if (i % 2)
 			wprintw(env->main, " ");
 		i++;
+		*col += 1;
 	}
 	ft_strdel(&hex);
 }
@@ -79,15 +84,17 @@ static void		ft_print_hex_mem_ncurse(t_vm *env, char *add, size_t size)
 void			ft_dump_ncurse(t_vm *env, const void *addr, size_t size)
 {
 	int		offset;
+	int		owner;
 
 	offset = 0;
+	owner = 0;
 	while (size > 64)
 	{
-		ft_print_hex_mem_ncurse(env, (char *)addr + offset, 64);
+		ft_print_hex_mem_ncurse(env, (char *)addr + offset, 64, &owner);
 		wprintw(env->main, "\n");
 		offset += 64;
 		size -= 64;
 	}
-	ft_print_hex_mem_ncurse(env, (char *)addr + offset, size);
+	ft_print_hex_mem_ncurse(env, (char *)addr + offset, size, &owner);
 	wprintw(env->main, "\n");
 }

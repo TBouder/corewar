@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 16:20:23 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/14 17:17:01 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/14 18:27:57 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,35 @@ void			ft_init_ncurse(t_vm *env)
 
 	start_color();
 	init_color(COLOR_BLACK, 224, 248, 299);
-	init_pair(1, COLOR_CYAN, COLOR_BLACK);
-	init_pair(2, COLOR_WHITE, COLOR_BLACK);
+	init_color(42, 980, 643, 376);
+	init_color(43, 986, 541, 996);
+	init_color(44, 498, 866, 298);
+	init_color(45, 1000, 863, 274);
 
+	init_pair(1, COLOR_CYAN, COLOR_BLACK);
+	init_pair(42, 42, COLOR_BLACK);
+	init_pair(43, 43, COLOR_BLACK);
+	init_pair(44, 44, COLOR_BLACK);
+	init_pair(45, 45, COLOR_BLACK);
 	// getch(); //TO START
 	refresh();
 
+}
+
+void			ft_print_champion_color(t_champions *champion, WINDOW *win)
+{
+	if (!champion->is_fork)
+	{
+		wprintw(win, "Champion ");
+		wattron(win, COLOR_PAIR(champion->color) | A_BOLD);
+		wprintw(win, "%d", champion->champ_id);
+		wattroff(win, COLOR_PAIR(champion->color) | A_BOLD);
+		wprintw(win, " (");
+		wattron(win, COLOR_PAIR(champion->color) | A_BOLD);
+		wprintw(win, "%s", champion->name);
+		wattroff(win, COLOR_PAIR(champion->color) | A_BOLD);
+		wprintw(win, ")");
+	}
 }
 
 void			ft_clear_ncurse(t_vm *env)
@@ -104,8 +127,19 @@ void			ft_reload_windows(t_vm *env, int part)
 
 		wprintw(env->info, "Number of Champion(s) : ");
 		wattron(env->info, COLOR_PAIR(1) | A_BOLD);
-		wprintw(env->info, "%d\n", env->nb_champ);
+		wprintw(env->info, "%d\n\n\n\n\n", env->nb_champ);
 		wattroff(env->info, COLOR_PAIR(1) | A_BOLD);
+
+		t_list *list;
+
+		list = env->list_champions;
+		while (list)
+		{
+			ft_print_champion_color(((t_champions *)list->content), env->info);
+			if (!((t_champions *)list->content)->is_fork)
+				wprintw(env->info, ": \n");
+			list = list->next;
+		}
 
 		wnoutrefresh(env->info);
 	}

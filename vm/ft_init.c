@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 17:48:28 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/14 16:07:23 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/14 18:41:03 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void		ft_add_champion(t_vm *env, t_champions *champion, int id, int pc)
 	new_champion->cycle = champion ? champion->cycle : 0;
 	new_champion->next_cycle = champion ? champion->next_cycle : 0;
 	new_champion->is_fork = champion ? 1 : 0;
+	new_champion->color = champion ? champion->color : id + 42;
 	ft_lstend(&env->list_champions, new_champion, sizeof(t_champions));
 	// if (champion)
 		// ft_put("A new Champion, {14}%d{0} ({14}%s{0}) has been forked at {14}map[%d]{0} !\n", new_champion->champ_id, new_champion->name, new_champion->pc);
@@ -86,6 +87,7 @@ void			ft_init_env(t_vm *env, int part)
 
 		env->total_size = 0;
 		env->map = ft_strnew(MEM_SIZE);
+		env->map_owner = ft_nbrnew(MEM_SIZE);
 		env->winner = NULL;
 
 		env->cycle_to_die = CYCLE_TO_DIE;
