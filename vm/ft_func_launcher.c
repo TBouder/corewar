@@ -6,11 +6,14 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 23:27:37 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/13 18:44:29 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/14 16:56:42 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
+
+#define IS_GRAPH env->options->flags['g']
+#define IS_VERBOSE env->options->flags['v']
 
 /*
 ** The ft_ret_cycle() function takes an opcode as paramater and according to it,
@@ -39,6 +42,43 @@ static int	ft_ret_cycle(int op)
 	return (0);
 }
 
+char		*ft_instruct_name(int op)
+{
+	if (op == LIVE)
+		return ("LIVE");
+	else if (op == LD)
+		return ("LD");
+	else if (op == ST)
+		return ("ST");
+	else if (op == ADD)
+		return ("ADD");
+	else if (op == SUB)
+		return ("SUB");
+	else if (op == AND)
+		return ("AND");
+	else if (op == OR)
+		return ("OR");
+	else if (op == XOR)
+		return ("XOR");
+	else if (op == ZJMP)
+		return ("ZJMP");
+	else if (op == LDI)
+		return ("LDI");
+	else if (op == STI)
+		return ("STI");
+	else if (op == FORK)
+		return ("FORK");
+	else if (op == LLD)
+		return ("LLD");
+	else if (op == LLDI)
+		return ("LLDI");
+	else if (op == LFORK)
+		return ("LFORK");
+	else if (op == AFF)
+		return ("AFF");
+	return ("INVALID INSTRUCTION");
+}
+
 int			ft_get_args(t_vm *env, t_champions *champ, int op)
 {
 	int		*nbr;
@@ -48,10 +88,12 @@ int			ft_get_args(t_vm *env, t_champions *champ, int op)
 		nbr = ft_get_size(env, champ); //Va, entre autre, faire +1 au pc si needed
 	else
 	{
-		nbr = ft_nbrnew(1);
+		nbr = ft_nbrnew(3);
 		nbr[0] = 10;
 	}
 	count = ft_count_to_next(nbr, op);
+
+	!IS_GRAPH && IS_VERBOSE ? ft_put("[{10}%s{0}]\n", ft_instruct_name(op)) : 0;
 
 	op == LIVE ? ft_corewar_live(env, champ, nbr) : 0;
 	op == LD ? ft_corewar_ld(env, champ, nbr) : 0;

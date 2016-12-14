@@ -6,11 +6,32 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 15:58:23 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/13 21:30:58 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/14 16:57:58 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
+
+#define IS_GRAPH env->options->flags['g']
+#define IS_VERBOSE env->options->flags['v']
+#define IS_DUMP env->options->flags['d']
+
+void	ft_verbose(t_vm *env, t_champions *champion, int part)
+{
+	if (part == 1)
+	{
+		ft_put("{9}------{0} Champion {14}%d{0} ({14}%s{0}) %s{9}------{0}\n",
+		champion->champ_id, champion->name,
+		champion->is_fork ? "({11}Forked champion{0}) " : "");
+		ft_put("Current cycle : {14}%d{0}\n", env->cycle);
+		ft_put("Current PC : {14}%d{0}\n", champion->pc);
+	}
+	if (part == 2)
+	{
+		ft_put("New PC : {14}%d{0}\n", champion->pc);
+		ft_put("The next cycle : {14}%d{0}\n\n\n", champion->next_cycle);
+	}
+}
 
 int		ft_one_isalive(t_vm *env)
 {
@@ -69,10 +90,7 @@ void	ft_exec_instruct(t_vm *env, t_champions *champion)
 	champion->next_cycle = env->cycle;
 	// ft_printf("{10}%d, %d{0}\n", env->cycle, champ_pc);
 	if (champ_pc < (int)champion->prog_size)
-	{
 		champion->next_cycle += ft_get_args(env, champion, (int)env->map[champ_pc]);
-		ft_put("Next action in {11}%d{0} loops\n\n", champion->next_cycle);
-	}
 }
 
 void	ft_foreach_champ(t_vm *env)
@@ -89,7 +107,9 @@ void	ft_foreach_champ(t_vm *env)
 			
 			if (env->cycle == champion->next_cycle)
 			{
+				!IS_GRAPH && IS_VERBOSE ? ft_verbose(env, champion, 1) : 0;
 				ft_exec_instruct(env, champion);
+				!IS_GRAPH && IS_VERBOSE ? ft_verbose(env, champion, 2) : 0;
 			}
 		}
 		list = list->next;
@@ -98,9 +118,20 @@ void	ft_foreach_champ(t_vm *env)
 
 void	ft_fight(t_vm *env)
 {
-	// int v = 0;
-	while (ft_one_isalive(env))// && v++ < 80)
+	int v = 0;
+
+	IS_GRAPH ? ft_reload_windows(env, 1) : 0; //CREATION OF THE MAP
+	IS_GRAPH ? ft_reload_windows(env, 2) : 0; //CREATION OF THE INFOS
+
+	while (ft_one_isalive(env) && v++ < 100000)
 	{
+		if (IS_DUMP && env->cycle == env->dump_cycle)
+		{
+			ft_dump(env->map, MEM_SIZE);
+			break ;
+		}
+
+		IS_GRAPH ? ft_reload_windows(env, 2) : 0;
 
 		ft_foreach_champ(env);
 

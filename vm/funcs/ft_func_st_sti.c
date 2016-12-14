@@ -6,11 +6,12 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/13 19:33:46 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/14 16:55:30 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../vm.h"
+#define IS_GRAPH env->options->flags['g']
 
 static int			ft_set_buffer(int nbr)
 {
@@ -28,7 +29,6 @@ static int			ft_set_buffer(int nbr)
 */
 void	ft_corewar_st(t_vm *env, t_champions *champ, int *nbr)
 {
-	ft_put("{9}----ST----{0}\n");
 	int		pc;
 
 	pc = champ->pc + 1;
@@ -46,6 +46,7 @@ void	ft_corewar_st(t_vm *env, t_champions *champ, int *nbr)
 			env->map[(champ->pc - 1 + (env->arg2 % I)) % M] = champ->reg[env->arg1];
 	}
 	ft_print_memory(env->map, 80);
+	IS_GRAPH ? ft_reload_windows(env, 1) : 0;
 }
 
 /*
@@ -53,7 +54,6 @@ void	ft_corewar_st(t_vm *env, t_champions *champ, int *nbr)
 */
 void	ft_corewar_sti(t_vm *env, t_champions *champ, int *nbr)
 {
-	ft_put("{9}----STI----{0}\n");
 	int		pc;
 	int		sum_idx;
 
@@ -80,4 +80,5 @@ void	ft_corewar_sti(t_vm *env, t_champions *champ, int *nbr)
 
 		env->map[(sum_idx % I) % M] = champ->reg[env->arg1];
 	}
+	IS_GRAPH ? ft_reload_windows(env, 1) : 0;
 }
