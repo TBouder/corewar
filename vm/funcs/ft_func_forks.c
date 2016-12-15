@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_func_forks.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/14 19:26:34 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/15 16:00:57 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	ft_corewar_fork(t_vm *env, t_champions *champ, int *nbr)
 	int		pc;
 
 	pc = champ->pc + 1;
+
 	if (IS_DIR(nbr[0]))
 	{
 		env->buf = ft_set_buffer(nbr[0]);
@@ -41,7 +42,7 @@ void	ft_corewar_fork(t_vm *env, t_champions *champ, int *nbr)
 		// ft_put("CURRENT POS : {13}%d{0} || NEXT POS {13}%d{0}\n", champ->pc - 1, env->arg1);
 		ft_add_champion(env, champ, champ->champ_id - 1, env->arg1);
 		ft_printf("env->map[%d]\n", env->arg1);
-		ft_print_memory(env->map, 80);
+		// ft_print_memory(env->map, 80);
 	}
 	// ft_DEBUG_display_champions(env);
 

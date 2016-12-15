@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 16:20:23 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/15 13:08:40 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/15 15:30:09 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ void			ft_init_ncurse(t_vm *env)
 
 	start_color();
 	init_color(COLOR_BLACK, 224, 248, 299);
-	init_color(42, 980, 643, 376);
-	init_color(43, 986, 541, 996);
-	init_color(44, 498, 866, 298);
-	init_color(45, 1000, 863, 274);
+	init_color(42, 498, 866, 298);
+	init_color(43, 1000, 863, 274);
+	init_color(44, 980, 643, 376);
+	init_color(45, 986, 541, 996);
 
 	init_pair(1, COLOR_CYAN, COLOR_BLACK);
 	init_pair(42, 42, COLOR_BLACK);

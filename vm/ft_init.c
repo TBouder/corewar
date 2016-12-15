@@ -6,18 +6,20 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 17:48:28 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/15 12:23:05 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/15 17:28:11 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
+#define IS_GRAPH env->options->flags['g']
 
 static void	ft_init_reg(t_champions *new_champion, t_champions *champion)
 {
 	int		reg_nb;
 
 	reg_nb = 0;
-	while (reg_nb <= REG_NUMBER)
+	// while (reg_nb <= REG_NUMBER)
+	while (reg_nb <= 99)
 	{
 		new_champion->reg[reg_nb] = champion ? champion->reg[reg_nb] : 0;
 		reg_nb++;
@@ -37,7 +39,7 @@ void		ft_add_champion(t_vm *env, t_champions *champion, int id, int pc)
 	new_champion->starting_pos = champion ? champion->starting_pos : 0;
 	new_champion->champ_id = id + 1;
 	ft_init_reg(new_champion, champion);
-	new_champion->reg[1] = champion ? champion->reg[1] : id + 1;
+	new_champion->reg[1] = champion ? champion->reg[1] : -1;//id + 1;
 	new_champion->pc = pc;
 	new_champion->pc_void = champion ? champion->pc_void : 0;
 	new_champion->carry = champion ? champion->carry : FALSE;
@@ -47,9 +49,20 @@ void		ft_add_champion(t_vm *env, t_champions *champion, int id, int pc)
 	new_champion->next_cycle = champion ? champion->next_cycle : 0;
 	new_champion->is_fork = champion ? 1 : 0;
 	new_champion->color = champion ? champion->color : id + 42;
-	ft_lstend(&env->list_champions, new_champion, sizeof(t_champions));
-	// if (champion)
-		// ft_put("A new Champion, {14}%d{0} ({14}%s{0}) has been forked at {14}map[%d]{0} !\n", new_champion->champ_id, new_champion->name, new_champion->pc);
+	ft_lststart(&env->list_champions, new_champion, sizeof(t_champions));
+	if (champion)
+	{
+		if (IS_GRAPH)
+		{
+			ft_print_champion_color(champion, env->notif);
+			wprintw(env->notif, " has been forked\n");
+			ft_reload_windows(env, 3);
+		}
+		else
+		{
+			ft_put("A new Champion, {14}%d{0} ({14}%s{0}) has been forked at {14}map[%d]{0} !\n", new_champion->champ_id, new_champion->name, new_champion->pc);
+		}
+	}
 }
 
 void		ft_init_lst_champions(t_vm *env)
