@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/15 13:39:52 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/15 14:41:19 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void		ft_corewar_ld(t_vm *env, t_champions *champ, int *nbr)
 		else if (IS_IND(nbr[0]))
 			champ->reg[env->arg2] = env->map[(unsigned int)((champ->pc - 1 + (env->arg1 % I)) % M)];
 
-		ft_printf("env->map[%d]\n",(champ->pc - 1 + (env->arg1 % I)));
+		ft_printf("env->map[%d]\n", (unsigned int)(champ->pc - 1 + (env->arg1 % I)) % M);
 
 		int k = champ->carry;
 		champ->carry = champ->reg[env->arg2] != 0 ? 1 : 0;
