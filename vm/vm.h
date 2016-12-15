@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/14 19:13:40 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/15 12:21:25 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ typedef struct		s_vm
 
 	unsigned int	usleep;
 	unsigned int	nb_notif;
+	int				total_live;
 
 }					t_vm;
 

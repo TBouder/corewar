@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 14:16:55 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/14 18:15:25 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/15 12:23:30 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void			ft_corewar_live(t_vm *env, t_champions *champ, int *nbr)
 				ft_put("Champion {14}%d{0} ({14}%s{0}) is {10}alive{0}\n",
 				player_alive, ((t_champions *)list->content)->name);
 			}
+			env->total_live++;
 		}
 	}
 }
