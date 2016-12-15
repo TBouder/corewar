@@ -265,11 +265,11 @@
 		
 		onboucle:
 		aff r2				# Va afficher les diff char ascii
+		fork %:laba			# Créé un nouveau champion tous les 256
 		add r2, r3, r2		# Incrémente r2, pour changer le char
 		zjmp %:onboucle
-		fork %:laba			# Créé un nouveau champion tous les 256
-		add r2, r3, r2		# Sinon le carry se met a 0
-		zjmp %:onboucle		# On revient au début du programme
+		# add r2, r3, r2		# Sinon le carry se met a 0
+		# zjmp %:onboucle		# On revient au début du programme
 		
 		laba:
 			ld %42, r2		# Normalement r2, spécifique au nouveau champ
