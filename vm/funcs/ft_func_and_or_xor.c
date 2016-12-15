@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_func_and_or_xor.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/14 17:09:45 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/15 13:11:15 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../vm.h"
+#define IS_GRAPH env->options->flags['g']
 
 static int	ft_set_buffer(int nbr)
 {
@@ -38,7 +39,7 @@ void	ft_and_or_xor_helper(t_vm *env, t_champions *champ, int *nbr, int op)
 		pc += env->buf;
 		env->buf = ft_set_buffer(nbr[2]);
 		env->arg3 = ft_byte_to_str(&env->map[pc], env->buf);
-		
+
 		if (IS_IND(nbr[0]) == 1)
 			env->arg1 = env->map[(champ->pc - 1 + (env->arg1 % I)) % M];
 		else if (IS_REG(nbr[0]))
@@ -56,7 +57,7 @@ void	ft_and_or_xor_helper(t_vm *env, t_champions *champ, int *nbr, int op)
 
 		int k = champ->carry;
 		champ->carry = champ->reg[env->arg3] != 0 ? 1 : 0;
-		if (champ->carry != k)
+		if (champ->carry != k && IS_GRAPH)
 			ft_printf("{13}new Carry = %d{0}\n", champ->carry);
 
 

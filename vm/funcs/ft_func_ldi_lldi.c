@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_func_ldi_lldi.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/14 16:55:42 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/15 13:12:26 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void		ft_corewar_ldi(t_vm *env, t_champions *champ, int *nbr)
 
 		sum_idx = env->arg1 + env->arg2; //SERA UNE ADRESSE DANS LAQUELLE ON VA LIRE UNE VALEUR DE LA TAILLE D'UN REGISTRE QU'ON MET DANS REG[env->arg3]
 
-
 		champ->reg[env->arg3] = ft_byte_to_str(&env->map[sum_idx % M], 1);
 		ft_put("\033[104mr%d = 0x%x{0}\n", env->arg3, champ->reg[env->arg3]);
 	}
@@ -80,7 +79,6 @@ void		ft_corewar_lldi(t_vm *env, t_champions *champ, int *nbr)
 			env->arg2 = champ->reg[env->arg2];
 
 		sum_idx = env->arg1 + env->arg2; //SERA UNE ADRESSE DANS LAQUELLE ON VA LIRE UNE VALEUR DE LA TAILLE D'UN REGISTRE QU'ON MET DANS REG[env->arg3]
-
 
 		champ->reg[env->arg3] = ft_byte_to_str(&env->map[(sum_idx % I) % M], 1);
 		ft_put("\033[104mr%d = 0x%x{0}\n", env->arg3, champ->reg[env->arg3]);

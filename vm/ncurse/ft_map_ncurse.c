@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 16:20:23 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/15 12:24:33 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/15 13:08:40 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,11 @@ void			ft_init_ncurse(t_vm *env)
 	init_pair(43, 43, COLOR_BLACK);
 	init_pair(44, 44, COLOR_BLACK);
 	init_pair(45, 45, COLOR_BLACK);
+
+	init_pair(52, COLOR_BLACK, 7);
+	init_pair(53, COLOR_BLACK, 7);
+	init_pair(54, COLOR_BLACK, 7);
+	init_pair(55, COLOR_BLACK, 7);
 	// getch(); //TO START
 	refresh();
 
