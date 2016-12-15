@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_func_launcher.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
+/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 23:27:37 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/13 23:51:33 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/14 16:56:42 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,8 @@ int			ft_get_args(t_vm *env, t_champions *champ, int op)
 	int		*nbr;
 	int		count;
 
-	if (op != LIVE && op != FORK)
-		nbr = ft_get_size(env, champ);
+	if (op != LIVE && op != ZJMP && op != FORK && op != LFORK)
+		nbr = ft_get_size(env, champ); //Va, entre autre, faire +1 au pc si needed
 	else
 	{
 		nbr = ft_nbrnew(3);
@@ -111,7 +111,8 @@ int			ft_get_args(t_vm *env, t_champions *champ, int op)
 	op == LLDI ? ft_corewar_lldi(env, champ, nbr) : 0;
 	op == LFORK ? ft_corewar_fork(env, champ, nbr) : 0;
 	op == AFF ? ft_corewar_aff(env, champ, nbr) : 0;
-	champ->pc += count;
+	if (op != ZJMP)
+		champ->pc += count;
 
 	return (ft_ret_cycle(op));
 }

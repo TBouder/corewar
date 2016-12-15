@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 15:58:23 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/15 12:39:35 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/15 12:42:20 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ void	ft_foreach_champ(t_vm *env)
 		champion = ((t_champions *)list->content);
 		if (champion->exist == TRUE)
 		{
+
 			if (env->cycle == champion->next_cycle)
 			{
 				!IS_GRAPH && IS_VERBOSE ? ft_verbose(env, champion, 1) : 0;
