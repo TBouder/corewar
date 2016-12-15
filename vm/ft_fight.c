@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 15:58:23 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/14 19:38:32 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/15 14:42:28 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,14 @@ int		ft_one_isalive(t_vm *env)
 		champion = ((t_champions *)list->content);
 		if (champion->exist == TRUE)
 		{
-			if (champion->is_alive > 0)
+			if (champion->is_alive >= 0)
 				return (1);
 		}
 		list = list->next;
 	}
+	IS_GRAPH ? wprintw(env->notif, "NO PLAYER?\n") : 0;
+	IS_GRAPH ? ft_reload_windows(env, 3) : 0;
+
 	return (0);
 }
 
@@ -66,19 +69,36 @@ int		ft_which_isalive(t_vm *env)
 		if (champion->exist == TRUE)
 		{
 			if (champion->is_alive <= 0)
+			{
 				champion->exist = FALSE; //MORT DU PROGRAMME
+				IS_GRAPH ? ft_print_champion_color(champion, env->notif) : 0;
+				IS_GRAPH ? wprintw(env->notif, " IS NOW DEAD\n") : 0;
+				IS_GRAPH ? ft_reload_windows(env, 3) : 0;
+			}
 			else
 				nb_live += champion->is_alive;
 			champion->is_alive = 0;
 		}
 		list = list->next;
 	}
+	env->total_live = 0;
 	return (nb_live);
 }
 
 void	ft_print_winner(t_vm *env)
 {
-	ft_put("Le joueur %d(%s) a gagne\n", env->winner->champ_id, env->winner->name);
+	int		key;
+
+	if (IS_GRAPH)
+	{
+		// ft_print_champion_color(champ, env->notif);
+		wprintw(env->notif, "END OF GAME : WINNER IS ???\n");
+		ft_reload_windows(env, 3);
+		while ((key = getch()) != 'q')
+			;
+	}
+
+	// ft_put("Le joueur %d(%s) a gagne\n", env->winner->champ_id, env->winner->name);
 	exit(1);
 }
 
@@ -137,6 +157,8 @@ void	ft_fight(t_vm *env)
 		{
 			if (ft_which_isalive(env) >= NBR_LIVE)
 			{
+				wprintw(env->notif, "HERE\n");
+				ft_reload_windows(env, 3);
 				env->cycle_to_die -= CYCLE_DELTA;
 				env->cycle_check = 0;
 			}
@@ -150,7 +172,7 @@ void	ft_fight(t_vm *env)
 			env->cycle_check = 0;
 		}
 		env->cycle++;
+		env->cpt_to_die++;
 	}
-
-	// ft_print_winner(env);
+	ft_print_winner(env);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/14 18:58:10 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/15 12:42:32 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ typedef struct		s_vm
 
 	unsigned int	usleep;
 	unsigned int	nb_notif;
+	int				total_live;
 
 }					t_vm;
 
@@ -149,11 +150,18 @@ void			ft_clear_ncurse(t_vm *env);
 void			ft_reload_windows(t_vm *env, int part);
 void			ft_print_champion_color(t_champions *champion, WINDOW *win);
 
-
 /*
 ** DUMP
 */
 void			ft_dump(const void *addr, size_t size);
 void			ft_dump_ncurse(t_vm *env, const void *addr, size_t size);
+
+/*
+** FREE
+*/
+void			ft_clear_champions(t_champions **champions, int size);
+void			ft_clear_all(t_vm *env);
+void			ft_error_vm(t_vm *env, char *msg, int clear);
+
 
 #endif
