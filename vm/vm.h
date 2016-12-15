@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
+/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/15 12:48:59 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/15 16:00:59 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ typedef struct		s_champions
 	unsigned int	starting_pos;		//position de depart dans la map
 	int				champ_id;
 
-	int				reg[REG_NUMBER];	//Los registros
+	// int				reg[REG_NUMBER];	//Los registros
+	int				reg[100];	//Los registros
 	int				pc;					//el pc
 	void			*pc_void;			//el pc de trump
 	int				carry;				//bool for carry fisher

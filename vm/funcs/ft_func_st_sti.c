@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_func_st_sti.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
+/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/15 12:57:24 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/15 16:44:06 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,10 @@ void	ft_corewar_sti(t_vm *env, t_champions *champ, int *nbr)
 		pc += env->buf;
 		env->buf = ft_set_buffer(nbr[2]);
 		env->arg3 = ft_byte_to_str(&env->map[pc], env->buf);
+
+		ft_printf("champ->reg[0] : %u\n", champ->reg[env->arg1]);
+		ft_printf("champ->reg[0] : %x\n", champ->reg[env->arg1]);
+		ft_print_memory(env->map, 80);
 
 		if (IS_IND(nbr[1]))
 			env->arg2 = env->map[(champ->pc - 1 + (env->arg2 % I)) % M];

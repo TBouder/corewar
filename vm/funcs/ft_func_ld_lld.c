@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_func_ld_lld.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
+/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/15 14:41:19 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/15 16:40:27 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void		ft_corewar_lld(t_vm *env, t_champions *champ, int *nbr)
 
 		int k = champ->carry;
 		champ->carry = champ->reg[env->arg2] != 0 ? 1 : 0;
-		if (champ->carry != k && IS_GRAPH)
+		if (champ->carry != k && !IS_GRAPH)
 			ft_printf("{13}new Carry = %d{0}\n", champ->carry);
 	}
 }
@@ -63,16 +63,19 @@ void		ft_corewar_ld(t_vm *env, t_champions *champ, int *nbr)
 		env->buf = ft_set_buffer(nbr[1]);
 		env->arg2 = ft_byte_to_str(&env->map[pc], env->buf);
 
+
 		if (IS_DIR(nbr[0]))
 			champ->reg[env->arg2] = (env->arg1 % I) % M;
 		else if (IS_IND(nbr[0]))
-			champ->reg[env->arg2] = env->map[(unsigned int)((champ->pc - 1 + (env->arg1 % I)) % M)];
+			champ->reg[env->arg2] = env->map[((champ->pc - 1 + (env->arg1 % I)) % M)];
 
-		ft_printf("env->map[%d]\n", (unsigned int)(champ->pc - 1 + (env->arg1 % I)) % M);
+		ft_printf("LD %ld, %d\n", champ->reg[env->arg2], champ->reg[env->arg2]);
+
+		// ft_printf("env->map[%d], env->arg1 : %d, champ->pc %d\n", (champ->pc - 1 + (env->arg1 % I)) % M, env->arg1, champ->pc);
 
 		int k = champ->carry;
 		champ->carry = champ->reg[env->arg2] != 0 ? 1 : 0;
-		if (champ->carry != k && IS_GRAPH)
+		if (champ->carry != k && !IS_GRAPH)
 			ft_printf("{13}new Carry = %d{0}\n", champ->carry);
 
 		// ft_print_memory(env->map, 80);
