@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 15:58:23 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/15 12:42:20 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/15 13:25:06 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ void	ft_print_winner(t_vm *env)
 		ft_reload_windows(env, 3);
 		while ((key = getch()) != 'q')
 			;
+		ft_clear_ncurse(env);
 	}
 
 	// ft_put("Le joueur %d(%s) a gagne\n", env->winner->champ_id, env->winner->name);

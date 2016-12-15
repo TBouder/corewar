@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_func_add_sub.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/14 17:09:40 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/15 13:10:50 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../vm.h"
+
+#define IS_GRAPH env->options->flags['g']
 
 static int	ft_set_buffer(int nbr)
 {
@@ -40,10 +42,10 @@ void	ft_corewar_add(t_vm *env, t_champions *champ, int *nbr)
 		env->arg3 = ft_byte_to_str(&env->map[pc], env->buf);
 
 		champ->reg[env->arg3] = (champ->reg[env->arg1] + champ->reg[env->arg2]) % I;
-		
+
 		int k = champ->carry;
 		champ->carry = (champ->reg[env->arg3] != 0) ? 1 : 0;
-		if (champ->carry != k)
+		if (champ->carry != k && IS_GRAPH)
 			ft_printf("{13}new Carry = %d{0}\n", champ->carry);
 	}
 }
@@ -65,10 +67,10 @@ void	ft_corewar_sub(t_vm *env, t_champions *champ, int *nbr)
 		env->arg3 = ft_byte_to_str(&env->map[pc], env->buf);
 
 		champ->reg[env->arg3] = (champ->reg[env->arg1] - champ->reg[env->arg2]) % I;
-		
+
 		int k = champ->carry;
 		champ->carry = (champ->reg[env->arg3] != 0) ? 1 : 0;
-		if (champ->carry != k)
+		if (champ->carry != k && IS_GRAPH)
 			ft_printf("{13}new Carry = %d{0}\n", champ->carry);
 	}
 }
