@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_func_st_sti.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
+/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/14 18:44:24 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/14 18:58:21 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	ft_corewar_st(t_vm *env, t_champions *champ, int *nbr)
 			env->map_owner[(champ->pc - 1 + (env->arg2 % I)) % M] = champ->color;
 		}
 	}
+	ft_print_memory(env->map, 80);
 	IS_GRAPH ? ft_reload_windows(env, 1) : 0;
 }
 

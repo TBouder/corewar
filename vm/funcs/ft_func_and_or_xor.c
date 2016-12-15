@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_func_and_or_xor.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
+/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/13 15:32:18 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/14 17:09:45 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ft_and_or_xor_helper(t_vm *env, t_champions *champ, int *nbr, int op)
 		pc += env->buf;
 		env->buf = ft_set_buffer(nbr[2]);
 		env->arg3 = ft_byte_to_str(&env->map[pc], env->buf);
-
+		
 		if (IS_IND(nbr[0]) == 1)
 			env->arg1 = env->map[(champ->pc - 1 + (env->arg1 % I)) % M];
 		else if (IS_REG(nbr[0]))
@@ -52,7 +52,14 @@ void	ft_and_or_xor_helper(t_vm *env, t_champions *champ, int *nbr, int op)
 		op == 6 ? champ->reg[env->arg3] = env->arg1 & env->arg2 : 0;
 		op == 7 ? champ->reg[env->arg3] = env->arg1 | env->arg2 : 0;
 		op == 8 ? champ->reg[env->arg3] = env->arg1 ^ env->arg2 : 0;
+
+
+		int k = champ->carry;
 		champ->carry = champ->reg[env->arg3] != 0 ? 1 : 0;
+		if (champ->carry != k)
+			ft_printf("{13}new Carry = %d{0}\n", champ->carry);
+
+
 	}
 }
 
