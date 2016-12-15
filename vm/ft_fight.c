@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 15:58:23 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/15 15:12:02 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/15 16:34:44 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,7 @@ void	ft_fight(t_vm *env)
 	IS_GRAPH ? ft_reload_windows(env, 1) : 0; //CREATION OF THE MAP
 	IS_GRAPH ? ft_reload_windows(env, 2) : 0; //CREATION OF THE INFOS
 
-	while (ft_one_isalive(env) && v++ < 1500)
+	while (ft_one_isalive(env) && v++ < 150)
 	{
 		if (IS_DUMP && env->cycle == env->dump_cycle)
 		{

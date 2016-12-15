@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_func_add_sub.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
+/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/15 13:10:50 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/15 15:20:38 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	ft_corewar_add(t_vm *env, t_champions *champ, int *nbr)
 
 		int k = champ->carry;
 		champ->carry = (champ->reg[env->arg3] != 0) ? 1 : 0;
-		if (champ->carry != k && IS_GRAPH)
+		if (champ->carry != k && !IS_GRAPH)
 			ft_printf("{13}new Carry = %d{0}\n", champ->carry);
 	}
 }
@@ -70,7 +70,7 @@ void	ft_corewar_sub(t_vm *env, t_champions *champ, int *nbr)
 
 		int k = champ->carry;
 		champ->carry = (champ->reg[env->arg3] != 0) ? 1 : 0;
-		if (champ->carry != k && IS_GRAPH)
+		if (champ->carry != k && !IS_GRAPH)
 			ft_printf("{13}new Carry = %d{0}\n", champ->carry);
 	}
 }

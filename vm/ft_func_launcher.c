@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_func_launcher.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
+/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 23:27:37 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/15 12:57:38 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/15 15:43:14 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,8 @@ int			ft_get_args(t_vm *env, t_champions *champ, int op)
 	op == AFF ? ft_corewar_aff(env, champ, nbr) : 0;
 	if (op != ZJMP)
 		champ->pc += count;
+
+	ft_printf("On avance de : %d, env->map[%d]\n", count, champ->pc);
 
 	IS_GRAPH ? ft_reload_windows(env, 1) : 0;
 
