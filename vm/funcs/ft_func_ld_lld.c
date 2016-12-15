@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/15 16:40:27 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/15 18:41:59 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ void		ft_corewar_ld(t_vm *env, t_champions *champ, int *nbr)
 		ft_printf("LD %ld, %d\n", champ->reg[env->arg2], champ->reg[env->arg2]);
 
 		// ft_printf("env->map[%d], env->arg1 : %d, champ->pc %d\n", (champ->pc - 1 + (env->arg1 % I)) % M, env->arg1, champ->pc);
+		if (!IS_GRAPH) /////////////
+			ft_printf("env->map[%d]\n", (unsigned int)(champ->pc - 1 + (env->arg1 % I)) % M);
 
 		int k = champ->carry;
 		champ->carry = champ->reg[env->arg2] != 0 ? 1 : 0;
