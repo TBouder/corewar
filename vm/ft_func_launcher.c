@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 23:27:37 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/15 15:43:14 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/15 19:14:59 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,8 +113,6 @@ int			ft_get_args(t_vm *env, t_champions *champ, int op)
 	op == AFF ? ft_corewar_aff(env, champ, nbr) : 0;
 	if (op != ZJMP)
 		champ->pc += count;
-
-	ft_printf("On avance de : %d, env->map[%d]\n", count, champ->pc);
 
 	IS_GRAPH ? ft_reload_windows(env, 1) : 0;
 

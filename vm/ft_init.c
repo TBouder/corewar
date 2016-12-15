@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 17:48:28 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/15 18:42:50 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/15 19:23:18 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void		ft_add_champion(t_vm *env, t_champions *champion, int id, int pc)
 	new_champion->starting_pos = champion ? champion->starting_pos : 0;
 	new_champion->champ_id = id + 1;
 	ft_init_reg(new_champion, champion);
-	new_champion->reg[1] = champion ? champion->reg[1] : -1;//id + 1;
+	new_champion->reg[1] = champion ? champion->reg[1] : id + 1;
 	new_champion->pc = pc;
 	new_champion->pc_void = champion ? champion->pc_void : 0;
 	new_champion->carry = champion ? champion->carry : FALSE;

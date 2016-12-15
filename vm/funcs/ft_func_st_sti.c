@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/15 18:41:42 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/15 19:13:35 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,28 +49,6 @@ void	ft_corewar_st(t_vm *env, t_champions *champ, int *nbr)
 		}
 	}
 }
-
-// char		*ft_byte_to_strr(char *str, int len)
-// {
-// 	int		i;
-// 	int		y;
-// 	char	*value;
-// 	char	*hex;
-//
-// 	i = 0;
-// 	y = 0;
-// 	len *= 2;
-// 	hex = ft_strinit("0123456789abcdef");
-// 	value = ft_strnew(len);
-// 	while (i < len)
-// 	{
-// 		value[i] = hex[(int)((unsigned char) str[y]) / 16];
-// 		value[i + 1] = hex[(int)((unsigned char) str[y]) % 16];
-// 		i += 2;
-// 		y++;
-// 	}
-// 	return (value);
-// }
 
 static void		ft_convert(unsigned long long n, char *s, int *index)
 {
@@ -125,18 +103,15 @@ void	ft_corewar_sti(t_vm *env, t_champions *champ, int *nbr)
 		env->buf = ft_set_buffer(nbr[2]);
 		env->arg3 = ft_byte_to_str(&env->map[pc], env->buf);
 
-		ft_printf("champ->reg[0] : %u\n", champ->reg[env->arg1]);
-		ft_printf("champ->reg[0] : %x\n", champ->reg[env->arg1]);
-		ft_print_memory(env->map, 80);
 
 		if (IS_IND(nbr[1]))
 			env->arg2 = env->map[(champ->pc - 1 + (env->arg2 % I)) % M];
-		if (IS_REG(nbr[1]))
+		else if (IS_REG(nbr[1]))
 			env->arg2 = champ->reg[env->arg2];
 		if (IS_REG(nbr[2]))
 			env->arg3 = champ->reg[env->arg3];
 		sum_idx = env->arg2 + env->arg3;
-
+		// ft_printf("{13}env->arg2 [%d]{0}\n", env->arg2);
 
 		char	*reg;
 		char	*regg;
@@ -160,28 +135,28 @@ void	ft_corewar_sti(t_vm *env, t_champions *champ, int *nbr)
 		while (i < 8)
 		{
 			str_reg = ft_strsub(reg, i, 2);
-			env->map[sum_idx + j] = ft_atoi_base(str_reg, 16);
+			env->map[champ->pc - 1 + sum_idx + j] = ft_atoi_base(str_reg, 16);
 			i += 2;
 			j += 1;
-			ft_print_memory(env->map, 280);
-			ft_put("\n\n");
+			// ft_print_memory(env->map, 280);
+			// ft_put("\n\n");
 		}
 
-		// reg = ft_itoxx((unsigned int)champ->reg[env->arg1]);
-		ft_put("WAZAAA : %s - %d\n", reg, len);
-		// len = ft_strlen(reg);
-		// i = 0;
-		// y = 0;
-		// while (i < 8)
-		// {
-		// 	sub_reg = ft_strsub(reg, i, 2);
-		//
-		// 	env->map[((sum_idx + y) % I) % M] = ft_atoi_base(sub_reg, 16);
-		// 	y++;
-		// 	i += 2;
-		// }
-
-		env->map[(sum_idx % I) % M] = champ->reg[env->arg1];
-		env->map_owner[(sum_idx % I) % M] = champ->color;
+		// env->map[(sum_idx % I) % M] = champ->reg[env->arg1];
+		// env->map_owner[(sum_idx % I) % M] = champ->color;
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

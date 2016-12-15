@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 14:16:55 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/15 15:29:38 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/15 19:15:28 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void			ft_corewar_live(t_vm *env, t_champions *champ, int *nbr)
 
 	if (IS_DIR(nbr[0]))
 	{
-		ft_print_memory(env->map, 80);
 		player_alive = ft_byte_to_str(&env->map[champ->pc + 1], 4);
 
 		if ((list = ft_find_live(env, player_alive)))
