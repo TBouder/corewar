@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/15 16:22:32 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/15 18:41:36 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,5 @@ void	ft_corewar_zjmp(t_vm *env, t_champions *champ, int *nbr)
 		champ->pc += ft_count_to_next(nbr, ZJMP);
 	IS_GRAPH ? ft_reload_windows(env, 1) : 0;
 	// ft_printf("{10}%d{0}\n", champ->pc);
+	IS_GRAPH ? ft_reload_windows(env, 1) : 0;
 }
