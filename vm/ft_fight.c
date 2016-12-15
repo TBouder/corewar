@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 15:58:23 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/14 18:59:18 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/14 19:38:32 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,9 +102,9 @@ void	ft_foreach_champ(t_vm *env)
 		champion = ((t_champions *)list->content);
 		if (champion->exist == TRUE)
 		{
-			
 			if (env->cycle == champion->next_cycle)
 			{
+			ft_printf("PC = {13}%d{0}\n", champion->pc);
 				!IS_GRAPH && IS_VERBOSE ? ft_verbose(env, champion, 1) : 0;
 				ft_exec_instruct(env, champion);
 				!IS_GRAPH && IS_VERBOSE ? ft_verbose(env, champion, 2) : 0;
@@ -121,7 +121,7 @@ void	ft_fight(t_vm *env)
 	IS_GRAPH ? ft_reload_windows(env, 1) : 0; //CREATION OF THE MAP
 	IS_GRAPH ? ft_reload_windows(env, 2) : 0; //CREATION OF THE INFOS
 
-	while (ft_one_isalive(env) && v++ < 100000)
+	while (ft_one_isalive(env) && v++ < 1500)
 	{
 		if (IS_DUMP && env->cycle == env->dump_cycle)
 		{
