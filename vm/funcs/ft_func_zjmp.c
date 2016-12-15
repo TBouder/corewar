@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_func_zjmp.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/14 19:24:20 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/15 15:24:19 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../vm.h"
+#define IS_GRAPH env->options->flags['g']
 
 static int	ft_set_buffer(int nbr)
 {
@@ -39,4 +40,5 @@ void	ft_corewar_zjmp(t_vm *env, t_champions *champ, int *nbr)
 	else
 		champ->pc += ft_count_to_next(nbr, ZJMP);
 	// ft_printf("{10}%d{0}\n", champ->pc);
+	IS_GRAPH ? ft_reload_windows(env, 1) : 0;
 }
