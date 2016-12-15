@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 15:58:23 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/15 14:42:28 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/15 15:12:02 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ void	ft_print_winner(t_vm *env)
 		ft_reload_windows(env, 3);
 		while ((key = getch()) != 'q')
 			;
+		ft_clear_ncurse(env);
 	}
 
 	// ft_put("Le joueur %d(%s) a gagne\n", env->winner->champ_id, env->winner->name);
@@ -124,7 +125,7 @@ void	ft_foreach_champ(t_vm *env)
 		{
 			if (env->cycle == champion->next_cycle)
 			{
-			ft_printf("PC = {13}%d{0}\n", champion->pc);
+				// ft_printf("PC = {13}%d{0}\n", champion->pc);
 				!IS_GRAPH && IS_VERBOSE ? ft_verbose(env, champion, 1) : 0;
 				ft_exec_instruct(env, champion);
 				!IS_GRAPH && IS_VERBOSE ? ft_verbose(env, champion, 2) : 0;

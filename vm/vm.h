@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/15 12:42:32 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/15 12:48:59 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ typedef struct		s_vm
 
 	header_t		*header;			//header struct
 	char			*map;				//Total map
-	int				*map_owner; //FOR COLORS
+	int				*map_owner;			//FOR COLORS
 
 //NCURSE
 	WINDOW	*main_border;
