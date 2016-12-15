@@ -6,51 +6,16 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 19:42:02 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/14 18:43:41 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/14 19:15:02 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
-# define	ERR_BAD_SRC_FILE			"{9}Error{0} : Can't read source file"
-# define	ERR_DIR						"{9}Error{0} : Directories are not allowed"
-# define	ERR_NOEXT					"{9}Error{0} : Extension .cor is missing (NOEXT)"
-# define	ERR_NOT_COR					"{9}Error{0} : File extension is not .cor"
+# define	ERR_BAD_SRC_FILE	"{9}Error{0} : Can't read source file"
+# define	ERR_DIR				"{9}Error{0} : Directories are not allowed"
+# define	ERR_NOEXT			"{9}Error{0} : Extension .cor is missing (NOEXT)"
+# define	ERR_NOT_COR			"{9}Error{0} : File extension is not .cor"
 # define	IS_GRAPH env.options->flags['g']
-
-void			ft_clear_champions(t_champions **champions, int size)
-{
-	int		i;
-
-	i = 0;
-	while (i < size)
-	{
-		ft_strdel(&champions[i]->name);
-		ft_strdel(&champions[i]->comment);
-		ft_strdel(&champions[i]->content);
-		champions[i]->magic = 0;
-		champions[i]->prog_size = 0;
-		i++;
-	}
-}
-
-void			ft_clear_all(t_vm *env)
-{
-	ft_dbstrdel(env->filename);
-	// ft_clear_champions(env->champions, env->nb_champ);
-	ft_strdel(&env->map);
-	free(env->header);
-	// free(env->champions);
-	free(env->fd);
-}
-
-void			ft_error_vm(t_vm *env, char *msg, int clear)
-{
-	ft_printf("{9}%s{0}\n", msg);
-	if (clear == 1)
-		ft_clear_all(env);
-	free(env->options);
-	exit(1);
-}
 
 void			ft_verif_extension(t_vm *env, char **av, int i)
 {
@@ -130,8 +95,8 @@ static void		ft_put_champion_map(t_vm *env)
 {
 	t_list			*list;
 	t_champions		*champion;
-	unsigned int	y; //POS IN MAP
-	unsigned int	z; //CONTENT OF CHAMP
+	unsigned int	y;
+	unsigned int	z;
 
 	list = env->list_champions;
 	while (list)
@@ -144,7 +109,6 @@ static void		ft_put_champion_map(t_vm *env)
 			//SI env->map[y] != 0 -> ERROR
 			env->map[y] = champion->content[z];
 			env->map_owner[y] = champion->color;
-			// env->map_owner[y * 2 + 1] = champion->color;
 			z++;
 			y++;
 		}
@@ -154,45 +118,9 @@ static void		ft_put_champion_map(t_vm *env)
 
 static void		ft_launcher(t_vm *env, char **av, int i)
 {
-	// t_list		*list;
 	ft_verif_extension(env, av, i);
 	ft_extract_champion(env);
 	ft_put_champion_map(env);
-
-	// int		x = 0;
-	// list = env->list_champions;
-	// while (list)
-	// {
-	// 	ft_printf("[{10}%s{0}][{14}%d{0}]\n", env->filename[x], env->fd[x]);
-	// 	ft_printf("\t[%s]\n", ((t_champions *)list->content)->name);
-	// 	ft_printf("\t[%s]\n", ((t_champions *)list->content)->comment);
-	// 	ft_printf("\t[%x]\n", ((t_champions *)list->content)->magic);
-	// 	ft_printf("\t[%d]\n", ((t_champions *)list->content)->prog_size);
-	// 	ft_printf("\t[%d]\n", ((t_champions *)list->content)->starting_pos);
-	// 	list = list->next;
-	// 	x++;
-	// }
-
-	// int x =0;
-	// while (x < MEM_SIZE * 2)
-	// {
-	// 	int j = 0;
-	// 	while (j < 64)
-	// 	{
-	// 		if (env->map_owner[x] == 0)
-	// 			ft_put("00");
-	// 		else
-	// 			ft_put("%d", env->map_owner[x]);
-	// 		x++;
-	// 		if (env->map_owner[x] == 0)
-	// 			ft_put("00 ");
-	// 		else
-	// 			ft_put("%d ", env->map_owner[x]);
-	// 		j++;
-	// 	}
-	// 	ft_put("\n");
-	// }
-
 	ft_fight(env);
 }
 

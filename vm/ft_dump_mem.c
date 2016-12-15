@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 18:15:11 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/14 18:43:10 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/14 19:11:45 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ void			ft_dump(const void *addr, size_t size)
 /*
 ** The ft_dump_ncurse() function dumps the memory with NCURSE
 */
-static void		ft_print_hex_mem_ncurse(t_vm *env, char *add, size_t size, int *col)
+static void		ft_print_hex_mem_ncurse(t_vm *env, char *add, size_t size,
+				int *col)
 {
 	size_t		i;
 	char		*hex;
