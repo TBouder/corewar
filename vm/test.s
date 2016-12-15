@@ -2,35 +2,64 @@
 .name    "Survivor"
 .comment "Invincible"
 
-; live %1
-; live %3
-; live %3
-; live %3
-#LD#############################################################################
-	; ; TEST DE LD DIRECT ET INDIRECT
-	; ################################
-	aff r1				#Affiche r2 -> 'D'
-	aff r1				#Affiche r2 -> 'D'
-	aff r1				#Affiche r2 -> 'D'
-	aff r1				#Affiche r2 -> 'D'
-	aff r1				#Affiche r2 -> 'D'
-	aff r1				#Affiche r2 -> 'D'
-	aff r1				#Affiche r2 -> 'D'
-	aff r1				#Affiche r2 -> 'D'
-	aff r1				#Affiche r2 -> 'D'
-	aff r1				#Affiche r2 -> 'D'
-	aff r1				#Affiche r2 -> 'D'
-	label:
-	ld %68, r2			#Met %68 dans r2 -> 'D'
-	ld 11, r7			#Met 11 dans r7 -> 0
-	aff r2				#Affiche r2 -> 'D'
-	aff r7				#Affiche r7 -> ''
-	add r2, r7, r3		#r3 = r2 + r7 -> 0x4 + 0x44 -> 'H'
-	aff r3				#Affiche r3 -> 'H'
-	live %1
-	; 1 CHAMP
-	st r2, r3			#Stock r2 dans r3
-	st r2, 42			#Stock r2 dans l'adresse PC + (42 % IDX_MOD)
+# ; live %1
+# ; live %3
+# ; live %3
+# ; live %3
+# #LD#############################################################################
+# 	; ; TEST DE LD DIRECT ET INDIRECT
+# 	; ################################
+# 	aff r1				#Affiche r2 -> 'D'
+# 	aff r1				#Affiche r2 -> 'D'
+# 	aff r1				#Affiche r2 -> 'D'
+# 	aff r1				#Affiche r2 -> 'D'
+# 	aff r1				#Affiche r2 -> 'D'
+# 	aff r1				#Affiche r2 -> 'D'
+# 	aff r1				#Affiche r2 -> 'D'
+# 	aff r1				#Affiche r2 -> 'D'
+# 	aff r1				#Affiche r2 -> 'D'
+# 	aff r1				#Affiche r2 -> 'D'
+# 	aff r1				#Affiche r2 -> 'D'
+# 	aff r1				#Affiche r2 -> 'D'
+# 	aff r1				#Affiche r2 -> 'D'
+# 	aff r1				#Affiche r2 -> 'D'
+# 	aff r1				#Affiche r2 -> 'D'
+# 	aff r1				#Affiche r2 -> 'D'
+# 	aff r1				#Affiche r2 -> 'D'
+# 	aff r1				#Affiche r2 -> 'D'
+# 	aff r1				#Affiche r2 -> 'D'
+# 	aff r1				#Affiche r2 -> 'D'
+# 	aff r1				#Affiche r2 -> 'D'
+# 	aff r1				#Affiche r2 -> 'D'
+# 	aff r1				#Affiche r2 -> 'D'
+# 	aff r1				#Affiche r2 -> 'D'
+# 	aff r1				#Affiche r2 -> 'D'
+# 	aff r1				#Affiche r2 -> 'D'
+# 	aff r1				#Affiche r2 -> 'D'
+# 	aff r1				#Affiche r2 -> 'D'
+# 	aff r1				#Affiche r2 -> 'D'
+# 	aff r1				#Affiche r2 -> 'D'
+# 	aff r1				#Affiche r2 -> 'D'
+# 	aff r1				#Affiche r2 -> 'D'
+# 	aff r1				#Affiche r2 -> 'D'
+# 	aff r1				#Affiche r2 -> 'D'
+# 	aff r1				#Affiche r2 -> 'D'
+# 	aff r1				#Affiche r2 -> 'D'
+# 	aff r1				#Affiche r2 -> 'D'
+# 	aff r1				#Affiche r2 -> 'D'
+# 	aff r1				#Affiche r2 -> 'D'
+# 	aff r1				#Affiche r2 -> 'D'
+# 	label:
+# 	ld %68, r2			#Met %68 dans r2 -> 'D'
+# 	ld 11, r7			#Met 11 dans r7 -> 0
+# 	aff r2				#Affiche r2 -> 'D'
+# 	aff r7				#Affiche r7 -> ''
+# 	add r2, r7, r3		#r3 = r2 + r7 -> 0x4 + 0x44 -> 'H'
+# 	aff r3				#Affiche r3 -> 'H'
+# 	live %1
+# 	; 1 CHAMP
+# 	st r2, r3			#Stock r2 dans r3
+# 	st r2, 42			#Stock r2 dans l'adresse PC + (42 % IDX_MOD)
 
 # 	fork %3
 # 	; 2 CHAMP
