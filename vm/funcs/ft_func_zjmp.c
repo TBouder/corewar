@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/15 18:41:36 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/15 19:14:44 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,6 @@ void	ft_corewar_zjmp(t_vm *env, t_champions *champ, int *nbr)
 	{
 		env->buf = ft_set_buffer(nbr[0]);
 		env->arg1 = ft_byte_to_str(&env->map[pc], env->buf);
-		ft_printf("Env->arg1 %d\n", env->arg1);
-		// ft_printf("{10}CARRY %d{0}\n", champ->carry);
-		// ft_printf("env->map[%d]\n", (champ->pc + ft_byte_to_str(&env->map[pc], ft_set_buffer(nbr[0]))) % M);
 		champ->pc = (champ->pc + env->arg1) % M; // On dois faire % IDX_MOD ?
 	}
 	else
