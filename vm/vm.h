@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/15 18:41:24 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/16 18:13:20 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ typedef struct		s_vm
 	int				arg2;
 	int				arg3;
 	int				buf;
+	int				sum_idx;
 
 	// int				detla;
 	// int				nbr_live;

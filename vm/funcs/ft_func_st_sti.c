@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/15 19:13:35 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/16 18:30:40 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,33 @@ static int			ft_set_buffer(int nbr)
 	if (IS_IND(nbr))
 		return (2);
 	return (0);
+}
+
+void				ft_put_map_reg(t_vm *env, t_champions *champ, int i, int j)
+{
+	char			*reg;
+	char			*begin_reg;
+	char			*sub_reg;
+	int				len;
+
+	reg = ft_strinit("00000000");
+	begin_reg = ft_itox((unsigned int)champ->reg[env->arg1]);
+	len = ft_printf("%!x", (unsigned int)champ->reg[env->arg1]);
+	while (i < 8 && len)
+	{
+		reg[7 - i] = begin_reg[len - 1];
+		i++;
+		len--;
+	}
+
+	i = 0;
+	while (i < 8)
+	{
+		sub_reg = ft_strsub(reg, i, 2);
+		env->map[(champ->pc - 1 + env->sum_idx + j) % M] = ft_atoi_base(sub_reg, 16);
+		i += 2;
+		j += 1;
+	}
 }
 
 /*
@@ -44,43 +71,13 @@ void	ft_corewar_st(t_vm *env, t_champions *champ, int *nbr)
 			champ->reg[env->arg2] = champ->reg[env->arg1];
 		else if (IS_IND(nbr[1]))
 		{
-			env->map[(champ->pc - 1 + (env->arg2 % I)) % M] = champ->reg[env->arg1];
+			ft_put_map_reg(env, champ, 0, 0);
+			env->sum_idx = env->arg2 % I;
+			// env->map[(champ->pc - 1 + (env->arg2 % I)) % M] = champ->reg[env->arg1];
 			env->map_owner[(champ->pc - 1 + (env->arg2 % I)) % M] = champ->color;
 		}
 	}
 }
-
-static void		ft_convert(unsigned long long n, char *s, int *index)
-{
-	char	*str;
-
-	str = ft_strinit("0123456789abcdef");
-	if (n < (ULL)16)
-	{
-		s[*index] = str[n];
-		*index += 1;
-	}
-	else
-	{
-		ft_convert(n / 16, s, index);
-		ft_convert(n % 16, s, index);
-	}
-	ft_strdel(&str);
-}
-
-char			*ft_itoxx(unsigned long long n)
-{
-	char	*s;
-	int		len;
-	int		k;
-
-	k = 0;
-	len = ft_nbrlen_base(n, 16);
-	s = ft_strnew(8);
-	ft_convert(n, s, &k);
-	return (s);
-}
-
 
 /*
 ** Stock la valeur de NBR[1] + NBR[2] dans NBR[0]
@@ -88,7 +85,6 @@ char			*ft_itoxx(unsigned long long n)
 void	ft_corewar_sti(t_vm *env, t_champions *champ, int *nbr)
 {
 	int		pc;
-	int		sum_idx;
 
 	pc = champ->pc + 1;
 
@@ -110,40 +106,9 @@ void	ft_corewar_sti(t_vm *env, t_champions *champ, int *nbr)
 			env->arg2 = champ->reg[env->arg2];
 		if (IS_REG(nbr[2]))
 			env->arg3 = champ->reg[env->arg3];
-		sum_idx = env->arg2 + env->arg3;
-		// ft_printf("{13}env->arg2 [%d]{0}\n", env->arg2);
+		env->sum_idx = env->arg2 + env->arg3;
 
-		char	*reg;
-		char	*regg;
-		char	*str_reg;
-		int		len;
-		int		i;
-
-		reg = ft_strinit("00000000");
-		regg = ft_itox((unsigned int)champ->reg[env->arg1]);
-		len = ft_printf("%!x", (unsigned int)champ->reg[env->arg1]);
-		i = 0;
-		while (i < 8 && len)
-		{
-			reg[7 - i] = regg[len - 1];
-			i++;
-			len--;
-		}
-
-		i = 0;
-		int j = 0;
-		while (i < 8)
-		{
-			str_reg = ft_strsub(reg, i, 2);
-			env->map[champ->pc - 1 + sum_idx + j] = ft_atoi_base(str_reg, 16);
-			i += 2;
-			j += 1;
-			// ft_print_memory(env->map, 280);
-			// ft_put("\n\n");
-		}
-
-		// env->map[(sum_idx % I) % M] = champ->reg[env->arg1];
-		// env->map_owner[(sum_idx % I) % M] = champ->color;
+		ft_put_map_reg(env, champ, 0, 0);
 	}
 }
 
