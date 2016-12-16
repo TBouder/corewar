@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_func_st_sti.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/15 19:13:35 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/16 14:37:47 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,6 @@ void	ft_corewar_sti(t_vm *env, t_champions *champ, int *nbr)
 		if (IS_REG(nbr[2]))
 			env->arg3 = champ->reg[env->arg3];
 		sum_idx = env->arg2 + env->arg3;
-		// ft_printf("{13}env->arg2 [%d]{0}\n", env->arg2);
 
 		char	*reg;
 		char	*regg;
@@ -138,25 +137,8 @@ void	ft_corewar_sti(t_vm *env, t_champions *champ, int *nbr)
 			env->map[champ->pc - 1 + sum_idx + j] = ft_atoi_base(str_reg, 16);
 			i += 2;
 			j += 1;
-			// ft_print_memory(env->map, 280);
-			// ft_put("\n\n");
 		}
-
 		// env->map[(sum_idx % I) % M] = champ->reg[env->arg1];
 		// env->map_owner[(sum_idx % I) % M] = champ->color;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
