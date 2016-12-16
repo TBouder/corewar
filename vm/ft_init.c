@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 17:48:28 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/15 19:23:18 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/16 01:14:53 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,10 @@ void		ft_add_champion(t_vm *env, t_champions *champion, int id, int pc)
 	new_champion->is_alive = champion ? champion->is_alive : 1;
 	new_champion->exist = champion ? champion->exist : TRUE;
 	new_champion->cycle = champion ? champion->cycle : 0;
-	new_champion->next_cycle = champion ? champion->next_cycle : 0;
+
+	// new_champion->next_cycle = champion ? champion->next_cycle : 0; //OLD
+	new_champion->next_cycle = env->cycle + 1; //PERMET DE DEBUG MAIS ON DOIT CATCH LA PROCHAINE INSTRUCION POUR CONNAITRE LE VRAI TEMPS D'ATTENTE
+
 	new_champion->is_fork = champion ? 1 : 0;
 	new_champion->color = champion ? champion->color : id + 42;
 	ft_lststart(&env->list_champions, new_champion, sizeof(t_champions));

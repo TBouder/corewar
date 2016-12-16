@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_fight.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 15:58:23 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/15 19:13:01 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/15 19:47:27 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,8 @@ void	ft_foreach_champ(t_vm *env)
 		champion = ((t_champions *)list->content);
 		if (champion->exist == TRUE)
 		{
+			// if (champion->is_fork)
+				// ft_put("{11}IS FORK : %d / %d{0}\n", env->cycle,champion->next_cycle);
 			if (env->cycle == champion->next_cycle)
 			{
 				// ft_printf("PC = {13}%d{0}\n", champion->pc);
