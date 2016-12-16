@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/15 19:14:13 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/16 18:27:48 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void		ft_corewar_lld(t_vm *env, t_champions *champ, int *nbr)
 		else if (IS_IND(nbr[0]))
 			champ->reg[env->arg2] = env->map[(champ->pc - 1 + env->arg1) % M];
 
-
 		int k = champ->carry;
 		champ->carry = champ->reg[env->arg2] != 0 ? 1 : 0;
 		if (champ->carry != k && !IS_GRAPH)
@@ -69,7 +68,6 @@ void		ft_corewar_ld(t_vm *env, t_champions *champ, int *nbr)
 		else if (IS_IND(nbr[0]))
 			champ->reg[env->arg2] = env->map[((champ->pc - 1 + (env->arg1 % I)) % M)];
 
-		// ft_printf("env->map[%d], env->arg1 : %d, champ->pc %d\n", (champ->pc - 1 + (env->arg1 % I)) % M, env->arg1, champ->pc);
 		if (!IS_GRAPH) /////////////
 			ft_printf("env->map[%d]\n", (unsigned int)(champ->pc - 1 + (env->arg1 % I)) % M);
 
@@ -77,7 +75,5 @@ void		ft_corewar_ld(t_vm *env, t_champions *champ, int *nbr)
 		champ->carry = champ->reg[env->arg2] != 0 ? 1 : 0;
 		if (champ->carry != k && !IS_GRAPH)
 			ft_printf("{13}new Carry = %d{0}\n", champ->carry);
-
-		// ft_print_memory(env->map, 80);
 	}
 }

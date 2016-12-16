@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 17:48:28 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/15 19:23:18 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/16 18:28:31 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ void			ft_init_env(t_vm *env, int part)
 		env->arg2 = 0;
 		env->arg3 = 0;
 		env->buf = 0;
+		env->sum_idx = 0;
 
 		env->total_live = env->nb_champ;
 
