@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/16 14:34:44 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/16 15:21:36 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,11 @@ void	ft_corewar_zjmp(t_vm *env, t_champions *champ, int *nbr)
 	int		pc;
 
 	pc = champ->pc + 1;
-	if (champ->carry == 1 && IS_DIR(nbr[0]))
+	if (champ->carry == 0 && IS_DIR(nbr[0])) // FONCTIONNE PAS AVEC champ->carry == 1
 	{
 		env->buf = ft_set_buffer(nbr[0]);
 		env->arg1 = ft_byte_to_str(&env->map[pc], env->buf);
 		champ->pc = ((champ->pc + env->arg1) % I) % M; // On dois faire % IDX_MOD ?
-
-		// wprintw(env->notif, "%d\n", env->arg1);
-		// ft_reload_windows(env, 3);
 	}
 	else
 		champ->pc += ft_count_to_next(nbr, ZJMP);

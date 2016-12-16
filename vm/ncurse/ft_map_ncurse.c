@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 16:20:23 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/16 14:48:52 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/16 14:53:00 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,8 +153,6 @@ static void		ft_reload_info(t_vm *env)
 			{
 				wprintw(env->info, ": \n");
 				wprintw(env->info, "\tLive : %d\n", ((t_champions *)list->content)->is_alive);
-				// env->cpt_to_die == env->cycle_to_die
-
 			}
 		}
 		list = list->next;
