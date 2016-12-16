@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 16:20:23 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/15 15:30:09 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/16 14:53:00 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,18 +61,15 @@ void			ft_init_ncurse(t_vm *env)
 
 void			ft_print_champion_color(t_champions *champion, WINDOW *win)
 {
-	if (!champion->is_fork)
-	{
-		wprintw(win, "Champion ");
-		wattron(win, COLOR_PAIR(champion->color) | A_BOLD);
-		wprintw(win, "%d", champion->champ_id);
-		wattroff(win, COLOR_PAIR(champion->color) | A_BOLD);
-		wprintw(win, " (");
-		wattron(win, COLOR_PAIR(champion->color) | A_BOLD);
-		wprintw(win, "%s", champion->name);
-		wattroff(win, COLOR_PAIR(champion->color) | A_BOLD);
-		wprintw(win, ")");
-	}
+	wprintw(win, "Champion ");
+	wattron(win, COLOR_PAIR(champion->color) | A_BOLD);
+	wprintw(win, "%d", champion->champ_id);
+	wattroff(win, COLOR_PAIR(champion->color) | A_BOLD);
+	wprintw(win, " (");
+	wattron(win, COLOR_PAIR(champion->color) | A_BOLD);
+	wprintw(win, "%s", champion->name);
+	wattroff(win, COLOR_PAIR(champion->color) | A_BOLD);
+	wprintw(win, ")");
 }
 
 void			ft_clear_ncurse(t_vm *env)
@@ -149,13 +146,14 @@ static void		ft_reload_info(t_vm *env)
 	list = env->list_champions;
 	while (list)
 	{
-		ft_print_champion_color(((t_champions *)list->content), env->info);
 		if (!((t_champions *)list->content)->is_fork)
 		{
-			wprintw(env->info, ": \n");
-			wprintw(env->info, "\tLive : %d\n", ((t_champions *)list->content)->is_alive);
-			// env->cpt_to_die == env->cycle_to_die
-
+			ft_print_champion_color(((t_champions *)list->content), env->info);
+			if (!((t_champions *)list->content)->is_fork)
+			{
+				wprintw(env->info, ": \n");
+				wprintw(env->info, "\tLive : %d\n", ((t_champions *)list->content)->is_alive);
+			}
 		}
 		list = list->next;
 	}
