@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_fight.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
+/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 15:58:23 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/15 19:47:27 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/16 19:17:54 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,7 +160,7 @@ void	ft_fight(t_vm *env)
 		{
 			if (ft_which_isalive(env) >= NBR_LIVE)
 			{
-				wprintw(env->notif, "HERE\n");
+				// wprintw(env->notif, "HERE\n");
 				ft_reload_windows(env, 3);
 				env->cycle_to_die -= CYCLE_DELTA;
 				env->cycle_check = 0;
