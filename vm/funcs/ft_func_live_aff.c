@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_func_live_aff.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 14:16:55 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/15 19:15:28 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/16 14:42:52 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void			ft_corewar_live(t_vm *env, t_champions *champ, int *nbr)
 			if (IS_GRAPH)
 			{
 				ft_print_champion_color(((t_champions *)list->content), env->notif);
+				// wprintw(env->notif, "%s", ((t_champions *)list->content)->name);
 				wprintw(env->notif, " is alive\n");
 				ft_reload_windows(env, 3);
 			}
