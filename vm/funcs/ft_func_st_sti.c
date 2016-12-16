@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/16 18:30:40 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/16 18:32:13 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,17 +111,3 @@ void	ft_corewar_sti(t_vm *env, t_champions *champ, int *nbr)
 		ft_put_map_reg(env, champ, 0, 0);
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/16 18:13:20 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/16 18:31:55 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,7 @@ void			ft_corewar_and(t_vm *env, t_champions *champ, int *nbr);
 void			ft_corewar_or(t_vm *env, t_champions *champ, int *nbr);
 void			ft_corewar_xor(t_vm *env, t_champions *champ, int *nbr);
 
+int			ft_ret_cycle(int op);
 
 /*
 ** NCURSE

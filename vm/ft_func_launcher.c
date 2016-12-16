@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_func_launcher.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 23:27:37 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/15 19:14:59 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/16 01:07:18 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 ** The ft_ret_cycle() function takes an opcode as paramater and according to it,
 ** returns the number of cycle to perform before calling the next instruction
 */
-static int	ft_ret_cycle(int op)
+int			ft_ret_cycle(int op)
 {
 	if (op == AFF)
 		return (2);
@@ -116,5 +116,6 @@ int			ft_get_args(t_vm *env, t_champions *champ, int op)
 
 	IS_GRAPH ? ft_reload_windows(env, 1) : 0;
 
-	return (ft_ret_cycle(op));
+	// return (ft_ret_cycle(op)); // WAINTING TIME AFTER INSTRUC
+	return (ft_ret_cycle((int)env->map[champ->pc]));
 }

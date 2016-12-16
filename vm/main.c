@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 19:42:02 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/14 19:15:02 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/16 01:05:01 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ static void		ft_put_champion_map(t_vm *env)
 			z++;
 			y++;
 		}
+		champion->next_cycle = ft_ret_cycle((int)env->map[champion->pc]); //ADDED TO PERFOM THE WAITING JOB BEFORE
 		list = list->next;
 	}
 }
