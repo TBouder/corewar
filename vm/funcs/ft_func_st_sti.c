@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_func_st_sti.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/16 18:32:13 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/17 15:27:02 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ void				ft_put_map_reg(t_vm *env, t_champions *champ, int i, int j)
 	while (i < 8)
 	{
 		sub_reg = ft_strsub(reg, i, 2);
-		env->map[(champ->pc - 1 + env->sum_idx + j) % M] = ft_atoi_base(sub_reg, 16);
+		env->map[(unsigned int)(champ->pc - 1 + env->sum_idx + j) % M] = ft_atoi_base(sub_reg, 16);
+		env->map_owner[(unsigned int)(champ->pc - 1 + env->sum_idx + j) % M] = champ->color;
 		i += 2;
 		j += 1;
 	}
@@ -71,10 +72,10 @@ void	ft_corewar_st(t_vm *env, t_champions *champ, int *nbr)
 			champ->reg[env->arg2] = champ->reg[env->arg1];
 		else if (IS_IND(nbr[1]))
 		{
-			ft_put_map_reg(env, champ, 0, 0);
 			env->sum_idx = env->arg2 % I;
+			ft_put_map_reg(env, champ, 0, 0);
 			// env->map[(champ->pc - 1 + (env->arg2 % I)) % M] = champ->reg[env->arg1];
-			env->map_owner[(champ->pc - 1 + (env->arg2 % I)) % M] = champ->color;
+			// env->map_owner[(champ->pc - 1 + (env->arg2 % I)) % M] = champ->color;
 		}
 	}
 }
