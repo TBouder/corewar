@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/16 18:44:04 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/18 14:44:21 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,15 @@ void	ft_corewar_fork(t_vm *env, t_champions *champ, int *nbr)
 
 void	ft_corewar_lfork(t_vm *env, t_champions *champ, int *nbr)
 {
-	if (0)
+	int		pc;
+
+	pc = champ->pc + 1;
+
+	if (IS_DIR(nbr[0]))
 	{
-		env = 0;
-		champ = 0;
-		nbr = 0;
+		env->buf = ft_set_buffer(nbr[0]);
+		env->arg1 = ft_byte_to_str(&env->map[pc], env->buf);
+		env->arg1 = (champ->pc + env->arg1) % M;
+		ft_add_champion(env, champ, champ->champ_id - 1, env->arg1);
 	}
 }
