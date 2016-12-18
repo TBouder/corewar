@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 19:42:02 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/16 01:05:01 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/16 19:37:07 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,7 @@ int				main(int ac, char **av)
 	env.options = (t_options *)malloc(sizeof(t_options));
 	i = ft_get_flags(&env, av, env.options);
 	if (i == ac)
-		ft_error_vm(&env, "{9}Error{0} : No champions", 1);
+		ft_error_vm(&env, "{9}Error{0} : No champions", 0);
 	else if (ac - i >= 1 && ac - i <= 4)
 	{
 		IS_GRAPH ? ft_init_ncurse(&env) : 0;

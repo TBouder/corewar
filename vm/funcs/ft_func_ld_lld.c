@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_func_ld_lld.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/16 19:19:42 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/17 15:40:10 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,8 @@ void		ft_corewar_ld(t_vm *env, t_champions *champ, int *nbr)
 		env->buf = ft_set_buffer(nbr[1]);
 		env->arg2 = ft_byte_to_str(&env->map[pc], env->buf);
 
-
 		if (IS_DIR(nbr[0]))
-			champ->reg[env->arg2] = (env->arg1 % I) % M;
+			champ->reg[env->arg2] = env->arg1;
 		else if (IS_IND(nbr[0]))
 			champ->reg[env->arg2] = env->map[((champ->pc - 1 + (env->arg1 % I)) % M)];
 
