@@ -260,22 +260,43 @@
 	# aff r4
 
 	#; TEST DE FORK
-		ld %36, r2			# Met la valeur $ dans r2
-		ld %1, r3			# Met 1 dans r3 (Pour permettre l'incrémentation)
+		ld %4293984255, r2			# Met la valeur $ dans r2
+		ld %286331153, r3		#; 1111 1111
+		ld %2290649224, r4
+		# st r3, -513				#; 1111 1111
+		st r2, 32768				#; fff0 ffff
+		st r2, 32769				#; fff0 ffff
+		st r2, 16777215				#; fff0 ffff
+		# st r3, 511				#; fff0 ffff
 
-		onboucle:
-		aff r2				# Va afficher les diff char ascii
-		add r2, r3, r2		# Incrémente r2, pour changer le char
-		zjmp %:onboucle
-
-		fork %:laba			# Créé un nouveau champion tous les 256
-		add r2, r3, r2		# Sinon le carry se met a 0
-		zjmp %:onboucle		# On revient au début du programme
-
-		laba:
-			ld %42, r2		# Normalement r2, spécifique au nouveau champ
-		st r1, 10			# Save le numéro du champion
+		# st r2, 70			# Save le numéro du champion
+		# st r2, 60			# Save le numéro du champion
+		# st r2, 50			# Save le numéro du champion
+		# st r2, 40			# Save le numéro du champion
+		# st r2, 30			# Save le numéro du champion
+		# st r2, 20			# Save le numéro du champion
+		# st r2, 10			# Save le numéro du champion
 		aff r2
+	#; FIN TEST
+
+
+	#; TEST DE FORK
+		# ld %36, r2			# Met la valeur $ dans r2
+		# ld %1, r3			# Met 1 dans r3 (Pour permettre l'incrémentation)
+
+		# onboucle:
+		# aff r2				# Va afficher les diff char ascii
+		# add r2, r3, r2		# Incrémente r2, pour changer le char
+		# zjmp %:onboucle
+
+		# fork %:laba			# Créé un nouveau champion tous les 256
+		# add r2, r3, r2		# Sinon le carry se met a 0
+		# zjmp %:onboucle		# On revient au début du programme
+
+		# laba:
+		# 	ld %42, r2		# Normalement r2, spécifique au nouveau champ
+		# st r1, 10			# Save le numéro du champion
+		# aff r2
 	#; FIN TEST
 
 	# ; TEST DE ZJMP AVEC LABEL

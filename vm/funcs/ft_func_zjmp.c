@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/18 14:41:29 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/18 15:42:44 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	ft_corewar_zjmp(t_vm *env, t_champions *champ, int *nbr)
 	pc = champ->pc + 1;
 	if (champ->carry == 1 && IS_DIR(nbr[0])) // FONCTIONNE PAS AVEC champ->carry == 1
 	{
-		ft_printf("{10}Good jump{0}\n");
 		env->buf = ft_set_buffer(nbr[0]);
 		env->arg1 = ft_byte_to_str(&env->map[pc], env->buf);
 		champ->pc = ((champ->pc + env->arg1) % I) % M; // On dois faire % IDX_MOD ?
