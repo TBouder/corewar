@@ -259,24 +259,15 @@
 	# add r3, r2, r4
 	# aff r4
 
-	#; TEST DE FORK
-		ld %4293984255, r2			# Met la valeur $ dans r2
-		ld %286331153, r3		#; 1111 1111
-		ld %2290649224, r4
-		# st r3, -513				#; 1111 1111
-		st r2, 32768				#; fff0 ffff
-		st r2, 32769				#; fff0 ffff
-		st r2, 16777215				#; fff0 ffff
-		# st r3, 511				#; fff0 ffff
-
-		# st r2, 70			# Save le numéro du champion
-		# st r2, 60			# Save le numéro du champion
-		# st r2, 50			# Save le numéro du champion
-		# st r2, 40			# Save le numéro du champion
-		# st r2, 30			# Save le numéro du champion
-		# st r2, 20			# Save le numéro du champion
-		# st r2, 10			# Save le numéro du champion
-		aff r2
+	#; TEST DE ST AVEC VALEUR NEGATIVE
+		# ld %4293984255, r2		#; fff0 ffff
+		# ld %286331153, r3		#; 1111 1111
+		# ld %2290649224, r4		#; 8888 8888
+		# ld %3722304989, r5		#; dddd dddd
+		# st r2, 32767
+		# st r3, 32768
+		# st r4, 32769
+		# st r5, -100			#; pareil que ~65436
 	#; FIN TEST
 
 

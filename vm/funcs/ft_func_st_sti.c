@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/19 19:22:34 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/20 19:14:37 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,6 @@ void				ft_put_map_reg(t_vm *env, t_champions *champ, int i, int j)
 		i++;
 		len--;
 	}
-
-	ft_printf("env->map[%d]\n", (champ->pc - 1 + env->sum_idx + j) % M);
-
 	i = 0;
 	while (i < 8)
 	{
@@ -74,21 +71,11 @@ void	ft_corewar_st(t_vm *env, t_champions *champ, int *nbr)
 			champ->reg[env->arg2] = champ->reg[env->arg1];
 		else if (IS_IND(nbr[1]))
 		{
-			// ft_printf("env->map[%d] avant %% I\n", env->arg2);
-			// if (env->arg2 < 0)
-			// {
-			// 	ft_printf("{10}NEGATIF{0}\n");
-			// 	env->sum_idx = env->arg2;
-			// }
-			// else
+			if (env->arg2 > 32768)
+				env->sum_idx = (env->arg2 % I) - I;
+			else
 				env->sum_idx = env->arg2 % I;
-			// ft_printf("env->map[%d] apres %% I\n", env->sum_idx);
 			ft_put_map_reg(env, champ, 0, 0);
-		
-			// ft_print_memory(env->map, 550);
-			// ft_printf("\n\n");
-			// env->map[(champ->pc - 1 + (env->arg2 % I)) % M] = champ->reg[env->arg1];
-			// env->map_owner[(champ->pc - 1 + (env->arg2 % I)) % M] = champ->color;
 		}
 	}
 }
