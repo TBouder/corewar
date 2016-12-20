@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_func_zjmp.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/18 15:42:44 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/20 23:32:08 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,13 @@ void	ft_corewar_zjmp(t_vm *env, t_champions *champ, int *nbr)
 	{
 		env->buf = ft_set_buffer(nbr[0]);
 		env->arg1 = ft_byte_to_str(&env->map[pc], env->buf);
-		champ->pc = ((champ->pc + env->arg1) % I) % M; // On dois faire % IDX_MOD ?
+		if (env->arg1 > 32768)
+			champ->pc = (champ->pc + ((env->arg1 % I) - I)) % M; // On dois faire % IDX_MOD ?
+		else
+			champ->pc = (champ->pc + (env->arg1 % I)) % M; // On dois faire % IDX_MOD ?
+		// champ->pc = ((champ->pc + env->arg1) % I) % M; // On dois faire % IDX_MOD ?
 	}
 	else
 		champ->pc += ft_count_to_next(nbr, ZJMP);
 	IS_GRAPH ? ft_reload_windows(env, 1) : 0;
-	// ft_printf("{10}%d{0}\n", champ->pc);
-	// IS_GRAPH ? ft_reload_windows(env, 1) : 0;
 }

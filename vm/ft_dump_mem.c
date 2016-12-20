@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 18:15:11 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/15 13:10:18 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/20 23:13:29 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,15 +72,13 @@ static t_champions	*ft_get_ncurse_color_champ(t_vm *env, int *col)
 	return (NULL);
 }
 
-static void		ft_get_ncurse_color(t_vm *env, int *col, int on)
+static void			ft_get_ncurse_color(t_vm *env, int *col, int on)
 {
 	t_champions	*champ;
 
 	if (env->map_owner[*col])
 	{
 		champ = ft_get_ncurse_color_champ(env, col);
-
-
 		if (champ)
 		{
 			if (on)
@@ -98,7 +96,7 @@ static void		ft_get_ncurse_color(t_vm *env, int *col, int on)
 	}
 }
 
-static void		ft_print_hex_mem_ncurse(t_vm *env, char *add, size_t size,
+static void			ft_print_hex_mem_ncurse(t_vm *env, char *add, size_t size,
 				int *col)
 {
 	size_t		i;
