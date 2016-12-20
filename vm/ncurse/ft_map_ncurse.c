@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_map_ncurse.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
+/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 16:20:23 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/16 14:53:00 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/20 19:42:36 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,10 @@ void			ft_clear_ncurse(t_vm *env)
 	endwin();
 	free(env->main);
 	free(env->info);
+	free(env->notif);
+	free(env->main_border);
+	free(env->info_border);
+	free(env->notif_border);
 }
 
 void			ft_get_key(t_vm *env)
