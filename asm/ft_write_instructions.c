@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 16:31:46 by quroulon          #+#    #+#             */
-/*   Updated: 2016/12/07 15:07:33 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/20 14:52:16 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ static void		ft_write_args(t_asm *env, char *arg, int pds, int line)
 	else
 	{
 		tmp = ft_atoi(&arg[0]);
+		tmp > 65535 || tmp < -65536 ? tmp = 65535 : 0;
 		tmp < 0 ? tmp = (USHRT_MAX + 1) + tmp : 0;
 		ft_transform_size(tmp, env->fd_cor, pds);
 	}
