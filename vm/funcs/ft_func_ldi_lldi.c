@@ -49,7 +49,7 @@ void		ft_corewar_ldi(t_vm *env, t_champions *champ, int *nbr)
 		env->sum_idx = env->arg1 + env->arg2; //SERA UNE ADRESSE DANS LAQUELLE ON VA LIRE UNE VALEUR DE LA TAILLE D'UN REGISTRE QU'ON MET DANS REG[env->arg3]
 
 		champ->reg[env->arg3] = ft_byte_to_str(&env->map[env->sum_idx % M], 1);
-		ft_put("\033[104mr%d = 0x%x{0}\n", env->arg3, champ->reg[env->arg3]);
+		// ft_put("\033[104mr%d = 0x%x{0}\n", env->arg3, champ->reg[env->arg3]);
 	}
 }
 
@@ -79,6 +79,6 @@ void		ft_corewar_lldi(t_vm *env, t_champions *champ, int *nbr)
 		env->sum_idx = env->arg1 + env->arg2; //SERA UNE ADRESSE DANS LAQUELLE ON VA LIRE UNE VALEUR DE LA TAILLE D'UN REGISTRE QU'ON MET DANS REG[env->arg3]
 
 		champ->reg[env->arg3] = ft_byte_to_str(&env->map[(env->sum_idx % I) % M], 1);
-		ft_put("\033[104mr%d = 0x%x{0}\n", env->arg3, champ->reg[env->arg3]);
+		// ft_put("\033[104mr%d = 0x%x{0}\n", env->arg3, champ->reg[env->arg3]);
 	}
 }
