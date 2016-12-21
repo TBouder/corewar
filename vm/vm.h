@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/21 09:34:39 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/21 13:54:35 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ void			ft_corewar_and(t_vm *env, t_champions *champ, int *nbr);
 void			ft_corewar_or(t_vm *env, t_champions *champ, int *nbr);
 void			ft_corewar_xor(t_vm *env, t_champions *champ, int *nbr);
 
-int			ft_ret_cycle(int op);
+int				ft_ret_cycle(int op);
 
 /*
 ** NCURSE
@@ -169,5 +169,16 @@ void			ft_clear_champions(t_champions **champions, int size);
 void			ft_clear_all(t_vm *env);
 void			ft_error_vm(t_vm *env, char *msg, int clear);
 
+/*
+** VERBOSE
+*/
+void			ft_verbose_fork(t_vm *env, t_champions *champ, t_champions *c);
+void			ft_verbose_champ_info(t_vm *env, t_champions *champ, int part);
+void			ft_verbose_dead(t_vm *env, t_champions *champ);
+
+/*
+** TOOLS
+*/
+void			ft_verif_extension(t_vm *env, char **av, int i);
 
 #endif

@@ -6,14 +6,11 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 23:27:37 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/21 09:46:29 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/21 12:22:54 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
-
-#define IS_GRAPH env->options->flags['g']
-#define IS_VERBOSE env->options->flags['v']
 
 /*
 ** The ft_ret_cycle() function takes an opcode as paramater and according to it,

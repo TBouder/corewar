@@ -6,7 +6,7 @@
 #    By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/10/05 20:24:05 by tbouder           #+#    #+#              #
-#    Updated: 2016/12/21 09:26:49 by tbouder          ###   ########.fr        #
+#    Updated: 2016/12/21 13:00:50 by tbouder          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ HEADER 		=	vm.h
 #	SRC
 ################################################################################
 SRC			=	main.c ft_extract_champion.c ft_init.c ft_fight.c \
-				ft_dump_mem.c ft_free.c \
+				ft_dump_mem.c ft_free.c ft_verbose.c ft_tools.c \
 				ft_func.c ft_func_launcher.c \
 				funcs/ft_func_live_aff.c \
 				funcs/ft_func_add_sub.c \
@@ -37,7 +37,7 @@ SRC			=	main.c ft_extract_champion.c ft_init.c ft_fight.c \
 				ncurse/ft_print_ncurse.c
 
 OBJ			=	main.o ft_extract_champion.o ft_init.o ft_fight.o \
-				ft_dump_mem.o ft_free.o \
+				ft_dump_mem.o ft_free.o ft_verbose.o ft_tools.o \
 				ft_func.o ft_func_launcher.o \
 				funcs/ft_func_live_aff.o \
 				funcs/ft_func_add_sub.o \

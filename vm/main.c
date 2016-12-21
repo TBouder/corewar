@@ -6,41 +6,12 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 19:42:02 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/21 09:50:04 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/21 12:27:38 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
-# define	IS_GRAPH env.options->flags['g']
-
-void			ft_verif_extension(t_vm *env, char **av, int i)
-{
-	char	*extension;
-	int		result;
-	int		y;
-
-	y = 0;
-	while (av[i])
-	{
-		errno = 0;
-		if (av[i] == NULL || (env->fd[y] = open(av[i], O_RDONLY)) == -1 || errno != 0)
-			ft_error_vm(env, ERR_BAD_SRC_FILE, 0);
-		if (open(av[i], O_DIRECTORY) != -1)
-			ft_error_vm(env, ERR_DIR, 0);
-		if (!ft_strrchr(av[i], '.'))
-			ft_error_vm(env, ERR_NOEXT, 0);
-		extension = ft_strinit(ft_strrchr(av[i], '.'));
-		result = EQU(extension, ".cor");
-		ft_strdel(&extension);
-		if (result)
-			env->filename[y] = ft_strinit(av[i]);
-		else
-			ft_error_vm(env, ERR_NOT_COR, 0);
-		i++;
-		y++;
-	}
-}
-/******************************************************************************/
+#define	IS_GRAPHIC env.options->flags['g']
 
 static void		ft_init_options(t_options *options)
 {
@@ -132,13 +103,13 @@ int				main(int ac, char **av)
 		ft_error_vm(&env, "{9}Error{0} : No champions", 0);
 	else if (ac - i >= 1 && ac - i <= 4)
 	{
-		IS_GRAPH ? ft_init_ncurse(&env) : 0;
+		IS_GRAPHIC ? ft_init_ncurse(&env) : 0;
 
 		ft_init_env(&env, ac - i);
 		ft_launcher(&env, av, i);
 		ft_clear_all(&env);
 
-		IS_GRAPH ? ft_clear_ncurse(&env) : 0;
+		IS_GRAPHIC ? ft_clear_ncurse(&env) : 0;
 	}
 	else
 		ft_error_vm(&env, "{9}Error{0} : Too many champions", 1);
