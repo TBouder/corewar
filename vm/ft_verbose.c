@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/21 12:17:02 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/21 14:17:44 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/21 19:00:39 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,24 @@ void		ft_verbose_dead(t_vm *env, t_champions *champ)
 	}
 	else
 	{
-		ft_put("The champion {14}%d{0} ({14}%s{0}) ",
-			champ->champ_id, champ->name);
+		ft_put("[%d] The champion {14}%d{0} ({14}%s{0}) ",
+			env->cycle, champ->champ_id, champ->name);
 		champ->is_fork ? ft_put("({11}Forked Champion{0}) ") : 0;
 		ft_put("is now {9}dead{0} !\n");
 	}
+}
+
+void		ft_verbose_winner(t_vm *env)
+{
+	int		key;
+
+	if (IS_GRAPH)
+	{
+		wprintw(env->notif, "END OF GAME : WINNER IS ???\n");
+		ft_reload_windows(env, 3);
+		while ((key = getch()) != 'q')
+			;
+		ft_clear_ncurse(env);
+	}
+	exit(1);
 }
