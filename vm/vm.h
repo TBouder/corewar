@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/20 23:11:06 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/21 09:34:39 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,8 @@ void			ft_init_ncurse(t_vm *env);
 void			ft_clear_ncurse(t_vm *env);
 void			ft_reload_windows(t_vm *env, int part);
 void			ft_print_champion_color(t_champions *champion, WINDOW *win);
+void			ft_print_infos(t_vm *env);
+void			ft_print_champions_infos(t_vm *env);
 void			ft_get_key(t_vm *env);
 
 /*

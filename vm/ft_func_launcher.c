@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 23:27:37 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/16 01:07:18 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/21 09:46:29 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,25 +42,13 @@ int			ft_ret_cycle(int op)
 	return (0);
 }
 
-char		*ft_instruct_name(int op)
+/*
+** The ft_instruct_name() function takes an op code and return the full name, as
+** a string, of this opcode (No malloc).
+*/
+static char	*ft_instruct_name_helper(int op)
 {
-	if (op == LIVE)
-		return ("LIVE");
-	else if (op == LD)
-		return ("LD");
-	else if (op == ST)
-		return ("ST");
-	else if (op == ADD)
-		return ("ADD");
-	else if (op == SUB)
-		return ("SUB");
-	else if (op == AND)
-		return ("AND");
-	else if (op == OR)
-		return ("OR");
-	else if (op == XOR)
-		return ("XOR");
-	else if (op == ZJMP)
+	if (op == ZJMP)
 		return ("ZJMP");
 	else if (op == LDI)
 		return ("LDI");
@@ -79,22 +67,33 @@ char		*ft_instruct_name(int op)
 	return ("INVALID INSTRUCTION");
 }
 
-int			ft_get_args(t_vm *env, t_champions *champ, int op)
+char		*ft_instruct_name(int op)
 {
-	int		*nbr;
-	int		count;
+	if (op == LIVE)
+		return ("LIVE");
+	else if (op == LD)
+		return ("LD");
+	else if (op == ST)
+		return ("ST");
+	else if (op == ADD)
+		return ("ADD");
+	else if (op == SUB)
+		return ("SUB");
+	else if (op == AND)
+		return ("AND");
+	else if (op == OR)
+		return ("OR");
+	else if (op == XOR)
+		return ("XOR");
+	return (ft_instruct_name_helper(op));
+}
 
-	if (op != LIVE && op != ZJMP && op != FORK && op != LFORK)
-		nbr = ft_get_size(env, champ); //Va, entre autre, faire +1 au pc si needed
-	else
-	{
-		nbr = ft_nbrnew(3);
-		nbr[0] = 10;
-	}
-	count = ft_count_to_next(nbr, op);
-
-	!IS_GRAPH && IS_VERBOSE ? ft_put("[{10}%s{0}]\n", ft_instruct_name(op)) : 0;
-
+/*
+** The ft_call_func() function calls the correct function in the funcs folder,
+** according to the opcode.
+*/
+static void	ft_call_func(t_vm *env, t_champions *champ, int *nbr, int op)
+{
 	op == LIVE ? ft_corewar_live(env, champ, nbr) : 0;
 	op == LD ? ft_corewar_ld(env, champ, nbr) : 0;
 	op == ST ? ft_corewar_st(env, champ, nbr) : 0;
@@ -111,11 +110,33 @@ int			ft_get_args(t_vm *env, t_champions *champ, int op)
 	op == LLDI ? ft_corewar_lldi(env, champ, nbr) : 0;
 	op == LFORK ? ft_corewar_fork(env, champ, nbr) : 0;
 	op == AFF ? ft_corewar_aff(env, champ, nbr) : 0;
+}
+
+/*
+** The ft_get_args() function gets the args of the argument and calls the
+** function to perform the instruction, after what, moves the PC.
+*/
+int			ft_get_args(t_vm *env, t_champions *champ, int op)
+{
+	int		*nbr;
+	int		count;
+
+	if (op != LIVE && op != ZJMP && op != FORK && op != LFORK)
+		nbr = ft_get_size(env, champ);
+	else
+	{
+		nbr = ft_nbrnew(3);
+		nbr[0] = 10;
+	}
+	count = ft_count_to_next(nbr, op);
+
+	!IS_GRAPH && IS_VERBOSE ? ft_put("[{10}%s{0}]\n", ft_instruct_name(op)) : 0;
+
+	ft_call_func(env, champ, nbr, op);
+
 	if (op != ZJMP)
 		champ->pc += count;
 
 	IS_GRAPH ? ft_reload_windows(env, 1) : 0;
-
-	// return (ft_ret_cycle(op)); // WAINTING TIME AFTER INSTRUC
 	return (ft_ret_cycle((int)env->map[champ->pc]));
 }

@@ -3,18 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 19:42:02 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/19 15:31:41 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/21 09:50:04 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
-# define	ERR_BAD_SRC_FILE	"{9}Error{0} : Can't read source file"
-# define	ERR_DIR				"{9}Error{0} : Directories are not allowed"
-# define	ERR_NOEXT			"{9}Error{0} : Extension .cor is missing (NOEXT)"
-# define	ERR_NOT_COR			"{9}Error{0} : File extension is not .cor"
 # define	IS_GRAPH env.options->flags['g']
 
 void			ft_verif_extension(t_vm *env, char **av, int i)
@@ -106,13 +102,12 @@ static void		ft_put_champion_map(t_vm *env)
 		z = 0;
 		while (z < champion->prog_size)
 		{
-			//SI env->map[y] != 0 -> ERROR
 			env->map[y] = champion->content[z];
 			env->map_owner[y] = champion->color;
 			z++;
 			y++;
 		}
-		champion->next_cycle = ft_ret_cycle((int)env->map[champion->pc]); //ADDED TO PERFOM THE WAITING JOB BEFORE
+		champion->next_cycle = ft_ret_cycle((int)env->map[champion->pc]);
 		list = list->next;
 	}
 }
@@ -147,7 +142,6 @@ int				main(int ac, char **av)
 	}
 	else
 		ft_error_vm(&env, "{9}Error{0} : Too many champions", 1);
-
 	free(env.options);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: zaz <zaz@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2016/12/13 18:10:24 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/21 09:50:03 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,15 @@
 	# define M MEM_SIZE
 	# define I IDX_MOD
 
+	# define COLS_MAIN (2 * COLS / 3)
+	# define COLS_INFO (COLS / 3)
+	# define LINES_INFO (2 * LINES / 3)
+	# define LINES_NOTIF (LINES / 3)
+
+	# define ERR_HEAD "{9}ERR{0} : The magic doesn't work with the header ..."
+	# define ERR_CONT "{9}ERR{0} : The magic doesn't work with the content ..."
+	# define ERR_BAD_SRC_FILE "{9}ERR{0} : Can't read source file"
+	# define ERR_DIR "{9}ERR{0} : Directories are not allowed"
+	# define ERR_NOEXT "{9}ERR{0} : Extension .cor is missing (NOEXT)"
+	# define ERR_NOT_COR "{9}ERR{0} : File extension is not .cor"
 #endif
