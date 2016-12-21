@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_func.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 14:16:55 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/15 16:00:10 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/21 09:48:24 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,22 +86,19 @@ int		ft_count_to_next(int *nbr, int op)
 	int		count;
 	int		situ ;
 
-	count = 0; //On saute le code du poids
+	count = 0;
 	if (op == 3 || op == 4 || op == 5 || op == 16)
 	 	situ = -42;
-	else if (op == 9 || op == 10 || op == 11 || op == 12 || op == 14 || op == 15)
+	else if ((op >= 9 && op <= 12) || op == 14 || op == 15)
 	 	situ = 2;
 	else if (op == 1 || op == 2 || op == 6 || op == 7 || op == 8 || op == 13)
 	 	situ = 4;
-
 	nbr[0] == 1 ? count += 1 : 0;
 	nbr[0] == 11 ? count += 2 : 0;
 	nbr[0] == 10 ? count += situ : 0;
-
 	nbr[1] == 1 ? count += 1 : 0;
 	nbr[1] == 11 ? count += 2 : 0;
 	nbr[1] == 10 ? count += situ : 0;
-
 	nbr[2] == 1 ? count += 1 : 0;
 	nbr[2] == 11 ? count += 2 : 0;
 	nbr[2] == 10 ? count += situ : 0;
@@ -109,5 +106,5 @@ int		ft_count_to_next(int *nbr, int op)
 		;//YA UN PB, GENRE UNE ERREUR
 	if (op == 1)
 		count = 4;
-	return (count + 1); //On passe a l'arg suivant
+	return (count + 1);
 }

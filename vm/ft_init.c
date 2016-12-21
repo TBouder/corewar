@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 17:48:28 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/20 23:21:15 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/21 09:50:33 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void		ft_add_champion(t_vm *env, t_champions *champion, int id, int pc)
 	new_champion->exist = champion ? champion->exist : TRUE;
 	new_champion->cycle = champion ? champion->cycle : 0;
 
-	// new_champion->next_cycle = champion ? champion->next_cycle : 0; //OLD
 	new_champion->next_cycle = env->cycle + 1; //PERMET DE DEBUG MAIS ON DOIT CATCH LA PROCHAINE INSTRUCION POUR CONNAITRE LE VRAI TEMPS D'ATTENTE
 
 	new_champion->is_fork = champion ? 1 : 0;
@@ -87,7 +86,6 @@ void			ft_init_env(t_vm *env, int part)
 		env->options = NULL;
 		env->nb_champ = 0;
 		env->dump_cycle = 0;
-
 		env->usleep = 50000;
 		env->nb_notif = 0;
 	}
@@ -104,18 +102,15 @@ void			ft_init_env(t_vm *env, int part)
 		env->map = ft_strnew(MEM_SIZE);
 		env->map_owner = ft_nbrnew(MEM_SIZE);
 		env->winner = NULL;
-
 		env->cycle_to_die = CYCLE_TO_DIE;
 		env->cpt_to_die = 0;
 		env->cycle_check = 0;
 		env->cycle = 0;
-
 		env->arg1 = 0;
 		env->arg2 = 0;
 		env->arg3 = 0;
 		env->buf = 0;
 		env->sum_idx = 0;
-
 		env->total_live = env->nb_champ;
 
 		// env->detla = CYCLE_DELTA;

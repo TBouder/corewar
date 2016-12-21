@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_fight.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 15:58:23 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/20 19:25:33 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/21 09:42:53 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ void	ft_print_winner(t_vm *env)
 
 	if (IS_GRAPH)
 	{
-		// ft_print_champion_color(champ, env->notif);
 		wprintw(env->notif, "END OF GAME : WINNER IS ???\n");
 		ft_reload_windows(env, 3);
 		while ((key = getch()) != 'q')
