@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/21 13:54:35 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/21 15:33:18 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,9 @@
 # include "ft_macro.h"
 # include <ncurses.h>
 
-// typedef int		bool;
-
 typedef struct		s_champions
 {
+	long			id;
 	char			*name;				//name
 	char			*comment;			//comment
 	unsigned int	magic;				//magic number
@@ -68,12 +67,11 @@ typedef struct		s_vm
 	int				buf;
 	int				sum_idx;
 
-	// int				detla;
-	// int				nbr_live;
-
 	header_t		*header;			//header struct
 	char			*map;				//Total map
 	int				*map_owner;			//FOR COLORS
+
+	long			current_id;
 
 //NCURSE
 	WINDOW	*main_border;
@@ -166,6 +164,7 @@ void			ft_dump_ncurse(t_vm *env, const void *addr, size_t size);
 ** FREE
 */
 void			ft_clear_champions(t_champions **champions, int size);
+void			ft_clear_champ(t_champions *champ);
 void			ft_clear_all(t_vm *env);
 void			ft_error_vm(t_vm *env, char *msg, int clear);
 

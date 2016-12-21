@@ -6,27 +6,19 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/14 19:12:52 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/16 19:36:55 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/21 16:22:28 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void			ft_clear_champions(t_champions **champions, int size)
+void			ft_clear_champ(t_champions *champ)
 {
-	int		i;
-
-	i = 0;
-	while (i < size)
-	{
-		ft_strdel(&champions[i]->name);
-		ft_strdel(&champions[i]->comment);
-		ft_strdel(&champions[i]->content);
-		champions[i]->magic = 0;
-		champions[i]->prog_size = 0;
-		i++;
-	}
+	ft_strdel(&champ->name);
+	ft_strdel(&champ->comment);
+	ft_strdel(&champ->content);
 }
+
 
 void			ft_clear_all(t_vm *env)
 {

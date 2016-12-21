@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 17:48:28 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/21 13:04:45 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/21 15:37:06 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,10 @@ void		ft_add_champion(t_vm *env, t_champions *champ, int id, int pc)
 	t_champions	*new_champ;
 
 	new_champ = (t_champions *)malloc(sizeof(t_champions));
-	new_champ->name = champ ? champ->name : NULL;
-	new_champ->comment = champ ? champ->comment : NULL;
-	new_champ->content = champ ? champ->content : NULL;
+	new_champ->id = env->current_id++;
+	new_champ->name = champ ? ft_strinit(champ->name) : NULL;
+	new_champ->comment = champ ? ft_strinit(champ->comment) : NULL;
+	new_champ->content = champ ? ft_strinit(champ->content) : NULL;
 	new_champ->magic = champ ? champ->magic : 0;
 	new_champ->prog_size = champ ? champ->prog_size : 0;
 	new_champ->starting_pos = champ ? champ->starting_pos : 0;
@@ -71,6 +72,7 @@ void			ft_init_env(t_vm *env, int part)
 		env->dump_cycle = 0;
 		env->usleep = 50000;
 		env->nb_notif = 0;
+		env->current_id = 0;
 	}
 	else
 	{
@@ -93,8 +95,5 @@ void			ft_init_env(t_vm *env, int part)
 		env->buf = 0;
 		env->sum_idx = 0;
 		env->total_live = env->nb_champ;
-
-		// env->detla = CYCLE_DELTA;
-		// env->nbr_live = NBR_LIVE;
 	}
 }
