@@ -6,7 +6,7 @@
 /*   By: zaz <zaz@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2016/12/21 09:50:03 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/21 12:22:43 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@
 	# define IS_DIR_IND(x) x == 11 || x == 10 ? 1 : 0
 	# define IS_IND_REG(x) x == 10 || x == 1 ? 1 : 0
 	# define IS_ALL(x) x == 11 || x == 10 || x == 1 ? 1 : 0
+
+	# define IS_GRAPH env->options->flags['g']
+	# define IS_DUMP env->options->flags['d']
+	# define IS_VERBOSE env->options->flags['v']
 
 	# define LIVE 1
 	# define LD 2
