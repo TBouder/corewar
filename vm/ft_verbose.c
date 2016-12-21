@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/21 12:17:02 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/21 13:55:35 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/21 14:17:44 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void		ft_verbose_dead(t_vm *env, t_champions *champ)
 	{
 		ft_put("The champion {14}%d{0} ({14}%s{0}) ",
 			champ->champ_id, champ->name);
-		champ->is_fork ? ft_put("({11}Forked Champion{0})") : 0;
+		champ->is_fork ? ft_put("({11}Forked Champion{0}) ") : 0;
 		ft_put("is now {9}dead{0} !\n");
 	}
 }

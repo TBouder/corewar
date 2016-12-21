@@ -6,11 +6,48 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 15:58:23 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/21 13:54:27 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/21 16:22:55 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
+
+
+static t_list	*ft_clearone_champ(t_list *to_remove)
+{
+	t_list		*tmp;
+	t_list		*ret;
+
+	tmp = to_remove;
+	ret = to_remove->next;
+	ft_clear_champ(((t_champions *)tmp->content));
+	return (ret);
+}
+
+void			ft_remove_champ(t_vm *env, int id)
+{
+	id = 2;
+	t_champions *champ;
+	t_list		*list;
+
+	list = env->list_champions;
+	champ = ((t_champions *)list->content);
+	if (champ->id == id)
+		env->list_champions = ft_clearone_champ(list);
+	else
+	{
+		while (list && list->next)
+		{
+			champ = ((t_champions *)list->next->content);
+			if (champ->id == id)
+			{
+				list->next = ft_clearone_champ(list->next);
+				break ;
+			}
+			list = list->next;
+		}
+	}
+}
 
 int		ft_one_isalive(t_vm *env)
 {
@@ -51,6 +88,7 @@ int		ft_which_isalive(t_vm *env)
 			{
 				champ->exist = FALSE; //MORT DU PROGRAMME
 				ft_verbose_dead(env, champ);
+				ft_remove_champ(env, champ->id);
 			}
 			else
 				nb_live += champ->is_alive;
