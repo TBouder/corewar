@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/21 15:33:18 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/21 23:50:17 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct		s_vm
 
 	t_champions		*winner;			//WINNER
 	t_list			*list_champions;
+	int				nb_live[5];
 	int				*fd;				//Each champion
 	char			**filename;			//Each champion name
 	int				nb_champ;			//Number of champion
@@ -73,7 +74,7 @@ typedef struct		s_vm
 
 	long			current_id;
 
-//NCURSE
+	//NCURSE
 	WINDOW	*main_border;
 	WINDOW	*main;
 	WINDOW	*info_border;
@@ -87,28 +88,11 @@ typedef struct		s_vm
 
 }					t_vm;
 
-/*
-** main.c
-*/
-void			ft_error_vm(t_vm *env, char *msg, int clear);
-
+void			ft_extract_champion(t_vm *env);
 void			ft_fight(t_vm *env);
 
 /*
-** ft_init.c
-*/
-void			ft_init_env(t_vm *env, int part);
-void			ft_add_champion(t_vm *env, t_champions *champion, int id, int pc);
-
-
-/*
-** ft_extract_champion.c
-*/
-void			ft_extract_champion(t_vm *env);
-
-
-/*
-** ft_func_part1
+** FUNCS
 */
 int				*ft_send_args(char *bin);
 int				*ft_get_size(t_vm *env, t_champions *champ);
@@ -119,40 +103,32 @@ int				ft_get_args(t_vm *env, t_champions *champ, int op);
 
 void			ft_corewar_live(t_vm *env, t_champions *champ, int *nbr);
 void			ft_corewar_aff(t_vm *env, t_champions *champ, int *nbr);
-
 void			ft_corewar_st(t_vm *env, t_champions *champ, int *nbr);
 void			ft_corewar_sti(t_vm *env, t_champions *champ, int *nbr);
-
 void			ft_corewar_ld(t_vm *env, t_champions *champ, int *nbr);
 void			ft_corewar_lld(t_vm *env, t_champions *champ, int *nbr);
-
 void			ft_corewar_ldi(t_vm *env, t_champions *champ, int *nbr);
 void			ft_corewar_lldi(t_vm *env, t_champions *champ, int *nbr);
-
 void			ft_corewar_zjmp(t_vm *env, t_champions *champ, int *nbr);
-
 void			ft_corewar_fork(t_vm *env, t_champions *champ, int *nbr);
 void			ft_corewar_lfork(t_vm *env, t_champions *champ, int *nbr);
-
 void			ft_corewar_add(t_vm *env, t_champions *champ, int *nbr);
 void			ft_corewar_sub(t_vm *env, t_champions *champ, int *nbr);
-
 void			ft_corewar_and(t_vm *env, t_champions *champ, int *nbr);
 void			ft_corewar_or(t_vm *env, t_champions *champ, int *nbr);
 void			ft_corewar_xor(t_vm *env, t_champions *champ, int *nbr);
 
-int				ft_ret_cycle(int op);
 
 /*
 ** NCURSE
 */
 void			ft_init_ncurse(t_vm *env);
 void			ft_clear_ncurse(t_vm *env);
-void			ft_reload_windows(t_vm *env, int part);
+void			ft_get_key(t_vm *env);
 void			ft_print_champion_color(t_champions *champion, WINDOW *win);
 void			ft_print_infos(t_vm *env);
 void			ft_print_champions_infos(t_vm *env);
-void			ft_get_key(t_vm *env);
+void			ft_reload_windows(t_vm *env, int part);
 
 /*
 ** DUMP
@@ -161,10 +137,16 @@ void			ft_dump(const void *addr, size_t size);
 void			ft_dump_ncurse(t_vm *env, const void *addr, size_t size);
 
 /*
+** INIT
+*/
+void			ft_init_env(t_vm *env, int part);
+void			ft_init_reg(t_champions *new_champ, t_champions *champ);
+void			ft_set_nb_live(t_vm *env, int val);
+
+/*
 ** FREE
 */
-void			ft_clear_champions(t_champions **champions, int size);
-void			ft_clear_champ(t_champions *champ);
+void			ft_clear_champ(t_vm *env, int id);
 void			ft_clear_all(t_vm *env);
 void			ft_error_vm(t_vm *env, char *msg, int clear);
 
@@ -174,10 +156,15 @@ void			ft_error_vm(t_vm *env, char *msg, int clear);
 void			ft_verbose_fork(t_vm *env, t_champions *champ, t_champions *c);
 void			ft_verbose_champ_info(t_vm *env, t_champions *champ, int part);
 void			ft_verbose_dead(t_vm *env, t_champions *champ);
+void			ft_verbose_winner(t_vm *env);
 
 /*
 ** TOOLS
 */
 void			ft_verif_extension(t_vm *env, char **av, int i);
+int				ft_which_isalive(t_vm *env);
+int				ft_one_isalive(t_vm *env);
+void			ft_add_champion(t_vm *env, t_champions *champ, int id, int pc);
+int				ft_ret_cycle(int op);
 
 #endif

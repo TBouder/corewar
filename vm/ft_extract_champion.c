@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 17:46:14 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/21 09:37:21 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/21 23:41:11 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ static void		ft_extract_header_lst(t_vm *env, int i, t_list *champion)
 	else
 		ft_error_vm(env, ERR_HEAD, 1);
 }
-
 
 void			ft_extract_champion(t_vm *env)
 {

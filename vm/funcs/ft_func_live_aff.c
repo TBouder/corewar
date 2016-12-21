@@ -6,12 +6,11 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 14:16:55 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/16 14:42:52 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/21 22:49:02 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../vm.h"
-#define IS_GRAPH env->options->flags['g']
 
 static t_list	*ft_find_live(t_vm *env, int id)
 {
@@ -39,10 +38,10 @@ void			ft_corewar_live(t_vm *env, t_champions *champ, int *nbr)
 		if ((list = ft_find_live(env, player_alive)))
 		{
 			((t_champions *)list->content)->is_alive += 1;
+			env->nb_live[((t_champions *)list->content)->champ_id] += 1;
 			if (IS_GRAPH)
 			{
 				ft_print_champion_color(((t_champions *)list->content), env->notif);
-				// wprintw(env->notif, "%s", ((t_champions *)list->content)->name);
 				wprintw(env->notif, " is alive\n");
 				ft_reload_windows(env, 3);
 			}
