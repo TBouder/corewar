@@ -1,3 +1,4 @@
+# touch champions/Car.cor && rm champions/Car.cor && clear && make -C asm/ && asm/asm champions/Car.s && make -C vm/ && vm/corewar champions/Car.cor
 # clear && make -C ../asm/ && rm test.cor && ../asm/asm test.s && make && ./corewar test.cor
 .name    "Survivor"
 .comment "Invincible"

@@ -149,7 +149,7 @@ void	ft_fight(t_vm *env)
 
 	IS_GRAPH ? ft_fight_init_graph(env) : 0;
 
-	while (ft_enter_loop(env) && v++ < 100000)
+	while (ft_enter_loop(env) && v++ < 3200)
 	{
 		ft_foreach_champ(env);
 		IS_GRAPH ? ft_reload_windows(env, 2) : 0;
