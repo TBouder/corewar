@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/21 12:27:24 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/21 23:44:39 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/22 00:26:33 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int		ft_which_isalive(t_vm *env)
 
 	i = 1;
 	nb_live = 0;
-	while (i < 4)
+	while (i <= env->nb_champ)
 	{
 		nb_live += env->nb_live[i];
 		if (env->nb_live[i] == 0)
@@ -70,19 +70,14 @@ int		ft_which_isalive(t_vm *env)
 */
 int		ft_one_isalive(t_vm *env)
 {
-	t_champions 	*champion;
-	t_list			*list;
+	int		i;
 
-	list = env->list_champions;
-	while (list)
+	i = 1;
+	while (i <= env->nb_champ)
 	{
-		champion = ((t_champions *)list->content);
-		if (champion->exist == TRUE)
-		{
-			if (champion->is_alive >= 0)
-				return (1);
-		}
-		list = list->next;
+		if (env->nb_live[i] >= 0)
+			return (1);
+		i++;
 	}
 	return (0);
 }
@@ -109,8 +104,6 @@ void	ft_add_champion(t_vm *env, t_champions *champ, int id, int pc)
 	new_champ->pc = pc;
 	new_champ->pc_void = champ ? champ->pc_void : 0;
 	new_champ->carry = champ ? champ->carry : FALSE;
-	new_champ->is_alive = champ ? champ->is_alive : 1;
-	new_champ->exist = champ ? champ->exist : TRUE;
 	new_champ->cycle = champ ? champ->cycle : 0;
 	new_champ->next_cycle = env->cycle + 1;
 	new_champ->is_fork = champ ? 1 : 0;
