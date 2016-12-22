@@ -6,12 +6,11 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 19:42:02 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/21 12:27:38 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/22 00:36:15 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
-#define	IS_GRAPHIC env.options->flags['g']
 
 static void		ft_init_options(t_options *options)
 {
@@ -88,7 +87,9 @@ static void		ft_launcher(t_vm *env, char **av, int i)
 	ft_verif_extension(env, av, i);
 	ft_extract_champion(env);
 	ft_put_champion_map(env);
+	IS_GRAPH ? ft_init_ncurse(env) : 0;
 	ft_fight(env);
+	IS_GRAPH ? ft_clear_ncurse(env) : 0;
 }
 
 int				main(int ac, char **av)
@@ -103,13 +104,9 @@ int				main(int ac, char **av)
 		ft_error_vm(&env, "{9}Error{0} : No champions", 0);
 	else if (ac - i >= 1 && ac - i <= 4)
 	{
-		IS_GRAPHIC ? ft_init_ncurse(&env) : 0;
-
 		ft_init_env(&env, ac - i);
 		ft_launcher(&env, av, i);
 		ft_clear_all(&env);
-
-		IS_GRAPHIC ? ft_clear_ncurse(&env) : 0;
 	}
 	else
 		ft_error_vm(&env, "{9}Error{0} : Too many champions", 1);

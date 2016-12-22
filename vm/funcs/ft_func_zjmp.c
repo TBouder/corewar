@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/20 23:32:08 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/22 00:44:14 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	ft_corewar_zjmp(t_vm *env, t_champions *champ, int *nbr)
 			champ->pc = (champ->pc + ((env->arg1 % I) - I)) % M; // On dois faire % IDX_MOD ?
 		else
 			champ->pc = (champ->pc + (env->arg1 % I)) % M; // On dois faire % IDX_MOD ?
-		// champ->pc = ((champ->pc + env->arg1) % I) % M; // On dois faire % IDX_MOD ?
 	}
 	else
 		champ->pc += ft_count_to_next(nbr, ZJMP);

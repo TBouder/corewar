@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_func_st_sti.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/20 19:14:37 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/22 00:57:59 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,13 +100,22 @@ void	ft_corewar_sti(t_vm *env, t_champions *champ, int *nbr)
 		env->buf = ft_set_buffer(nbr[2]);
 		env->arg3 = ft_byte_to_str(&env->map[pc], env->buf);
 
-
 		if (IS_IND(nbr[1]))
+		{
 			env->arg2 = env->map[(champ->pc - 1 + (env->arg2 % I)) % M];
+
+			// OR
+
+			// if (env->arg2 > 32768)
+			// 	env->arg2 = env->map[(champ->pc + ((env->arg2 % I) - I)) % M];
+			// else
+			// 	env->arg2 = env->map[(champ->pc + (env->arg2 % I)) % M];
+		}
 		else if (IS_REG(nbr[1]))
 			env->arg2 = champ->reg[env->arg2];
 		if (IS_REG(nbr[2]))
 			env->arg3 = champ->reg[env->arg3];
+
 		env->sum_idx = env->arg2 + env->arg3;
 
 		ft_put_map_reg(env, champ, 0, 0);
