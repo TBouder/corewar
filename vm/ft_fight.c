@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 15:58:23 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/22 00:37:28 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/22 13:04:38 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ static void		ft_foreach_champ(t_vm *env)
 	int			pc;
 
 	list = env->list_champions;
-	while (list)
+	while (list && list->content)
 	{
-		champ = ((t_champions *)list->content);
-		if (env->cycle == champ->next_cycle)
+		champ = (t_champions *)list->content;
+		if (champ && env->cycle == champ->next_cycle)
 		{
 			!IS_GRAPH && IS_VERBOSE ? ft_verbose_champ_info(env, champ, 1) : 0;
 			pc = champ->pc;
@@ -62,7 +62,7 @@ static void		ft_perfom_checks(t_vm *env)
 			env->cycle_to_die -= CYCLE_DELTA;
 			env->cycle_to_die < 0 ? env->cycle_to_die = 0 : 0;
 			env->cycle_check = 0;
-			ft_reload_windows(env, 3);
+			IS_GRAPH ? ft_reload_windows(env, 3) : 0;
 		}
 		env->cpt_to_die = 0;
 		env->cycle_check++;
@@ -88,6 +88,31 @@ static int		ft_enter_loop(t_vm *env)
 		&& env->cycle_to_die > 0);
 }
 
+
+
+
+
+
+
+
+void		ft_display_list(t_vm *env)
+{
+	t_champions *champ;
+	t_list		*list;
+	int			i;
+
+	list = env->list_champions;
+	i = 0;
+	ft_put("[{10}vvvvvv{0}]\n");
+	while (list && list->content)
+	{
+		champ = ((t_champions *)list->content);
+		ft_put("[{9}%s{0}] - %d\n", champ->name, i++);
+		list = list->next;
+	}
+	ft_put("[{10}^^^^^^{0}]\n");
+}
+
 /*
 ** The ft_fight() function is the main part of the vm. It will performs all the
 ** instructions until all champions die.
@@ -98,6 +123,9 @@ void	ft_fight(t_vm *env)
 	ft_set_nb_live(env, 1);
 	while (ft_enter_loop(env))
 	{
+		// ft_put("hello\n");
+		// ft_display_list(env);
+		// ft_put("end\n");
 		ft_foreach_champ(env);
 		ft_perfom_checks(env);
 		env->cycle++;
