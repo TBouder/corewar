@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/21 12:27:24 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/22 00:26:33 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/22 13:05:44 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ int		ft_which_isalive(t_vm *env)
 	{
 		nb_live += env->nb_live[i];
 		if (env->nb_live[i] == 0)
-			ft_clear_champ(env, i);
+			ft_clear_champ(&env->list_champions, i);
+			// ft_clear_champ(env, i);
 		i++;
 	}
 	return (nb_live);
