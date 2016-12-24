@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 15:58:23 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/22 13:04:38 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/24 18:08:16 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static void		ft_fight_init_graph(t_vm *env)
 */
 static void		ft_foreach_champ(t_vm *env)
 {
+	// ft_put("INSIDE : {14}%s{0}\n", ((t_champions *)env->list_champions->content)->name);
 	t_champions *champ;
 	t_list		*list;
 	int			pc;
@@ -88,31 +89,6 @@ static int		ft_enter_loop(t_vm *env)
 		&& env->cycle_to_die > 0);
 }
 
-
-
-
-
-
-
-
-void		ft_display_list(t_vm *env)
-{
-	t_champions *champ;
-	t_list		*list;
-	int			i;
-
-	list = env->list_champions;
-	i = 0;
-	ft_put("[{10}vvvvvv{0}]\n");
-	while (list && list->content)
-	{
-		champ = ((t_champions *)list->content);
-		ft_put("[{9}%s{0}] - %d\n", champ->name, i++);
-		list = list->next;
-	}
-	ft_put("[{10}^^^^^^{0}]\n");
-}
-
 /*
 ** The ft_fight() function is the main part of the vm. It will performs all the
 ** instructions until all champions die.
@@ -120,12 +96,8 @@ void		ft_display_list(t_vm *env)
 void	ft_fight(t_vm *env)
 {
 	IS_GRAPH ? ft_fight_init_graph(env) : 0;
-	ft_set_nb_live(env, 1);
 	while (ft_enter_loop(env))
 	{
-		// ft_put("hello\n");
-		// ft_display_list(env);
-		// ft_put("end\n");
 		ft_foreach_champ(env);
 		ft_perfom_checks(env);
 		env->cycle++;

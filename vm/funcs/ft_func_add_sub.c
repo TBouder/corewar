@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/17 15:40:35 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/24 18:59:16 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,8 @@ void	ft_corewar_add(t_vm *env, t_champions *champ, int *nbr)
 		pc += env->buf;
 		env->buf = ft_set_buffer(nbr[2]);
 		env->arg3 = ft_byte_to_str(&env->map[pc], env->buf);
-
 		champ->reg[env->arg3] = (champ->reg[env->arg1] + champ->reg[env->arg2]);
-
-		int k = champ->carry;
 		champ->carry = (champ->reg[env->arg3] == 0) ? 1 : 0;
-		if (champ->carry != k && !IS_GRAPH)
-			ft_printf("{13}new Carry = %d{0}\n", champ->carry);
 	}
 }
 
@@ -65,12 +60,7 @@ void	ft_corewar_sub(t_vm *env, t_champions *champ, int *nbr)
 		pc += env->buf;
 		env->buf = ft_set_buffer(nbr[2]);
 		env->arg3 = ft_byte_to_str(&env->map[pc], env->buf);
-
 		champ->reg[env->arg3] = (champ->reg[env->arg1] - champ->reg[env->arg2]);
-
-		int k = champ->carry;
 		champ->carry = (champ->reg[env->arg3] == 0) ? 1 : 0;
-		if (champ->carry != k && !IS_GRAPH)
-			ft_printf("{13}new Carry = %d{0}\n", champ->carry);
 	}
 }

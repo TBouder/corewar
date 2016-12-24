@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/22 13:04:05 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/24 16:19:30 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,6 @@ void			ft_set_nb_live(t_vm *env, int val);
 /*
 ** FREE
 */
-// void			ft_clear_champ(t_vm *env, int id);
 void			ft_clear_champ(t_list **blist, int id);
 void			ft_clear_all(t_vm *env);
 void			ft_error_vm(t_vm *env, char *msg, int clear);
