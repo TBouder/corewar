@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/22 00:57:59 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/24 19:08:38 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ void	ft_corewar_sti(t_vm *env, t_champions *champ, int *nbr)
 	int		pc;
 
 	pc = champ->pc + 1;
-
 	if (IS_REG(nbr[0]) && IS_ALL(nbr[1]) && IS_DIR_REG(nbr[2]))
 	{
 		env->buf = ft_set_buffer(nbr[0]);
@@ -102,22 +101,16 @@ void	ft_corewar_sti(t_vm *env, t_champions *champ, int *nbr)
 
 		if (IS_IND(nbr[1]))
 		{
-			env->arg2 = env->map[(champ->pc - 1 + (env->arg2 % I)) % M];
-
-			// OR
-
-			// if (env->arg2 > 32768)
-			// 	env->arg2 = env->map[(champ->pc + ((env->arg2 % I) - I)) % M];
-			// else
-			// 	env->arg2 = env->map[(champ->pc + (env->arg2 % I)) % M];
+			if (env->arg2 > 32768)
+				env->arg2 = env->map[(champ->pc + ((env->arg2 % I) - I)) % M];
+			else
+				env->arg2 = env->map[(champ->pc + (env->arg2 % I)) % M];
 		}
 		else if (IS_REG(nbr[1]))
 			env->arg2 = champ->reg[env->arg2];
 		if (IS_REG(nbr[2]))
 			env->arg3 = champ->reg[env->arg3];
-
 		env->sum_idx = env->arg2 + env->arg3;
-
 		ft_put_map_reg(env, champ, 0, 0);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 17:48:28 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/22 11:56:06 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/24 17:51:47 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static void		ft_init_lst_champions(t_vm *env)
 	env->list_champions = NULL;
 	while (i < env->nb_champ)
 		ft_add_champion(env, NULL, i++, 0);
+
 }
 
 static void		ft_init_env_helper(t_vm *env, int part)

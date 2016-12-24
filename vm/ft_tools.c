@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/21 12:27:24 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/22 13:05:44 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/24 17:51:52 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ int		ft_which_isalive(t_vm *env)
 		nb_live += env->nb_live[i];
 		if (env->nb_live[i] == 0)
 			ft_clear_champ(&env->list_champions, i);
-			// ft_clear_champ(env, i);
 		i++;
 	}
 	return (nb_live);
@@ -99,14 +98,16 @@ void	ft_add_champion(t_vm *env, t_champions *champ, int id, int pc)
 	new_champ->magic = champ ? champ->magic : 0;
 	new_champ->prog_size = champ ? champ->prog_size : 0;
 	new_champ->starting_pos = champ ? champ->starting_pos : 0;
-	new_champ->champ_id = id + 1;
+	new_champ->champ_id = (id + 1) * -1;
+	// new_champ->champ_id = id + 1;
 	ft_init_reg(new_champ, champ);
-	new_champ->reg[1] = champ ? champ->reg[1] : id + 1;
+	new_champ->reg[1] = champ ? champ->reg[1] : (id + 1) * -1;
+	// new_champ->reg[1] = champ ? champ->reg[1] : id + 1;
 	new_champ->pc = pc;
 	new_champ->pc_void = champ ? champ->pc_void : 0;
 	new_champ->carry = champ ? champ->carry : FALSE;
 	new_champ->cycle = champ ? champ->cycle : 0;
-	new_champ->next_cycle = env->cycle + 1;
+	new_champ->next_cycle = champ ? env->cycle + ft_ret_cycle((int)env->map[pc]) - 1 : env->cycle - 1;
 	new_champ->is_fork = champ ? 1 : 0;
 	new_champ->color = champ ? champ->color : id + 42;
 	ft_lststart(&env->list_champions, new_champ, sizeof(t_champions));

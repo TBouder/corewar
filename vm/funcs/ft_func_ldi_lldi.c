@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/22 00:39:53 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/24 19:07:29 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,14 +71,15 @@ void		ft_corewar_lldi(t_vm *env, t_champions *champ, int *nbr)
 
 		if (IS_IND(nbr[0]))
 			env->arg1 = env->map[(champ->pc - 1 + env->arg1) % M];
-		if (IS_REG(nbr[0]))
+		else if (IS_REG(nbr[0]))
 			env->arg1 = champ->reg[env->arg1];
 		if (IS_REG(nbr[1]))
 			env->arg2 = champ->reg[env->arg2];
 
 		env->sum_idx = env->arg1 + env->arg2;
 
-		champ->reg[env->arg3] = ft_byte_to_str(&env->map[(env->sum_idx % I) % M], 1);
+		// champ->reg[env->arg3] = ft_byte_to_str(&env->map[(env->sum_idx % I) % M], 1); // OLD
+		champ->reg[env->arg3] = ft_byte_to_str(&env->map[env->sum_idx % M], 1);
 		ft_put("\033[104mr%d = 0x%x{0}\n", env->arg3, champ->reg[env->arg3]);
 	}
 }
