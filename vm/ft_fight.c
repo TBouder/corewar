@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 15:58:23 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/25 14:34:35 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/25 23:58:41 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ void	ft_fight(t_vm *env)
 		ft_reload_changes(env);
 		env->cycle++;
 		env->cpt_to_die++;
+		IS_GRAPH ? ft_get_key(env) : 0;
 		IS_GRAPH ? ft_reload_windows(env, 1) : 0;
 		IS_GRAPH ? ft_reload_windows(env, 2) : 0;
 	}

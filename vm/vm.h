@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/25 14:31:10 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/25 14:54:04 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ typedef struct		s_vm
 	unsigned int	usleep;
 	unsigned int	nb_notif;
 	int				total_live;
-
+	int				n_key;
 }					t_vm;
 
 void			ft_extract_champion(t_vm *env);
