@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/24 19:08:46 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/25 14:01:57 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,4 @@ void	ft_corewar_zjmp(t_vm *env, t_champions *champ, int *nbr)
 	}
 	else
 		champ->pc += ft_count_to_next(nbr, ZJMP);
-	IS_GRAPH ? ft_reload_windows(env, 1) : 0;
 }

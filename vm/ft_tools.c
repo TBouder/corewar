@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/21 12:27:24 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/24 17:51:52 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/25 14:29:07 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,10 +98,10 @@ void	ft_add_champion(t_vm *env, t_champions *champ, int id, int pc)
 	new_champ->magic = champ ? champ->magic : 0;
 	new_champ->prog_size = champ ? champ->prog_size : 0;
 	new_champ->starting_pos = champ ? champ->starting_pos : 0;
-	new_champ->champ_id = (id + 1) * -1;
+	new_champ->champ_id = (id + 1) * -1; // IF NEGATIF
 	// new_champ->champ_id = id + 1;
 	ft_init_reg(new_champ, champ);
-	new_champ->reg[1] = champ ? champ->reg[1] : (id + 1) * -1;
+	new_champ->reg[1] = champ ? champ->reg[1] : (id + 1) * -1; // IF NEGATIF
 	// new_champ->reg[1] = champ ? champ->reg[1] : id + 1;
 	new_champ->pc = pc;
 	new_champ->pc_void = champ ? champ->pc_void : 0;

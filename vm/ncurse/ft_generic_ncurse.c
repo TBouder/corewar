@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 16:20:23 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/21 23:38:39 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/25 14:49:03 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,16 @@ static void		ft_init_colors(void)
 {
 	start_color();
 	init_color(COLOR_BLACK, 224, 248, 299);
+
 	init_color(42, 498, 866, 298);
 	init_color(43, 1000, 863, 274);
 	init_color(44, 980, 643, 376);
 	init_color(45, 986, 541, 996);
+	init_color(52, 298, 666, 98);
+	init_color(53, 800, 663, 74);
+	init_color(54, 780, 443, 176);
+	init_color(55, 786, 341, 796);
+
 	init_pair(1, COLOR_CYAN, COLOR_BLACK);
 	init_pair(42, 42, COLOR_BLACK);
 	init_pair(43, 43, COLOR_BLACK);
@@ -29,6 +35,10 @@ static void		ft_init_colors(void)
 	init_pair(53, COLOR_BLACK, 7);
 	init_pair(54, COLOR_BLACK, 7);
 	init_pair(55, COLOR_BLACK, 7);
+	init_pair(62, 52, COLOR_BLACK);
+	init_pair(63, 53, COLOR_BLACK);
+	init_pair(64, 54, COLOR_BLACK);
+	init_pair(65, 55, COLOR_BLACK);
 }
 
 void			ft_init_ncurse(t_vm *env)
@@ -48,7 +58,6 @@ void			ft_init_ncurse(t_vm *env)
 	ft_init_colors();
 	noecho();
 	curs_set(FALSE);
-	// getch();
 	nodelay(stdscr, TRUE);
 	refresh();
 }
@@ -64,6 +73,28 @@ void			ft_clear_ncurse(t_vm *env)
 	free(env->notif_border);
 }
 
+int				ft_pause(t_vm *env)
+{
+	int		key;
+
+	key = getch();
+	if (key == ' ')
+		return (1);
+
+	if (key == 'q')
+	{
+		ft_clear_ncurse(env);
+		exit(0);
+	}
+	else if (key == '+' && env->usleep < 250000)
+		env->usleep += 1000;
+	else if (key == '-' && env->usleep > 1000)
+		env->usleep -= 1000;
+	else if (key == ' ')
+		return (1);
+	return (0);
+}
+
 void			ft_get_key(t_vm *env)
 {
 	int				key;
@@ -76,8 +107,8 @@ void			ft_get_key(t_vm *env)
 	}
 	else if (key == ' ')
 	{
-		while ((key = getch()) != ' ')
-			;
+		while (ft_pause(env) == 0)
+			IS_GRAPH ? ft_reload_windows(env, 2) : 0;
 	}
 	else if (key == '+' && env->usleep < 250000)
 		env->usleep += 1000;
