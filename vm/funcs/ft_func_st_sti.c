@@ -6,14 +6,13 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/24 19:08:38 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/25 14:34:32 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../vm.h"
-#define IS_GRAPH env->options->flags['g']
 
-static int			ft_set_buffer(int nbr)
+static int	ft_set_buffer(int nbr)
 {
 	if (IS_REG(nbr))
 		return (1);
@@ -24,7 +23,15 @@ static int			ft_set_buffer(int nbr)
 	return (0);
 }
 
-void				ft_put_map_reg(t_vm *env, t_champions *champ, int i, int j)
+void		ft_color_map(t_vm *env, t_champions *champ, unsigned int pc, char *sub_reg)
+{
+	env->map[pc] = ft_atoi_base(sub_reg, 16);
+	env->map_owner[pc] = champ->color;
+	env->map_moves[pc] = champ->color;
+	env->map_moves_buff[pc] = 50;
+}
+
+void		ft_put_map_reg(t_vm *env, t_champions *champ, int i, int j)
 {
 	char			*reg;
 	char			*begin_reg;
@@ -44,8 +51,8 @@ void				ft_put_map_reg(t_vm *env, t_champions *champ, int i, int j)
 	while (i < 8)
 	{
 		sub_reg = ft_strsub(reg, i, 2);
-		env->map[(unsigned int)(champ->pc - 1 + env->sum_idx + j) % M] = ft_atoi_base(sub_reg, 16);
-		env->map_owner[(unsigned int)(champ->pc - 1 + env->sum_idx + j) % M] = champ->color;
+		ft_color_map(env, champ,
+			(unsigned int)(champ->pc - 1 + env->sum_idx + j) % M, sub_reg);
 		i += 2;
 		j += 1;
 	}
@@ -54,7 +61,7 @@ void				ft_put_map_reg(t_vm *env, t_champions *champ, int i, int j)
 /*
 ** Stock la valeur de NBR[0] dans NBR[1]
 */
-void	ft_corewar_st(t_vm *env, t_champions *champ, int *nbr)
+void		ft_corewar_st(t_vm *env, t_champions *champ, int *nbr)
 {
 	int		pc;
 
@@ -83,7 +90,7 @@ void	ft_corewar_st(t_vm *env, t_champions *champ, int *nbr)
 /*
 ** Stock la valeur de NBR[1] + NBR[2] dans NBR[0]
 */
-void	ft_corewar_sti(t_vm *env, t_champions *champ, int *nbr)
+void		ft_corewar_sti(t_vm *env, t_champions *champ, int *nbr)
 {
 	int		pc;
 

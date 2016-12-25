@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 15:58:23 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/24 18:08:16 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/25 14:34:35 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,27 @@ static int		ft_enter_loop(t_vm *env)
 		&& env->cycle_to_die > 0);
 }
 
+
+void			ft_reload_changes(t_vm *env)
+{
+	int		i;
+
+	i = 0;
+	if (IS_GRAPH)
+	{
+		while (i < MEM_SIZE)
+		{
+			if (env->map_moves_buff[i] > 0)
+			{
+				env->map_moves_buff[i] -= 1;
+				if (env->map_moves_buff[i] == 0)
+					env->map_moves[i] = 0;
+			}
+			i++;
+		}
+	}
+}
+
 /*
 ** The ft_fight() function is the main part of the vm. It will performs all the
 ** instructions until all champions die.
@@ -100,8 +121,10 @@ void	ft_fight(t_vm *env)
 	{
 		ft_foreach_champ(env);
 		ft_perfom_checks(env);
+		ft_reload_changes(env);
 		env->cycle++;
 		env->cpt_to_die++;
+		IS_GRAPH ? ft_reload_windows(env, 1) : 0;
 		IS_GRAPH ? ft_reload_windows(env, 2) : 0;
 	}
 	IS_DUMP && !IS_GRAPH ? ft_dump(env->map, MEM_SIZE) : 0;

@@ -6,12 +6,11 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/24 19:05:42 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/25 14:33:27 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../vm.h"
-#define IS_GRAPH env->options->flags['g']
 
 static int	ft_set_buffer(int nbr)
 {

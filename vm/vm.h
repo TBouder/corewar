@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/24 16:19:30 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/25 14:31:10 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ typedef struct		s_vm
 	header_t		*header;			//header struct
 	char			*map;				//Total map
 	int				*map_owner;			//FOR COLORS
+	int				*map_moves;			//FOR CHANGES
+	int				*map_moves_buff;	//FOR TIME BEFORE CHANGE EXPIRES
 
 	long			current_id;
 

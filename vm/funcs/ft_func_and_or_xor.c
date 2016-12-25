@@ -6,12 +6,11 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/24 19:05:00 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/25 14:02:34 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../vm.h"
-#define IS_GRAPH env->options->flags['g']
 
 static int	ft_set_buffer(int nbr)
 {
@@ -28,7 +27,6 @@ void	ft_and_or_xor_helper(t_vm *env, t_champions *champ, int *nbr, int op)
 {
 	int		pc;
 
-	champ->carry = false;
 	pc = champ->pc + 1;
 	if (IS_ALL(nbr[0]) && IS_ALL(nbr[1]) && IS_REG(nbr[2]))
 	{
