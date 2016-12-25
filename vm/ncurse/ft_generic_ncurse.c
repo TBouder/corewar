@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 16:20:23 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/25 14:49:03 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/26 00:03:59 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,45 +73,62 @@ void			ft_clear_ncurse(t_vm *env)
 	free(env->notif_border);
 }
 
-int				ft_pause(t_vm *env)
+void			ft_key_pause(t_vm *env)
 {
 	int		key;
 
-	key = getch();
-	if (key == ' ')
-		return (1);
-
-	if (key == 'q')
+	env->n_key = 0;
+	while (1)
 	{
-		ft_clear_ncurse(env);
-		exit(0);
+		key = getch();
+		if (key == ' ' || key == 'n')
+		{
+			key == 'n' ? env->n_key = 1 : 0;
+			break ;
+		}
+
+		else if (key == 'q')
+		{
+			ft_clear_ncurse(env);
+			exit(0);
+		}
+		else if (key == '+' && env->usleep < 250000)
+		{
+			env->usleep += 1000;
+			IS_GRAPH ? ft_reload_windows(env, 2) : 0;
+		}
+		else if (key == '-' && env->usleep > 1000)
+		{
+			env->usleep -= 1000;
+			IS_GRAPH ? ft_reload_windows(env, 2) : 0;
+		}
 	}
-	else if (key == '+' && env->usleep < 250000)
-		env->usleep += 1000;
-	else if (key == '-' && env->usleep > 1000)
-		env->usleep -= 1000;
-	else if (key == ' ')
-		return (1);
-	return (0);
 }
 
-void			ft_get_key(t_vm *env)
+void			ft_first_case(t_vm *env)
 {
 	int				key;
 
 	key = getch();
-	if (key == 'q')
+	if (key == ' ')
+		ft_key_pause(env);
+	else if (key == 'q')
 	{
 		ft_clear_ncurse(env);
 		exit(0);
-	}
-	else if (key == ' ')
-	{
-		while (ft_pause(env) == 0)
-			IS_GRAPH ? ft_reload_windows(env, 2) : 0;
 	}
 	else if (key == '+' && env->usleep < 250000)
 		env->usleep += 1000;
 	else if (key == '-' && env->usleep > 1000)
 		env->usleep -= 1000;
+	else if (key == 'n')
+		env->n_key = 1;
+}
+
+void			ft_get_key(t_vm *env)
+{
+	if (env->n_key == 0)
+		ft_first_case(env);
+	else
+		ft_key_pause(env);
 }

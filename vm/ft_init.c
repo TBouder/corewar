@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 17:48:28 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/25 13:38:17 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/25 14:54:41 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void			ft_init_env(t_vm *env, int part)
 		env->usleep = 50000;
 		env->nb_notif = 0;
 		env->current_id = 0;
+		env->n_key = 0;
 	}
 	else
 		ft_init_env_helper(env, part);
