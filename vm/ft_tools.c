@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/21 12:27:24 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/25 14:29:07 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/26 15:50:41 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ int		ft_one_isalive(t_vm *env)
 ** The ft_add_champion() function adds a champion in the list, as a copy of
 ** champ or as a new one.
 */
+
 void	ft_add_champion(t_vm *env, t_champions *champ, int id, int pc)
 {
 	t_champions	*new_champ;
@@ -107,7 +108,7 @@ void	ft_add_champion(t_vm *env, t_champions *champ, int id, int pc)
 	new_champ->pc_void = champ ? champ->pc_void : 0;
 	new_champ->carry = champ ? champ->carry : FALSE;
 	new_champ->cycle = champ ? champ->cycle : 0;
-	new_champ->next_cycle = champ ? env->cycle + ft_ret_cycle((int)env->map[pc]) - 1 : env->cycle - 1;
+	new_champ->next_cycle = champ ? env->cycle + ft_ret_cycle((int)env->map[pc]) : env->cycle;
 	new_champ->is_fork = champ ? 1 : 0;
 	new_champ->color = champ ? champ->color : id + 42;
 	ft_lststart(&env->list_champions, new_champ, sizeof(t_champions));
