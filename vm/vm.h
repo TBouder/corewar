@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/25 14:54:04 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/27 14:10:37 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,19 @@
 
 typedef struct		s_champions
 {
-	long			id;
+	long			id;					//General ID
 	char			*name;				//name
 	char			*comment;			//comment
 	unsigned int	magic;				//magic number
 	unsigned int	prog_size;			//total size
 	char			*content;			//instructions
 	unsigned int	starting_pos;		//position de depart dans la map
-	int				champ_id;
+	int				champ_id;			//L'id entre les 4 champions
+	int				fake_id;
 
 	// int				reg[REG_NUMBER];	//Los registros
-	int				reg[100];	//Los registros
+	int				reg[100];			//Los registros
 	int				pc;					//el pc
-	void			*pc_void;			//el pc de trump
 	int				carry;				//bool for carry fisher
 	int				cycle;				//Ya une histoire de cycle
 	int				next_cycle;
@@ -45,6 +45,8 @@ typedef struct		s_champions
 typedef struct		s_vm
 {
 	t_options		*options;			//Flags
+	char			**champions;
+	t_list			*champs;
 	int				dump_cycle;
 
 	t_champions		*winner;			//WINNER
@@ -73,6 +75,7 @@ typedef struct		s_vm
 	int				*map_moves_buff;	//FOR TIME BEFORE CHANGE EXPIRES
 
 	long			current_id;
+	int				*fake_id;
 
 	//NCURSE
 	WINDOW	*main_border;
@@ -90,6 +93,11 @@ typedef struct		s_vm
 
 void			ft_extract_champion(t_vm *env);
 void			ft_fight(t_vm *env);
+
+/*
+** FLAGS
+*/
+int				ft_get_flags(t_vm *env, char **av, t_options *options);
 
 /*
 ** FUNCS
@@ -141,7 +149,9 @@ void			ft_dump_ncurse(t_vm *env, const void *addr, size_t size);
 */
 void			ft_init_env(t_vm *env, int part);
 void			ft_init_reg(t_champions *new_champ, t_champions *champ);
-void			ft_set_nb_live(t_vm *env, int val);
+void			ft_init_lives(t_vm *env, int val);
+void			ft_init_fake_id(t_vm *env);
+void			ft_init_champ(t_vm *env, t_champions *champ, int id, int pc);
 
 /*
 ** FREE
@@ -149,6 +159,14 @@ void			ft_set_nb_live(t_vm *env, int val);
 void			ft_clear_champ(t_list **blist, int id);
 void			ft_clear_all(t_vm *env);
 void			ft_error_vm(t_vm *env, char *msg, int clear);
+
+/*
+** VERIF
+*/
+void			ft_verif_extension(t_vm *env, t_list *champs);
+void			ft_verif_fake_id(t_vm *env);
+int				ft_verif_one_alive(t_vm *env);
+int				ft_verif_alives(t_vm *env);
 
 /*
 ** VERBOSE
@@ -161,10 +179,6 @@ void			ft_verbose_winner(t_vm *env);
 /*
 ** TOOLS
 */
-void			ft_verif_extension(t_vm *env, char **av, int i);
-int				ft_which_isalive(t_vm *env);
-int				ft_one_isalive(t_vm *env);
-void			ft_add_champion(t_vm *env, t_champions *champ, int id, int pc);
 int				ft_ret_cycle(int op);
 
 #endif

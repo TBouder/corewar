@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 15:58:23 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/25 23:58:41 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/27 00:25:37 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void		ft_perfom_checks(t_vm *env)
 {
 	if (env->cpt_to_die == env->cycle_to_die)
 	{
-		if (ft_which_isalive(env) >= NBR_LIVE)
+		if (ft_verif_alives(env) >= NBR_LIVE)
 		{
 			env->cycle_to_die -= CYCLE_DELTA;
 			env->cycle_to_die < 0 ? env->cycle_to_die = 0 : 0;
@@ -68,7 +68,7 @@ static void		ft_perfom_checks(t_vm *env)
 		env->cpt_to_die = 0;
 		env->cycle_check++;
 		env->total_live = 0;
-		ft_set_nb_live(env, 0);
+		ft_init_lives(env, 0);
 	}
 	if (env->cycle_check == MAX_CHECKS)
 	{
@@ -84,30 +84,9 @@ static void		ft_perfom_checks(t_vm *env)
 */
 static int		ft_enter_loop(t_vm *env)
 {
-	return (ft_one_isalive(env)
+	return (ft_verif_one_alive(env)
 		&& (IS_DUMP && !IS_GRAPH ? env->cycle < env->dump_cycle : 1)
 		&& env->cycle_to_die > 0);
-}
-
-
-void			ft_reload_changes(t_vm *env)
-{
-	int		i;
-
-	i = 0;
-	if (IS_GRAPH)
-	{
-		while (i < MEM_SIZE)
-		{
-			if (env->map_moves_buff[i] > 0)
-			{
-				env->map_moves_buff[i] -= 1;
-				if (env->map_moves_buff[i] == 0)
-					env->map_moves[i] = 0;
-			}
-			i++;
-		}
-	}
 }
 
 /*
@@ -121,7 +100,6 @@ void	ft_fight(t_vm *env)
 	{
 		ft_foreach_champ(env);
 		ft_perfom_checks(env);
-		ft_reload_changes(env);
 		env->cycle++;
 		env->cpt_to_die++;
 		IS_GRAPH ? ft_get_key(env) : 0;

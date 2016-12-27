@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 14:16:55 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/26 16:56:46 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/27 00:16:56 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ void			ft_corewar_live(t_vm *env, t_champions *champ, int *nbr)
 		list = ft_find_live(env, player_alive);
 		if (list)
 		{
-			// env->nb_live[((t_champions *)list->content)->champ_id] += 1;
-			env->nb_live[((t_champions *)list->content)->champ_id * -1] += 1; //IF NEGATIF
+			env->nb_live[((t_champions *)list->content)->champ_id] += 1;
+			// env->nb_live[((t_champions *)list->content)->champ_id * -1] += 1; //IF NEGATIF
 			ft_set_winner(env, (t_champions *)list->content);
 			if (IS_GRAPH)
 			{

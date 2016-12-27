@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 18:15:11 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/25 14:11:04 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/27 00:24:36 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ static void			ft_get_ncurse_color(t_vm *env, int *col, int on)
 			else
 				wattroff(env->main, COLOR_PAIR(env->map_owner[*col] + 20) | A_BOLD);
 		}
+		env->map_moves[*col]--;
 	}
 
 	else if (env->map_owner[*col])
