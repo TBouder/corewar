@@ -17,7 +17,8 @@ By Quroulon and Tbouder
 - [x] VM : Verbose mode  
 - [x] VM : Graphic mode  
 - [x] VM : Graphic mode with colors  
-- [x] VM : Graphic mode with time management  
+- [x] VM : Graphic mode with time management (increase or decrease speed)  
+- [x] VM : Graphic mode with cycle to cycle management (n key)  
 - [x] VM : Graphic mode with on the air notifications  
 
 ###Requirements :  
