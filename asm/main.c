@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 16:03:50 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/06 15:38:14 by quroulon         ###   ########.fr       */
+/*   Updated: 2016/12/27 14:47:23 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,6 @@ void	ft_print_on_success(t_asm env)
 	ft_printf("{14}%-17s{0} : [{10}%x{0}]\n", "Hex Size", env.instruct_size);
 	ft_printf("----------------------------------------------------\n");
 	ft_printf("Writing output program to {10}%s{0}.cor\n", env.filename_noext);
-	while (i < env.file_len)
-	{
-		ft_printf("[{10}%s{0}] -> [{14}%d{0}] ([{11}%d{0}] + [{11}%d{0}] + [{11}%d{0}] + [{11}%d{0}])\n",
-		env.file_content[i], env.instruct_weight[i], env.arg_weight[i][0], env.arg_weight[i][1], env.arg_weight[i][2], env.arg_weight[i][3]);
-		i++;
-	}
 }
 
 void	ft_launcher(t_asm *env, char **av, int i)
