@@ -13,6 +13,7 @@ By Quroulon and Tbouder
 
 ###Bonus :  
 - [x] ASM : Explicit errors  
+- [x] ASM : Explicit success  
 - [x] ASM : Extended registers  
 - [x] VM : Verbose mode  
 - [x] VM : Graphic mode  
