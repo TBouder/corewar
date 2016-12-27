@@ -32,7 +32,7 @@ void	ft_corewar_fork(t_vm *env, t_champions *champ, int *nbr)
 			env->arg1 = (champ->pc + ((env->arg1 % I) - I)) % M;
 		else
 			env->arg1 = (champ->pc + (env->arg1 % I)) % M;
-		ft_add_champion(env, champ, champ->champ_id - 1, env->arg1);
+		ft_init_champ(env, champ, champ->champ_id - 1, env->arg1);
 	}
 }
 
@@ -46,6 +46,6 @@ void	ft_corewar_lfork(t_vm *env, t_champions *champ, int *nbr)
 		env->buf = ft_set_buffer(nbr[0]);
 		env->arg1 = ft_byte_to_str(&env->map[pc], env->buf);
 		env->arg1 = (champ->pc + env->arg1) % M;
-		ft_add_champion(env, champ, champ->champ_id - 1, env->arg1);
+		ft_init_champ(env, champ, champ->champ_id - 1, env->arg1);
 	}
 }
