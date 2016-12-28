@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_func.c                                          :+:      :+:    :+:   */
+/*   ft_func_helper.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 14:16:55 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/21 09:48:24 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/26 16:13:20 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,10 @@ int		*ft_get_size(t_vm *env, t_champions *champ)
 int		ft_count_to_next(int *nbr, int op)
 {
 	int		count;
-	int		situ ;
+	int		situ;
 
 	count = 0;
+	situ = 0;
 	if (op == 3 || op == 4 || op == 5 || op == 16)
 	 	situ = -42;
 	else if ((op >= 9 && op <= 12) || op == 14 || op == 15)

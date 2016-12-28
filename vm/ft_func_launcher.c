@@ -6,38 +6,11 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 23:27:37 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/21 12:22:54 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/26 16:52:34 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
-
-/*
-** The ft_ret_cycle() function takes an opcode as paramater and according to it,
-** returns the number of cycle to perform before calling the next instruction
-*/
-int			ft_ret_cycle(int op)
-{
-	if (op == AFF)
-		return (2);
-	else if (op == LD || op == ST)
-		return (5);
-	else if (op == AND || op == OR || op == XOR)
-		return (6);
-	else if (op == LIVE || op == ADD || op == SUB || op == LLD)
-		return (10);
-	else if (op == ZJMP)
-		return (20);
-	else if (op == LDI || op == STI)
-		return (25);
-	else if (op == LLDI)
-		return (50);
-	else if (op == FORK)
-		return (800);
-	else if (op == LFORK)
-		return (1000);
-	return (0);
-}
 
 /*
 ** The ft_instruct_name() function takes an op code and return the full name, as
@@ -64,7 +37,7 @@ static char	*ft_instruct_name_helper(int op)
 	return ("INVALID INSTRUCTION");
 }
 
-char		*ft_instruct_name(int op)
+static char	*ft_instruct_name(int op)
 {
 	if (op == LIVE)
 		return ("LIVE");
@@ -118,22 +91,26 @@ int			ft_get_args(t_vm *env, t_champions *champ, int op)
 	int		*nbr;
 	int		count;
 
-	if (op != LIVE && op != ZJMP && op != FORK && op != LFORK)
-		nbr = ft_get_size(env, champ);
-	else
+	if (op >= 1 && op <= 16)
 	{
-		nbr = ft_nbrnew(3);
-		nbr[0] = 10;
+		if (op != LIVE && op != ZJMP && op != FORK && op != LFORK)
+			nbr = ft_get_size(env, champ);
+		else
+		{
+			nbr = ft_nbrnew(3);
+			nbr[0] = 10;
+		}
+		count = ft_count_to_next(nbr, op);
+		!IS_GRAPH && IS_VERBOSE ? ft_put("[{10}%s{0}]\n", ft_instruct_name(op)) : 0;
+		ft_call_func(env, champ, nbr, op);
+		if (op != ZJMP)
+			champ->pc += count;
+		champ->pc %= MEM_SIZE;
+		IS_GRAPH ? ft_reload_windows(env, 1) : 0;
+		return (ft_ret_cycle((int)env->map[champ->pc]));
 	}
-	count = ft_count_to_next(nbr, op);
-
-	!IS_GRAPH && IS_VERBOSE ? ft_put("[{10}%s{0}]\n", ft_instruct_name(op)) : 0;
-
-	ft_call_func(env, champ, nbr, op);
-
-	if (op != ZJMP)
-		champ->pc += count;
-
+	champ->pc += 1;
+	champ->pc %= MEM_SIZE;
 	IS_GRAPH ? ft_reload_windows(env, 1) : 0;
-	return (ft_ret_cycle((int)env->map[champ->pc]));
+	return (2);
 }

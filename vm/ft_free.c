@@ -6,35 +6,49 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/14 19:12:52 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/16 19:36:55 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/24 15:58:05 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void			ft_clear_champions(t_champions **champions, int size)
+static void		ft_del_champ(t_champions *champ)
 {
-	int		i;
+	ft_strdel(&champ->name);
+	ft_strdel(&champ->comment);
+	ft_strdel(&champ->content);
+}
 
-	i = 0;
-	while (i < size)
+void			ft_clear_champ(t_list **blist, int id)
+{
+	t_list	*current;
+	t_list	*prev;
+
+	current = *blist;
+	prev = NULL;
+	while (current)
 	{
-		ft_strdel(&champions[i]->name);
-		ft_strdel(&champions[i]->comment);
-		ft_strdel(&champions[i]->content);
-		champions[i]->magic = 0;
-		champions[i]->prog_size = 0;
-		i++;
+		if (((t_champions *)current->content)->champ_id == id)
+		{
+			if (prev == NULL)
+				*blist = current->next;
+			else
+				prev->next = current->next;
+			ft_del_champ((t_champions *)current->content);
+			free(current->content);
+			free(current);
+			current = *blist;
+		}
+		prev = current;
+		current = current->next;
 	}
 }
 
 void			ft_clear_all(t_vm *env)
 {
 	ft_dbstrdel(env->filename);
-	// ft_clear_champions(env->champions, env->nb_champ);
 	ft_strdel(&env->map);
 	free(env->header);
-	// free(env->champions);
 	free(env->fd);
 }
 

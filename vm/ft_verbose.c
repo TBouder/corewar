@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/21 12:17:02 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/21 13:55:35 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/22 00:22:29 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,36 @@ void		ft_verbose_dead(t_vm *env, t_champions *champ)
 	}
 	else
 	{
-		ft_put("The champion {14}%d{0} ({14}%s{0}) ",
-			champ->champ_id, champ->name);
-		champ->is_fork ? ft_put("({11}Forked Champion{0})") : 0;
+		ft_put("[%d] The champion {14}%d{0} ({14}%s{0}) ",
+			env->cycle, champ->champ_id, champ->name);
+		champ->is_fork ? ft_put("({11}Forked Champion{0}) ") : 0;
 		ft_put("is now {9}dead{0} !\n");
 	}
+}
+
+void		ft_verbose_winner(t_vm *env)
+{
+	int		key;
+
+	if (IS_GRAPH)
+	{
+		if (env->winner->name == NULL)
+			wprintw(env->notif, "There is no winner this time !\n");
+		else
+			wprintw(env->notif, "The winner is %d (%s) !\n",
+				env->winner->champ_id, env->winner->name);
+		ft_reload_windows(env, 3);
+		while ((key = getch()) != 'q')
+			;
+		ft_clear_ncurse(env);
+	}
+	else
+	{
+		if (env->winner->name == NULL)
+			ft_put("There is no winner this time !\n");
+		else
+			ft_put("The winner is {14}%d{0} ({14}%s{0}) !\n",
+				env->winner->champ_id, env->winner->name);
+	}
+	exit(1);
 }

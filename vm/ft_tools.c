@@ -6,37 +6,35 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/21 12:27:24 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/21 12:28:08 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/27 14:09:56 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void			ft_verif_extension(t_vm *env, char **av, int i)
+/*
+** The ft_ret_cycle() function takes an opcode as paramater and according to it,
+** returns the number of cycle to perform before calling the next instruction
+*/
+int		ft_ret_cycle(int op)
 {
-	char	*extension;
-	int		result;
-	int		y;
-
-	y = 0;
-	while (av[i])
-	{
-		errno = 0;
-		if (av[i] == NULL || (env->fd[y] = open(av[i], O_RDONLY)) == -1
-			|| errno != 0)
-			ft_error_vm(env, ERR_BAD_SRC_FILE, 0);
-		if (open(av[i], O_DIRECTORY) != -1)
-			ft_error_vm(env, ERR_DIR, 0);
-		if (!ft_strrchr(av[i], '.'))
-			ft_error_vm(env, ERR_NOEXT, 0);
-		extension = ft_strinit(ft_strrchr(av[i], '.'));
-		result = EQU(extension, ".cor");
-		ft_strdel(&extension);
-		if (result)
-			env->filename[y] = ft_strinit(av[i]);
-		else
-			ft_error_vm(env, ERR_NOT_COR, 0);
-		i++;
-		y++;
-	}
+	if (op == AFF)
+		return (2);
+	else if (op == LD || op == ST)
+		return (5);
+	else if (op == AND || op == OR || op == XOR)
+		return (6);
+	else if (op == LIVE || op == ADD || op == SUB || op == LLD)
+		return (10);
+	else if (op == ZJMP)
+		return (20);
+	else if (op == LDI || op == STI)
+		return (25);
+	else if (op == LLDI)
+		return (50);
+	else if (op == FORK)
+		return (800);
+	else if (op == LFORK)
+		return (1000);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 18:15:11 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/20 23:13:29 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/27 00:24:36 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,27 @@ static void			ft_get_ncurse_color(t_vm *env, int *col, int on)
 {
 	t_champions	*champ;
 
-	if (env->map_owner[*col])
+	if (env->map_moves[*col])
+	{
+		champ = ft_get_ncurse_color_champ(env, col);
+		if (champ)
+		{
+			if (on)
+				wattron(env->main, COLOR_PAIR(champ->color + 10) | A_BOLD);
+			else
+				wattroff(env->main, COLOR_PAIR(champ->color + 10) | A_BOLD);
+		}
+		else
+		{
+			if (on)
+				wattron(env->main, COLOR_PAIR(env->map_owner[*col] + 20) | A_BOLD);
+			else
+				wattroff(env->main, COLOR_PAIR(env->map_owner[*col] + 20) | A_BOLD);
+		}
+		env->map_moves[*col]--;
+	}
+
+	else if (env->map_owner[*col])
 	{
 		champ = ft_get_ncurse_color_champ(env, col);
 		if (champ)
