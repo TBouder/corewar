@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 23:08:55 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/21 09:34:45 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/25 23:58:16 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ static void		ft_reload_notifs(t_vm *env)
 
 void			ft_reload_windows(t_vm *env, int part)
 {
-	ft_get_key(env);
 	if (part == 1)
 		ft_reload_main(env);
 	else if (part == 2)

@@ -6,12 +6,18 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 14:16:55 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/16 14:42:52 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/27 00:16:56 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../vm.h"
-#define IS_GRAPH env->options->flags['g']
+
+static void		ft_set_winner(t_vm *env, t_champions *champ)
+{
+	ft_strdel(&env->winner->name);
+	env->winner->name = ft_strinit(champ->name);
+	env->winner->champ_id = champ->champ_id;
+}
 
 static t_list	*ft_find_live(t_vm *env, int id)
 {
@@ -35,14 +41,16 @@ void			ft_corewar_live(t_vm *env, t_champions *champ, int *nbr)
 	if (IS_DIR(nbr[0]))
 	{
 		player_alive = ft_byte_to_str(&env->map[champ->pc + 1], 4);
-
-		if ((list = ft_find_live(env, player_alive)))
+		list = ft_find_live(env, player_alive);
+		if (list)
 		{
-			((t_champions *)list->content)->is_alive += 1;
+			env->nb_live[((t_champions *)list->content)->champ_id] += 1;
+			// env->nb_live[((t_champions *)list->content)->champ_id * -1] += 1; //IF NEGATIF
+			ft_set_winner(env, (t_champions *)list->content);
 			if (IS_GRAPH)
 			{
-				ft_print_champion_color(((t_champions *)list->content), env->notif);
-				// wprintw(env->notif, "%s", ((t_champions *)list->content)->name);
+				ft_print_champion_color(((t_champions *)list->content),
+					env->notif);
 				wprintw(env->notif, " is alive\n");
 				ft_reload_windows(env, 3);
 			}

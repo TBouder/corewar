@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 13:34:46 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/02 13:16:47 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/27 14:57:55 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,9 +125,10 @@ int				ft_verif_label(t_asm *env, char *str)
 	{
 		if (!ft_isstrnum(str + 1))
 			return (0);
-		reg_nb = ft_atoi(str);
-		if (reg_nb <= REG_NUMBER)
-			return (3);
+		reg_nb = ft_atoi(str + 1);
+		if (reg_nb > 99 || reg_nb < 0)
+			return (0);
+		return (3);
 	}
 	return (0);
 }
