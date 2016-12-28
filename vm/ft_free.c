@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/14 19:12:52 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/24 15:58:05 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/28 23:02:37 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ void			ft_clear_champ(t_list **blist, int id)
 			free(current);
 			current = *blist;
 		}
+		if (!current)
+			break ;
 		prev = current;
 		current = current->next;
 	}
