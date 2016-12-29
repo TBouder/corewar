@@ -29,14 +29,23 @@ void	ft_corewar_zjmp(t_vm *env, t_champions *champ, int *nbr)
 	int		pc;
 
 	pc = champ->pc + 1;
+	if (champ->carry == 0)
+		ft_printf("{10}LE CARRY EST PAS A UN{0}\n");
+
 	if (champ->carry == 1 && IS_DIR(nbr[0]))
 	{
 		env->buf = ft_set_buffer(nbr[0]);
 		env->arg1 = ft_byte_to_str(&env->map[pc], env->buf);
+
+		ft_printf("destination {10}%d{0}\n", (champ->pc + (env->arg1 % I)) % M);
+		ft_print_memory(env->map, (champ->pc + (env->arg1 % I)) % M + 4);
+		
 		if (env->arg1 > 32768)
 			champ->pc = (champ->pc + ((env->arg1 % I) - I)) % M;
 		else
 			champ->pc = (champ->pc + (env->arg1 % I)) % M;
+
+
 	}
 	else
 		champ->pc += ft_count_to_next(nbr, ZJMP);
