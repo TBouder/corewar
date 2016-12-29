@@ -40,7 +40,6 @@ void		ft_put_map_reg(t_vm *env, t_champions *champ, int i, int j)
 
 	reg = ft_strinit("00000000");
 	begin_reg = ft_itox((unsigned int)champ->reg[env->arg1]);
-	ft_printf("{10}%s{0}\n", begin_reg);
 	len = ft_printf("%!x", (unsigned int)champ->reg[env->arg1]);
 	while (i < 8 && len)
 	{
@@ -120,7 +119,6 @@ void		ft_corewar_sti(t_vm *env, t_champions *champ, int *nbr)
 		if (IS_REG(nbr[2]))
 			env->arg3 = champ->reg[env->arg3];
 		env->sum_idx = env->arg2 + env->arg3;
-		ft_printf("env->arg1 = {10}%d{0}\n", env->arg1);
 
 		ft_put_map_reg(env, champ, 0, 0);
 	}
