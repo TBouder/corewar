@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/21 12:27:24 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/30 20:54:46 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/30 22:35:30 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,12 @@ int		ft_set_buffer_and_or_xor(int nbr)
 	else if (IS_IND(nbr))
 		return (2);
 	return (0);
+}
+
+int		ft_mod(int nbr)
+{
+	nbr %= M;
+	if (nbr < 0)
+		return (M + nbr);
+	return (nbr);
 }
