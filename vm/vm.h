@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/27 14:10:37 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/30 20:54:59 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,6 @@ void			ft_dump_ncurse(t_vm *env, const void *addr, size_t size);
 */
 void			ft_init_env(t_vm *env, int part);
 void			ft_init_reg(t_champions *new_champ, t_champions *champ);
-void			ft_set_lives(t_vm *env, int val);
 void			ft_init_fake_id(t_vm *env);
 void			ft_init_champ(t_vm *env, t_champions *champ, int id, int pc);
 
@@ -180,5 +179,7 @@ void			ft_verbose_winner(t_vm *env);
 ** TOOLS
 */
 int				ft_ret_cycle(int op);
+void			ft_set_lives(t_vm *env, int val);
+int				ft_set_buffer_and_or_xor(int nbr);
 
 #endif

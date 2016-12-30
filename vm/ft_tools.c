@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/21 12:27:24 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/30 20:45:03 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/30 20:54:46 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,15 @@ void	ft_set_lives(t_vm *env, int val)
 		env->nb_live[i] = val;
 		i++;
 	}
+}
+
+int		ft_set_buffer_and_or_xor(int nbr)
+{
+	if (IS_REG(nbr))
+		return (1);
+	else if (IS_DIR(nbr))
+		return (4);
+	else if (IS_IND(nbr))
+		return (2);
+	return (0);
 }
