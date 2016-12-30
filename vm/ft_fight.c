@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 15:58:23 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/30 20:48:33 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/30 22:32:40 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ static void		ft_foreach_champ(t_vm *env)
 			pc = champ->pc;
 			champ->next_cycle = env->cycle;
 			champ->next_cycle += ft_get_args(env, champ, (int)env->map[pc]);
+			IS_GRAPH ? ft_reload_windows(env, 1) : 0;
 			!IS_GRAPH && IS_VERBOSE ? ft_verbose_champ_info(env, champ, 2) : 0;
 		}
 		list = list->next;

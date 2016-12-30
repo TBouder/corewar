@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/25 14:01:57 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/30 22:52:32 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ void	ft_corewar_zjmp(t_vm *env, t_champions *champ, int *nbr)
 		env->buf = ft_set_buffer(nbr[0]);
 		env->arg1 = ft_byte_to_str(&env->map[pc], env->buf);
 		if (env->arg1 > 32768)
-			champ->pc = (champ->pc + ((env->arg1 % I) - I)) % M;
+			champ->pc = ft_mod(champ->pc + ((env->arg1 % I) - I));
 		else
-			champ->pc = (champ->pc + (env->arg1 % I)) % M;
+			champ->pc = ft_mod(champ->pc + (env->arg1 % I));
 	}
 	else
 		champ->pc += ft_count_to_next(nbr, ZJMP);

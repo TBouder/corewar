@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/30 20:56:06 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/30 22:47:38 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,14 @@ void		ft_corewar_ldi(t_vm *env, t_champions *champ, int *nbr)
 		env->buf = ft_set_buffer(nbr[2]);
 		env->arg3 = ft_byte_to_str(&env->map[pc], env->buf);
 		if (IS_IND(nbr[0]))
-			env->arg1 = env->map[(champ->pc - 1 + env->arg1) % M];
+			env->arg1 = env->map[ft_mod(champ->pc - 1 + env->arg1)];
 		if (IS_REG(nbr[0]))
 			env->arg1 = champ->reg[env->arg1];
 		if (IS_REG(nbr[1]))
 			env->arg2 = champ->reg[env->arg2];
 		env->sum_idx = env->arg1 + env->arg2;
-		champ->reg[env->arg3] = ft_byte_to_str(&env->map[env->sum_idx % M], 1);
+		champ->reg[env->arg3] =
+			ft_byte_to_str(&env->map[ft_mod(env->sum_idx)], 1);
 	}
 }
 
@@ -65,12 +66,13 @@ void		ft_corewar_lldi(t_vm *env, t_champions *champ, int *nbr)
 		env->buf = ft_set_buffer(nbr[2]);
 		env->arg3 = ft_byte_to_str(&env->map[pc], env->buf);
 		if (IS_IND(nbr[0]))
-			env->arg1 = env->map[(champ->pc - 1 + env->arg1) % M];
+			env->arg1 = env->map[ft_mod(champ->pc - 1 + env->arg1)];
 		else if (IS_REG(nbr[0]))
 			env->arg1 = champ->reg[env->arg1];
 		if (IS_REG(nbr[1]))
 			env->arg2 = champ->reg[env->arg2];
 		env->sum_idx = env->arg1 + env->arg2;
-		champ->reg[env->arg3] = ft_byte_to_str(&env->map[env->sum_idx % M], 1);
+		champ->reg[env->arg3] =
+			ft_byte_to_str(&env->map[ft_mod(env->sum_idx)], 1);
 	}
 }
