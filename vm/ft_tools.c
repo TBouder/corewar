@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/21 12:27:24 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/27 14:09:56 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/30 20:45:03 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,17 @@ int		ft_ret_cycle(int op)
 	else if (op == LFORK)
 		return (1000);
 	return (0);
+}
+
+void	ft_set_lives(t_vm *env, int val)
+{
+	int		i;
+
+	i = 1;
+	env->nb_live[0] = 0;
+	while (i <= env->nb_champ)
+	{
+		env->nb_live[i] = val;
+		i++;
+	}
 }
