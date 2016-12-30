@@ -149,7 +149,7 @@ void			ft_dump_ncurse(t_vm *env, const void *addr, size_t size);
 */
 void			ft_init_env(t_vm *env, int part);
 void			ft_init_reg(t_champions *new_champ, t_champions *champ);
-void			ft_init_lives(t_vm *env, int val);
+void			ft_set_lives(t_vm *env, int val);
 void			ft_init_fake_id(t_vm *env);
 void			ft_init_champ(t_vm *env, t_champions *champ, int id, int pc);
 
