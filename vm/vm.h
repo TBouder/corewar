@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/30 20:54:59 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/30 21:02:03 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,70 +21,59 @@
 
 typedef struct		s_champions
 {
-	long			id;					//General ID
-	char			*name;				//name
-	char			*comment;			//comment
-	unsigned int	magic;				//magic number
-	unsigned int	prog_size;			//total size
-	char			*content;			//instructions
-	unsigned int	starting_pos;		//position de depart dans la map
-	int				champ_id;			//L'id entre les 4 champions
+	long			id;
+	char			*name;
+	char			*comment;
+	unsigned int	magic;
+	unsigned int	prog_size;
+	char			*content;
+	unsigned int	starting_pos;
+	int				champ_id;
 	int				fake_id;
-
-	// int				reg[REG_NUMBER];	//Los registros
-	int				reg[100];			//Los registros
-	int				pc;					//el pc
-	int				carry;				//bool for carry fisher
-	int				cycle;				//Ya une histoire de cycle
+	int				reg[100];
+	int				pc;
+	int				carry;
+	int				cycle;
 	int				next_cycle;
-
 	int				is_fork;
 	int				color;
 }					t_champions;
 
 typedef struct		s_vm
 {
-	t_options		*options;			//Flags
+	t_options		*options;
 	char			**champions;
 	t_list			*champs;
 	int				dump_cycle;
-
-	t_champions		*winner;			//WINNER
+	t_champions		*winner;
 	t_list			*list_champions;
 	int				nb_live[5];
-	int				*fd;				//Each champion
-	char			**filename;			//Each champion name
-	int				nb_champ;			//Number of champion
-	int				total_size;			//Total size of the champions
-
+	int				*fd;
+	char			**filename;
+	int				nb_champ;
+	int				total_size;
 	int				cycle_to_die;
 	int				cpt_to_die;
 	int				cycle_check;
 	int				cycle;
-
 	int				arg1;
 	int				arg2;
 	int				arg3;
 	int				buf;
 	int				sum_idx;
-
-	header_t		*header;			//header struct
-	char			*map;				//Total map
-	int				*map_owner;			//FOR COLORS
-	int				*map_moves;			//FOR CHANGES
-	int				*map_moves_buff;	//FOR TIME BEFORE CHANGE EXPIRES
-
+	header_t		*header;
+	char			*map;
+	int				*map_owner;
+	int				*map_moves;
+	int				*map_moves_buff;
 	long			current_id;
 	int				*fake_id;
-
-	//NCURSE
-	WINDOW	*main_border;
-	WINDOW	*main;
-	WINDOW	*info_border;
-	WINDOW	*info;
-	WINDOW	*notif_border;
-	WINDOW	*notif;
-
+	WINDOW			*main_border;
+	WINDOW			*main;
+	WINDOW			*info_border;
+	WINDOW			*info;
+	WINDOW			*notif_border;
+	WINDOW			*notif;
 	unsigned int	usleep;
 	unsigned int	nb_notif;
 	int				total_live;
@@ -106,9 +95,7 @@ int				*ft_send_args(char *bin);
 int				*ft_get_size(t_vm *env, t_champions *champ);
 int				ft_count_to_next(int *nbr, int op);
 int				ft_byte_to_str(char *str, int len);
-
 int				ft_get_args(t_vm *env, t_champions *champ, int op);
-
 void			ft_corewar_live(t_vm *env, t_champions *champ, int *nbr);
 void			ft_corewar_aff(t_vm *env, t_champions *champ, int *nbr);
 void			ft_corewar_st(t_vm *env, t_champions *champ, int *nbr);
@@ -125,7 +112,6 @@ void			ft_corewar_sub(t_vm *env, t_champions *champ, int *nbr);
 void			ft_corewar_and(t_vm *env, t_champions *champ, int *nbr);
 void			ft_corewar_or(t_vm *env, t_champions *champ, int *nbr);
 void			ft_corewar_xor(t_vm *env, t_champions *champ, int *nbr);
-
 
 /*
 ** NCURSE
