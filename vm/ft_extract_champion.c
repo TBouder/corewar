@@ -23,7 +23,7 @@ static int		ft_rev_hex(char *hex)
 	int		y;
 
 	hex_len = ft_strlen(hex);
-	new_hex = ft_strnew(hex_len);
+	new_hex = ft_strnew(8);
 	i = hex_len;
 	y = 0;
 	while (y < hex_len)
@@ -34,7 +34,10 @@ static int		ft_rev_hex(char *hex)
 			new_hex[y++] = hex[i - 1];
 		}
 		else
+		{
+			new_hex[y++] = '0';
 			new_hex[y++] = hex[i - 1];
+		}
 		i -= (i - 2 >= 0) ? 2 : 1;
 	}
 	ret_value = ft_atoi_base(new_hex, 16);
@@ -66,6 +69,7 @@ static void		ft_extract_header_lst(t_vm *env, int i, t_list *champion)
 	char	*hex;
 
 	read_success = read(env->fd[i], &env->header[i], sizeof(header_t));
+
 	if (read_success)
 	{
 		CHAMPIONS->name = ft_strinit(env->header[i].prog_name);
@@ -83,7 +87,7 @@ static void		ft_extract_header_lst(t_vm *env, int i, t_list *champion)
 		env->total_size += CHAMPIONS->prog_size;
 	}
 	else
-		ft_error_vm(env, ERR_HEAD, 1);
+		ft_error_vm(env, ERR_HEAD, 1);	
 }
 
 void			ft_extract_champion(t_vm *env)
