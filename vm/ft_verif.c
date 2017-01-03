@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 13:56:19 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/03 12:10:34 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/03 14:13:32 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,18 @@ void	ft_verif_extension(t_vm *env, t_list *champs)
 		errno = 0;
 		if (!champs->content ||
 			(env->fd[y] = open(champs->content, O_RDONLY)) == -1 || errno != 0)
-			ft_error_vm(env, ERR_BAD_SRC_FILE, 0);
+			ft_error_vm(env, ERR_BAD_SRC_FILE, 1);
 		if (open(champs->content, O_DIRECTORY) != -1)
-			ft_error_vm(env, ERR_DIR, 0);
+			ft_error_vm(env, ERR_DIR, 1);
 		if (!ft_strrchr(champs->content, '.'))
-			ft_error_vm(env, ERR_NOEXT, 0);
+			ft_error_vm(env, ERR_NOEXT, 1);
 		extension = ft_strinit(ft_strrchr(champs->content, '.'));
 		result = EQU(extension, ".cor");
 		ft_strdel(&extension);
 		if (result)
 			env->filename[y] = ft_strinit(champs->content);
 		else
-			ft_error_vm(env, ERR_NOT_COR, 0);
+			ft_error_vm(env, ERR_NOT_COR, 1);
 		y++;
 		champs = champs->next;
 	}
