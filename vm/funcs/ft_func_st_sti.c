@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/03 11:09:32 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/03 15:58:29 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,15 @@ void		ft_put_map_reg(t_vm *env, t_champions *champ, int i, int j)
 	len = ft_printf("%!x", (unsigned int)champ->reg[env->arg1]);
 	while (i < 8 && len)
 	{
-		reg[7 - i] = begin_reg[len - 1];
-		i++;
+		reg[7 - i++] = begin_reg[len - 1];
 		len--;
 	}
 	i = 0;
 	while (i < 8)
 	{
 		sub_reg = ft_strsub(reg, i, 2);
-		ft_color_map(env, champ,
-			(unsigned int)ft_mod((champ->pc - 1 + env->sum_idx + j), M), sub_reg);
+		ft_color_map(env, champ, (unsigned int)
+			ft_mod((champ->pc - 1 + env->sum_idx + j), M), sub_reg);
 		i += 2;
 		j += 1;
 		ft_strdel(&sub_reg);
@@ -65,6 +64,7 @@ void		ft_put_map_reg(t_vm *env, t_champions *champ, int i, int j)
 /*
 ** Stock la valeur de NBR[0] dans NBR[1]
 */
+
 void		ft_corewar_st(t_vm *env, t_champions *champ, int *nbr)
 {
 	int		pc;
@@ -93,6 +93,7 @@ void		ft_corewar_st(t_vm *env, t_champions *champ, int *nbr)
 /*
 ** Stock la valeur de NBR[1] + NBR[2] dans NBR[0]
 */
+
 void		ft_corewar_sti(t_vm *env, t_champions *champ, int *nbr)
 {
 	int		pc;
@@ -109,9 +110,9 @@ void		ft_corewar_sti(t_vm *env, t_champions *champ, int *nbr)
 		env->buf = ft_set_buffer(nbr[2]);
 		env->arg3 = ft_byte_to_str(&env->map[pc], env->buf);
 		if (IS_IND(nbr[1]) && env->arg2 > 32768)
-				env->arg2 = env->map[ft_mod(champ->pc + ((env->arg2 % I) - I), M)];
+			env->arg2 = env->map[ft_mod(champ->pc + ((env->arg2 % I) - I), M)];
 		else if (IS_IND(nbr[1]))
-				env->arg2 = env->map[ft_mod(champ->pc + (env->arg2 % I), M)];
+			env->arg2 = env->map[ft_mod(champ->pc + (env->arg2 % I), M)];
 		else if (IS_REG(nbr[1]))
 			env->arg2 = champ->reg[env->arg2];
 		if (IS_REG(nbr[2]))

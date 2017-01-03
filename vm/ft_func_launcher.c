@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 23:27:37 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/03 11:31:31 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/03 16:01:50 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 ** The ft_instruct_name() function takes an op code and return the full name, as
 ** a string, of this opcode (No malloc).
 */
+
 static char	*ft_instruct_name_helper(int op)
 {
 	if (op == ZJMP)
@@ -62,6 +63,7 @@ static char	*ft_instruct_name(int op)
 ** The ft_call_func() function calls the correct function in the funcs folder,
 ** according to the opcode.
 */
+
 static void	ft_call_func(t_vm *env, t_champions *champ, int *nbr, int op)
 {
 	op == LIVE ? ft_corewar_live(env, champ, nbr) : 0;
@@ -86,6 +88,7 @@ static void	ft_call_func(t_vm *env, t_champions *champ, int *nbr, int op)
 ** The ft_get_args() function gets the args of the argument and calls the
 ** function to perform the instruction, after what, moves the PC.
 */
+
 int			ft_get_args(t_vm *env, t_champions *champ, int op)
 {
 	int		*nbr;
