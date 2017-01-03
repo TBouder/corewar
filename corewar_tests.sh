@@ -6,7 +6,7 @@
 #    By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/05/17 19:19:25 by tbouder           #+#    #+#              #
-#    Updated: 2016/12/05 11:58:27 by tbouder          ###   ########.fr        #
+#    Updated: 2017/01/03 20:32:55 by tbouder          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,8 @@ ft_arg ()
 			ARG=$2
 		elif [ "$1" = "offi" ]; then
 			offi="OK"
+		elif [ "$1" = "vm" ]; then
+			vm="OK"
 		fi
 		shift
 	done
@@ -60,23 +62,24 @@ echo 'quroulon@student.42.fr      tbouder@student.42.fr'
 ft_arg $@
 
 ASM=./asm/asm
+COREWAR=./vm/corewar
 if [ "$file" = "OK" ]; then
 	echo "\033[44m\033[1mFILE ERROR (empty, not valid, not file, not .s, dev/null, etc.)\033[0m"
-	echo "\033[41m\033[1m ---> ./asm\033[0m"															&& ft_leaks $ASM
-	echo "\n\033[41m\033[1m ---> ./asm ..\033[0m" 														&& ft_leaks $ASM ..
-	echo "\n\033[41m\033[1m ---> ./asm 1\033[0m" 														&& ft_leaks $ASM 1
-	echo "\n\033[41m\033[1m ---> ./asm empty\033[0m" 													&& ft_leaks $ASM empty
-	echo "\n\033[41m\033[1m ---> ./asm /dev/null\033[0m" 												&& ft_leaks $ASM /dev/null
-	echo "\n\033[41m\033[1m ---> ./asm /dev/random\033[0m" 												&& ft_leaks $ASM /dev/random
-	echo "\n\033[41m\033[1m ---> ./asm ""\033[0m" 														&& ft_leaks $ASM ""
-	echo "\n\033[41m\033[1m ---> ./asm NULL\033[0m" 													&& ft_leaks $ASM NULL
-	echo "\n\033[41m\033[1m ---> ./asm main.c\033[0m" 													&& ft_leaks $ASM main.c
-	echo "\n\033[41m\033[1m ---> ./asm main.c Makefile\033[0m" 											&& ft_leaks $ASM main.c Makefile
-	echo "\n\033[41m\033[1m ---> ./asm tests/test.s\033[0m" 											&& ft_leaks $ASM tests/test.s
-	echo "\n\033[41m\033[1m ---> ./asm tests/empty.s main.c\033[0m" 									&& ft_leaks $ASM tests/empty.s main.c
-	echo "\n\033[41m\033[1m ---> ./asm main.c empty.s\033[0m" 											&& ft_leaks $ASM main.c tests/empty.s
-	echo "\n\033[41m\033[1m ---> ./asm tests/empty.s valid.s\033[0m" 									&& ft_leaks $ASM tests/empty.s tests/valid.s
-	echo "\n\033[41m\033[1m ---> ./asm tests/empty.s\033[0m" 											&& ft_leaks $ASM tests/empty.s
+	echo "\033[41m\033[1m ---> ./asm\033[0m"							&& ft_leaks $ASM
+	echo "\n\033[41m\033[1m ---> ./asm ..\033[0m" 						&& ft_leaks $ASM ..
+	echo "\n\033[41m\033[1m ---> ./asm 1\033[0m" 						&& ft_leaks $ASM 1
+	echo "\n\033[41m\033[1m ---> ./asm empty\033[0m" 					&& ft_leaks $ASM empty
+	echo "\n\033[41m\033[1m ---> ./asm /dev/null\033[0m" 				&& ft_leaks $ASM /dev/null
+	echo "\n\033[41m\033[1m ---> ./asm /dev/random\033[0m" 				&& ft_leaks $ASM /dev/random
+	echo "\n\033[41m\033[1m ---> ./asm ""\033[0m" 						&& ft_leaks $ASM ""
+	echo "\n\033[41m\033[1m ---> ./asm NULL\033[0m" 					&& ft_leaks $ASM NULL
+	echo "\n\033[41m\033[1m ---> ./asm main.c\033[0m" 					&& ft_leaks $ASM main.c
+	echo "\n\033[41m\033[1m ---> ./asm main.c Makefile\033[0m" 			&& ft_leaks $ASM main.c Makefile
+	echo "\n\033[41m\033[1m ---> ./asm tests/test.s\033[0m" 			&& ft_leaks $ASM tests/test.s
+	echo "\n\033[41m\033[1m ---> ./asm tests/empty.s main.c\033[0m" 	&& ft_leaks $ASM tests/empty.s main.c
+	echo "\n\033[41m\033[1m ---> ./asm main.c empty.s\033[0m" 			&& ft_leaks $ASM main.c tests/empty.s
+	echo "\n\033[41m\033[1m ---> ./asm tests/empty.s valid.s\033[0m" 	&& ft_leaks $ASM tests/empty.s tests/valid.s
+	echo "\n\033[41m\033[1m ---> ./asm tests/empty.s\033[0m" 			&& ft_leaks $ASM tests/empty.s
 fi
 
 if [ "$name" = "OK" ]; then
@@ -159,4 +162,74 @@ if [ "$arg_ok" = "OK" ]; then
 		fi
 		i=$[$i+1]
 	done
+fi
+
+if [ "$vm" = "OK" ]; then
+	echo "\033[44m\033[1mVM NO CHAMPS\033[0m"
+	echo "\033[41m\033[1m ---> ./corewar\033[0m"					&& ft_leaks $COREWAR
+	echo "\033[41m\033[1m ---> ./corewar ..\033[0m"					&& ft_leaks $COREWAR ..
+	echo "\033[41m\033[1m ---> ./corewar 1\033[0m"					&& ft_leaks $COREWAR 1
+	echo "\033[41m\033[1m ---> ./corewar empty\033[0m"				&& ft_leaks $COREWAR empty
+	echo "\033[41m\033[1m ---> ./corewar /dev/null\033[0m"			&& ft_leaks $COREWAR /dev/null
+	echo "\033[41m\033[1m ---> ./corewar /dev/random\033[0m"		&& ft_leaks $COREWAR /dev/random
+	echo "\033[41m\033[1m ---> ./corewar ""\033[0m"					&& ft_leaks $COREWAR ""
+	echo "\033[41m\033[1m ---> ./corewar NULL\033[0m"				&& ft_leaks $COREWAR NULL
+	echo "\033[41m\033[1m ---> ./corewar vm/main.c\033[0m"			&& ft_leaks $COREWAR vm/main.c
+	echo "\033[41m\033[1m ---> ./corewar valid.s\033[0m"			&& ft_leaks $COREWAR valid.s
+	echo "\033[41m\033[1m ---> ./corewar vm/test.cor\033[0m"		&& ft_leaks $COREWAR vm/test.cor
+	echo "\033[41m\033[1m ---> ./corewar vm/testfile.cor\033[0m"	&& ft_leaks $COREWAR vm/testfile.cor
+	echo "\n\033[41m\033[1m ---> ./corewar -n\033[0m" 				&& ft_leaks $COREWAR -n
+	echo "\n\033[41m\033[1m ---> ./corewar -d\033[0m" 				&& ft_leaks $COREWAR -d
+	echo "\n\033[41m\033[1m ---> ./corewar -dump\033[0m" 			&& ft_leaks $COREWAR -dump
+	echo "\n\033[41m\033[1m ---> ./corewar -g\033[0m" 				&& ft_leaks $COREWAR -g
+	echo "\n\033[41m\033[1m ---> ./corewar -v\033[0m" 				&& ft_leaks $COREWAR -v
+
+# ############################################################################ #
+
+	echo "\n\033[44m\033[1mVM TOO MANY CHAMPS\033[0m"
+	echo "\033[41m\033[1m ---> ./corewar 5 champs\033[0m"	&& ft_leaks $COREWAR valid.cor valid.cor valid.cor valid.cor valid.cor
+	echo "\033[41m\033[1m ---> ./corewar 6 champs\033[0m"	&& ft_leaks $COREWAR valid.cor valid.cor valid.cor valid.cor valid.cor valid.cor
+	echo "\033[41m\033[1m ---> ./corewar 7 champs\033[0m"	&& ft_leaks $COREWAR valid.cor valid.cor valid.cor valid.cor valid.cor valid.cor valid.cor
+	echo "\033[41m\033[1m ---> ./corewar 8 champs\033[0m"	&& ft_leaks $COREWAR valid.cor valid.cor valid.cor valid.cor valid.cor valid.cor valid.cor valid.cor
+
+# ############################################################################ #
+
+	echo "\n\033[44m\033[1mVM WITH -n\033[0m"
+	echo "\n\033[41m\033[1m ---> ./corewar -n valid.cor\033[0m"		&& ft_leaks $COREWAR -n valid.cor
+	echo "\n\033[41m\033[1m ---> ./corewar -n -1 valid.cor\033[0m"	&& ft_leaks $COREWAR -n -1 valid.cor
+	echo "\n\033[41m\033[1m ---> ./corewar -n e valid.cor\033[0m"	&& ft_leaks $COREWAR -n e valid.cor
+	echo "\n\033[41m\033[1m ---> ./corewar -n -n valid.cor\033[0m"	&& ft_leaks $COREWAR -n -n valid.cor
+	echo "\n\033[41m\033[1m ---> ./corewar -n 1 valid.cor -n valid.cor\033[0m" \
+		&& ft_leaks $COREWAR -n 1 valid.cor -n valid.cor
+	echo "\n\033[41m\033[1m ---> ./corewar -n 1 valid.cor -n 2 valid.cor -n valid.cor\033[0m" \
+		&& ft_leaks $COREWAR -n 1 valid.cor -n 2 valid.cor -n valid.cor
+	echo "\n\033[41m\033[1m ---> ./corewar -n 1 valid.cor -n 2 valid.cor -n 3 valid.cor -n valid.cor\033[0m" \
+		&& ft_leaks $COREWAR -n 1 valid.cor -n 2 valid.cor -n 3 valid.cor -n valid.cor
+	echo "\n\033[41m\033[1m ---> ./corewar -n 1 valid.cor -n 2 valid.cor -n valid.cor -n 3 valid.cor\033[0m" \
+		&& ft_leaks $COREWAR -n 1 valid.cor -n 2 valid.cor -n valid.cor -n 3 valid.cor
+	echo "\n\033[41m\033[1m ---> ./corewar -n 1 valid.cor -n 1 valid.cor\033[0m" \
+		&& ft_leaks $COREWAR -n 1 valid.cor -n 1 valid.cor
+	echo "\n\033[41m\033[1m ---> ./corewar valid.cor -n 1 valid.cor\033[0m" \
+		&& ft_leaks $COREWAR valid.cor -n 1 valid.cor
+
+# ############################################################################ #
+
+	echo "\n\033[44m\033[1mVM WITH -d & -dump\033[0m"
+	echo "\n\033[41m\033[1m ---> ./corewar -d valid.cor\033[0m"					&& ft_leaks $COREWAR -d valid.cor
+	echo "\n\033[41m\033[1m ---> ./corewar -d -1 valid.cor\033[0m"				&& ft_leaks $COREWAR -d -1 valid.cor
+	echo "\n\033[41m\033[1m ---> ./corewar -d e valid.cor\033[0m"				&& ft_leaks $COREWAR -d e valid.cor
+	echo "\n\033[41m\033[1m ---> ./corewar -d -n 5 valid.cor\033[0m"			&& ft_leaks $COREWAR -d -n 5 valid.cor
+	echo "\n\033[41m\033[1m ---> ./corewar -dump valid.cor\033[0m"				&& ft_leaks $COREWAR -dump valid.cor
+	echo "\n\033[41m\033[1m ---> ./corewar -dump -1 valid.cor\033[0m"			&& ft_leaks $COREWAR -dump -1 valid.cor
+	echo "\n\033[41m\033[1m ---> ./corewar -dump e valid.cor\033[0m"			&& ft_leaks $COREWAR -dump e valid.cor
+	echo "\n\033[41m\033[1m ---> ./corewar -dump -n 5 valid.cor\033[0m"			&& ft_leaks $COREWAR -dump -n 5 valid.cor
+	echo "\n\033[41m\033[1m ---> ./corewar -d 10 valid.cor -d valid.cor\033[0m"	&& ft_leaks $COREWAR -d 10 valid.cor -d valid.cor
+	echo "\n\033[41m\033[1m ---> ./corewar -d 10 valid.cor -d valid.cor\033[0m"	&& ft_leaks $COREWAR -d 10 valid.cor -d 2 valid.cor
+
+	# ./corewar -g -n 99 ../valid.cor -n 50 ../valid.cor -n 8 ../valid.cor -n 1 ../valid.cor OKAY a chaque fois
+# ############################################################################ #
+
+
+	# echo "\n\033[41m\033[1m ---> ./corewar -n\033[0m" 		&& ft_leaks $COREWAR -n
+	# echo "\n\033[41m\033[1m ---> ./corewar -n\033[0m" 		&& ft_leaks $COREWAR -n
 fi
