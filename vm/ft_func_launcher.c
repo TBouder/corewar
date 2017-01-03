@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 23:27:37 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/03 10:44:44 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/03 11:31:31 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ int			ft_get_args(t_vm *env, t_champions *champ, int op)
 		ft_call_func(env, champ, nbr, op);
 		op != ZJMP ? champ->pc += count : 0;
 		champ->pc = ft_mod(champ->pc, M);
+		free(nbr);
 		return (ft_ret_cycle((int)env->map[champ->pc]));
 	}
 	champ->pc += 1;

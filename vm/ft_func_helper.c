@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 14:16:55 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/30 20:43:03 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/03 11:34:14 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int		*ft_send_args(char *bin)
 	ft_strdel(&first);
 	ft_strdel(&second);
 	ft_strdel(&third);
+	ft_strdel(&bin);
 	return (nbr);
 }
 
@@ -54,6 +55,7 @@ int		ft_byte_to_str(char *str, int len)
 	}
 	res = ft_atoi_base(value, 16);
 	ft_strdel(&value);
+	ft_strdel(&hex);
 	return (res);
 }
 
@@ -78,6 +80,7 @@ int		*ft_get_size(t_vm *env, t_champions *champ)
 		i--;
 		len--;
 	}
+	ft_strdel(&size);
 	return (ft_send_args(bin));
 }
 
