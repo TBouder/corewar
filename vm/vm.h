@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/03 11:04:05 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/03 14:48:23 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ typedef struct		s_champions
 typedef struct		s_vm
 {
 	t_options		*options;
-	char			**champions;
 	t_list			*champs;
 	int				dump_cycle;
 	t_champions		*winner;
@@ -166,6 +165,7 @@ void			ft_verbose_winner(t_vm *env);
 */
 int				ft_ret_cycle(int op);
 void			ft_set_lives(t_vm *env, int val);
+void			ft_reset_lives(t_vm *env, int val);
 int				ft_set_buffer_and_or_xor(int nbr);
 int				ft_mod(int nbr, int mod);
 

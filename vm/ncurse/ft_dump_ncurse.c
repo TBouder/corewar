@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 20:32:37 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/30 20:35:21 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/03 13:42:35 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static t_champions	*ft_get_ncurse_color_champ(t_vm *env, int *col)
 	while (list)
 	{
 		champ = (t_champions *)list->content;
-		if (champ->pc == *col)
+		if (champ && champ->pc == *col)
 			return (champ);
 		list = list->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 15:58:23 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/30 22:32:40 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/03 13:57:44 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static void		ft_perfom_checks(t_vm *env)
 		env->cpt_to_die = 0;
 		env->cycle_check++;
 		env->total_live = 0;
-		ft_set_lives(env, 0);
+		ft_reset_lives(env, 0);
 	}
 	if (env->cycle_check == MAX_CHECKS)
 	{
