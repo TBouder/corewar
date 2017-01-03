@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 16:20:23 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/03 15:43:00 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/03 15:53:35 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ void			ft_clear_ncurse(t_vm *env)
 	delwin(env->info_border);
 	delwin(env->notif_border);
 	endwin();
-	// refresh();
 }
 
 static void		ft_key_pause(t_vm *env)
