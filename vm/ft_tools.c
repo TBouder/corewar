@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/21 12:27:24 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/03 10:48:28 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/03 12:11:23 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,20 @@ void	ft_set_lives(t_vm *env, int val)
 	while (i <= env->nb_champ)
 	{
 		env->nb_live[i] = val;
+		i++;
+	}
+}
+
+void	ft_reset_lives(t_vm *env, int val)
+{
+	int		i;
+
+	i = 1;
+	env->nb_live[0] = 0;
+	while (i <= env->nb_champ)
+	{
+		if (env->nb_live[i] > 0)
+			env->nb_live[i] = val;
 		i++;
 	}
 }
