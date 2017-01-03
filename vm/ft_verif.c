@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 13:56:19 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/03 11:38:55 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/03 12:10:34 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,11 @@ int		ft_verif_one_alive(t_vm *env)
 	while (i <= env->nb_champ)
 	{
 		if (env->nb_live[i] >= 0)
+		{
+			// wprintw(env->notif, "ONE ALIVE : i = %d\n", env->nb_live[i]);
+			// ft_reload_windows(env, 3);
 			return (1);
+		}
 		i++;
 	}
 	return (0);
@@ -101,7 +105,10 @@ int		ft_verif_alives(t_vm *env)
 	{
 		nb_live += env->nb_live[i];
 		if (env->nb_live[i] == 0)
+		{
 			ft_clear_champ(&env->list_champions, i);
+			env->nb_live[i] = -1;
+		}
 		i++;
 	}
 	return (nb_live);
