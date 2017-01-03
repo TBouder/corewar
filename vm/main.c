@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 19:42:02 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/27 14:04:39 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/30 20:47:29 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,8 @@ static int		ft_parse_args(t_vm *env, int i, char **av)
 		}
 		else if (av[i])
 		{
-			if (x == 4)
-				ft_error_vm(env, "{9}Error{0} : Too many champions", 0);
+			x++ == 4 ? ft_error_vm(env, "{9}Err{0} : Too many champs", 0) : 0;
 			ft_lstend(&env->champs, (char *)av[i], ft_strlen(av[i]) + 1);
-			x++;
 		}
 		i++;
 	}
@@ -73,7 +71,7 @@ static void		ft_launcher(t_vm *env)
 	ft_verif_extension(env, env->champs);
 	ft_extract_champion(env);
 	ft_put_champion_map(env);
-	ft_init_lives(env, 1);
+	ft_set_lives(env, 1);
 	IS_GRAPH ? ft_init_ncurse(env) : 0;
 	ft_fight(env);
 	IS_GRAPH ? ft_clear_ncurse(env) : 0;

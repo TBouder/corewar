@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 15:58:23 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/27 00:25:37 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/30 22:32:40 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ static void		ft_fight_init_graph(t_vm *env)
 */
 static void		ft_foreach_champ(t_vm *env)
 {
-	// ft_put("INSIDE : {14}%s{0}\n", ((t_champions *)env->list_champions->content)->name);
 	t_champions *champ;
 	t_list		*list;
 	int			pc;
@@ -44,6 +43,7 @@ static void		ft_foreach_champ(t_vm *env)
 			pc = champ->pc;
 			champ->next_cycle = env->cycle;
 			champ->next_cycle += ft_get_args(env, champ, (int)env->map[pc]);
+			IS_GRAPH ? ft_reload_windows(env, 1) : 0;
 			!IS_GRAPH && IS_VERBOSE ? ft_verbose_champ_info(env, champ, 2) : 0;
 		}
 		list = list->next;
@@ -68,7 +68,7 @@ static void		ft_perfom_checks(t_vm *env)
 		env->cpt_to_die = 0;
 		env->cycle_check++;
 		env->total_live = 0;
-		ft_init_lives(env, 0);
+		ft_set_lives(env, 0);
 	}
 	if (env->cycle_check == MAX_CHECKS)
 	{

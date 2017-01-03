@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 14:16:55 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/26 16:13:20 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/30 20:43:03 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,6 @@ int		ft_count_to_next(int *nbr, int op)
 	nbr[2] == 1 ? count += 1 : 0;
 	nbr[2] == 11 ? count += 2 : 0;
 	nbr[2] == 10 ? count += situ : 0;
-	if (count < 0)
-		;//YA UN PB, GENRE UNE ERREUR
 	if (op == 1)
 		count = 4;
 	return (count + 1);
