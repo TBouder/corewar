@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/14 19:12:52 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/03 15:21:22 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/03 15:51:19 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void			ft_clear_champ(t_list **blist, int id)
 	}
 }
 
-void		ft_clear_all_champs(t_list **begin_list)
+void			ft_clear_all_champs(t_list **begin_list)
 {
 	t_list	*free_list;
 	t_list	*temp;
@@ -66,7 +66,6 @@ void		ft_clear_all_champs(t_list **begin_list)
 		*begin_list = NULL;
 	}
 }
-
 
 void			ft_clear_all(t_vm *env)
 {
