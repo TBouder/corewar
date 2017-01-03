@@ -72,15 +72,7 @@ void		ft_corewar_lldi(t_vm *env, t_champions *champ, int *nbr)
 		if (IS_REG(nbr[1]))
 			env->arg2 = champ->reg[env->arg2];
 		env->sum_idx = env->arg1 + env->arg2;
-<<<<<<< HEAD
-
-		// champ->reg[env->arg3] = ft_byte_to_str(&env->map[(env->sum_idx % I) % M], 1); // OLD
-		// champ->reg[env->arg3] = ft_byte_to_str(&env->map[env->sum_idx % M], 1);
-		champ->reg[env->arg3] = ft_byte_to_str(&env->map[champ->pc - 1 + env->sum_idx], 1); // lldi n'appliquera aucun modulo aux adresses
-		ft_put("\033[104mr%d = 0x%x{0}\n", env->arg3, champ->reg[env->arg3]);
-=======
 		champ->reg[env->arg3] =
 			ft_byte_to_str(&env->map[ft_mod(env->sum_idx, M)], 1);
->>>>>>> tbouder
 	}
 }
