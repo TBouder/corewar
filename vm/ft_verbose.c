@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/21 12:17:02 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/03 11:42:07 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/03 20:39:25 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,10 @@ void		ft_verbose_champ_info(t_vm *env, t_champions *champ, int part)
 {
 	if (part == 1)
 	{
-		ft_put("{9}------{0} Champion {14}%d{0} ({14}%s{0}) %s{9}------{0}\n",
-		champ->champ_id, champ->name,
+		ft_put("{9}------{0} Champion {14}%d{0} (Nb champ : {14}%d{0} ",
+			champ->fake_id, champ->champ_id);
+		ft_put("Unique Id : {14}%d{0}) ", champ->id);
+		ft_put("({14}%s{0}) %s{9}------{0}\n", champ->name,
 		champ->is_fork ? "({11}Forked Champion{0}) " : "");
 		ft_put("Current cycle : {14}%d{0}\n", env->cycle);
 		ft_put("Current PC : {14}%d{0}\n", champ->pc);
