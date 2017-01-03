@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/30 22:45:27 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/03 10:45:17 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ void	ft_corewar_fork(t_vm *env, t_champions *champ, int *nbr)
 		env->buf = ft_set_buffer(nbr[0]);
 		env->arg1 = ft_byte_to_str(&env->map[pc], env->buf);
 		if (env->arg1 > 32768)
-			env->arg1 = ft_mod(champ->pc + ((env->arg1 % I) - I));
+			env->arg1 = ft_mod(champ->pc + ((env->arg1 % I) - I), M);
 		else
-			env->arg1 = ft_mod(champ->pc + (env->arg1 % I));
+			env->arg1 = ft_mod(champ->pc + (env->arg1 % I), M);
 		ft_init_champ(env, champ, champ->champ_id - 1, env->arg1);
 	}
 }
@@ -45,7 +45,7 @@ void	ft_corewar_lfork(t_vm *env, t_champions *champ, int *nbr)
 	{
 		env->buf = ft_set_buffer(nbr[0]);
 		env->arg1 = ft_byte_to_str(&env->map[pc], env->buf);
-		env->arg1 = ft_mod(champ->pc + env->arg1);
+		env->arg1 = ft_mod(champ->pc + env->arg1, M);
 		ft_init_champ(env, champ, champ->champ_id - 1, env->arg1);
 	}
 }

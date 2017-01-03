@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/30 22:35:27 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/03 10:44:08 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,6 +167,6 @@ void			ft_verbose_winner(t_vm *env);
 int				ft_ret_cycle(int op);
 void			ft_set_lives(t_vm *env, int val);
 int				ft_set_buffer_and_or_xor(int nbr);
-int				ft_mod(int nbr);
+int				ft_mod(int nbr, int mod);
 
 #endif
