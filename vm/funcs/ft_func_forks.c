@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/03 10:45:17 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/03 16:00:40 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	ft_set_buffer(int nbr)
 	return (0);
 }
 
-void	ft_corewar_fork(t_vm *env, t_champions *champ, int *nbr)
+void		ft_corewar_fork(t_vm *env, t_champions *champ, int *nbr)
 {
 	int		pc;
 
@@ -36,7 +36,7 @@ void	ft_corewar_fork(t_vm *env, t_champions *champ, int *nbr)
 	}
 }
 
-void	ft_corewar_lfork(t_vm *env, t_champions *champ, int *nbr)
+void		ft_corewar_lfork(t_vm *env, t_champions *champ, int *nbr)
 {
 	int		pc;
 

@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 12:10:11 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/03 13:58:14 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/03 16:02:50 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ static void		ft_init_champ_data(t_champions *new_champ, t_champions *champ)
 	new_champ->prog_size = champ ? champ->prog_size : 0;
 }
 
-static void		ft_init_champ_id(t_vm *env, t_champions *new_champ, t_champions
-				*champ, int id)
+static void		ft_init_champ_id(t_vm *env, t_champions *new_champ,
+				t_champions *champ, int id)
 {
 	new_champ->id = env->current_id++;
 	new_champ->champ_id = id + 1;
@@ -36,7 +36,7 @@ static void		ft_init_champ_id(t_vm *env, t_champions *new_champ, t_champions
 	new_champ->fake_id = champ ? champ->fake_id : env->fake_id[id];
 }
 
-void	ft_init_champ(t_vm *env, t_champions *champ, int id, int pc)
+void			ft_init_champ(t_vm *env, t_champions *champ, int id, int pc)
 {
 	t_champions	*new_champ;
 

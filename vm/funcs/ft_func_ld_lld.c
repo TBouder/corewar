@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/03 10:45:31 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/03 15:59:27 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ void		ft_corewar_lld(t_vm *env, t_champions *champ, int *nbr)
 		if (IS_DIR(nbr[0]))
 			champ->reg[env->arg2] = env->arg1;
 		else if (IS_IND(nbr[0]))
-			champ->reg[env->arg2] = env->map[ft_mod(champ->pc - 1 + env->arg1, M)];
+			champ->reg[env->arg2] =
+				env->map[ft_mod(champ->pc - 1 + env->arg1, M)];
 		champ->carry = champ->reg[env->arg2] == 0 ? 1 : 0;
 	}
 }
