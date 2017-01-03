@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 23:27:37 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/26 16:52:34 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/03 10:44:44 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,16 +101,14 @@ int			ft_get_args(t_vm *env, t_champions *champ, int op)
 			nbr[0] = 10;
 		}
 		count = ft_count_to_next(nbr, op);
-		!IS_GRAPH && IS_VERBOSE ? ft_put("[{10}%s{0}]\n", ft_instruct_name(op)) : 0;
+		if (!IS_GRAPH && IS_VERBOSE)
+			ft_put("[{10}%s{0}]\n", ft_instruct_name(op));
 		ft_call_func(env, champ, nbr, op);
-		if (op != ZJMP)
-			champ->pc += count;
-		champ->pc %= MEM_SIZE;
-		IS_GRAPH ? ft_reload_windows(env, 1) : 0;
+		op != ZJMP ? champ->pc += count : 0;
+		champ->pc = ft_mod(champ->pc, M);
 		return (ft_ret_cycle((int)env->map[champ->pc]));
 	}
 	champ->pc += 1;
-	champ->pc %= MEM_SIZE;
-	IS_GRAPH ? ft_reload_windows(env, 1) : 0;
+	champ->pc = ft_mod(champ->pc, M);
 	return (2);
 }

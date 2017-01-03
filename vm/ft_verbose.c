@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/21 12:17:02 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/22 00:22:29 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/30 20:45:56 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,5 @@ void		ft_verbose_winner(t_vm *env)
 			ft_put("The winner is {14}%d{0} ({14}%s{0}) !\n",
 				env->winner->champ_id, env->winner->name);
 	}
-	exit(1);
+	ft_error_vm(env, "", 1);
 }

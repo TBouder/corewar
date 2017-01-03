@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 14:16:55 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/27 00:16:56 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/30 23:02:22 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,26 +41,22 @@ void			ft_corewar_live(t_vm *env, t_champions *champ, int *nbr)
 	if (IS_DIR(nbr[0]))
 	{
 		player_alive = ft_byte_to_str(&env->map[champ->pc + 1], 4);
-		list = ft_find_live(env, player_alive);
-		if (list)
+		if (!(list = ft_find_live(env, player_alive)))
+			return ;
+		env->nb_live[((t_champions *)list->content)->champ_id] += 1;
+		ft_set_winner(env, (t_champions *)list->content);
+		if (IS_GRAPH)
 		{
-			env->nb_live[((t_champions *)list->content)->champ_id] += 1;
-			// env->nb_live[((t_champions *)list->content)->champ_id * -1] += 1; //IF NEGATIF
-			ft_set_winner(env, (t_champions *)list->content);
-			if (IS_GRAPH)
-			{
-				ft_print_champion_color(((t_champions *)list->content),
-					env->notif);
-				wprintw(env->notif, " is alive\n");
-				ft_reload_windows(env, 3);
-			}
-			else
-			{
-				ft_put("Champion {14}%d{0} ({14}%s{0}) is {10}alive{0}\n",
-				player_alive, ((t_champions *)list->content)->name);
-			}
-			env->total_live++;
+			ft_print_champion_color(((t_champions *)list->content), env->notif);
+			wprintw(env->notif, " is alive\n");
+			ft_reload_windows(env, 3);
 		}
+		else
+		{
+			ft_put("Champion {14}%d{0} ({14}%s{0}) is {10}alive{0}\n",
+			player_alive, ((t_champions *)list->content)->name);
+		}
+		env->total_live++;
 	}
 }
 
@@ -85,6 +81,5 @@ void			ft_corewar_aff(t_vm *env, t_champions *champ, int *nbr)
 			ft_put("{10}r%d{0} : [{10}%C{0}] [{10}0x%x{0}]\n", value,
 			champ->reg[value] % 256, champ->reg[value] % 256);
 		}
-
 	}
 }
