@@ -45,8 +45,9 @@ void		ft_corewar_ldi(t_vm *env, t_champions *champ, int *nbr)
 		if (IS_REG(nbr[1]))
 			env->arg2 = champ->reg[env->arg2];
 		env->sum_idx = env->arg1 + env->arg2;
+		// Relatif a IDX_MOD
 		champ->reg[env->arg3] =
-			ft_byte_to_str(&env->map[ft_mod(env->sum_idx, M)], 1);
+			ft_byte_to_str(&env->map[ft_mod(champ->pc - 1 + env->sum_idx, M)], 4);
 	}
 }
 
@@ -73,6 +74,6 @@ void		ft_corewar_lldi(t_vm *env, t_champions *champ, int *nbr)
 			env->arg2 = champ->reg[env->arg2];
 		env->sum_idx = env->arg1 + env->arg2;
 		champ->reg[env->arg3] =
-			ft_byte_to_str(&env->map[ft_mod(env->sum_idx, M)], 1);
+			ft_byte_to_str(&env->map[ft_mod(champ->pc - 1 + env->sum_idx, M)], 4);
 	}
 }

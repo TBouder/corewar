@@ -6,12 +6,11 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/03 11:36:25 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/03 11:51:07 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../vm.h"
-#define IS_GRAPH env->options->flags['g']
 
 static int	ft_set_buffer(int nbr)
 {
@@ -29,11 +28,12 @@ void	ft_corewar_zjmp(t_vm *env, t_champions *champ, int *nbr)
 	int		pc;
 
 	pc = champ->pc + 1;
+
 	if (champ->carry == 1 && IS_DIR(nbr[0]))
 	{
 		env->buf = ft_set_buffer(nbr[0]);
 		env->arg1 = ft_byte_to_str(&env->map[pc], env->buf);
-		if (env->arg1 > 32768)
+		if (env->arg1 > MAX)
 			champ->pc = ft_mod(champ->pc + ((env->arg1 % I) - I), M);
 		else
 			champ->pc = ft_mod(champ->pc + (env->arg1 % I), M);
