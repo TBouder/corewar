@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/30 22:45:00 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/03 10:45:07 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ void		ft_and_or_xor_helper(t_vm *env, t_champions *champ, int *nbr)
 	if (IS_IND(nbr[0]) == 1)
 	{
 		if (env->arg1 > 32768)
-			env->arg1 = env->map[ft_mod(champ->pc - 1 + ((env->arg1 % I) - I))];
+			env->arg1 = env->map[ft_mod(champ->pc - 1 + ((env->arg1 % I) - I), M)];
 		else
-			env->arg1 = env->map[ft_mod(champ->pc - 1 + (env->arg1 % I))];
+			env->arg1 = env->map[ft_mod(champ->pc - 1 + (env->arg1 % I), M)];
 	}
 	else if (IS_REG(nbr[0]))
 		env->arg1 = champ->reg[env->arg1];
@@ -27,9 +27,9 @@ void		ft_and_or_xor_helper(t_vm *env, t_champions *champ, int *nbr)
 	if (IS_IND(nbr[1]) == 1)
 	{
 		if (env->arg2 > 32768)
-			env->arg2 = env->map[ft_mod(champ->pc - 1 + ((env->arg2 % I) - I))];
+			env->arg2 = env->map[ft_mod(champ->pc - 1 + ((env->arg2 % I) - I), M)];
 		else
-			env->arg2 = env->map[ft_mod(champ->pc - 1 + (env->arg2 % I))];
+			env->arg2 = env->map[ft_mod(champ->pc - 1 + (env->arg2 % I), M)];
 	}
 	else if (IS_REG(nbr[1]))
 		env->arg2 = champ->reg[env->arg2];
