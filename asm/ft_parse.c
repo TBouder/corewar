@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 17:46:27 by quroulon          #+#    #+#             */
-/*   Updated: 2016/12/10 20:42:43 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/03 16:53:21 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void		ft_put_data(t_asm *env)
 	char	*hex_string;
 
 	ft_printf("%s\n", env->filename_new);
-	fd = open(env->filename_new, O_WRONLY, 0600);
+	fd = open(env->filename_new, O_WRONLY | O_TRUNC, 0600);
 	if (fd == -1)
 		fd = open(env->filename_new, O_CREAT | O_WRONLY, 0600);
 	env->fd_cor = fd;
