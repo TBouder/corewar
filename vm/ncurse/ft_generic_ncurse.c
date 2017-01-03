@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 16:20:23 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/03 15:53:35 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/03 16:45:42 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ void			ft_get_key(t_vm *env)
 		}
 		else if (key == '+' && env->usleep < 250000)
 			env->usleep += 1000;
-		else if (key == '-' && env->usleep > 1000)
+		else if (key == '-' && env->usleep > 0)
 			env->usleep -= 1000;
 		else if (key == 'n')
 			env->n_key = 1;
