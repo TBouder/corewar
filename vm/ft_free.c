@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/14 19:12:52 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/28 23:02:37 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/03 11:49:40 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,21 +37,52 @@ void			ft_clear_champ(t_list **blist, int id)
 			ft_del_champ((t_champions *)current->content);
 			free(current->content);
 			free(current);
-			current = *blist;
+			if (!(current = *blist))
+				break ;
 		}
-		if (!current)
-			break ;
 		prev = current;
 		current = current->next;
 	}
 }
 
+static void		ft_clear_all_champs(t_list **begin_list)
+{
+	t_list	*free_list;
+	t_list	*temp;
+
+	if (begin_list != NULL)
+	{
+		free_list = *begin_list;
+		while (free_list)
+		{
+			temp = free_list;
+			free_list = free_list->next;
+			temp->content_size = 0;
+			ft_del_champ((t_champions *)temp->content);
+			free(temp->content);
+			free(temp);
+		}
+		*begin_list = NULL;
+	}
+}
+
+
 void			ft_clear_all(t_vm *env)
 {
 	ft_dbstrdel(env->filename);
 	ft_strdel(&env->map);
+	free(env->map_owner);
+	free(env->map_moves);
+	free(env->map_moves_buff);
 	free(env->header);
 	free(env->fd);
+	free(env->fake_id);
+	ft_clear_all_champs(&env->list_champions);
+	free(env->list_champions);
+	ft_lstclr(&env->champs);
+
+	ft_strdel(&env->winner->name);
+	free(env->winner);
 }
 
 void			ft_error_vm(t_vm *env, char *msg, int clear)

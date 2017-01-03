@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/03 10:46:38 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/03 11:09:32 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,10 @@ void		ft_put_map_reg(t_vm *env, t_champions *champ, int i, int j)
 			(unsigned int)ft_mod((champ->pc - 1 + env->sum_idx + j), M), sub_reg);
 		i += 2;
 		j += 1;
+		ft_strdel(&sub_reg);
 	}
+	ft_strdel(&begin_reg);
+	ft_strdel(&reg);
 }
 
 /*

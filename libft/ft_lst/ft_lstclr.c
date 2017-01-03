@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstclr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Tbouder <Tbouder@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/22 12:09:59 by tbouder           #+#    #+#             */
-/*   Updated: 2016/02/04 16:42:46 by Tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/03 11:06:48 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 */
 
 #include "../libft.h"
-#include <stdlib.h>
 
 void		ft_lstclr(t_list **begin_list)
 {
