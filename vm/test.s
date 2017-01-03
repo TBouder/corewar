@@ -260,16 +260,16 @@
 	# add r3, r2, r4
 	# aff r4
 
-	#; TEST DE ST AVEC VALEUR NEGATIVE
-		# ld %4293984255, r2		#; fff0 ffff
-		# ld %286331153, r3		#; 1111 1111
-		# ld %2290649224, r4		#; 8888 8888
-		# ld %3722304989, r5		#; dddd dddd
-		# st r2, 32767
-		# st r3, 32768
-		# st r4, 32769
-		# st r5, -100			#; pareil que ~65436
-	#; FIN TEST
+	# ; TEST DE ST AVEC VALEUR NEGATIVE
+		ld %4293984255, r2		#; fff0 ffff
+	# 	ld %286331153, r3		#; 1111 1111
+	# 	ld %2290649224, r4		#; 8888 8888
+	# 	ld %3722304989, r5		#; dddd dddd
+	# 	st r2, 32767
+	# 	st r3, 32768
+	# 	st r4, 32769
+	# 	st r5, -100			#; pareil que ~65436
+	# ; FIN TEST
 
 
 	#; TEST DE FORK
