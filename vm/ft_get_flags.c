@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 12:00:35 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/27 12:27:49 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/03 14:10:01 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,15 @@ int				ft_get_flags(t_vm *env, char **av, t_options *options)
 		j = 1;
 		if (ft_isstrstr(av[i], "-dump") || ft_isstrstr(av[i], "-d"))
 			ft_extract_dump(env, av, options, &i);
-		else if (ft_isstrstr(av[i], "-n"))
+		else
+		if (ft_isstrstr(av[i], "-n"))
 			ft_extract_fakenb(env, av, options, &i);
 		else
 		{
 			while (av[i][j] != '\0' && ft_isalnum(av[i][j]))
 			{
 				value = av[i][j++];
-				options->flags[value] = TRUE;
+				value != 'd' ? options->flags[value] = TRUE : 0;
 			}
 		}
 		i++;

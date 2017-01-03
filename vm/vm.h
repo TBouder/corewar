@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/03 12:11:32 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/03 14:48:23 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ typedef struct		s_champions
 typedef struct		s_vm
 {
 	t_options		*options;
-	char			**champions;
 	t_list			*champs;
 	int				dump_cycle;
 	t_champions		*winner;

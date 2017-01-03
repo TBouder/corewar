@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 15:58:23 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/03 12:11:39 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/03 13:57:44 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,12 +99,7 @@ void	ft_fight(t_vm *env)
 	while (ft_enter_loop(env))
 	{
 		ft_foreach_champ(env);
-
-		// wprintw(env->notif, "env->nb_live[1] = %d\n", env->nb_live[1]);
-		// ft_reload_windows(env, 3);
-
 		ft_perfom_checks(env);
-
 		env->cycle++;
 		env->cpt_to_die++;
 		IS_GRAPH ? ft_get_key(env) : 0;
