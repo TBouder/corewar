@@ -50,6 +50,8 @@
 	# define LINES_INFO (2 * LINES / 3)
 	# define LINES_NOTIF (LINES / 3)
 
+	# define MAX (USHRT_MAX / 2) + 1
+
 	# define ERR_HEAD "{9}ERR{0} : The magic doesn't work with the header ..."
 	# define ERR_CONT "{9}ERR{0} : The magic doesn't work with the content ..."
 	# define ERR_BAD_SRC_FILE "{9}ERR{0} : Can't read source file"
