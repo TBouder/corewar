@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 19:42:02 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/03 15:28:19 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/04 10:54:59 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,15 @@ static void		ft_launcher(t_vm *env)
 	ft_set_lives(env, 1);
 	IS_GRAPH ? ft_init_ncurse(env) : 0;
 	ft_fight(env);
+}
+
+void			ft_success_vm(t_vm *env, int clear)
+{
+	if (clear == 1)
+		ft_clear_all(env);
+	free(env->options);
+	free(env->fake_id);
+	exit(1);
 }
 
 int				main(int ac, char **av)
