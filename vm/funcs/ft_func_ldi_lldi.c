@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/04 16:15:09 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/04 17:25:28 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,13 @@ static void	ft_extract_args(t_vm *env, int pc, int *nbr)
 static int	ft_edit_args(t_vm *env, t_champions *champ, int *nbr)
 {
 	if (IS_IND(nbr[0]))
-		env->arg1 = env->map[ft_mod(champ->pc - 1 + env->arg1, M)];
+		env->arg1 = env->map[ft_mod(ft_mod(champ->pc - 1 + env->arg1, I), M)];
 	else if (IS_REG(nbr[0]) && IS_IN_REG(env->arg1))
 		env->arg1 = champ->reg[env->arg1];
 	else
 		return (0);
 	if (IS_REG(nbr[1]) && IS_IN_REG(env->arg2))
 		env->arg2 = champ->reg[env->arg2];
-	else
-		return (0);
 	return (1);
 }
 
@@ -63,7 +61,7 @@ void		ft_corewar_ldi(t_vm *env, t_champions *champ, int *nbr)
 			return ;
 		env->sum_idx = env->arg1 + env->arg2;
 		champ->reg[env->arg3] = ft_byte_to_str(
-			&env->map[ft_mod(ft_mod(champ->pc - 1 + env->sum_idx, I), M)], 4);
+			&env->map[ft_mod(champ->pc - 1 + env->sum_idx, M)], 4);
 	}
 }
 
@@ -75,8 +73,16 @@ void		ft_corewar_lldi(t_vm *env, t_champions *champ, int *nbr)
 	if (IS_ALL(nbr[0]) && IS_DIR_REG(nbr[1]) && IS_REG(nbr[2]))
 	{
 		ft_extract_args(env, pc, nbr);
-		if (ft_edit_args(env, champ, nbr) == 0)
-			return ;
+
+		if (IS_IND(nbr[0]))
+			env->arg1 = env->map[ft_mod(champ->pc - 1 + env->arg1, M)];
+		else if (IS_REG(nbr[0]) && IS_IN_REG(env->arg1))
+			env->arg1 = champ->reg[env->arg1];
+		if (IS_REG(nbr[1]) && IS_IN_REG(env->arg2))
+			env->arg2 = champ->reg[env->arg2];
+
+		// if (ft_edit_args(env, champ, nbr) == 0)
+			// return ;
 		env->sum_idx = env->arg1 + env->arg2;
 		champ->reg[env->arg3] = ft_byte_to_str(
 			&env->map[ft_mod(champ->pc - 1 + env->sum_idx, M)], 4);
