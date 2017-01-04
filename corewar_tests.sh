@@ -6,7 +6,7 @@
 #    By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/05/17 19:19:25 by tbouder           #+#    #+#              #
-#    Updated: 2017/01/03 20:32:55 by tbouder          ###   ########.fr        #
+#    Updated: 2017/01/04 11:00:08 by tbouder          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,8 @@ ft_arg ()
 			offi="OK"
 		elif [ "$1" = "vm" ]; then
 			vm="OK"
+		elif [ "$1" = "champs" ]; then
+			champs="OK"
 		fi
 		shift
 	done
@@ -63,6 +65,7 @@ ft_arg $@
 
 ASM=./asm/asm
 COREWAR=./vm/corewar
+VMOFFI=./corewar-exemple/corewar
 if [ "$file" = "OK" ]; then
 	echo "\033[44m\033[1mFILE ERROR (empty, not valid, not file, not .s, dev/null, etc.)\033[0m"
 	echo "\033[41m\033[1m ---> ./asm\033[0m"							&& ft_leaks $ASM
@@ -184,7 +187,7 @@ if [ "$vm" = "OK" ]; then
 	echo "\n\033[41m\033[1m ---> ./corewar -g\033[0m" 				&& ft_leaks $COREWAR -g
 	echo "\n\033[41m\033[1m ---> ./corewar -v\033[0m" 				&& ft_leaks $COREWAR -v
 
-# ############################################################################ #
+	# ############################################################################ #
 
 	echo "\n\033[44m\033[1mVM TOO MANY CHAMPS\033[0m"
 	echo "\033[41m\033[1m ---> ./corewar 5 champs\033[0m"	&& ft_leaks $COREWAR valid.cor valid.cor valid.cor valid.cor valid.cor
@@ -192,7 +195,7 @@ if [ "$vm" = "OK" ]; then
 	echo "\033[41m\033[1m ---> ./corewar 7 champs\033[0m"	&& ft_leaks $COREWAR valid.cor valid.cor valid.cor valid.cor valid.cor valid.cor valid.cor
 	echo "\033[41m\033[1m ---> ./corewar 8 champs\033[0m"	&& ft_leaks $COREWAR valid.cor valid.cor valid.cor valid.cor valid.cor valid.cor valid.cor valid.cor
 
-# ############################################################################ #
+	# ############################################################################ #
 
 	echo "\n\033[44m\033[1mVM WITH -n\033[0m"
 	echo "\n\033[41m\033[1m ---> ./corewar -n valid.cor\033[0m"		&& ft_leaks $COREWAR -n valid.cor
@@ -212,7 +215,7 @@ if [ "$vm" = "OK" ]; then
 	echo "\n\033[41m\033[1m ---> ./corewar valid.cor -n 1 valid.cor\033[0m" \
 		&& ft_leaks $COREWAR valid.cor -n 1 valid.cor
 
-# ############################################################################ #
+		# ############################################################################ #
 
 	echo "\n\033[44m\033[1mVM WITH -d & -dump\033[0m"
 	echo "\n\033[41m\033[1m ---> ./corewar -d valid.cor\033[0m"					&& ft_leaks $COREWAR -d valid.cor
@@ -226,10 +229,25 @@ if [ "$vm" = "OK" ]; then
 	echo "\n\033[41m\033[1m ---> ./corewar -d 10 valid.cor -d valid.cor\033[0m"	&& ft_leaks $COREWAR -d 10 valid.cor -d valid.cor
 	echo "\n\033[41m\033[1m ---> ./corewar -d 10 valid.cor -d valid.cor\033[0m"	&& ft_leaks $COREWAR -d 10 valid.cor -d 2 valid.cor
 
-	# ./corewar -g -n 99 ../valid.cor -n 50 ../valid.cor -n 8 ../valid.cor -n 1 ../valid.cor OKAY a chaque fois
-# ############################################################################ #
+	#./corewar -g -n 99 ../valid.cor -n 50 ../valid.cor -n 8 ../valid.cor -n 1 ../valid.cor OKAY a chaque fois#
+fi
 
-
-	# echo "\n\033[41m\033[1m ---> ./corewar -n\033[0m" 		&& ft_leaks $COREWAR -n
-	# echo "\n\033[41m\033[1m ---> ./corewar -n\033[0m" 		&& ft_leaks $COREWAR -n
+if [ "$champs" = "OK" ]; then
+	i="0"
+	j="0"
+	# ############################################################################ #
+	tab=("champions/Backward.cor" "champions/Car.cor" "champions/Death.cor" "champions/Gagnant.cor" "champions/Octobre_Rouge_V4.2.cor" "champions/Survivor.cor" "champions/barriere.cor" "champions/ex.cor" "champions/ex2.cor" "champions/jumper.cor" "champions/lde.cor" "champions/leeloo.cor" "champions/mat.cor" "champions/maxidef.cor" "champions/mortel.cor" "champions/new.cor" "champions/octobre_rouge2.cor" "champions/slider2.cor" "champions/tdc2.cor" "champions/tdc3.cor" "champions/tdc4.cor" "champions/test.cor" "champions/toto.cor")
+	# ############################################################################ #
+	while [ $j -lt 23 ]; do
+		k="0"
+		while [ $k -lt 23 ]; do
+			# echo ".name \"VALID NAME\"\n.comment \"VALID CHAMPS\"\n4:\n $1 ${tab[$j]}, ${tab[$k]}" > asm/tests/args/$1/test_$1_$i.s
+			echo "\033[44m\033[1m${tab[$j]}\033[0m vs \033[45m\033[1m${tab[$k]}\033[0m"
+			# $VMOFFI ${tab[$j]} ${tab[$k]} | grep "has won"
+			$COREWAR -s ${tab[$j]} ${tab[$k]}
+			k=$[$k+1]
+			i=$[$i+1]
+		done
+		j=$[$j+1]
+	done
 fi
