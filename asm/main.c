@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 16:03:50 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/27 14:47:23 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/03 16:05:13 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ void	ft_print_on_success(t_asm env)
 	i = 0;
 	ft_printf("----------------------------------------------------\n");
 	ft_printf("{14}%-17s{0} : [{10}%s{0}]\n", "Champion Name", env.champ_name);
-	ft_printf("{14}%-17s{0} : [{10}%s{0}]\n", "Champion Comment", env.champ_comment);
+	ft_printf("{14}%-17s{0} : [{10}%s{0}]\n", "Champion Comment",
+		env.champ_comment);
 	ft_printf("{14}%-17s{0} : [{10}%d{0}]\n", "File Size", env.instruct_size);
 	ft_printf("{14}%-17s{0} : [{10}%x{0}]\n", "Hex Size", env.instruct_size);
 	ft_printf("----------------------------------------------------\n");

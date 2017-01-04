@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/03 10:46:13 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/03 15:58:53 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,8 @@ void		ft_corewar_ldi(t_vm *env, t_champions *champ, int *nbr)
 		if (IS_REG(nbr[1]))
 			env->arg2 = champ->reg[env->arg2];
 		env->sum_idx = env->arg1 + env->arg2;
-		// Relatif a IDX_MOD
-		champ->reg[env->arg3] =
-			ft_byte_to_str(&env->map[ft_mod(champ->pc - 1 + env->sum_idx, M)], 4);
+		champ->reg[env->arg3] = ft_byte_to_str(
+			&env->map[ft_mod(champ->pc - 1 + env->sum_idx, M)], 4);
 	}
 }
 
@@ -73,7 +72,7 @@ void		ft_corewar_lldi(t_vm *env, t_champions *champ, int *nbr)
 		if (IS_REG(nbr[1]))
 			env->arg2 = champ->reg[env->arg2];
 		env->sum_idx = env->arg1 + env->arg2;
-		champ->reg[env->arg3] =
-			ft_byte_to_str(&env->map[ft_mod(champ->pc - 1 + env->sum_idx, M)], 4);
+		champ->reg[env->arg3] = ft_byte_to_str(
+			&env->map[ft_mod(champ->pc - 1 + env->sum_idx, M)], 4);
 	}
 }

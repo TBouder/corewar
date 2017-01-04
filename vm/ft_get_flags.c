@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 12:00:35 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/03 14:10:01 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/03 20:04:52 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,24 @@ static void		ft_extract_dump(t_vm *env, char **av, t_options *flag, int *i)
 {
 	flag->flags['d'] = TRUE;
 	*i += 1;
-	if (ft_isstrnum(av[*i]))
+	if (av[*i] && ft_isstrnum(av[*i]))
 		env->dump_cycle = ft_atoi(av[*i]);
+	else if (!av[*i])
+		ft_error_vm(env, "{9}Err{0} : No arg after -d", 0);
 	else
-		*i -= 1;
+		ft_error_vm(env, "{9}Err{0} : Bad arg after -d", 0);
 }
 
 static void		ft_extract_fakenb(t_vm *env, char **av, t_options *flag, int *i)
 {
 	flag->flags['n'] = TRUE;
 	*i += 1;
-	if (ft_isstrnum(av[*i]))
+	if (av[*i] && ft_isstrnum(av[*i]))
 		env->fake_id[0] = ft_atoi(av[*i]);
+	else if (!av[*i])
+		ft_error_vm(env, "{9}Err{0} : No arg after -n", 0);
 	else
-		*i -= 1;
+		ft_error_vm(env, "{9}Err{0} : Bad arg after -n", 0);
 }
 
 int				ft_get_flags(t_vm *env, char **av, t_options *options)
@@ -54,8 +58,7 @@ int				ft_get_flags(t_vm *env, char **av, t_options *options)
 		j = 1;
 		if (ft_isstrstr(av[i], "-dump") || ft_isstrstr(av[i], "-d"))
 			ft_extract_dump(env, av, options, &i);
-		else
-		if (ft_isstrstr(av[i], "-n"))
+		else if (ft_isstrstr(av[i], "-n"))
 			ft_extract_fakenb(env, av, options, &i);
 		else
 		{

@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/03 11:51:07 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/03 15:59:12 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,11 @@ static int	ft_set_buffer(int nbr)
 	return (0);
 }
 
-void	ft_corewar_zjmp(t_vm *env, t_champions *champ, int *nbr)
+void		ft_corewar_zjmp(t_vm *env, t_champions *champ, int *nbr)
 {
 	int		pc;
 
 	pc = champ->pc + 1;
-
 	if (champ->carry == 1 && IS_DIR(nbr[0]))
 	{
 		env->buf = ft_set_buffer(nbr[0]);

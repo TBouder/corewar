@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 14:16:55 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/03 11:34:14 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/03 16:03:25 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ int		ft_byte_to_str(char *str, int len)
 	value = ft_strnew(len);
 	while (i < len)
 	{
-		value[i] = hex[(int)((unsigned char) str[y]) / 16];
-		value[i + 1] = hex[(int)((unsigned char) str[y]) % 16];
+		value[i] = hex[(int)((unsigned char)str[y]) / 16];
+		value[i + 1] = hex[(int)((unsigned char)str[y]) % 16];
 		i += 2;
 		y++;
 	}
@@ -92,11 +92,11 @@ int		ft_count_to_next(int *nbr, int op)
 	count = 0;
 	situ = 0;
 	if (op == 3 || op == 4 || op == 5 || op == 16)
-	 	situ = -42;
+		situ = -42;
 	else if ((op >= 9 && op <= 12) || op == 14 || op == 15)
-	 	situ = 2;
+		situ = 2;
 	else if (op == 1 || op == 2 || op == 6 || op == 7 || op == 8 || op == 13)
-	 	situ = 4;
+		situ = 4;
 	nbr[0] == 1 ? count += 1 : 0;
 	nbr[0] == 11 ? count += 2 : 0;
 	nbr[0] == 10 ? count += situ : 0;
