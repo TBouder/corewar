@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 14:16:55 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/30 23:02:22 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/04 10:41:46 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void			ft_corewar_live(t_vm *env, t_champions *champ, int *nbr)
 			wprintw(env->notif, " is alive\n");
 			ft_reload_windows(env, 3);
 		}
-		else
+		else if (!IS_SILENT)
 		{
 			ft_put("Champion {14}%d{0} ({14}%s{0}) is {10}alive{0}\n",
 			player_alive, ((t_champions *)list->content)->name);
@@ -74,7 +74,7 @@ void			ft_corewar_aff(t_vm *env, t_champions *champ, int *nbr)
 			champ->reg[value] % 256, champ->reg[value] % 256);
 			ft_reload_windows(env, 3);
 		}
-		else
+		else if (!IS_SILENT)
 		{
 			ft_put("Champion {14}%d{0} ({14}%s{0}) ask to print ",
 			champ->champ_id, champ->name);
