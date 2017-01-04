@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/03 15:54:41 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/04 10:27:03 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ typedef struct		s_vm
 	int				arg3;
 	int				buf;
 	int				sum_idx;
-	header_t		*header;
+	t_header		*header;
 	char			*map;
 	int				*map_owner;
 	int				*map_moves;
