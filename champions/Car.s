@@ -51,49 +51,29 @@ label09: ld    %0,r4              		# 7,171,110
 
 label03: ldi   r2,%:label12,r6    		# 6,181,100
 	 ld    %0,r4              		# 7,187,94
-<<<<<<< HEAD
 	 live  %4294967295                 		# 5,194,87
-=======
-	 live  %1                 		# 5,194,87
->>>>>>> tbouder
 
 label12: sti   r6,r2,r3           		# 5,199,82
 	 zjmp  %-277              		# 3,204,77
 
 label08: ldi   r2,%:label13,r6    		# 6,207,74
 	 ld    %0,r4              		# 7,213,68
-<<<<<<< HEAD
 	 live  %4294967295                 		# 5,220,61
-=======
-	 live  %1                 		# 5,220,61
->>>>>>> tbouder
 
 label13: sti   r6,r2,r3           		# 5,225,56
 	 zjmp  %395               		# 3,230,51
 
 label05: ldi   r2,%:label14,r6    		# 6,233,48
 	 ld    %0,r4              		# 7,239,42
-<<<<<<< HEAD
 	 live  %4294967295                 		# 5,246,35
-=======
-	 live  %1                 		# 5,246,35
->>>>>>> tbouder
 
 label14: sti   r6,r2,r3           		# 5,251,30
 	 zjmp  %-207              		# 3,256,25
 
-<<<<<<< HEAD
 label10: live  %4294967295                 		# 5,259,22
 	 fork  %:label10          		# 3,264,17
 	 zjmp  %:label10          		# 3,267,14
 
 label11: live  %4294967295                 		# 5,270,11
-=======
-label10: live  %1                 		# 5,259,22
-	 fork  %:label10          		# 3,264,17
-	 zjmp  %:label10          		# 3,267,14
-
-label11: live  %1                 		# 5,270,11
->>>>>>> tbouder
 	 fork  %:label11          		# 3,275,6
 	 zjmp  %:label11          		# 3,278,3
