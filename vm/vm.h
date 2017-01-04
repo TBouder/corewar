@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/04 10:55:11 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/04 13:40:09 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,5 +172,6 @@ void				ft_set_lives(t_vm *env, int val);
 void				ft_reset_lives(t_vm *env, int val);
 int					ft_set_buffer_and_or_xor(int nbr);
 int					ft_mod(int nbr, int mod);
+int					ft_get_file_size(int fd);
 
 #endif

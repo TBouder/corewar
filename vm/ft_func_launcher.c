@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 23:27:37 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/03 16:01:50 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/04 14:27:12 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,9 @@ static char	*ft_instruct_name(int op)
 
 static void	ft_call_func(t_vm *env, t_champions *champ, int *nbr, int op)
 {
+	env->arg1 = 0;
+	env->arg2 = 0;
+	env->arg3 = 0;
 	op == LIVE ? ft_corewar_live(env, champ, nbr) : 0;
 	op == LD ? ft_corewar_ld(env, champ, nbr) : 0;
 	op == ST ? ft_corewar_st(env, champ, nbr) : 0;

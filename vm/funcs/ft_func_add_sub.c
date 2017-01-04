@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/03 16:00:34 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/04 14:35:24 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,18 @@ static int	ft_set_buffer(int nbr)
 	return (0);
 }
 
+static void	ft_extract_args(t_vm *env, int pc, int *nbr)
+{
+	env->buf = ft_set_buffer(nbr[0]);
+	env->arg1 = ft_byte_to_str(&env->map[pc], env->buf);
+	pc += env->buf;
+	env->buf = ft_set_buffer(nbr[1]);
+	env->arg2 = ft_byte_to_str(&env->map[pc], env->buf);
+	pc += env->buf;
+	env->buf = ft_set_buffer(nbr[2]);
+	env->arg3 = ft_byte_to_str(&env->map[pc], env->buf);
+}
+
 void		ft_corewar_add(t_vm *env, t_champions *champ, int *nbr)
 {
 	int			pc;
@@ -30,16 +42,14 @@ void		ft_corewar_add(t_vm *env, t_champions *champ, int *nbr)
 	pc = champ->pc + 1;
 	if (IS_REG(nbr[0]) && IS_REG(nbr[1]) && IS_REG(nbr[2]))
 	{
-		env->buf = ft_set_buffer(nbr[0]);
-		env->arg1 = ft_byte_to_str(&env->map[pc], env->buf);
-		pc += env->buf;
-		env->buf = ft_set_buffer(nbr[1]);
-		env->arg2 = ft_byte_to_str(&env->map[pc], env->buf);
-		pc += env->buf;
-		env->buf = ft_set_buffer(nbr[2]);
-		env->arg3 = ft_byte_to_str(&env->map[pc], env->buf);
-		champ->reg[env->arg3] = (champ->reg[env->arg1] + champ->reg[env->arg2]);
-		champ->carry = (champ->reg[env->arg3] == 0) ? 1 : 0;
+		ft_extract_args(env, pc, nbr);
+		if (IS_IN_REG(env->arg1) && IS_IN_REG(env->arg2)
+			&& IS_IN_REG(env->arg3))
+		{
+			champ->reg[env->arg3] = champ->reg[env->arg1]
+				+ champ->reg[env->arg2];
+			champ->carry = (champ->reg[env->arg3] == 0) ? 1 : 0;
+		}
 	}
 }
 
@@ -50,15 +60,13 @@ void		ft_corewar_sub(t_vm *env, t_champions *champ, int *nbr)
 	pc = champ->pc + 1;
 	if (IS_REG(nbr[0]) && IS_REG(nbr[1]) && IS_REG(nbr[2]))
 	{
-		env->buf = ft_set_buffer(nbr[0]);
-		env->arg1 = ft_byte_to_str(&env->map[pc], env->buf);
-		pc += env->buf;
-		env->buf = ft_set_buffer(nbr[1]);
-		env->arg2 = ft_byte_to_str(&env->map[pc], env->buf);
-		pc += env->buf;
-		env->buf = ft_set_buffer(nbr[2]);
-		env->arg3 = ft_byte_to_str(&env->map[pc], env->buf);
-		champ->reg[env->arg3] = (champ->reg[env->arg1] - champ->reg[env->arg2]);
-		champ->carry = (champ->reg[env->arg3] == 0) ? 1 : 0;
+		ft_extract_args(env, pc, nbr);
+		if (IS_IN_REG(env->arg1) && IS_IN_REG(env->arg2)
+			&& IS_IN_REG(env->arg3))
+		{
+			champ->reg[env->arg3] = champ->reg[env->arg1]
+				- champ->reg[env->arg2];
+			champ->carry = (champ->reg[env->arg3] == 0) ? 1 : 0;
+		}
 	}
 }
