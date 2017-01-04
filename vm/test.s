@@ -261,7 +261,10 @@
 	# aff r4
 
 	; TEST DE LDI POUR IDX_MOD
-		ld %1, r2
+		ld %16707, r2
+
+		ld -5, r2
+		aff r2
 		# ldi r2, %-65535, r2		#; fff0 ffff
 		# ldi r2, %65539, r2		#; fff0 ffff
 		# ldi r2, %985, r2		#; fff0 ffff
@@ -271,23 +274,23 @@
 		# ldi r2, %2290649224, r6		#; 8888 8888
 		# ldi r2, %3722304989, r7		#; dddd dddd
 
-		lldi r2, %250, r3		#; ffff fff0
-		lldi r2, %-250, r4		#; fff0 ffff
-		lldi r2, %511, r5		#; 1111 1111
-		lldi r2, %512, r6		#; 8888 8888
-		lldi r2, %513, r7		#; dddd dddd
+		# lldi r2, %250, r3		#; ffff fff0
+		# lldi r2, %-250, r4		#; fff0 ffff
+		# lldi r2, %511, r5		#; 1111 1111
+		# lldi r2, %512, r6		#; 8888 8888
+		# lldi r2, %513, r7		#; dddd dddd
 
-		st r3, 120
-		st r4, 140
-		st r5, 160
-		st r6, 180
-		st r7, 200
+		# st r3, 120
+		# st r4, 140
+		# st r5, 160
+		# st r6, 180
+		# st r7, 200
 
-		aff r3
-		aff r4
-		aff r5
-		aff r6
-		aff r7
+		# aff r3
+		# aff r4
+		# aff r5
+		# aff r6
+		# aff r7
 	; FIN TEST
 
 	# ; TEST DE ST AVEC VALEUR NEGATIVE

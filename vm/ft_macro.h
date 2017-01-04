@@ -13,13 +13,13 @@
 #ifndef FT_MACRO_H
 # define FT_MACRO_H
 
-# define IS_REG(x) x == 1 ? 1 : 0
-# define IS_DIR(x) x == 10 ? 1 : 0
-# define IS_IND(x) x == 11 ? 1 : 0
-# define IS_DIR_REG(x) x == 11 || x == 1 ? 1 : 0
-# define IS_DIR_IND(x) x == 11 || x == 10 ? 1 : 0
-# define IS_IND_REG(x) x == 10 || x == 1 ? 1 : 0
-# define IS_ALL(x) x == 11 || x == 10 || x == 1 ? 1 : 0
+# define IS_REG(x) (x == 1 ? 1 : 0)
+# define IS_DIR(x) (x == 10 ? 1 : 0)
+# define IS_IND(x) (x == 11 ? 1 : 0)
+# define IS_DIR_REG(x) ((x == 11 || x == 1) ? 1 : 0)
+# define IS_DIR_IND(x) ((x == 11 || x == 10) ? 1 : 0)
+# define IS_IND_REG(x) ((x == 10 || x == 1) ? 1 : 0)
+# define IS_ALL(x) ((x == 11 || x == 10 || x == 1) ? 1 : 0)
 
 # define IS_GRAPH env->options->flags['g']
 # define IS_DUMP env->options->flags['d']
