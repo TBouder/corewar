@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 20:32:37 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/03 13:42:35 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/04 15:45:25 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,26 @@ static t_champions	*ft_get_ncurse_color_champ(t_vm *env, int *col)
 		list = list->next;
 	}
 	return (NULL);
+}
+
+static void			ft_get_ncurse_color_helper_helper(t_vm *env, int *col, int on)
+{
+	t_list		*list;
+	t_champions	*champ;
+
+	list = env->list_champions;
+	while (list)
+	{
+		champ = (t_champions *)list->content;
+		if (champ && champ->pc == *col)
+		{
+			if (on)
+				wattron(env->main, COLOR_PAIR(champ->color + 10) | A_BOLD);
+			else
+				wattroff(env->main, COLOR_PAIR(champ->color + 10) | A_BOLD);
+		}
+		list = list->next;
+	}
 }
 
 static void			ft_get_ncurse_color_helper(t_vm *env, int *col, int on)
@@ -78,6 +98,7 @@ static void			ft_get_ncurse_color(t_vm *env, int *col, int on)
 				wattroff(env->main, COLOR_PAIR(env->map_owner[*col]) | A_BOLD);
 		}
 	}
+	ft_get_ncurse_color_helper_helper(env, col, on);
 }
 
 static void			ft_print_hex_mem_ncurse(t_vm *env, char *add, size_t size,

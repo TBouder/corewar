@@ -6,7 +6,7 @@
 /*   By: zaz <zaz@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2017/01/04 14:20:13 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/04 15:07:57 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # define IS_IND_REG(x) x == 10 || x == 1 ? 1 : 0
 # define IS_ALL(x) x == 11 || x == 10 || x == 1 ? 1 : 0
 # define IS_IN_REG(x) x >= 0 && x <= 99 ? 1 : 0
+# define IS_NOT_IN_REG(x) x < 0 || x > 99 ? 1 : 0
 
 # define IS_GRAPH env->options->flags['g']
 # define IS_DUMP env->options->flags['d']
