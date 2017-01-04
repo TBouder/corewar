@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/04 13:40:09 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/04 20:06:17 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ typedef struct		s_vm
 	char			*map;
 	int				*map_owner;
 	int				*map_moves;
-	int				*map_moves_buff;
 	long			current_id;
 	int				*fake_id;
 	WINDOW			*main_border;

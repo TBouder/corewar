@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 17:48:28 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/04 10:25:06 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/04 20:06:10 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ static void		ft_init_env_helper(t_vm *env, int part)
 	env->map = ft_strnew(MEM_SIZE);
 	env->map_owner = ft_nbrnew(MEM_SIZE);
 	env->map_moves = ft_nbrnew(MEM_SIZE);
-	env->map_moves_buff = ft_nbrnew(MEM_SIZE);
 	env->winner = (t_champions *)malloc(sizeof(t_champions));
 	env->winner->name = NULL;
 	env->winner->champ_id = 0;

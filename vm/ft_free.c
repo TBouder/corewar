@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/14 19:12:52 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/03 15:51:19 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/04 20:06:06 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ void			ft_clear_all(t_vm *env)
 	ft_strdel(&env->map);
 	free(env->map_owner);
 	free(env->map_moves);
-	free(env->map_moves_buff);
 	free(env->header);
 	free(env->fd);
 	ft_clear_all_champs(&env->list_champions);

@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/04 17:42:59 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/04 20:06:11 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void		ft_color_map(t_vm *env, t_champions *champ, unsigned int pc,
 	env->map[pc] = ft_atoi_base(sub_reg, 16);
 	env->map_owner[pc] = champ->color;
 	env->map_moves[pc] = champ->color;
-	env->map_moves_buff[pc] = 50;
 }
 
 void		ft_put_map_reg(t_vm *env, t_champions *champ, int i, int j)
