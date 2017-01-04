@@ -29,7 +29,7 @@ void		ft_color_map(t_vm *env, t_champions *champ, unsigned int pc,
 	env->map[pc] = ft_atoi_base(sub_reg, 16);
 	env->map_owner[pc] = champ->color;
 	env->map_moves[pc] = champ->color;
-	env->map_moves_buff[pc] = 50;
+	// env->map_moves_buff[pc] = 50;
 }
 
 void		ft_put_map_reg(t_vm *env, t_champions *champ, int i, int j)
@@ -81,7 +81,7 @@ void		ft_corewar_st(t_vm *env, t_champions *champ, int *nbr)
 			champ->reg[env->arg2] = champ->reg[env->arg1];
 		else if (IS_IND(nbr[1]))
 		{
-			if (env->arg2 > 32768)
+			if (env->arg2 > MAX)
 				env->sum_idx = (env->arg2 % I) - I;
 			else
 				env->sum_idx = env->arg2 % I;
