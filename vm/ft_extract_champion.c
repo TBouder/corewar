@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 17:46:14 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/30 20:48:14 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/04 10:24:59 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ static void		ft_extract_header_lst(t_vm *env, int i, t_list *champion)
 	int		read_success;
 	char	*hex;
 
-	read_success = read(env->fd[i], &env->header[i], sizeof(header_t));
+	read_success = read(env->fd[i], &env->header[i], sizeof(t_header));
 	if (read_success)
 	{
 		CHAMPIONS->name = ft_strinit(env->header[i].prog_name);

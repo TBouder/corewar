@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/03 14:48:23 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/04 10:27:03 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ typedef struct		s_vm
 	int				arg3;
 	int				buf;
 	int				sum_idx;
-	header_t		*header;
+	t_header		*header;
 	char			*map;
 	int				*map_owner;
 	int				*map_moves;
@@ -79,94 +79,97 @@ typedef struct		s_vm
 	int				n_key;
 }					t_vm;
 
-void			ft_extract_champion(t_vm *env);
-void			ft_fight(t_vm *env);
+void				ft_extract_champion(t_vm *env);
+void				ft_fight(t_vm *env);
 
 /*
 ** FLAGS
 */
-int				ft_get_flags(t_vm *env, char **av, t_options *options);
+int					ft_get_flags(t_vm *env, char **av, t_options *options);
 
 /*
 ** FUNCS
 */
-int				*ft_send_args(char *bin);
-int				*ft_get_size(t_vm *env, t_champions *champ);
-int				ft_count_to_next(int *nbr, int op);
-int				ft_byte_to_str(char *str, int len);
-int				ft_get_args(t_vm *env, t_champions *champ, int op);
-void			ft_corewar_live(t_vm *env, t_champions *champ, int *nbr);
-void			ft_corewar_aff(t_vm *env, t_champions *champ, int *nbr);
-void			ft_corewar_st(t_vm *env, t_champions *champ, int *nbr);
-void			ft_corewar_sti(t_vm *env, t_champions *champ, int *nbr);
-void			ft_corewar_ld(t_vm *env, t_champions *champ, int *nbr);
-void			ft_corewar_lld(t_vm *env, t_champions *champ, int *nbr);
-void			ft_corewar_ldi(t_vm *env, t_champions *champ, int *nbr);
-void			ft_corewar_lldi(t_vm *env, t_champions *champ, int *nbr);
-void			ft_corewar_zjmp(t_vm *env, t_champions *champ, int *nbr);
-void			ft_corewar_fork(t_vm *env, t_champions *champ, int *nbr);
-void			ft_corewar_lfork(t_vm *env, t_champions *champ, int *nbr);
-void			ft_corewar_add(t_vm *env, t_champions *champ, int *nbr);
-void			ft_corewar_sub(t_vm *env, t_champions *champ, int *nbr);
-void			ft_corewar_and(t_vm *env, t_champions *champ, int *nbr);
-void			ft_corewar_or(t_vm *env, t_champions *champ, int *nbr);
-void			ft_corewar_xor(t_vm *env, t_champions *champ, int *nbr);
+int					*ft_send_args(char *bin);
+int					*ft_get_size(t_vm *env, t_champions *champ);
+int					ft_count_to_next(int *nbr, int op);
+int					ft_byte_to_str(char *str, int len);
+int					ft_get_args(t_vm *env, t_champions *champ, int op);
+void				ft_corewar_live(t_vm *env, t_champions *champ, int *nbr);
+void				ft_corewar_aff(t_vm *env, t_champions *champ, int *nbr);
+void				ft_corewar_st(t_vm *env, t_champions *champ, int *nbr);
+void				ft_corewar_sti(t_vm *env, t_champions *champ, int *nbr);
+void				ft_corewar_ld(t_vm *env, t_champions *champ, int *nbr);
+void				ft_corewar_lld(t_vm *env, t_champions *champ, int *nbr);
+void				ft_corewar_ldi(t_vm *env, t_champions *champ, int *nbr);
+void				ft_corewar_lldi(t_vm *env, t_champions *champ, int *nbr);
+void				ft_corewar_zjmp(t_vm *env, t_champions *champ, int *nbr);
+void				ft_corewar_fork(t_vm *env, t_champions *champ, int *nbr);
+void				ft_corewar_lfork(t_vm *env, t_champions *champ, int *nbr);
+void				ft_corewar_add(t_vm *env, t_champions *champ, int *nbr);
+void				ft_corewar_sub(t_vm *env, t_champions *champ, int *nbr);
+void				ft_corewar_and(t_vm *env, t_champions *champ, int *nbr);
+void				ft_corewar_or(t_vm *env, t_champions *champ, int *nbr);
+void				ft_corewar_xor(t_vm *env, t_champions *champ, int *nbr);
 
 /*
 ** NCURSE
 */
-void			ft_init_ncurse(t_vm *env);
-void			ft_clear_ncurse(t_vm *env);
-void			ft_get_key(t_vm *env);
-void			ft_print_champion_color(t_champions *champion, WINDOW *win);
-void			ft_print_infos(t_vm *env);
-void			ft_print_champions_infos(t_vm *env);
-void			ft_reload_windows(t_vm *env, int part);
+void				ft_init_ncurse(t_vm *env);
+void				ft_clear_ncurse(t_vm *env);
+void				ft_get_key(t_vm *env);
+void				ft_print_champion_color(t_champions *champion, WINDOW *win);
+void				ft_print_infos(t_vm *env);
+void				ft_print_champions_infos(t_vm *env);
+void				ft_reload_windows(t_vm *env, int part);
 
 /*
 ** DUMP
 */
-void			ft_dump(const void *addr, size_t size);
-void			ft_dump_ncurse(t_vm *env, const void *addr, size_t size);
+void				ft_dump(const void *addr, size_t size);
+void				ft_dump_ncurse(t_vm *env, const void *addr, size_t size);
 
 /*
 ** INIT
 */
-void			ft_init_env(t_vm *env, int part);
-void			ft_init_reg(t_champions *new_champ, t_champions *champ);
-void			ft_init_fake_id(t_vm *env);
-void			ft_init_champ(t_vm *env, t_champions *champ, int id, int pc);
+void				ft_init_env(t_vm *env, int part);
+void				ft_init_reg(t_champions *new_champ, t_champions *champ);
+void				ft_init_fake_id(t_vm *env);
+void				ft_init_champ(t_vm *env, t_champions *champ, int id,
+					int pc);
 
 /*
 ** FREE
 */
-void			ft_clear_champ(t_list **blist, int id);
-void			ft_clear_all(t_vm *env);
-void			ft_error_vm(t_vm *env, char *msg, int clear);
+void				ft_clear_champ(t_list **blist, int id);
+void				ft_clear_all(t_vm *env);
+void				ft_error_vm(t_vm *env, char *msg, int clear);
 
 /*
 ** VERIF
 */
-void			ft_verif_extension(t_vm *env, t_list *champs);
-void			ft_verif_fake_id(t_vm *env);
-int				ft_verif_one_alive(t_vm *env);
-int				ft_verif_alives(t_vm *env);
+void				ft_verif_extension(t_vm *env, t_list *champs);
+void				ft_verif_fake_id(t_vm *env);
+int					ft_verif_one_alive(t_vm *env);
+int					ft_verif_alives(t_vm *env);
 
 /*
 ** VERBOSE
 */
-void			ft_verbose_fork(t_vm *env, t_champions *champ, t_champions *c);
-void			ft_verbose_champ_info(t_vm *env, t_champions *champ, int part);
-void			ft_verbose_dead(t_vm *env, t_champions *champ);
-void			ft_verbose_winner(t_vm *env);
+void				ft_verbose_fork(t_vm *env, t_champions *champ,
+					t_champions *c);
+void				ft_verbose_champ_info(t_vm *env, t_champions *champ,
+					int part);
+void				ft_verbose_dead(t_vm *env, t_champions *champ);
+void				ft_verbose_winner(t_vm *env);
 
 /*
 ** TOOLS
 */
-int				ft_ret_cycle(int op);
-void			ft_set_lives(t_vm *env, int val);
-void			ft_reset_lives(t_vm *env, int val);
-int				ft_set_buffer_and_or_xor(int nbr);
-int				ft_mod(int nbr, int mod);
+int					ft_ret_cycle(int op);
+void				ft_set_lives(t_vm *env, int val);
+void				ft_reset_lives(t_vm *env, int val);
+int					ft_set_buffer_and_or_xor(int nbr);
+int					ft_mod(int nbr, int mod);
 
 #endif

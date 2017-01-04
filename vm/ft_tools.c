@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/21 12:27:24 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/03 12:11:23 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/03 16:01:40 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 ** The ft_ret_cycle() function takes an opcode as paramater and according to it,
 ** returns the number of cycle to perform before calling the next instruction
 */
+
 int		ft_ret_cycle(int op)
 {
 	if (op == AFF)

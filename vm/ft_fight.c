@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 15:58:23 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/03 13:57:44 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/03 15:52:35 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 ** The ft_fight_init_graph() function initialises the three boxes with Ncurse if
 ** the graphic mode is enable.
 */
+
 static void		ft_fight_init_graph(t_vm *env)
 {
 	ft_reload_windows(env, 1);
@@ -27,6 +28,7 @@ static void		ft_fight_init_graph(t_vm *env)
 ** The ft_foreach_champ() function performs all the instructions for each
 ** champions.
 */
+
 static void		ft_foreach_champ(t_vm *env)
 {
 	t_champions *champ;
@@ -54,6 +56,7 @@ static void		ft_foreach_champ(t_vm *env)
 ** The ft_perfom_checks() function performs all the checks related to the cycle
 ** and to kill a champion, reduce the cycle to die etc.
 */
+
 static void		ft_perfom_checks(t_vm *env)
 {
 	if (env->cpt_to_die == env->cycle_to_die)
@@ -82,6 +85,7 @@ static void		ft_perfom_checks(t_vm *env)
 ** The ft_enter_loop() function determines is we can continue the main loop or
 ** not !
 */
+
 static int		ft_enter_loop(t_vm *env)
 {
 	return (ft_verif_one_alive(env)
@@ -93,7 +97,8 @@ static int		ft_enter_loop(t_vm *env)
 ** The ft_fight() function is the main part of the vm. It will performs all the
 ** instructions until all champions die.
 */
-void	ft_fight(t_vm *env)
+
+void			ft_fight(t_vm *env)
 {
 	IS_GRAPH ? ft_fight_init_graph(env) : 0;
 	while (ft_enter_loop(env))

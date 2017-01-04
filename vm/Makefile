@@ -6,7 +6,7 @@
 #    By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/10/05 20:24:05 by tbouder           #+#    #+#              #
-#    Updated: 2016/12/30 20:33:50 by tbouder          ###   ########.fr        #
+#    Updated: 2017/01/03 16:27:26 by tbouder          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,7 +66,7 @@ $(NAME): $(OBJ)
 
 clean:
 	# $(MAKE) clean -C ../libft
-	rm -f $(OBJ)
+	rm -f $(notdir $(OBJ)) $(OBJ)
 
 fclean: clean
 	# $(MAKE) fclean -C ../libft

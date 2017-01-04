@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 17:48:28 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/03 13:50:29 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/04 10:25:06 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ static void		ft_init_lst_champions(t_vm *env)
 	env->list_champions = NULL;
 	while (i < env->nb_champ)
 		ft_init_champ(env, NULL, i++, 0);
-
 }
 
 static void		ft_init_env_helper(t_vm *env, int part)
@@ -29,7 +28,7 @@ static void		ft_init_env_helper(t_vm *env, int part)
 	ft_verif_fake_id(env);
 	env->fd = ft_nbrnew(part);
 	env->filename = ft_dbstrnew(part);
-	env->header = (header_t *)malloc(sizeof(header_t) * part);
+	env->header = (t_header *)malloc(sizeof(t_header) * part);
 	ft_init_lst_champions(env);
 	env->total_size = 0;
 	env->map = ft_strnew(MEM_SIZE);

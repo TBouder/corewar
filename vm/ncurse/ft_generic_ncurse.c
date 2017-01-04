@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 16:20:23 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/30 20:40:37 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/03 16:45:42 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,14 @@ void			ft_init_ncurse(t_vm *env)
 
 void			ft_clear_ncurse(t_vm *env)
 {
+	clear();
+	delwin(env->main);
+	delwin(env->info);
+	delwin(env->notif);
+	delwin(env->main_border);
+	delwin(env->info_border);
+	delwin(env->notif_border);
 	endwin();
-	free(env->main);
-	free(env->info);
-	free(env->notif);
-	free(env->main_border);
-	free(env->info_border);
-	free(env->notif_border);
 }
 
 static void		ft_key_pause(t_vm *env)
@@ -86,7 +87,7 @@ static void		ft_key_pause(t_vm *env)
 		}
 		else if (key == 'q')
 		{
-			ft_clear_ncurse(env);
+			ft_error_vm(env, "ASK TO LEAV PROG", 1);
 			exit(0);
 		}
 		else if (key == '+' || key == '-')
@@ -109,12 +110,12 @@ void			ft_get_key(t_vm *env)
 			ft_key_pause(env);
 		else if (key == 'q')
 		{
-			ft_clear_ncurse(env);
+			ft_error_vm(env, "ASK TO LEAV PROG", 1);
 			exit(0);
 		}
 		else if (key == '+' && env->usleep < 250000)
 			env->usleep += 1000;
-		else if (key == '-' && env->usleep > 1000)
+		else if (key == '-' && env->usleep > 0)
 			env->usleep -= 1000;
 		else if (key == 'n')
 			env->n_key = 1;

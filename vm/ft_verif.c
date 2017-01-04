@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 13:56:19 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/03 14:13:32 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/03 16:01:10 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 /*
 ** The ft_verif_extension() function checks if the file extension is .cor
 */
+
 void	ft_verif_extension(t_vm *env, t_list *champs)
 {
 	char	*extension;
@@ -48,6 +49,7 @@ void	ft_verif_extension(t_vm *env, t_list *champs)
 ** The ft_verif_fake_id() function checks all IDs and check if there is two time
 ** the same one (error)
 */
+
 void	ft_verif_fake_id(t_vm *env)
 {
 	int		i;
@@ -70,8 +72,10 @@ void	ft_verif_fake_id(t_vm *env)
 }
 
 /*
-** The ft_verif_one_alive() function checks if there is at least one champion alive
+** The ft_verif_one_alive() function checks if there is at least one
+** champion is alive
 */
+
 int		ft_verif_one_alive(t_vm *env)
 {
 	int		i;
@@ -80,11 +84,7 @@ int		ft_verif_one_alive(t_vm *env)
 	while (i <= env->nb_champ)
 	{
 		if (env->nb_live[i] >= 0)
-		{
-			// wprintw(env->notif, "ONE ALIVE : i = %d\n", env->nb_live[i]);
-			// ft_reload_windows(env, 3);
 			return (1);
-		}
 		i++;
 	}
 	return (0);
@@ -94,6 +94,7 @@ int		ft_verif_one_alive(t_vm *env)
 ** The ft_verif_alives() function checks, for each champion, if it is alive or
 ** not and remove it if not.
 */
+
 int		ft_verif_alives(t_vm *env)
 {
 	int		i;

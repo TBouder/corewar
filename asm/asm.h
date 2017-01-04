@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/02 18:59:53 by quroulon         ###   ########.fr       */
+/*   Updated: 2017/01/03 16:10:22 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ void					ft_get_file_content(t_asm *env);
 void					ft_get_size(t_asm *env, int i);
 int						ft_get_opcode(char *opname);
 int						ft_get_weight(t_asm *env, int value, int ret, int pos);
+void					ft_get_opweight(t_asm *env, int opcode);
 
 /*
 ** parse.c
