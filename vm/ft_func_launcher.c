@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 23:27:37 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/04 14:27:12 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/04 15:50:44 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,5 +117,5 @@ int			ft_get_args(t_vm *env, t_champions *champ, int op)
 	}
 	champ->pc += 1;
 	champ->pc = ft_mod(champ->pc, M);
-	return (2);
+	return (ft_ret_cycle((int)env->map[champ->pc]));
 }

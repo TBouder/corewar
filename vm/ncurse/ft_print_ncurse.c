@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/21 09:26:13 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/30 20:40:55 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/04 15:18:22 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,11 @@ void			ft_print_champions_infos(t_vm *env)
 				wprintw(env->info, ": \n");
 				wprintw(env->info, "\tLives : %d\n",
 					env->nb_live[((t_champions *)list->content)->champ_id]);
+				wprintw(env->info, "\tPC : %d\n",
+					((t_champions *)list->content)->pc);
+				wprintw(env->info, "\tNEXT CYCLE : %d\n",
+					((t_champions *)list->content)->next_cycle);
+
 			}
 		}
 		list = list->next;
