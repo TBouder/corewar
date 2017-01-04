@@ -6,7 +6,7 @@
 /*   By: zaz <zaz@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2017/01/03 15:53:18 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/04 10:40:18 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # define IS_GRAPH env->options->flags['g']
 # define IS_DUMP env->options->flags['d']
 # define IS_VERBOSE env->options->flags['v']
+# define IS_SILENT env->options->flags['s']
 
 # define LIVE 1
 # define LD 2
