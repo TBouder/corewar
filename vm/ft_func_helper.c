@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 14:16:55 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/03 16:03:25 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/04 14:01:14 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int		ft_byte_to_str(char *str, int len)
 	res = ft_atoi_base(value, 16);
 	ft_strdel(&value);
 	ft_strdel(&hex);
+	free(hex);
 	return (res);
 }
 

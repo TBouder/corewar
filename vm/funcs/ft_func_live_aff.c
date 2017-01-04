@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 14:16:55 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/04 10:41:46 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/04 14:41:37 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,14 @@ void			ft_corewar_aff(t_vm *env, t_champions *champ, int *nbr)
 	if (IS_REG(nbr[0]))
 	{
 		value = ft_byte_to_str(&env->map[champ->pc + 1], 1);
-		if (IS_GRAPH)
+		if (IS_GRAPH && IS_IN_REG(champ->reg[value]))
 		{
 			ft_print_champion_color(champ, env->notif);
 			wprintw(env->notif, " ask to print r%d : [%C] [0x%x]\n", value,
 			champ->reg[value] % 256, champ->reg[value] % 256);
 			ft_reload_windows(env, 3);
 		}
-		else if (!IS_SILENT)
+		else if (!IS_SILENT && IS_IN_REG(champ->reg[value]))
 		{
 			ft_put("Champion {14}%d{0} ({14}%s{0}) ask to print ",
 			champ->champ_id, champ->name);

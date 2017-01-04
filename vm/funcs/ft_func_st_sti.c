@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/03 15:58:29 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/04 14:20:48 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ void		ft_put_map_reg(t_vm *env, t_champions *champ, int i, int j)
 	char			*sub_reg;
 	int				len;
 
+	if (IS_IN_REG(env->arg1) == 0)
+		return ;
 	reg = ft_strinit("00000000");
 	begin_reg = ft_itox((unsigned int)champ->reg[env->arg1]);
 	len = ft_printf("%!x", (unsigned int)champ->reg[env->arg1]);
@@ -77,7 +79,7 @@ void		ft_corewar_st(t_vm *env, t_champions *champ, int *nbr)
 		pc += env->buf;
 		env->buf = ft_set_buffer(nbr[1]);
 		env->arg2 = ft_byte_to_str(&env->map[pc], env->buf);
-		if (IS_REG(nbr[1]))
+		if (IS_REG(nbr[1]) && IS_IN_REG(env->arg2) && IS_IN_REG(env->arg1))
 			champ->reg[env->arg2] = champ->reg[env->arg1];
 		else if (IS_IND(nbr[1]))
 		{
@@ -113,9 +115,9 @@ void		ft_corewar_sti(t_vm *env, t_champions *champ, int *nbr)
 			env->arg2 = env->map[ft_mod(champ->pc + ((env->arg2 % I) - I), M)];
 		else if (IS_IND(nbr[1]))
 			env->arg2 = env->map[ft_mod(champ->pc + (env->arg2 % I), M)];
-		else if (IS_REG(nbr[1]))
+		else if (IS_REG(nbr[1]) && IS_IN_REG(env->arg2))
 			env->arg2 = champ->reg[env->arg2];
-		if (IS_REG(nbr[2]))
+		if (IS_REG(nbr[2]) && IS_IN_REG(env->arg3))
 			env->arg3 = champ->reg[env->arg3];
 		env->sum_idx = env->arg2 + env->arg3;
 		ft_put_map_reg(env, champ, 0, 0);
