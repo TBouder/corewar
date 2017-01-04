@@ -17,11 +17,19 @@ static void		ft_write_args_helper(t_asm *env, char *arg, int pds, int tmp)
 	if (pds == 2)
 	{
 		tmp = ft_atoi(&arg[1]);
+		if ((unsigned long)tmp > USHRT_MAX)
+			tmp = tmp & USHRT_MAX;
+		if ((unsigned long)tmp > USHRT_MAX)
+			tmp %= USHRT_MAX;
 		tmp < 0 ? tmp = (USHRT_MAX + 1) + tmp : 0;
 	}
 	else if (pds == 4)
 	{
 		tmp = ft_atoi_l(&arg[1]);
+		if ((unsigned long)tmp > UINT_MAX)
+			tmp = tmp & UINT_MAX;
+		if ((unsigned long)tmp > UINT_MAX)
+			tmp %= UINT_MAX;
 		tmp < 0 ? tmp = (UINT_MAX + 1) + (int)tmp : 0;
 	}
 	ft_transform_size(tmp, env->fd_cor, pds);
@@ -48,7 +56,10 @@ static void		ft_write_args(t_asm *env, char *arg, int pds, int line)
 	else
 	{
 		tmp = ft_atoi(&arg[0]);
-		tmp > 65535 || tmp < -65536 ? tmp = 65535 : 0;
+		if ((unsigned long)tmp > USHRT_MAX)
+			tmp = tmp & USHRT_MAX;
+		if ((unsigned long)tmp > USHRT_MAX)
+			tmp %= USHRT_MAX;
 		tmp < 0 ? tmp = (USHRT_MAX + 1) + tmp : 0;
 		ft_transform_size(tmp, env->fd_cor, pds);
 	}
