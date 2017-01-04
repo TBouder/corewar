@@ -30,7 +30,7 @@ typedef struct		s_champions
 	unsigned int	starting_pos;
 	int				champ_id;
 	int				fake_id;
-	int				reg[100];
+	unsigned long			reg[100];
 	int				pc;
 	int				carry;
 	int				cycle;
