@@ -40,13 +40,13 @@ void		ft_corewar_ldi(t_vm *env, t_champions *champ, int *nbr)
 		env->arg3 = ft_byte_to_str(&env->map[pc], env->buf);
 		if (IS_IND(nbr[0]))
 			env->arg1 = env->map[ft_mod(champ->pc - 1 + env->arg1, M)];
-		if (IS_REG(nbr[0]))
+		else if (IS_REG(nbr[0]))
 			env->arg1 = champ->reg[env->arg1];
 		if (IS_REG(nbr[1]))
 			env->arg2 = champ->reg[env->arg2];
 		env->sum_idx = env->arg1 + env->arg2;
 		champ->reg[env->arg3] = ft_byte_to_str(
-			&env->map[ft_mod(champ->pc - 1 + env->sum_idx, M)], 4);
+			&env->map[ft_mod(ft_mod(champ->pc - 1 + env->sum_idx, I), M)], 4);
 	}
 }
 
