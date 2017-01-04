@@ -60,12 +60,19 @@ void		ft_corewar_ld(t_vm *env, t_champions *champ, int *nbr)
 			champ->reg[env->arg2] = env->arg1;
 		else if (IS_IND(nbr[0]))
 		{
-			if (env->arg1 > 32768)
-				champ->reg[env->arg2] = env->map[ft_mod(champ->pc - 1 +
-				((env->arg1 % I) - I), M)];
+			if (env->arg1 > MAX)
+			{
+				ft_printf("{9}%ld{0}\n", ft_mod(champ->pc - 1 + ((env->arg1 % I) - I), M));
+				champ->reg[env->arg2] = ft_byte_to_str(&env->map[ft_mod(champ->pc - 1 +
+				((env->arg1 % I) - I), M)], 4);
+			}
 			else
-				champ->reg[env->arg2] = env->map[ft_mod(champ->pc - 1 +
-				(env->arg1 % I), M)];
+			{
+				ft_printf("{14}%ld{0}\n", ft_byte_to_str(&env->map[ft_mod(champ->pc - 1 +
+				(env->arg1 % I), M)], 4));
+				champ->reg[env->arg2] = ft_byte_to_str(&env->map[ft_mod(champ->pc - 1 +
+				(env->arg1 % I), M)], 4);
+			}
 		}
 		champ->carry = champ->reg[env->arg2] == 0 ? 1 : 0;
 	}

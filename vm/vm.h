@@ -30,7 +30,7 @@ typedef struct		s_champions
 	unsigned int	starting_pos;
 	int				champ_id;
 	int				fake_id;
-	unsigned long			reg[100];
+	unsigned long	reg[100];
 	int				pc;
 	int				carry;
 	int				cycle;
@@ -55,9 +55,9 @@ typedef struct		s_vm
 	int				cpt_to_die;
 	int				cycle_check;
 	int				cycle;
-	int				arg1;
-	int				arg2;
-	int				arg3;
+	unsigned long	arg1;
+	unsigned long	arg2;
+	unsigned long	arg3;
 	int				buf;
 	int				sum_idx;
 	t_header		*header;
