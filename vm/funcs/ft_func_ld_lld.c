@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/04 17:48:01 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/04 20:00:39 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ void		ft_corewar_ld(t_vm *env, t_champions *champ, int *nbr)
 			champ->reg[env->arg2] = env->arg1;
 		else if (IS_IND(nbr[0]) && IS_IN_REG(env->arg2))
 		{
-			wprintw(env->notif, "ARG1 : %d\n", env->arg1);
-			ft_reload_windows(env, 3);
+			// wprintw(env->notif, "ARG1 : %d\n", env->arg1);
+			// ft_reload_windows(env, 3);
 
 			if (env->arg1 > 32768)
 				champ->reg[env->arg2] = env->map[ft_mod(champ->pc - 1 +
