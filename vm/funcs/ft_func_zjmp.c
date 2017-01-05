@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/05 14:25:38 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/05 18:03:31 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@ static void	ft_extract_args(t_vm *env, int pc, int *nbr)
 	env->buf = ft_set_buffer(nbr[0]);
 	env->arg1 = ft_byte_to_str(&env->map[pc], env->buf);
 }
+
+/*
+** ARG1 can be DIR
+*/
 
 void		ft_corewar_zjmp(t_vm *env, t_champions *champ, int *nbr)
 {
