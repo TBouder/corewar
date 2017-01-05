@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/21 09:26:13 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/04 20:19:02 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/05 15:27:02 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,12 @@ void			ft_print_champions_infos(t_vm *env)
 		}
 		list = list->next;
 	}
+}
+
+void	ft_color_map(t_vm *env, t_champions *champ, int pc, char *sub_reg)
+{
+	pc %= M;
+	env->map[pc] = ft_atoi_base(sub_reg, 16);
+	env->map_owner[pc] = champ->color;
+	env->map_moves[pc] = champ->color;
 }

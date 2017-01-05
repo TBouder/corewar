@@ -67,14 +67,14 @@ void			ft_corewar_aff(t_vm *env, t_champions *champ, int *nbr)
 	if (IS_REG(nbr[0]))
 	{
 		value = ft_byte_to_str(&env->map[champ->pc + 1], 1);
-		if (IS_GRAPH && IS_IN_REG(champ->reg[value]))
+		if (IS_GRAPH && IN_REG(champ->reg[value]))
 		{
 			ft_print_champion_color(champ, env->notif);
 			wprintw(env->notif, " ask to print r%d : [%C] [0x%x]\n", value,
 			champ->reg[value] % 256, champ->reg[value] % 256);
 			ft_reload_windows(env, 3);
 		}
-		else if (!IS_SILENT && IS_IN_REG(champ->reg[value]))
+		else if (!IS_SILENT && IN_REG(champ->reg[value]))
 		{
 			ft_put("Champion {14}%d{0} ({14}%s{0}) ask to print ",
 			champ->champ_id, champ->name);
