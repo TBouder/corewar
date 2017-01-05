@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 14:16:55 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/05 11:18:50 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/05 18:12:04 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static void		ft_set_winner(t_vm *env, t_champions *champ)
 	ft_strdel(&env->winner->name);
 	env->winner->name = ft_strinit(champ->name);
 	env->winner->champ_id = champ->champ_id;
+	env->winner->fake_id = champ->fake_id;
 }
 
 static t_list	*ft_find_live(t_vm *env, int id)
