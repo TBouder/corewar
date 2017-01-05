@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/05 17:56:49 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/05 19:40:46 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,13 @@ static int	ft_edit_arg_1(t_vm *env, t_champions *champ, int *nbr)
 
 static void	ft_extract_args(t_vm *env, int pc, int *nbr)
 {
-	env->buf = ft_set_buffer_and_or_xor(nbr[0]);
+	env->buf = ft_set_buffer_2(nbr[0]);
 	env->arg1 = ft_byte_to_str(&env->map[pc], env->buf);
 	pc += env->buf;
-	env->buf = ft_set_buffer_and_or_xor(nbr[1]);
+	env->buf = ft_set_buffer_2(nbr[1]);
 	env->arg2 = ft_byte_to_str(&env->map[pc], env->buf);
 	pc += env->buf;
-	env->buf = ft_set_buffer_and_or_xor(nbr[2]);
+	env->buf = ft_set_buffer_2(nbr[2]);
 	env->arg3 = ft_byte_to_str(&env->map[pc], env->buf);
 }
 

@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/05 16:24:07 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/05 19:34:47 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,11 @@ int					*ft_get_size(t_vm *env, t_champions *champ);
 int					ft_count_to_next(int *nbr, int op);
 int					ft_byte_to_str(char *str, int len);
 int					ft_get_args(t_vm *env, t_champions *champ, int op);
+int					ft_set_buffer_1(int nbr);
+int					ft_set_buffer_2(int nbr);
+int					ft_set_buffer_3(int nbr);
+int					ft_set_buffer_4(int nbr);
+
 void				ft_corewar_live(t_vm *env, t_champions *champ, int *nbr);
 void				ft_corewar_aff(t_vm *env, t_champions *champ, int *nbr);
 void				ft_corewar_st(t_vm *env, t_champions *champ, int *nbr);
