@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/05 14:34:43 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/05 17:57:54 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,10 @@ static void	ft_extract_args(t_vm *env, int pc, int *nbr)
 	env->arg1 = ft_byte_to_str(&env->map[pc], env->buf);
 }
 
+/*
+** ARG1 can be DIR
+*/
+
 void		ft_corewar_lfork(t_vm *env, t_champions *champ, int *nbr)
 {
 	int		pc;
@@ -47,7 +51,6 @@ void		ft_corewar_lfork(t_vm *env, t_champions *champ, int *nbr)
 		ft_extract_args(env, pc, nbr);
 		if (!ft_edit_arg_1(env, champ, nbr))
 			return ;
-		// env->arg1 = ft_mod(champ->pc + env->arg1, M);
 		ft_init_champ(env, champ, champ->champ_id - 1, env->arg1);
 	}
 }
