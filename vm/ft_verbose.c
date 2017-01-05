@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/21 12:17:02 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/04 10:55:41 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/05 18:10:45 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,14 @@ void		ft_verbose_winner(t_vm *env)
 
 	if (IS_GRAPH)
 	{
+		werase(env->notif);
 		if (env->winner->name == NULL)
 			wprintw(env->notif, "There is no winner this time !\n");
 		else
 			wprintw(env->notif, "The winner is %d (%s) !\n",
-				env->winner->champ_id, env->winner->name);
-		ft_reload_windows(env, 3);
+				env->winner->fake_id, env->winner->name);
+		wnoutrefresh(env->notif);
+		doupdate();
 		while ((key = getch()) != 'q')
 			;
 		ft_clear_ncurse(env);
@@ -90,7 +92,7 @@ void		ft_verbose_winner(t_vm *env)
 			ft_put("There is no winner this time !\n");
 		else
 			ft_put("The winner is {14}%d{0} ({14}%s{0}) !\n",
-				env->winner->champ_id, env->winner->name);
+				env->winner->fake_id, env->winner->name);
 	}
 	ft_success_vm(env, 1);
 }
