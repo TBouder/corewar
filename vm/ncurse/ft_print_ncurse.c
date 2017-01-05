@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/21 09:26:13 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/05 15:27:02 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/05 17:19:09 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,10 @@ void			ft_print_infos(t_vm *env)
 	wattron(env->info, COLOR_PAIR(1) | A_BOLD);
 	wprintw(env->info, "%d\n", env->nb_champ);
 	wattroff(env->info, COLOR_PAIR(1) | A_BOLD);
+	wprintw(env->info, "Number of process : ");
+	wattron(env->info, COLOR_PAIR(1) | A_BOLD);
+	wprintw(env->info, "%d\n", env->nb_forks);
+	wattroff(env->info, COLOR_PAIR(1) | A_BOLD);
 	wprintw(env->info, "Lives : ");
 	wattron(env->info, COLOR_PAIR(1) | A_BOLD);
 	wprintw(env->info, "%d / %d\n", env->total_live, NBR_LIVE);
@@ -66,16 +70,12 @@ void			ft_print_champions_infos(t_vm *env)
 			if (!((t_champions *)list->content)->is_fork)
 			{
 				wprintw(env->info, ": \n");
-				wprintw(env->info, "\tLives : %d\n",
+				wprintw(env->info, "\tLives :\t\t%d\n",
 					env->nb_live[((t_champions *)list->content)->champ_id]);
-				wprintw(env->info, "\tPC : %d\n",
+				wprintw(env->info, "\tPC :\t\t%d\n",
 					((t_champions *)list->content)->pc);
-				wprintw(env->info, "\tNext Cycle : %d\n",
+				wprintw(env->info, "\tNext Cycle :\t%d\n",
 					((t_champions *)list->content)->next_cycle);
-				wprintw(env->info, "\tR2[%d] - R3[%d] - R4[%d]\n",
-					((t_champions *)list->content)->reg[2] % I,
-					((t_champions *)list->content)->reg[3] % I,
-					((t_champions *)list->content)->reg[4] % I);
 
 			}
 		}

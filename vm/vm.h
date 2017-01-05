@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/05 15:41:26 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/05 16:24:07 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct		s_champions
 	int				next_cycle;
 	int				is_fork;
 	int				color;
+	int				alive;
 }					t_champions;
 
 typedef struct		s_vm
@@ -50,6 +51,7 @@ typedef struct		s_vm
 	int				*fd;
 	char			**filename;
 	int				nb_champ;
+	int				nb_forks;
 	int				total_size;
 	int				cycle_to_die;
 	int				cpt_to_die;
@@ -142,7 +144,7 @@ void				ft_init_champ(t_vm *env, t_champions *champ, int id,
 /*
 ** FREE
 */
-void				ft_clear_champ(t_list **blist, int id);
+void				ft_clear_champ(t_vm *env, t_list **blist, int id);
 void				ft_clear_all(t_vm *env);
 void				ft_error_vm(t_vm *env, char *msg, int clear);
 void				ft_success_vm(t_vm *env, int clear);

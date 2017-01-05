@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/14 19:12:52 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/04 20:06:06 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/05 16:38:10 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void		ft_del_champ(t_champions *champ)
 	ft_strdel(&champ->content);
 }
 
-void			ft_clear_champ(t_list **blist, int id)
+void			ft_clear_champ(t_vm *env, t_list **blist, int id)
 {
 	t_list	*current;
 	t_list	*prev;
@@ -30,6 +30,12 @@ void			ft_clear_champ(t_list **blist, int id)
 	{
 		if (((t_champions *)current->content)->champ_id == id)
 		{
+			((t_champions *)current->content)->alive = 0;
+			((t_champions *)current->content)->pc = -1;
+			env->nb_forks -= 1;
+		}
+		else if (((t_champions *)current->content)->champ_id == id)
+		{
 			if (prev == NULL)
 				*blist = current->next;
 			else
@@ -37,6 +43,7 @@ void			ft_clear_champ(t_list **blist, int id)
 			ft_del_champ((t_champions *)current->content);
 			free(current->content);
 			free(current);
+			env->nb_forks -= 1;
 			if (!(current = *blist))
 				break ;
 		}

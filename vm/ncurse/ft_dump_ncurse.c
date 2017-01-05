@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/30 20:32:37 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/04 15:45:25 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/05 16:22:43 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ static void			ft_get_ncurse_color_helper_helper(t_vm *env, int *col, int on)
 		if (champ && champ->pc == *col)
 		{
 			if (on)
-				wattron(env->main, COLOR_PAIR(champ->color + 10) | A_BOLD);
+				wattron(env->main, COLOR_PAIR(champ->color + 30) | A_BOLD);
 			else
-				wattroff(env->main, COLOR_PAIR(champ->color + 10) | A_BOLD);
+				wattroff(env->main, COLOR_PAIR(champ->color + 30) | A_BOLD);
 		}
 		list = list->next;
 	}

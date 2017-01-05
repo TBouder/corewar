@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 16:20:23 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/03 16:45:42 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/05 16:17:31 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static void		ft_init_colors(void)
 	init_color(54, 780, 443, 176);
 	init_color(55, 786, 341, 796);
 	init_pair(1, COLOR_CYAN, COLOR_BLACK);
+
 	init_pair(42, 42, COLOR_BLACK);
 	init_pair(43, 43, COLOR_BLACK);
 	init_pair(44, 44, COLOR_BLACK);
@@ -37,6 +38,11 @@ static void		ft_init_colors(void)
 	init_pair(63, 53, COLOR_BLACK);
 	init_pair(64, 54, COLOR_BLACK);
 	init_pair(65, 55, COLOR_BLACK);
+
+	init_pair(72, COLOR_BLACK, 42);
+	init_pair(73, COLOR_BLACK, 43);
+	init_pair(74, COLOR_BLACK, 44);
+	init_pair(75, COLOR_BLACK, 45);
 }
 
 void			ft_init_ncurse(t_vm *env)
