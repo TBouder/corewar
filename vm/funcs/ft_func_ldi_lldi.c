@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/04 17:25:28 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/05 12:42:19 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ static int	ft_edit_args(t_vm *env, t_champions *champ, int *nbr)
 	return (1);
 }
 
-
 void		ft_corewar_ldi(t_vm *env, t_champions *champ, int *nbr)
 {
 	int		pc;
@@ -59,9 +58,19 @@ void		ft_corewar_ldi(t_vm *env, t_champions *champ, int *nbr)
 		ft_extract_args(env, pc, nbr);
 		if (ft_edit_args(env, champ, nbr) == 0)
 			return ;
+
+			// wprintw(env->notif, "Reg : [%d]\n", env->arg3);
+			// wprintw(env->notif, "First : [%d]\n", env->arg1);
+			// wprintw(env->notif, "Second : [%d]\n", env->arg2);
+
 		env->sum_idx = env->arg1 + env->arg2;
-		champ->reg[env->arg3] = ft_byte_to_str(
-			&env->map[ft_mod(champ->pc - 1 + env->sum_idx, M)], 4);
+		// ft_put("{10}%d vs %d{0}\n", env->sum_idx, ft_mod(env->sum_idx, I));
+		// exit (0);
+		// wprintw(env->notif, "Sum : [%d]\n", env->sum_idx);
+		// wprintw(env->notif, "Sum_mod : [%d]\n", ft_mod(champ->pc - 1 + env->sum_idx, M));
+		ft_reload_windows(env, 3);
+
+		champ->reg[env->arg3] = ft_byte_to_str(&env->map[ft_mod(champ->pc - 1 + env->sum_idx, M)], 4);
 	}
 }
 

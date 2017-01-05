@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/21 12:27:24 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/04 15:46:28 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/05 12:11:59 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,25 @@ int		ft_set_buffer_and_or_xor(int nbr)
 	return (0);
 }
 
+// int		ft_mod_OLD(int nbr, int mod)
+// {
+// 	nbr %= mod;
+// 	if (nbr < 0)
+// 		return (mod + nbr);
+// 	return (nbr);
+// }
+
+
 int		ft_mod(int nbr, int mod)
 {
-	nbr %= mod;
 	if (nbr < 0)
-		return (mod + nbr);
-	return (nbr);
+	{
+		nbr = -nbr % mod;
+		return (M - nbr);
+	}
+	else
+	{
+		nbr = nbr % mod;
+		return (nbr);
+	}
 }

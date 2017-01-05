@@ -6,7 +6,7 @@
 /*   By: zaz <zaz@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2017/01/04 16:55:06 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/04 20:08:27 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,9 @@
 # define IS_REG(x) (x == 1 ? 1 : 0)
 # define IS_DIR(x) (x == 10 ? 1 : 0)
 # define IS_IND(x) (x == 11 ? 1 : 0)
-
 # define IS_DIR_REG(x) ((x == 10 || x == 1) ? 1 : 0)
 # define IS_DIR_IND(x) ((x == 10 || x == 11) ? 1 : 0)
 # define IS_IND_REG(x) ((x == 11 || x == 1) ? 1 : 0)
-
 # define IS_ALL(x) ((x == 11 || x == 10 || x == 1) ? 1 : 0)
 # define IS_IN_REG(x) ((x >= 0 && x <= 99) ? 1 : 0)
 
