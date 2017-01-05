@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/04 20:19:32 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/05 17:18:15 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +64,11 @@ void		ft_corewar_ld(t_vm *env, t_champions *champ, int *nbr)
 		{
 			if (env->arg1 > MAX)
 			{
-				ft_printf("{9}%ld{0}\n", ft_mod(champ->pc - 1 + ((env->arg1 % I) - I), M));
 				champ->reg[env->arg2] = ft_byte_to_str(&env->map[ft_mod(champ->pc - 1 +
 				((env->arg1 % I) - I), M)], 4);
 			}
 			else
 			{
-				ft_printf("{14}%ld{0}\n", ft_byte_to_str(&env->map[ft_mod(champ->pc - 1 +
-				(env->arg1 % I), M)], 4));
 				champ->reg[env->arg2] = ft_byte_to_str(&env->map[ft_mod(champ->pc - 1 +
 				(env->arg1 % I), M)], 4);
 			}

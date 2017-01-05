@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 15:58:23 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/03 15:52:35 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/05 16:31:02 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void		ft_foreach_champ(t_vm *env)
 	while (list && list->content)
 	{
 		champ = (t_champions *)list->content;
-		if (champ && env->cycle == champ->next_cycle)
+		if (champ && env->cycle == champ->next_cycle && champ->alive)
 		{
 			!IS_GRAPH && IS_VERBOSE ? ft_verbose_champ_info(env, champ, 1) : 0;
 			pc = champ->pc;
@@ -59,7 +59,7 @@ static void		ft_foreach_champ(t_vm *env)
 
 static void		ft_perfom_checks(t_vm *env)
 {
-	if (env->cpt_to_die == env->cycle_to_die)
+	if (env->cpt_to_die == env->cycle_to_die - 1)
 	{
 		if (ft_verif_alives(env) >= NBR_LIVE)
 		{

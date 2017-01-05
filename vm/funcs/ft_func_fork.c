@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/05 14:13:01 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/05 16:07:56 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,6 @@ static int	ft_set_buffer(int nbr)
 
 static int	ft_edit_arg_1(t_vm *env, t_champions *champ, int *nbr)
 {
-	int		pc;
-
-	pc = champ->pc - 1;
 	if (IS_DIR(nbr[0]) && env->arg1 > MAX)
 		env->arg1 = ft_mod(champ->pc + ((env->arg1 % I) - I), M);
 	else if (IS_DIR(nbr[0]))
@@ -50,5 +47,6 @@ void		ft_corewar_fork(t_vm *env, t_champions *champ, int *nbr)
 		if (!ft_edit_arg_1(env, champ, nbr))
 			return ;
 		ft_init_champ(env, champ, champ->champ_id - 1, env->arg1);
+		env->nb_forks += 1;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 17:48:28 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/04 20:06:10 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/05 16:07:30 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static void		ft_init_lst_champions(t_vm *env)
 static void		ft_init_env_helper(t_vm *env, int part)
 {
 	env->nb_champ = part;
+	env->nb_forks = part;
 	ft_verif_fake_id(env);
 	env->fd = ft_nbrnew(part);
 	env->filename = ft_dbstrnew(part);
