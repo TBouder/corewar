@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/05 14:18:18 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/05 17:46:19 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,12 @@ static void	ft_extract_args(t_vm *env, int pc, int *nbr)
 	env->buf = ft_set_buffer(nbr[2]);
 	env->arg3 = ft_byte_to_str(&env->map[pc], env->buf);
 }
+
+/*
+** ARG1 can be REG
+** ARG2 can be REG
+** ARG3 can be REG
+*/
 
 void		ft_corewar_add(t_vm *env, t_champions *champ, int *nbr)
 {
