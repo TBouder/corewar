@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/05 19:40:55 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/05 23:37:57 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,7 @@ static int	ft_edit_arg_2(t_vm *env, t_champions *champ, int *nbr)
 	int		pc;
 
 	pc = champ->pc - 1;
-	if (IS_DIR(nbr[1]) && env->arg2 > MAX)
-		env->arg2 = env->arg2 % I - I;
-	else if (IS_DIR(nbr[1]))
+	if (IS_DIR(nbr[1]))
 		;
 	else if (IS_IND(nbr[1]) == 1 && env->arg2 > MAX)
 		env->arg2 = env->map[ft_mod(pc + ((env->arg2 % I) - I), M)];
@@ -56,9 +54,7 @@ static int	ft_edit_arg_1(t_vm *env, t_champions *champ, int *nbr)
 	int		pc;
 
 	pc = champ->pc - 1;
-	if (IS_DIR(nbr[0]) && env->arg1 > MAX)
-		env->arg1 = env->arg1 % I - I;
-	else if (IS_DIR(nbr[0]))
+	if (IS_DIR(nbr[0]))
 		;
 	else if (IS_IND(nbr[0]) == 1 && env->arg1 > MAX)
 		env->arg1 = env->map[ft_mod(pc + ((env->arg1 % I) - I), M)];
