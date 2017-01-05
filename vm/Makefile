@@ -6,14 +6,14 @@
 #    By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/10/05 20:24:05 by tbouder           #+#    #+#              #
-#    Updated: 2017/01/04 13:40:26 by tbouder          ###   ########.fr        #
+#    Updated: 2017/01/05 10:48:53 by tbouder          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 		= 	corewar
 
 CC			= 	gcc
-CFLAGS		= 	-Wall -Werror -Wextra -g -O3
+CFLAGS		= 	-Wall -Werror -Wextra -g 
 
 LIB			=	../libft/libft.a
 

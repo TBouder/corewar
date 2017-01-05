@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/21 09:26:13 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/04 17:44:35 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/04 20:19:02 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,10 @@ void			ft_print_champions_infos(t_vm *env)
 					((t_champions *)list->content)->pc);
 				wprintw(env->info, "\tNext Cycle : %d\n",
 					((t_champions *)list->content)->next_cycle);
-					wprintw(env->info, "\tR2 : %d\n",
 				wprintw(env->info, "\tR2[%d] - R3[%d] - R4[%d]\n",
-					((t_champions *)list->content)->reg[2],
-					((t_champions *)list->content)->reg[3],
-					((t_champions *)list->content)->reg[4]));
+					((t_champions *)list->content)->reg[2] % I,
+					((t_champions *)list->content)->reg[3] % I,
+					((t_champions *)list->content)->reg[4] % I);
 
 			}
 		}
