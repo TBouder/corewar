@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/05 11:54:01 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/05 15:41:26 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,8 @@ void				ft_print_champion_color(t_champions *champion, WINDOW *win);
 void				ft_print_infos(t_vm *env);
 void				ft_print_champions_infos(t_vm *env);
 void				ft_reload_windows(t_vm *env, int part);
+void				ft_color_map(t_vm *env, t_champions *champ,
+					int pc, char *sub_reg);
 
 /*
 ** DUMP
@@ -172,5 +174,6 @@ void				ft_reset_lives(t_vm *env, int val);
 int					ft_set_buffer_and_or_xor(int nbr);
 int					ft_mod(int nbr, int mod);
 int					ft_get_file_size(int fd);
+void				ft_put_map_reg(t_vm *env, t_champions *champ, int i, int j);
 
 #endif

@@ -40,12 +40,12 @@ void		ft_corewar_lld(t_vm *env, t_champions *champ, int *nbr)
 	if ((IS_IND(nbr[0]) || IS_DIR(nbr[0])) && IS_REG(nbr[1]))
 	{
 		ft_extract_args(env, pc, nbr);
-		if (IS_DIR(nbr[0]) && IS_IN_REG(env->arg2))
+		if (IS_DIR(nbr[0]) && IN_REG(env->arg2))
 			champ->reg[env->arg2] = env->arg1;
-		else if (IS_IND(nbr[0]) && IS_IN_REG(env->arg2))
+		else if (IS_IND(nbr[0]) && IN_REG(env->arg2))
 			champ->reg[env->arg2] =
 				env->map[ft_mod(champ->pc - 1 + env->arg1, M)];
-		if (IS_IN_REG(env->arg2))
+		if (IN_REG(env->arg2))
 			champ->carry = champ->reg[env->arg2] == 0 ? 1 : 0;
 	}
 }
@@ -58,9 +58,9 @@ void		ft_corewar_ld(t_vm *env, t_champions *champ, int *nbr)
 	if ((IS_IND(nbr[0]) || IS_DIR(nbr[0])) && IS_REG(nbr[1]))
 	{
 		ft_extract_args(env, pc, nbr);
-		if (IS_DIR(nbr[0]) && IS_IN_REG(env->arg2))
+		if (IS_DIR(nbr[0]) && IN_REG(env->arg2))
 			champ->reg[env->arg2] = env->arg1;
-		else if (IS_IND(nbr[0]) && IS_IN_REG(env->arg2))
+		else if (IS_IND(nbr[0]) && IN_REG(env->arg2))
 		{
 			if (env->arg1 > MAX)
 			{
@@ -76,7 +76,7 @@ void		ft_corewar_ld(t_vm *env, t_champions *champ, int *nbr)
 				(env->arg1 % I), M)], 4);
 			}
 		}
-		if (IS_IN_REG(env->arg2))
+		if (IN_REG(env->arg2))
 			champ->carry = champ->reg[env->arg2] == 0 ? 1 : 0;
 	}
 }
