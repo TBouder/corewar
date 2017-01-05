@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/05 19:42:26 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/06 00:09:24 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,10 @@ void		ft_corewar_zjmp(t_vm *env, t_champions *champ, int *nbr)
 	{
 		ft_extract_args(env, pc, nbr);
 		if (env->arg1 > MAX)
-			champ->pc = ft_mod(champ->pc + ((env->arg1 % I) - I), M);
+			env->arg1 = ft_mod(env->arg1, I) - I;
 		else
-			champ->pc = ft_mod(champ->pc + (env->arg1 % I), M);
+			env->arg1 = ft_mod(env->arg1, I);
+		champ->pc = ft_mod(champ->pc + env->arg1, M);
 	}
 	else
 		champ->pc += ft_count_to_next(nbr, ZJMP);
