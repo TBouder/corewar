@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 16:20:23 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/05 16:17:31 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/06 10:43:08 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ static void		ft_init_colors(void)
 	init_pair(63, 53, COLOR_BLACK);
 	init_pair(64, 54, COLOR_BLACK);
 	init_pair(65, 55, COLOR_BLACK);
-
 	init_pair(72, COLOR_BLACK, 42);
 	init_pair(73, COLOR_BLACK, 43);
 	init_pair(74, COLOR_BLACK, 44);

@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 12:10:11 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/05 16:25:43 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/06 10:43:13 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,29 +32,8 @@ static void		ft_init_champ_id(t_vm *env, t_champions *new_champ,
 	new_champ->id = env->current_id++;
 	new_champ->champ_id = id + 1;
 	ft_init_reg(new_champ, champ);
-
-if (env->fake_id[id] == 1)
-{
-	new_champ->reg[1] = champ ? champ->reg[1] : -4;
-	new_champ->fake_id = champ ? champ->fake_id : -4;
-}
-if (env->fake_id[id] == 2)
-{
-	new_champ->reg[1] = champ ? champ->reg[1] : -3;
-	new_champ->fake_id = champ ? champ->fake_id : -3;
-}
-if (env->fake_id[id] == 3)
-{
-	new_champ->reg[1] = champ ? champ->reg[1] : -2;
-	new_champ->fake_id = champ ? champ->fake_id : -2;
-}
-if (env->fake_id[id] == 4)
-{
-	new_champ->reg[1] = champ ? champ->reg[1] : -1;
-	new_champ->fake_id = champ ? champ->fake_id : -1;
-}
-	// new_champ->reg[1] = champ ? champ->reg[1] : env->fake_id[id];
-	// new_champ->fake_id = champ ? champ->fake_id : env->fake_id[id];
+	new_champ->reg[1] = champ ? champ->reg[1] : env->fake_id[id];
+	new_champ->fake_id = champ ? champ->fake_id : env->fake_id[id];
 }
 
 void			ft_init_champ(t_vm *env, t_champions *champ, int id, int pc)
