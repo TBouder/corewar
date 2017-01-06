@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 13:39:20 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/05 15:41:14 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/06 14:40:54 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	ft_put_map_reg(t_vm *env, t_champions *champ, int i, int j)
 	char			*sub_reg;
 	int				len;
 
-	reg = ft_strinit("00000000");
+	reg = ft_strinit((char *)"00000000");
 	begin_reg = ft_itox(env->arg1);
 	len = ft_strlen(begin_reg);
 	while (i < 8 && len)

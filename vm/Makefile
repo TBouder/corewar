@@ -6,14 +6,20 @@
 #    By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/10/05 20:24:05 by tbouder           #+#    #+#              #
-#    Updated: 2017/01/06 00:39:55 by tbouder          ###   ########.fr        #
+#    Updated: 2017/01/06 14:57:36 by tbouder          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 		= 	corewar
 
 CC			= 	gcc
-CFLAGS		= 	-Wall -Werror -Wextra -g
+CFLAGS		= 	-Wall -Werror -Wextra -g -O3
+
+CFLAGS_EXT	=	-Wwrite-strings -Wstrict-prototypes -Wunreachable-code -Wno-missing-braces  -Wno-missing-field-initializers \
+				-Wchar-subscripts -Wcomment -Wformat=2 -Wimplicit-int -Werror-implicit-function-declaration -Wmain \
+				-Wparentheses -Wsequence-point -Wreturn-type -Wswitch -Wtrigraphs -Wunused -Wuninitialized \
+				-Wunknown-pragmas -Wfloat-equal -Wundef -Wshadow -Wpointer-arith \
+				-Wbad-function-cast -Wsign-compare -Waggregate-return -Wmissing-prototypes -Wmissing-declarations -Wformat -Wmissing-format-attribute -Wno-deprecated-declarations -Wpacked -Wredundant-decls -Wnested-externs -Winline
 
 LIB			=	../libft/libft.a
 
@@ -42,17 +48,17 @@ OBJ			=	$(SRC:.c=.o)
 ################################################################################
 #	RULES
 ################################################################################
-# .SILENT: $(NAME) clean fclean $(OBJ)
+.SILENT: $(NAME) clean fclean $(OBJ)
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@$(CC) -o $@ $^ $(LIB) -lncurses $(CFLAGS)
+	@$(CC) -o $@ $^ $(LIB) -lncurses $(CFLAGS) $(CFLAGS_EXT)
 
 main.o: vm.h
 
 %.o: %.c
-	$(CC) -o $@ -c $< $(CFLAGS)
+	$(CC) -o $@ -c $< $(CFLAGS) $(CFLAGS_EXT)
 
 .PHONY: clean flcean
 
