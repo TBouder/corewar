@@ -12,16 +12,21 @@
 
 NAME 		= 	corewar
 
-CC			= 	gcc
-CFLAGS		= 	-Wall -Werror -Wextra -g
+CC			=	gcc
+CFLAGS		=	-Wall -Werror -Wextra
+LDFLAGS		=	-lncurses
 
 LIB			=	../libft/libft.a
+LIBFTDIR	=	../libft
 
-HEADER 		=	vm.h
+INC 		=	vm.h ft_macro.h op.h
+
+# _GREEN		=	$'\x1b[32m'
 
 ################################################################################
 #	SRC
 ################################################################################
+
 SRC			=	main.c ft_extract_champion.c ft_init.c ft_init_helper.c ft_fight.c \
 				ft_dump_mem.c ft_free.c ft_verbose.c ft_tools.c ft_verif.c \
 				ft_get_flags.c ft_tools_helper.c\
@@ -37,29 +42,33 @@ SRC			=	main.c ft_extract_champion.c ft_init.c ft_init_helper.c ft_fight.c \
 				ncurse/ft_generic_ncurse.c ncurse/ft_reload_ncurse.c \
 				ncurse/ft_print_ncurse.c ncurse/ft_dump_ncurse.c
 
-OBJ			=	$(SRC:.c=.o)
+OBJ			=	$(SRC:%.c=%.o)
 
 ################################################################################
 #	RULES
 ################################################################################
-# .SILENT: $(NAME) clean fclean $(OBJ)
+
+.PHONY: clean flcean re all
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	@$(CC) -o $@ $^ $(LIB) -lncurses $(CFLAGS)
+$(NAME): $(OBJ) $(LIB)
+	@$(CC) -o $@ $^ $(LDFLAGS)
+	@echo Creation of exe $(NAME)
 
-main.o: vm.h
+%.o: %.c $(INC)
+	@$(CC) -o $@ -c $< $(CFLAGS)
+	@echo Compilation of $<
 
-%.o: %.c
-	$(CC) -o $@ -c $< $(CFLAGS)
-
-.PHONY: clean flcean
+$(LIB):
+	@$(MAKE) -C $(LIBFTDIR)
 
 clean:
-	@rm -f $(notdir $(OBJ)) $(OBJ)
+	@rm -f $(OBJ)
+	@echo Vm : Deleted Obj files
 
 fclean: clean
 	@rm -f $(NAME)
+	@echo $(NAME) Deleted 
 
 re: fclean all
