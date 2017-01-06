@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 23:27:37 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/04 15:50:44 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/06 14:41:31 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,42 +20,42 @@
 static char	*ft_instruct_name_helper(int op)
 {
 	if (op == ZJMP)
-		return ("ZJMP");
+		return ((char *)"ZJMP");
 	else if (op == LDI)
-		return ("LDI");
+		return ((char *)"LDI");
 	else if (op == STI)
-		return ("STI");
+		return ((char *)"STI");
 	else if (op == FORK)
-		return ("FORK");
+		return ((char *)"FORK");
 	else if (op == LLD)
-		return ("LLD");
+		return ((char *)"LLD");
 	else if (op == LLDI)
-		return ("LLDI");
+		return ((char *)"LLDI");
 	else if (op == LFORK)
-		return ("LFORK");
+		return ((char *)"LFORK");
 	else if (op == AFF)
-		return ("AFF");
-	return ("INVALID INSTRUCTION");
+		return ((char *)"AFF");
+	return ((char *)"INVALID INSTRUCTION");
 }
 
 static char	*ft_instruct_name(int op)
 {
 	if (op == LIVE)
-		return ("LIVE");
+		return ((char *)"LIVE");
 	else if (op == LD)
-		return ("LD");
+		return ((char *)"LD");
 	else if (op == ST)
-		return ("ST");
+		return ((char *)"ST");
 	else if (op == ADD)
-		return ("ADD");
+		return ((char *)"ADD");
 	else if (op == SUB)
-		return ("SUB");
+		return ((char *)"SUB");
 	else if (op == AND)
-		return ("AND");
+		return ((char *)"AND");
 	else if (op == OR)
-		return ("OR");
+		return ((char *)"OR");
 	else if (op == XOR)
-		return ("XOR");
+		return ((char *)"XOR");
 	return (ft_instruct_name_helper(op));
 }
 

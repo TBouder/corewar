@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/05 23:12:54 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/06 14:56:35 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,7 @@ void				ft_init_champ(t_vm *env, t_champions *champ, int id,
 */
 void				ft_clear_champ(t_vm *env, t_list **blist, int id);
 void				ft_clear_all(t_vm *env);
-void				ft_error_vm(t_vm *env, char *msg, int clear);
+void				ft_error_vm(t_vm *env, const char *msg, int clear);
 void				ft_success_vm(t_vm *env, int clear);
 
 /*
