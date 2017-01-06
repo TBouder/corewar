@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/05 19:39:24 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/06 10:31:47 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,12 @@ static int	ft_edit_arg_2(t_vm *env, t_champions *champ, int *nbr)
 {
 	if (IS_DIR(nbr[1]) && env->arg2 > MAX)
 		env->arg2 = env->arg2 % I - I;
-	else if (IS_DIR(nbr[0]))
+	else if (IS_DIR(nbr[1]))
 		;
 	else if (IS_IND(nbr[1]) && env->arg2 > MAX)
 		env->arg2 = ft_byte_to_str(&env->map[ft_mod(champ->pc + ((env->arg2 % I) - I), M)], 2);
 	else if (IS_IND(nbr[1]))
 		env->arg2 = ft_byte_to_str(&env->map[ft_mod(champ->pc + (env->arg2 % I), M)], 2);
-
 	else if (IS_REG(nbr[1]))
 		env->arg2 = champ->reg[env->arg2];
 	else
@@ -85,7 +84,6 @@ void		ft_corewar_sti(t_vm *env, t_champions *champ, int *nbr)
 			return ;
 		if (!ft_edit_arg_3(env, champ, nbr))
 			return ;
-
 		env->sum_idx = env->arg2 + env->arg3;
 		ft_put_map_reg(env, champ, 0, 0);
 	}

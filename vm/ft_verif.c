@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 13:56:19 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/05 16:13:00 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/06 10:53:32 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int		ft_verif_one_alive(t_vm *env)
 	i = 1;
 	while (i <= env->nb_champ)
 	{
-		if (env->nb_live[i] >= 0)
+		if (env->nb_live[i] > 0)
 			return (1);
 		i++;
 	}
@@ -110,7 +110,7 @@ int		ft_verif_alives(t_vm *env)
 		if (env->nb_live[i] == 0)
 		{
 			ft_clear_champ(env, &env->list_champions, i);
-			env->nb_live[i] = -1;
+			env->nb_live[i] = 0;
 		}
 		else
 			number_of_survivor++;
