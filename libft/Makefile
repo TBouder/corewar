@@ -6,7 +6,7 @@
 #    By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/10/05 20:24:05 by tbouder           #+#    #+#              #
-#    Updated: 2017/01/03 16:44:15 by tbouder          ###   ########.fr        #
+#    Updated: 2017/01/07 12:34:21 by tbouder          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -117,7 +117,7 @@ PRINTF_COL	= 	ft_printf/ft_colors/ft_colors.c
 FT_PRINTF	=	$(PRINTF) $(PRINTF_CONV) $(PRINTF_FUNC) $(PRINTF_COL)
 
 SRC			=	$(LIBFT) $(GET) $(FT_PRINTF)
-OBJ			=	$(notdir $(SRC:.c=.o))
+OBJ			=	$(SRC:.c=.o)
 
 
 ################################################################################
@@ -127,8 +127,7 @@ OBJ			=	$(notdir $(SRC:.c=.o))
 
 all: $(NAME)
 
-$(NAME):
-	$(CC) $(CFLAGS) -c $(HEADER) $(SRC)
+$(NAME): $(OBJ)
 	ar rc $(NAME) $(OBJ)
 	ranlib $(NAME)
 

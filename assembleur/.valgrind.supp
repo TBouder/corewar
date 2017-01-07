@@ -1,0 +1,67 @@
+{
+	OSX
+		Memcheck:Leak
+		match-leak-kinds: possible
+		fun:malloc_zone_malloc
+		fun:_objc_copyClassNamesForImage
+		fun:_ZL9protocolsv
+		fun:_Z9readClassP10objc_classbb
+		fun:gc_init
+		fun:_ZL33objc_initializeClassPair_internalP10objc_classPKcS0_S0_
+		fun:layout_string_create
+		fun:_ZL12realizeClassP10objc_class
+		fun:_ZL22copySwiftV1MangledNamePKcb
+			fun:_ZL22copySwiftV1MangledNamePKcb
+			   fun:_ZL22copySwiftV1MangledNamePKcb
+			   fun:_ZL22copySwiftV1MangledNamePKcb
+}
+
+{
+	LS1
+		Memcheck:Leak
+		match-leak-kinds: definite
+		fun:malloc
+		fun:_object_remove_assocations
+		fun:objc_destructInstance
+		fun:object_dispose
+		fun:-[OS_xpc_object _xref_dispose]
+		fun:xpc_pipe_routine
+		fun:_xpc_interface_routine
+		fun:bootstrap_look_up3
+		fun:bootstrap_look_up2
+		fun:___notify_lib_init_block_invoke
+		fun:_dispatch_client_callout
+		fun:dispatch_once_f
+}
+
+{
+	LS2
+		Memcheck:Leak
+		match-leak-kinds: definite
+		fun:calloc
+		fun:_objc_fetch_pthread_data
+		fun:_ZL27_fetchInitializingClassLista
+		fun:_class_initialize
+		fun:_class_initialize
+		fun:_class_initialize
+		fun:_class_initialize
+		fun:lookUpImpOrForward
+		fun:objc_msgSend
+		fun:xpc_pipe_routine
+		fun:_xpc_interface_routine
+		fun:bootstrap_look_up3
+}
+
+{
+	Ctime
+		Memcheck:Leak
+		match-leak-kinds: definite
+		fun:malloc
+		fun:localtime
+		fun:ctime
+		fun:ft_extract_time
+		fun:ft_extract_data
+		fun:ft_manage_dir
+		fun:ft_process_dir
+		fun:main
+}
