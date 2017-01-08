@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+         #
+#    By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/10/05 20:24:05 by tbouder           #+#    #+#              #
-#    Updated: 2017/01/07 12:34:21 by tbouder          ###   ########.fr        #
+#    Updated: 2017/01/08 21:42:31 by quroulon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,13 @@ OCLINT		=	oclint
 OFLAGS		=	-enable-global-analysis -rc SHORT_VARIABLE_NAME=1 \
 				-rc LONG_LINE=80 -rc CYCLOMATIC_COMPLEXITY=25 -disable-rule \
 				UselessParentheses -disable-rule ParameterReassignment
-HEADER 		= 	libft.h get_next_line/get_next_line.h ft_printf/ft_printf.h
+INC 		= 	libft.h get_next_line/get_next_line.h ft_printf/ft_printf.h
+
+_RED		=	\033[0;31m
+_GREEN		=	\033[0;32m
+_BLUE		=	\033[0;36m
+_RESET		=	\033[0;m
+_WHITE		=	\033[0;37m
 
 ################################################################################
 #	LIBFT
@@ -116,31 +122,38 @@ PRINTF_FUNC	= 	ft_printf/ft_funcs/ft_flags_0.c ft_printf/ft_funcs/ft_flags_1.c \
 PRINTF_COL	= 	ft_printf/ft_colors/ft_colors.c
 FT_PRINTF	=	$(PRINTF) $(PRINTF_CONV) $(PRINTF_FUNC) $(PRINTF_COL)
 
-SRC			=	$(LIBFT) $(GET) $(FT_PRINTF)
-OBJ			=	$(SRC:.c=.o)
+SRC			=	$(LIBFT) $(GNL) $(FT_PRINTF)
+OBJ			=	$(SRC:%.c=%.o)
 
 
 ################################################################################
 #	RULES
 ################################################################################
-.SILENT : $(NAME) clean fclean oclint
+.PHONY: all clean flcean re all
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	ar rc $(NAME) $(OBJ)
-	ranlib $(NAME)
+	@ar rc $@ $^
+	@ranlib $@
+	@echo "$(_GREEN)Creation of exe $@$(_RESET)"
+
+%.o: %.c $(INC)
+	@$(CC) -o $@ -c $< $(CFLAGS)
+	@echo "Compilation of $<"
 
 clean:
-	rm -f $(OBJ)
+	@rm -f $(OBJ)
+	@echo "$(_RED)Libft : Deleted Obj files$(_RESET)"
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
+	@echo "$(_RED)$(NAME) Deleted$(_RESET)"
 
 re: fclean all
 
 list:
-	ar t $(NAME)
+	@ar t $@
 
 oclint:
-	$(OCLINT) $(OFLAGS) $(LIBFT) $(GET) $(FT_PRINTF) $(HEADER) -- c
+	@$(OCLINT) $(OFLAGS) $(LIBFT) $(GNL) $(FT_PRINTF) $(HEADER) -- c
