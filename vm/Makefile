@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+         #
+#    By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/10/05 20:24:05 by tbouder           #+#    #+#              #
-#    Updated: 2017/01/07 12:38:07 by tbouder          ###   ########.fr        #
+#    Updated: 2017/01/08 21:44:46 by quroulon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,14 +19,19 @@ CFLAGS_EXT	=	-O3 -Wwrite-strings -Wstrict-prototypes -Wunreachable-code -Wno-mis
 				-Wparentheses -Wsequence-point -Wreturn-type -Wswitch -Wtrigraphs -Wunused -Wuninitialized \
 				-Wunknown-pragmas -Wfloat-equal -Wundef -Wshadow -Wpointer-arith \
 				-Wbad-function-cast -Wsign-compare -Waggregate-return -Wmissing-prototypes -Wmissing-declarations -Wformat -Wmissing-format-attribute -Wno-deprecated-declarations -Wpacked -Wredundant-decls -Wnested-externs -Winline
-LDFLAGS		=	-lncurses
+LDFLAGS		=	-lncurses -L$(LIBFTDIR) -lft
 
 LIB			=	../libft/libft.a
 LIBFTDIR	=	../libft
 
 INC 		=	vm.h ft_macro.h op.h
 
-# _GREEN		=	$'\x1b[32m'
+_RED		=	\033[0;31m
+_GREEN		=	\033[0;32m
+_BLUE		=	\033[0;36m
+_RESET		=	\033[0;m
+_WHITE		=	\033[0;37m
+
 
 ################################################################################
 #	SRC
@@ -58,21 +63,21 @@ all: $(NAME)
 
 $(NAME): $(OBJ) $(LIB)
 	@$(CC) -o $@ $^ $(LDFLAGS)
-	@echo Creation of exe $(NAME)
+	@echo "$(_GREEN)Creation of exe $@$(_RESET)"
 
 %.o: %.c $(INC)
 	@$(CC) -o $@ -c $< $(CFLAGS)
-	@echo Compilation of $<
+	@echo "Compilation of $<"
 
 $(LIB):
 	@$(MAKE) -C $(LIBFTDIR)
 
 clean:
 	@rm -f $(OBJ)
-	@echo Vm : Deleted Obj files
+	@echo "$(_RED)Vm : Deleted Obj files$(_RESET)"
 
 fclean: clean
 	@rm -f $(NAME)
-	@echo $(NAME) Deleted
+	@echo "$(_RED)$(NAME) Deleted$(_RESET)"
 
 re: fclean all
