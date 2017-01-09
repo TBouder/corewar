@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/09 11:19:12 by tbouder           #+#    #+#             */
-/*   Updated: 2016/03/28 22:09:54 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/09 10:08:37 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,15 @@ ULL					ft_atoi_ll(const char *str)
 {
 	ULL		result;
 	int		sign;
+	int		i;
 
 	sign = 1;
 	result = 0;
-	while (*str >= '0' && *str <= '1')
-		result = (result + *str++ - '0') * 10;
+	i = 0;
+	while (str && str[i] && str[i] >= '0' && str[i] <= '1')
+	{
+		result = (result + str[i] - '0') * 10;
+		i++;
+	}
 	return (result / 10 * sign);
 }

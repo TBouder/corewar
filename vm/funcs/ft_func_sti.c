@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/09 09:16:15 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/09 12:26:18 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ static int	ft_edit_arg_2(t_vm *env, t_champions *champ, int *nbr)
 	else if (IS_DIR(nbr[1]))
 		;
 	else if (IS_IND(nbr[1]) && env->arg2 > MAX)
-		env->arg2 = ft_byte_to_str(&env->map[
-			ft_mod(champ->pc + ((env->arg2 % I) - I), M)], 2);
+		env->arg2 = ft_byte_to_str(env,
+			ft_mod(champ->pc + ((env->arg2 % I) - I), M), 2);
 	else if (IS_IND(nbr[1]))
-		env->arg2 = ft_byte_to_str(&env->map[
-			ft_mod(champ->pc + (env->arg2 % I), M)], 2);
+		env->arg2 = ft_byte_to_str(env,
+			ft_mod(champ->pc + (env->arg2 % I), M), 2);
 	else if (IS_REG(nbr[1]))
 		env->arg2 = champ->reg[env->arg2];
 	else
@@ -56,17 +56,17 @@ static int	ft_edit_arg_1(t_vm *env, t_champions *champ, int *nbr)
 static void	ft_extract_args(t_vm *env, int pc, int *nbr)
 {
 	env->buf = ft_set_buffer_4(nbr[0]);
-	env->arg1 = ft_byte_to_str(&env->map[pc], env->buf);
+	env->arg1 = ft_byte_to_str(env, pc, env->buf);
 	pc += env->buf;
 	env->buf = ft_set_buffer_4(nbr[1]);
-	env->arg2 = ft_byte_to_str(&env->map[pc], env->buf);
+	env->arg2 = ft_byte_to_str(env, pc, env->buf);
 	pc += env->buf;
 	env->buf = ft_set_buffer_4(nbr[2]);
-	env->arg3 = ft_byte_to_str(&env->map[pc], env->buf);
+	env->arg3 = ft_byte_to_str(env, pc, env->buf);
 }
 
 /*
-** Utilise la somme des valeurs de NBR[1] + NBR[2] comme adresse pour NBR[0]
+** Somme des valeurs de NBR[1] + NBR[2] comme adresse pour valeur de NBR[0]
 ** ARG1 can be REG
 ** ARG2 can be DIR, IND or REG
 ** ARG3 can be DIR or REG
