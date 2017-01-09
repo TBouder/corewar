@@ -7,7 +7,7 @@ live1:
 	live %2
 ld %0, r42
 fork %:catourne1
-fork %:catourne2
+# fork %:catourne2
 
 
 live2:
@@ -38,18 +38,19 @@ ld %0, r7
 ld %4, r8
 ld %8, r9
 
+defense:
 sti r1, %:live4, %1
 ld 10, r5
 ld 9, r6
-defense:
 live4:
 	live %2
-zjmp %-511
+zjmp %:goodbye
 sti r5, %:goodbye, r7
 sti r6, %:goodbye, r8
 
-add r7, r9, r7
 add r8, r9, r8
+add r7, r9, r7 # faire en sorte que ca finisse a zéro
+zjmp %:hello
 ld %0, r42 # permet de boucler dans le programme en évitant les pièges
 zjmp %:defense
 
