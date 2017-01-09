@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 18:15:11 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/03 15:52:29 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/06 14:40:46 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void		ft_print_hex_mem(char *add, size_t size)
 	size_t		i;
 	char		*hex;
 
-	hex = ft_strinit("0123456789abcdef");
+	hex = ft_strinit((char *)"0123456789abcdef");
 	i = 0;
 	while (i < 64)
 	{

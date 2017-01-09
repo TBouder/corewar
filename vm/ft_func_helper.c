@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 14:16:55 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/03 16:03:25 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/06 14:41:07 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int		ft_byte_to_str(char *str, int len)
 	i = 0;
 	y = 0;
 	len *= 2;
-	hex = ft_strinit("0123456789abcdef");
+	hex = ft_strinit((char *)"0123456789abcdef");
 	value = ft_strnew(len);
 	while (i < len)
 	{
@@ -56,6 +56,7 @@ int		ft_byte_to_str(char *str, int len)
 	res = ft_atoi_base(value, 16);
 	ft_strdel(&value);
 	ft_strdel(&hex);
+	free(hex);
 	return (res);
 }
 

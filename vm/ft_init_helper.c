@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/27 12:10:11 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/03 16:02:50 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/06 10:43:13 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void			ft_init_champ(t_vm *env, t_champions *champ, int id, int pc)
 		: env->cycle;
 	new_champ->is_fork = champ ? 1 : 0;
 	new_champ->color = champ ? champ->color : id + 42;
+	new_champ->alive = 1;
 	ft_lststart(&env->list_champions, new_champ, sizeof(t_champions));
 	ft_verbose_fork(env, champ, new_champ);
 	free(new_champ);

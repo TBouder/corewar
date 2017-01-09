@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 15:58:23 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/03 15:52:35 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/06 10:51:18 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void		ft_foreach_champ(t_vm *env)
 	while (list && list->content)
 	{
 		champ = (t_champions *)list->content;
-		if (champ && env->cycle == champ->next_cycle)
+		if (champ && env->cycle == champ->next_cycle && champ->alive)
 		{
 			!IS_GRAPH && IS_VERBOSE ? ft_verbose_champ_info(env, champ, 1) : 0;
 			pc = champ->pc;
@@ -57,8 +57,10 @@ static void		ft_foreach_champ(t_vm *env)
 ** and to kill a champion, reduce the cycle to die etc.
 */
 
-static void		ft_perfom_checks(t_vm *env)
+static int		ft_perfom_checks(t_vm *env)
 {
+	int		ret;
+
 	if (env->cpt_to_die == env->cycle_to_die)
 	{
 		if (ft_verif_alives(env) >= NBR_LIVE)
@@ -71,7 +73,9 @@ static void		ft_perfom_checks(t_vm *env)
 		env->cpt_to_die = 0;
 		env->cycle_check++;
 		env->total_live = 0;
+		ret = ft_verif_one_alive(env);
 		ft_reset_lives(env, 0);
+		return (ret);
 	}
 	if (env->cycle_check == MAX_CHECKS)
 	{
@@ -79,6 +83,7 @@ static void		ft_perfom_checks(t_vm *env)
 		env->cycle_to_die < 0 ? env->cycle_to_die = 0 : 0;
 		env->cycle_check = 0;
 	}
+	return (1);
 }
 
 /*
@@ -88,8 +93,7 @@ static void		ft_perfom_checks(t_vm *env)
 
 static int		ft_enter_loop(t_vm *env)
 {
-	return (ft_verif_one_alive(env)
-		&& (IS_DUMP && !IS_GRAPH ? env->cycle < env->dump_cycle : 1)
+	return ((IS_DUMP && !IS_GRAPH ? env->cycle < env->dump_cycle : 1)
 		&& env->cycle_to_die > 0);
 }
 
@@ -104,7 +108,8 @@ void			ft_fight(t_vm *env)
 	while (ft_enter_loop(env))
 	{
 		ft_foreach_champ(env);
-		ft_perfom_checks(env);
+		if (ft_perfom_checks(env) != 1)
+			break ;
 		env->cycle++;
 		env->cpt_to_die++;
 		IS_GRAPH ? ft_get_key(env) : 0;

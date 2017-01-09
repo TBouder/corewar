@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
+/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 19:42:02 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/03 15:28:19 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/08 20:54:41 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,18 @@ static void		ft_launcher(t_vm *env)
 	ft_verif_extension(env, env->champs);
 	ft_extract_champion(env);
 	ft_put_champion_map(env);
-	ft_set_lives(env, 1);
+	ft_set_lives(env, 0);
 	IS_GRAPH ? ft_init_ncurse(env) : 0;
 	ft_fight(env);
+}
+
+void			ft_success_vm(t_vm *env, int clear)
+{
+	if (clear == 1)
+		ft_clear_all(env);
+	free(env->options);
+	free(env->fake_id);
+	exit(1);
 }
 
 int				main(int ac, char **av)

@@ -6,7 +6,11 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 17:48:28 by tbouder           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2017/01/03 16:14:58 by tbouder          ###   ########.fr       */
+=======
+/*   Updated: 2017/01/05 23:33:26 by tbouder          ###   ########.fr       */
+>>>>>>> tbouder
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +29,16 @@ static void		ft_init_lst_champions(t_vm *env)
 static void		ft_init_env_helper(t_vm *env, int part)
 {
 	env->nb_champ = part;
+	env->nb_forks = part;
 	ft_verif_fake_id(env);
 	env->fd = ft_nbrnew(part);
 	env->filename = ft_dbstrnew(part);
-	env->header = (header_t *)malloc(sizeof(header_t) * part);
+	env->header = (t_header *)malloc(sizeof(t_header) * part);
 	ft_init_lst_champions(env);
 	env->total_size = 0;
 	env->map = ft_strnew(MEM_SIZE);
 	env->map_owner = ft_nbrnew(MEM_SIZE);
 	env->map_moves = ft_nbrnew(MEM_SIZE);
-	env->map_moves_buff = ft_nbrnew(MEM_SIZE);
 	env->winner = (t_champions *)malloc(sizeof(t_champions));
 	env->winner->name = NULL;
 	env->winner->champ_id = 0;
@@ -57,7 +61,7 @@ void			ft_init_env(t_vm *env, int part)
 		env->options = NULL;
 		env->nb_champ = 0;
 		env->dump_cycle = 0;
-		env->usleep = 50000;
+		env->usleep = 25000;
 		env->nb_notif = 0;
 		env->current_id = 0;
 		env->n_key = 0;
