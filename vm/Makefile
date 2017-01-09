@@ -6,7 +6,7 @@
 #    By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/10/05 20:24:05 by tbouder           #+#    #+#              #
-#    Updated: 2017/01/07 12:38:07 by tbouder          ###   ########.fr        #
+#    Updated: 2017/01/09 09:18:10 by tbouder          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,9 +33,9 @@ INC 		=	vm.h ft_macro.h op.h
 ################################################################################
 
 SRC			=	main.c ft_extract_champion.c ft_init.c ft_init_helper.c ft_fight.c \
-				ft_dump_mem.c ft_free.c ft_verbose.c ft_tools.c ft_verif.c \
+				ft_dump_mem.c ft_free.c ft_free_helper.c ft_verbose.c ft_tools.c ft_verif.c \
 				ft_get_flags.c ft_tools_helper.c\
-				ft_func_helper.c ft_func_launcher.c funcs/ft_func_buffer.c\
+				ft_func_helper.c ft_func_launcher.c ft_func_buffer.c\
 				funcs/ft_func_live.c funcs/ft_func_aff.c\
 				funcs/ft_func_add.c funcs/ft_func_sub.c \
 				funcs/ft_func_and.c funcs/ft_func_xor.c funcs/ft_func_or.c \
@@ -45,7 +45,7 @@ SRC			=	main.c ft_extract_champion.c ft_init.c ft_init_helper.c ft_fight.c \
 				funcs/ft_func_st.c funcs/ft_func_sti.c \
 				funcs/ft_func_ld.c funcs/ft_func_lld.c \
 				ncurse/ft_generic_ncurse.c ncurse/ft_reload_ncurse.c \
-				ncurse/ft_print_ncurse.c ncurse/ft_dump_ncurse.c
+				ncurse/ft_print_ncurse.c ncurse/ft_dump_ncurse.c ncurse/ft_dump_ncurse_helper.c
 
 OBJ			=	$(SRC:%.c=%.o)
 

@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 17:46:14 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/06 15:04:25 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/09 09:09:08 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,7 @@ static void		ft_extract_header_lst(t_vm *env, int i, t_list *champion)
 		if (CHAMPIONS->prog_size > CHAMP_MAX_SIZE)
 			ft_error_vm(env, "{9}Error{0} : Champion size is over 682", 1);
 		env->total_size += CHAMPIONS->prog_size;
-		if (size != CHAMPIONS->prog_size)
-			ft_error_vm(env, ERR_SIZE, 1);
+		(size != CHAMPIONS->prog_size) ? ft_error_vm(env, ERR_SIZE, 1) : 0;
 	}
 	else
 		ft_error_vm(env, ERR_HEAD, 1);

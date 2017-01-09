@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/06 10:31:47 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/09 09:16:15 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,11 @@ static int	ft_edit_arg_2(t_vm *env, t_champions *champ, int *nbr)
 	else if (IS_DIR(nbr[1]))
 		;
 	else if (IS_IND(nbr[1]) && env->arg2 > MAX)
-		env->arg2 = ft_byte_to_str(&env->map[ft_mod(champ->pc + ((env->arg2 % I) - I), M)], 2);
+		env->arg2 = ft_byte_to_str(&env->map[
+			ft_mod(champ->pc + ((env->arg2 % I) - I), M)], 2);
 	else if (IS_IND(nbr[1]))
-		env->arg2 = ft_byte_to_str(&env->map[ft_mod(champ->pc + (env->arg2 % I), M)], 2);
+		env->arg2 = ft_byte_to_str(&env->map[
+			ft_mod(champ->pc + (env->arg2 % I), M)], 2);
 	else if (IS_REG(nbr[1]))
 		env->arg2 = champ->reg[env->arg2];
 	else
@@ -64,7 +66,7 @@ static void	ft_extract_args(t_vm *env, int pc, int *nbr)
 }
 
 /*
-** Utilise la somme des valeurs de NBR[1] + NBR[2] comme adresse pour y mettre dans NBR[0]
+** Utilise la somme des valeurs de NBR[1] + NBR[2] comme adresse pour NBR[0]
 ** ARG1 can be REG
 ** ARG2 can be DIR, IND or REG
 ** ARG3 can be DIR or REG

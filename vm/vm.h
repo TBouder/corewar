@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/06 14:56:35 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/09 09:17:56 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,7 @@ void				ft_color_map(t_vm *env, t_champions *champ,
 */
 void				ft_dump(const void *addr, size_t size);
 void				ft_dump_ncurse(t_vm *env, const void *addr, size_t size);
+void				ft_get_ncurse_color(t_vm *env, int *col, int on);
 
 /*
 ** INIT
