@@ -130,7 +130,7 @@ void					ft_parse_file(t_asm *env);
 char					*ft_transform_magic(int i);
 char					*ft_transform_champ_infos(char *content,
 							size_t content_size);
-void					ft_transform_size(unsigned int content, int fd,
+void					ft_edit_size(unsigned int content, int fd,
 											int len);
 
 /*
