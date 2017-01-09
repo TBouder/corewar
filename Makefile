@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+         #
+#    By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/10/05 20:24:05 by tbouder           #+#    #+#              #
-#    Updated: 2017/01/08 21:49:34 by quroulon         ###   ########.fr        #
+#    Updated: 2017/01/09 09:28:30 by tbouder          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,7 @@ clean_asm:
 	@$(MAKE) clean -C $(ASM_DIR)
 
 clean_vm:
-	@$(MAKE) clean -C $(VM_DIR)	
+	@$(MAKE) clean -C $(VM_DIR)
 
 
 
@@ -63,7 +63,7 @@ fclean_libft:
 
 fclean_asm:
 	@$(MAKE) fclean -C $(ASM_DIR)
-	@rm -f $(ASM_EXEC)
+	@rm -f $(ASM_DIR)$(ASM_EXEC)
 
 fclean_vm:
 	@$(MAKE) fclean -C $(VM_DIR)
