@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 23:27:37 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/06 14:41:31 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/09 15:42:04 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int			ft_get_args(t_vm *env, t_champions *champ, int op)
 		}
 		count = ft_count_to_next(nbr, op);
 		if (!IS_GRAPH && IS_VERBOSE)
-			ft_put("[{10}%s{0}]\n", ft_instruct_name(op));
+			ft_printf("[{10}%s{0}]\n", ft_instruct_name(op));
 		ft_call_func(env, champ, nbr, op);
 		op != ZJMP ? champ->pc += count : 0;
 		champ->pc = ft_mod(champ->pc, M);

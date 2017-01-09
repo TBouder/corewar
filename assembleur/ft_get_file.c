@@ -32,7 +32,7 @@ static void	ft_get_file_content_label(t_asm *env, char *label, char *final_line,
 		env->file_len++;
 	}
 	else
-		ft_lstend(lst, final_line, ft_strlen_asm(final_line) + 1);
+		ft_lstend(lst, final_line, ft_strlen(final_line) + 1);
 	ft_dbstrdel(split);
 }
 
@@ -46,12 +46,12 @@ static void	ft_get_file_content_help(t_asm *env, char *final_line, t_list **lst)
 	while (final_line[len] && final_line[len] != ' ')
 		len++;
 	label = ft_strsub(final_line, 0, len);
-	args = ft_strsub(final_line, len, ft_strlen_asm(final_line));
+	args = ft_strsub(final_line, len, ft_strlen(final_line));
 	if (label[len - 1] == ':')
 		ft_get_file_content_label(env, label, final_line, lst);
 	else if (ft_get_opcode(label) != 0 || ft_strstr(label, ".name")
 		|| ft_strstr(label, ".comment"))
-		ft_lstend(lst, final_line, ft_strlen_asm(final_line) + 1);
+		ft_lstend(lst, final_line, ft_strlen(final_line) + 1);
 	else
 	{
 		env->error_int = 2;

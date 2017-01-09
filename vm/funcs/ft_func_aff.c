@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 14:16:55 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/09 12:26:39 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/09 15:42:27 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ void			ft_corewar_aff(t_vm *env, t_champions *champ, int *nbr)
 		}
 		else if (!IS_SILENT && IN_REG(champ->reg[value]))
 		{
-			ft_put("Champion {14}%d{0} ({14}%s{0}) ask to print ",
+			ft_printf("Champion {14}%d{0} ({14}%s{0}) ask to print ",
 			champ->champ_id, champ->name);
-			ft_put("{10}r%d{0} : [{10}%C{0}] [{10}0x%x{0}]\n", value,
+			ft_printf("{10}r%d{0} : [{10}%C{0}] [{10}0x%x{0}]\n", value,
 			champ->reg[value] % 256, champ->reg[value] % 256);
 		}
 	}
