@@ -54,7 +54,7 @@ char		*ft_transform_champ_infos(char *content, size_t content_size)
 	return (magic_hex);
 }
 
-static char	*ft_transform_size_helper(U_INT content, size_t content_size, int i)
+static char	*ft_edit_size_helper(U_INT content, size_t content_size, int i)
 {
 	int		y;
 	char	*magic;
@@ -79,7 +79,7 @@ static char	*ft_transform_size_helper(U_INT content, size_t content_size, int i)
 	return (magic_hex);
 }
 
-void		ft_transform_size(unsigned int content, int fd, int len)
+void		ft_edit_size(unsigned int content, int fd, int len)
 {
 	char		*hex_string;
 	char		*content_str;
@@ -93,7 +93,7 @@ void		ft_transform_size(unsigned int content, int fd, int len)
 	len_size = (len_size / 2) + odd;
 	len_buffer = len - len_size;
 	write(fd, "\x00", len_buffer);
-	hex_string = ft_transform_size_helper(content, len_size, 0);
+	hex_string = ft_edit_size_helper(content, len_size, 0);
 	write(fd, hex_string, len_size);
 	ft_strdel(&hex_string);
 	ft_strdel(&content_str);
