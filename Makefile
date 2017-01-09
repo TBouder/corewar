@@ -6,7 +6,7 @@
 #    By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/10/05 20:24:05 by tbouder           #+#    #+#              #
-#    Updated: 2017/01/09 09:28:30 by tbouder          ###   ########.fr        #
+#    Updated: 2017/01/09 09:35:30 by tbouder          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,7 +63,7 @@ fclean_libft:
 
 fclean_asm:
 	@$(MAKE) fclean -C $(ASM_DIR)
-	@rm -f $(ASM_DIR)$(ASM_EXEC)
+	@rm -f $(ASM_EXEC)
 
 fclean_vm:
 	@$(MAKE) fclean -C $(VM_DIR)
