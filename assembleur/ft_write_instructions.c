@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 16:31:46 by quroulon          #+#    #+#             */
-/*   Updated: 2017/01/03 16:12:18 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/09 09:08:12 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void		ft_write_args_helper(t_asm *env, char *arg, int pds, int tmp)
 			tmp %= UINT_MAX;
 		tmp < 0 ? tmp = (UINT_MAX + 1) + (int)tmp : 0;
 	}
-	ft_transform_size(tmp, env->fd_cor, pds);
+	ft_edit_size(tmp, env->fd_cor, pds);
 }
 
 static void		ft_write_args(t_asm *env, char *arg, int pds, int line)
@@ -41,18 +41,17 @@ static void		ft_write_args(t_asm *env, char *arg, int pds, int line)
 
 	tmp = 0;
 	if (arg[0] && arg[0] == 'r')
-		ft_transform_size(ft_atoi(&arg[1]), env->fd_cor, pds);
+		ft_edit_size(ft_atoi(&arg[1]), env->fd_cor, pds);
 	else if (arg[0] && arg[0] == '%')
 	{
 		if (arg[1] && arg[1] == ':')
-			ft_transform_size(ft_calcul_jump(env, &arg[2], line, pds),
+			ft_edit_size(ft_calcul_jump(env, &arg[2], line, pds),
 								env->fd_cor, pds);
 		else
 			ft_write_args_helper(env, arg, pds, tmp);
 	}
 	else if (arg[0] && arg[0] == ':')
-		ft_transform_size(ft_calcul_jump(env, &arg[1], line, pds),
-							env->fd_cor, pds);
+		ft_edit_size(ft_calcul_jump(env, &arg[1], line, pds), env->fd_cor, pds);
 	else
 	{
 		tmp = ft_atoi(&arg[0]);
@@ -61,7 +60,7 @@ static void		ft_write_args(t_asm *env, char *arg, int pds, int line)
 		if ((unsigned long)tmp > USHRT_MAX)
 			tmp %= USHRT_MAX;
 		tmp < 0 ? tmp = (USHRT_MAX + 1) + tmp : 0;
-		ft_transform_size(tmp, env->fd_cor, pds);
+		ft_edit_size(tmp, env->fd_cor, pds);
 	}
 }
 

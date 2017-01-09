@@ -37,7 +37,7 @@ void		ft_put_data(t_asm *env)
 	hex_string = ft_transform_champ_infos(env->champ_name, PROG_NAME_LENGTH);
 	write(fd, hex_string, PROG_NAME_LENGTH);
 	ft_strdel(&hex_string);
-	ft_transform_size(env->instruct_size, fd, 8);
+	ft_edit_size(env->instruct_size, fd, 8);
 	hex_string = ft_transform_champ_infos(env->champ_comment, COMMENT_LENGTH);
 	write(fd, hex_string, COMMENT_LENGTH);
 	ft_strdel(&hex_string);

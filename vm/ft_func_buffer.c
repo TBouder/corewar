@@ -6,15 +6,16 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 19:32:18 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/05 19:41:46 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/09 09:15:00 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../vm.h"
+#include "vm.h"
 
 /*
 ** For add & sub
 */
+
 int		ft_set_buffer_1(int nbr)
 {
 	if (IS_REG(nbr))
@@ -47,7 +48,6 @@ int		ft_set_buffer_3(int nbr)
 		return (2);
 	return (0);
 }
-
 
 /*
 ** For sti ldi lldi & st
