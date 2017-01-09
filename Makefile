@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+         #
+#    By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/10/05 20:24:05 by tbouder           #+#    #+#              #
-#    Updated: 2017/01/03 16:23:18 by tbouder          ###   ########.fr        #
+#    Updated: 2017/01/08 21:49:34 by quroulon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,23 +28,18 @@ VM_EXEC		=	corewar
 
 .PHONY: all libft asm vm clean fclean re
 
-all:
-	@$(MAKE) -C $(LIBFT_DIR)
-	@$(MAKE) -C $(ASM_DIR)
-	@mv $(ASM_DIR)$(ASM_EXEC) .
-	@$(MAKE) -C $(VM_DIR)
-	@mv $(VM_DIR)$(VM_EXEC) .
+all: libft asm vm
 
 libft:
 	@$(MAKE) -C $(LIBFT_DIR)
 
 asm:
 	@$(MAKE) -C $(ASM_DIR)
-	@mv $(ASM_DIR)$(ASM_EXEC) .
+	@cp $(ASM_DIR)$(ASM_EXEC) .
 
 vm:
 	@$(MAKE) -C $(VM_DIR)
-	@mv $(VM_DIR)$(VM_EXEC) .
+	@cp $(VM_DIR)$(VM_EXEC) .
 
 
 
@@ -61,7 +56,7 @@ clean_vm:
 
 
 
-fclean: clean fclean_libft fclean_asm fclean_vm
+fclean: fclean_libft fclean_asm fclean_vm
 
 fclean_libft:
 	@$(MAKE) fclean -C $(LIBFT_DIR)
