@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_verbose.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
+/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/21 12:17:02 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/05 18:10:45 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/09 15:07:39 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void		ft_verbose_champ_info(t_vm *env, t_champions *champ, int part)
 	}
 	if (part == 2 && !IS_SILENT)
 	{
+		ft_put("Carry : {14}%d{0}\n", champ->carry);
 		ft_put("New PC : {14}%d{0}\n", champ->pc);
 		ft_put("The next cycle : {14}%d{0}\n\n\n", champ->next_cycle);
 	}

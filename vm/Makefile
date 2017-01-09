@@ -6,7 +6,7 @@
 #    By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/10/05 20:24:05 by tbouder           #+#    #+#              #
-#    Updated: 2017/01/09 11:22:02 by quroulon         ###   ########.fr        #
+#    Updated: 2017/01/09 14:13:44 by quroulon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,9 +57,10 @@ OBJ			=	$(SRC:%.c=%.o)
 ################################################################################
 #	RULES
 ################################################################################
+
 .PHONY: clean flcean re all
 
-all: $(NAME) target
+all: $(NAME)
 
 $(NAME): $(OBJ) $(LIB)
 	@$(CC) -o $@ $^ $(LDFLAGS)
@@ -73,7 +74,7 @@ $(LIB):
 	@$(MAKE) -C $(LIBFTDIR)
 
 clean:
-	@rm -f target $(OBJ)
+	@rm -f $(OBJ)
 	@echo "$(_RED)Vm : Deleted Obj files$(_RESET)"
 
 fclean: clean
@@ -81,46 +82,3 @@ fclean: clean
 	@echo "$(_RED)$(NAME) Deleted$(_RESET)"
 
 re: fclean all
-
-
-
-# BUILD is initially undefined
-ifndef BUILD
-
-# max equals 256 x's
-sixteen := x x x x x x x x x x x x x x x x
-MAX := $(foreach x,$(sixteen),$(sixteen))
-
-# T estimates how many targets we are building by replacing BUILD with a special string
-T := $(shell $(MAKE) -nrRf $(firstword $(MAKEFILE_LIST)) $(MAKECMDGOALS) \
-            BUILD="COUNTTHIS" | grep -c "COUNTTHIS")
-
-# N is the number of pending targets in base 1, well in fact, base x :-)
-N := $(wordlist 1,$T,$(MAX))
-
-# auto-decrementing counter that returns the number of pending targets in base 10
-counter = $(words $N)$(eval N := $(wordlist 2,$(words $N),$N))
-
-# BUILD is now defined to show the progress, this also avoids redefining T in loop
-BUILD = @echo $(counter) of $(T)
-endif
-
-# dummy phony targets
-
-# .PHONY: all clean
-
-# all: target
-#     @echo done
-
-# clean:
-#     @rm -f target *.c
-
-# dummy build rules
-
-target: a.c b.c c.c d.c e.c f.c g.c
-    @touch $@
-    $(BUILD)
-
-%.c:
-    @touch $@
-    $(BUILD)
