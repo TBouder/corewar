@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 14:16:55 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/05 18:54:30 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/09 12:26:39 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void			ft_corewar_aff(t_vm *env, t_champions *champ, int *nbr)
 
 	if (IS_REG(nbr[0]))
 	{
-		value = ft_byte_to_str(&env->map[champ->pc + 1], 1);
+		value = ft_byte_to_str(env, champ->pc + 1, 1);
 		if (IS_GRAPH && IN_REG(champ->reg[value]))
 		{
 			ft_print_champion_color(champ, env->notif);

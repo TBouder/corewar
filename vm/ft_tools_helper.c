@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 13:39:20 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/06 14:40:54 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/09 11:46:38 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int		ft_get_file_size(int fd)
 
  	o_pos = lseek(fd, 0, SEEK_CUR);
 	file_size = lseek(fd, 0, SEEK_END) * 2;
-	// file_size *= 2;
 	prog_size = (MAGIC_LEN * 2) + (PROG_NAME_LENGTH * 2)
 				+ (COMMENT_LENGTH * 2) + (SIZE_LEN * 2);
 	lseek(fd, o_pos, SEEK_SET);
