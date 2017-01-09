@@ -6,7 +6,7 @@
 /*   By: zaz <zaz@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2017/01/04 11:32:15 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/04 10:24:31 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 ** Toutes les tailles sont en octets.
 ** On part du principe qu'un int fait 32 bits. Est-ce vrai chez vous ?
 */
-
 # define IND_SIZE				2
 # define REG_SIZE				4
 # define DIR_SIZE				REG_SIZE
@@ -49,12 +48,20 @@
 # define NBR_LIVE				21
 # define MAX_CHECKS				10
 
+/*
+** Comment
+*/
+
 typedef char	t_arg_type;
 
 # define T_REG					1
 # define T_DIR					2
 # define T_IND					4
 # define T_LAB					8
+
+/*
+** Comment
+*/
 
 # define PROG_NAME_LENGTH		(128)
 # define COMMENT_LENGTH			(2048)

@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/03 15:54:41 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/09 09:17:56 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,14 @@ typedef struct		s_champions
 	unsigned int	starting_pos;
 	int				champ_id;
 	int				fake_id;
-	int				reg[100];
+	unsigned long	reg[100];
 	int				pc;
 	int				carry;
 	int				cycle;
 	int				next_cycle;
 	int				is_fork;
 	int				color;
+	int				alive;
 }					t_champions;
 
 typedef struct		s_vm
@@ -50,21 +51,21 @@ typedef struct		s_vm
 	int				*fd;
 	char			**filename;
 	int				nb_champ;
+	int				nb_forks;
 	int				total_size;
 	int				cycle_to_die;
 	int				cpt_to_die;
 	int				cycle_check;
 	int				cycle;
-	int				arg1;
-	int				arg2;
-	int				arg3;
+	unsigned long	arg1;
+	unsigned long	arg2;
+	unsigned long	arg3;
 	int				buf;
 	int				sum_idx;
-	header_t		*header;
+	t_header		*header;
 	char			*map;
 	int				*map_owner;
 	int				*map_moves;
-	int				*map_moves_buff;
 	long			current_id;
 	int				*fake_id;
 	WINDOW			*main_border;
@@ -95,6 +96,11 @@ int					*ft_get_size(t_vm *env, t_champions *champ);
 int					ft_count_to_next(int *nbr, int op);
 int					ft_byte_to_str(char *str, int len);
 int					ft_get_args(t_vm *env, t_champions *champ, int op);
+int					ft_set_buffer_1(int nbr);
+int					ft_set_buffer_2(int nbr);
+int					ft_set_buffer_3(int nbr);
+int					ft_set_buffer_4(int nbr);
+
 void				ft_corewar_live(t_vm *env, t_champions *champ, int *nbr);
 void				ft_corewar_aff(t_vm *env, t_champions *champ, int *nbr);
 void				ft_corewar_st(t_vm *env, t_champions *champ, int *nbr);
@@ -122,12 +128,15 @@ void				ft_print_champion_color(t_champions *champion, WINDOW *win);
 void				ft_print_infos(t_vm *env);
 void				ft_print_champions_infos(t_vm *env);
 void				ft_reload_windows(t_vm *env, int part);
+void				ft_color_map(t_vm *env, t_champions *champ,
+					int pc, char *sub_reg);
 
 /*
 ** DUMP
 */
 void				ft_dump(const void *addr, size_t size);
 void				ft_dump_ncurse(t_vm *env, const void *addr, size_t size);
+void				ft_get_ncurse_color(t_vm *env, int *col, int on);
 
 /*
 ** INIT
@@ -141,9 +150,10 @@ void				ft_init_champ(t_vm *env, t_champions *champ, int id,
 /*
 ** FREE
 */
-void				ft_clear_champ(t_list **blist, int id);
+void				ft_clear_champ(t_vm *env, t_list **blist, int id);
 void				ft_clear_all(t_vm *env);
-void				ft_error_vm(t_vm *env, char *msg, int clear);
+void				ft_error_vm(t_vm *env, const char *msg, int clear);
+void				ft_success_vm(t_vm *env, int clear);
 
 /*
 ** VERIF
@@ -171,5 +181,7 @@ void				ft_set_lives(t_vm *env, int val);
 void				ft_reset_lives(t_vm *env, int val);
 int					ft_set_buffer_and_or_xor(int nbr);
 int					ft_mod(int nbr, int mod);
+int					ft_get_file_size(int fd);
+void				ft_put_map_reg(t_vm *env, t_champions *champ, int i, int j);
 
 #endif

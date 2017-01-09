@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 23:27:37 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/03 16:01:50 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/06 14:41:31 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,42 +20,42 @@
 static char	*ft_instruct_name_helper(int op)
 {
 	if (op == ZJMP)
-		return ("ZJMP");
+		return ((char *)"ZJMP");
 	else if (op == LDI)
-		return ("LDI");
+		return ((char *)"LDI");
 	else if (op == STI)
-		return ("STI");
+		return ((char *)"STI");
 	else if (op == FORK)
-		return ("FORK");
+		return ((char *)"FORK");
 	else if (op == LLD)
-		return ("LLD");
+		return ((char *)"LLD");
 	else if (op == LLDI)
-		return ("LLDI");
+		return ((char *)"LLDI");
 	else if (op == LFORK)
-		return ("LFORK");
+		return ((char *)"LFORK");
 	else if (op == AFF)
-		return ("AFF");
-	return ("INVALID INSTRUCTION");
+		return ((char *)"AFF");
+	return ((char *)"INVALID INSTRUCTION");
 }
 
 static char	*ft_instruct_name(int op)
 {
 	if (op == LIVE)
-		return ("LIVE");
+		return ((char *)"LIVE");
 	else if (op == LD)
-		return ("LD");
+		return ((char *)"LD");
 	else if (op == ST)
-		return ("ST");
+		return ((char *)"ST");
 	else if (op == ADD)
-		return ("ADD");
+		return ((char *)"ADD");
 	else if (op == SUB)
-		return ("SUB");
+		return ((char *)"SUB");
 	else if (op == AND)
-		return ("AND");
+		return ((char *)"AND");
 	else if (op == OR)
-		return ("OR");
+		return ((char *)"OR");
 	else if (op == XOR)
-		return ("XOR");
+		return ((char *)"XOR");
 	return (ft_instruct_name_helper(op));
 }
 
@@ -66,6 +66,9 @@ static char	*ft_instruct_name(int op)
 
 static void	ft_call_func(t_vm *env, t_champions *champ, int *nbr, int op)
 {
+	env->arg1 = 0;
+	env->arg2 = 0;
+	env->arg3 = 0;
 	op == LIVE ? ft_corewar_live(env, champ, nbr) : 0;
 	op == LD ? ft_corewar_ld(env, champ, nbr) : 0;
 	op == ST ? ft_corewar_st(env, champ, nbr) : 0;
@@ -114,5 +117,5 @@ int			ft_get_args(t_vm *env, t_champions *champ, int op)
 	}
 	champ->pc += 1;
 	champ->pc = ft_mod(champ->pc, M);
-	return (2);
+	return (ft_ret_cycle((int)env->map[champ->pc]));
 }

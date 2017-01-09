@@ -6,7 +6,11 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 16:20:23 by tbouder           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2017/01/03 16:14:51 by tbouder          ###   ########.fr       */
+=======
+/*   Updated: 2017/01/09 09:21:27 by tbouder          ###   ########.fr       */
+>>>>>>> tbouder
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +18,6 @@
 
 static void		ft_init_colors(void)
 {
-	start_color();
-	init_color(COLOR_BLACK, 224, 248, 299);
 	init_color(42, 498, 866, 298);
 	init_color(43, 1000, 863, 274);
 	init_color(44, 980, 643, 376);
@@ -37,6 +39,10 @@ static void		ft_init_colors(void)
 	init_pair(63, 53, COLOR_BLACK);
 	init_pair(64, 54, COLOR_BLACK);
 	init_pair(65, 55, COLOR_BLACK);
+	init_pair(72, COLOR_BLACK, 42);
+	init_pair(73, COLOR_BLACK, 43);
+	init_pair(74, COLOR_BLACK, 44);
+	init_pair(75, COLOR_BLACK, 45);
 }
 
 void			ft_init_ncurse(t_vm *env)
@@ -53,6 +59,8 @@ void			ft_init_ncurse(t_vm *env)
 	box(env->main_border, ACS_VLINE, ACS_HLINE);
 	box(env->info_border, ACS_VLINE, ACS_HLINE);
 	box(env->notif_border, ACS_VLINE, ACS_HLINE);
+	start_color();
+	init_color(COLOR_BLACK, 224, 248, 299);
 	ft_init_colors();
 	noecho();
 	curs_set(FALSE);

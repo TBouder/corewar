@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/14 19:12:52 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/03 15:51:19 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/09 09:12:57 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,33 +19,7 @@ static void		ft_del_champ(t_champions *champ)
 	ft_strdel(&champ->content);
 }
 
-void			ft_clear_champ(t_list **blist, int id)
-{
-	t_list	*current;
-	t_list	*prev;
-
-	current = *blist;
-	prev = NULL;
-	while (current)
-	{
-		if (((t_champions *)current->content)->champ_id == id)
-		{
-			if (prev == NULL)
-				*blist = current->next;
-			else
-				prev->next = current->next;
-			ft_del_champ((t_champions *)current->content);
-			free(current->content);
-			free(current);
-			if (!(current = *blist))
-				break ;
-		}
-		prev = current;
-		current = current->next;
-	}
-}
-
-void			ft_clear_all_champs(t_list **begin_list)
+static void		ft_clear_all_champs(t_list **begin_list)
 {
 	t_list	*free_list;
 	t_list	*temp;
@@ -74,7 +48,6 @@ void			ft_clear_all(t_vm *env)
 	ft_strdel(&env->map);
 	free(env->map_owner);
 	free(env->map_moves);
-	free(env->map_moves_buff);
 	free(env->header);
 	free(env->fd);
 	ft_clear_all_champs(&env->list_champions);
@@ -84,7 +57,7 @@ void			ft_clear_all(t_vm *env)
 	IS_GRAPH ? ft_clear_ncurse(env) : 0;
 }
 
-void			ft_error_vm(t_vm *env, char *msg, int clear)
+void			ft_error_vm(t_vm *env, const char *msg, int clear)
 {
 	ft_printf("{9}%s{0}\n", msg);
 	if (clear == 1)

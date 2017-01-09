@@ -6,70 +6,78 @@
 #    By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/10/05 20:24:05 by tbouder           #+#    #+#              #
-#    Updated: 2016/12/30 20:33:50 by tbouder          ###   ########.fr        #
+#    Updated: 2017/01/09 09:24:51 by tbouder          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 		= 	corewar
 
-CC			= 	gcc
-CFLAGS		= 	-Wall -Werror -Wextra -g
+CC			=	gcc
+CFLAGS		=	-Wall -Werror -Wextra -g
+CFLAGS_EXT	=	-O3 -Wwrite-strings -Wstrict-prototypes -Wunreachable-code -Wno-missing-braces  -Wno-missing-field-initializers \
+				-Wchar-subscripts -Wcomment -Wformat=2 -Wimplicit-int -Werror-implicit-function-declaration -Wmain \
+				-Wparentheses -Wsequence-point -Wreturn-type -Wswitch -Wtrigraphs -Wunused -Wuninitialized \
+				-Wunknown-pragmas -Wfloat-equal -Wundef -Wshadow -Wpointer-arith \
+				-Wbad-function-cast -Wsign-compare -Waggregate-return -Wmissing-prototypes -Wmissing-declarations -Wformat -Wmissing-format-attribute -Wno-deprecated-declarations -Wpacked -Wredundant-decls -Wnested-externs -Winline
+LDFLAGS		=	-lncurses -L$(LIBFTDIR) -lft
 
 LIB			=	../libft/libft.a
+LIBFTDIR	=	../libft
 
-HEADER 		=	vm.h
+INC 		=	vm.h ft_macro.h op.h
+
+_RED		=	\033[0;31m
+_GREEN		=	\033[0;32m
+_BLUE		=	\033[0;36m
+_RESET		=	\033[0;m
+_WHITE		=	\033[0;37m
+
 
 ################################################################################
 #	SRC
 ################################################################################
-SRC			=	main.c ft_extract_champion.c ft_init.c ft_init_helper.c ft_fight.c \
-				ft_dump_mem.c ft_free.c ft_verbose.c ft_tools.c ft_verif.c \
-				ft_get_flags.c \
-				ft_func_helper.c ft_func_launcher.c \
-				funcs/ft_func_live_aff.c \
-				funcs/ft_func_add_sub.c \
-				funcs/ft_func_and_or_xor.c \
-				funcs/ft_func_forks.c \
-				funcs/ft_func_zjmp.c \
-				funcs/ft_func_ldi_lldi.c \
-				funcs/ft_func_st_sti.c \
-				funcs/ft_func_ld_lld.c \
-				ncurse/ft_generic_ncurse.c ncurse/ft_reload_ncurse.c \
-				ncurse/ft_print_ncurse.c ncurse/ft_dump_ncurse.c
 
-OBJ			=	main.o ft_extract_champion.o ft_init.o ft_init_helper.o ft_fight.o \
-				ft_dump_mem.o ft_free.o ft_verbose.o ft_tools.o ft_verif.o \
-				ft_get_flags.o \
-				ft_func_helper.o ft_func_launcher.o \
-				funcs/ft_func_live_aff.o \
-				funcs/ft_func_add_sub.o \
-				funcs/ft_func_and_or_xor.o \
-				funcs/ft_func_forks.o \
-				funcs/ft_func_zjmp.o \
-				funcs/ft_func_ldi_lldi.o \
-				funcs/ft_func_st_sti.o \
-				funcs/ft_func_ld_lld.o \
-				ncurse/ft_generic_ncurse.o ncurse/ft_reload_ncurse.o \
-				ncurse/ft_print_ncurse.o ncurse/ft_dump_ncurse.o
+SRC			=	main.c ft_extract_champion.c ft_init.c ft_init_helper.c ft_fight.c \
+				ft_dump_mem.c ft_free.c ft_free_helper.c ft_verbose.c ft_tools.c ft_verif.c \
+				ft_get_flags.c ft_tools_helper.c\
+				ft_func_helper.c ft_func_launcher.c ft_func_buffer.c\
+				funcs/ft_func_live.c funcs/ft_func_aff.c\
+				funcs/ft_func_add.c funcs/ft_func_sub.c \
+				funcs/ft_func_and.c funcs/ft_func_xor.c funcs/ft_func_or.c \
+				funcs/ft_func_fork.c funcs/ft_func_lfork.c \
+				funcs/ft_func_zjmp.c \
+				funcs/ft_func_ldi.c funcs/ft_func_lldi.c \
+				funcs/ft_func_st.c funcs/ft_func_sti.c \
+				funcs/ft_func_ld.c funcs/ft_func_lld.c \
+				ncurse/ft_generic_ncurse.c ncurse/ft_reload_ncurse.c \
+				ncurse/ft_print_ncurse.c ncurse/ft_dump_ncurse.c ncurse/ft_dump_ncurse_helper.c
+
+OBJ			=	$(SRC:%.c=%.o)
 
 ################################################################################
 #	RULES
 ################################################################################
-.SILENT : $(NAME) clean fclean $(OBJ)
+.PHONY: clean flcean re all
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	# $(MAKE) re -C ../libft
-	$(CC) $(CFLAGS) -c $(SRC)
-	$(CC) -o $(NAME) $(OBJ) $(LIB) -lncurses
+$(NAME): $(OBJ) $(LIB)
+	@$(CC) -o $@ $^ $(LDFLAGS)
+	@echo "$(_GREEN)Creation of exe $@$(_RESET)"
+
+%.o: %.c $(INC)
+	@$(CC) -o $@ -c $< $(CFLAGS)
+	@echo "Compilation of $<"
+
+$(LIB):
+	@$(MAKE) -C $(LIBFTDIR)
 
 clean:
-	# $(MAKE) clean -C ../libft
-	rm -f $(OBJ)
+	@rm -f $(OBJ)
+	@echo "$(_RED)Vm : Deleted Obj files$(_RESET)"
 
 fclean: clean
-	# $(MAKE) fclean -C ../libft
-	rm -f $(NAME)
+	@rm -f $(NAME)
+	@echo "$(_RED)$(NAME) Deleted$(_RESET)"
 
 re: fclean all
