@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tools_helper.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
+/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 13:39:20 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/06 14:40:54 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/09 18:24:48 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,12 @@ void	ft_put_map_reg(t_vm *env, t_champions *champ, int i, int j)
 		sub_reg = ft_strsub(reg, i, 2);
 		ft_color_map(env, champ, champ->pc - 1
 			+ ft_mod(env->sum_idx + j, I), sub_reg);
+		// ft_color_map(env, champ, champ->pc - 1 + (env->sum_idx + j) % I, sub_reg);
+		// if (env->sum_idx < 0)
+		// 	ft_color_map(env, champ, champ->pc - 1 + M - (-(env->sum_idx + j)) % I, sub_reg);
+		// else
+		// 	ft_color_map(env, champ, champ->pc - 1 + (env->sum_idx + j) % I, sub_reg);
+		
 		i += 2;
 		j += 1;
 		ft_strdel(&sub_reg);
