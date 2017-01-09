@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 19:42:02 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/08 20:54:41 by quroulon         ###   ########.fr       */
+/*   Updated: 2017/01/09 15:37:19 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,5 +104,5 @@ int				main(int ac, char **av)
 		ft_clear_all(&env);
 	}
 	free(env.options);
-	return (0);
+	return (1);
 }
