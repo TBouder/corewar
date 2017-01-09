@@ -31,12 +31,12 @@ char			ft_verif_extension(t_asm *env, char *source)
 		ft_error_asm(env, ERR_DIR, 0);
 	if (!ft_strrchr(source, '.'))
 		ft_error_asm(env, ERR_NOEXT, 0);
-	extension = ft_strinit_asm(ft_strrchr(source, '.'));
+	extension = ft_strinit(ft_strrchr(source, '.'));
 	result = EQU(extension, ".s");
 	if (result)
 	{
-		len_source = ft_strlen_asm(source);
-		env->filename = ft_strinit_asm(source);
+		len_source = ft_strlen(source);
+		env->filename = ft_strinit(source);
 		env->filename_noext = ft_strsub(source, 0, len_source - 2);
 		env->filename_new = ft_strjoin(env->filename_noext, ".cor");
 	}

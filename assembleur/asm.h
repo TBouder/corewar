@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/03 16:10:22 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/09 15:51:03 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,6 @@ typedef struct			s_asm
 	char				***args;
 	int					opcode;
 }						t_asm;
-
-/*
-** ft_asm_func.c
-*/
-int						ft_strlen_asm(char *str);
-char					*ft_strinit_asm(char *str);
 
 /*
 ** main.c
