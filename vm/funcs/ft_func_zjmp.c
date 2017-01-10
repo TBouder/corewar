@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/06 00:09:24 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/09 12:25:15 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	ft_extract_args(t_vm *env, int pc, int *nbr)
 {
 	env->buf = ft_set_buffer_3(nbr[0]);
-	env->arg1 = ft_byte_to_str(&env->map[pc], env->buf);
+	env->arg1 = ft_byte_to_str(env, pc, env->buf);
 }
 
 /*

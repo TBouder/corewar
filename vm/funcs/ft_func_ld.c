@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/09 09:15:36 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/09 12:25:27 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,10 @@ static int	ft_edit_arg_1(t_vm *env, t_champions *champ, int *nbr)
 	if (IS_DIR(nbr[0]))
 		;
 	else if (IS_IND(nbr[0]) && env->arg1 > MAX)
-		env->arg1 = ft_byte_to_str(&env->map[
-			ft_mod(pc + ((env->arg1 % I) - I), M)], 4);
+		env->arg1 = ft_byte_to_str(env,
+			ft_mod(pc + ((env->arg1 % I) - I), M), 4);
 	else if (IS_IND(nbr[0]))
-		env->arg1 = ft_byte_to_str(&env->map[
-			ft_mod(pc + (env->arg1 % I), M)], 4);
+		env->arg1 = ft_byte_to_str(env, ft_mod(pc + (env->arg1 % I), M), 4);
 	else
 		return (0);
 	return (1);
@@ -40,10 +39,10 @@ static int	ft_edit_arg_1(t_vm *env, t_champions *champ, int *nbr)
 static void	ft_extract_args(t_vm *env, int pc, int *nbr)
 {
 	env->buf = ft_set_buffer_2(nbr[0]);
-	env->arg1 = ft_byte_to_str(&env->map[pc], env->buf);
+	env->arg1 = ft_byte_to_str(env, pc, env->buf);
 	pc += env->buf;
 	env->buf = ft_set_buffer_2(nbr[1]);
-	env->arg2 = ft_byte_to_str(&env->map[pc], env->buf);
+	env->arg2 = ft_byte_to_str(env, pc, env->buf);
 }
 
 /*

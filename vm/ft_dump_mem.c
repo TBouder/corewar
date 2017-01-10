@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 18:15:11 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/06 14:40:46 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/09 15:41:15 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ void			ft_dump(const void *addr, size_t size)
 	while (size > 16)
 	{
 		ft_print_hex_mem((char *)addr + offset, 64);
-		ft_put("\n");
+		ft_putchar('\n');
 		offset += 64;
 		size -= 64;
 	}
 	ft_print_hex_mem((char *)addr + offset, size);
-	ft_put("\n");
+	ft_putchar('\n');
 }

@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 14:16:55 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/06 14:41:07 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/09 12:25:01 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,13 @@ int		*ft_send_args(char *bin)
 	return (nbr);
 }
 
-int		ft_byte_to_str(char *str, int len)
+long	ft_byte_to_str(t_vm *env, int pc, int len)
 {
-	int		i;
-	int		y;
-	int		res;
-	char	*value;
-	char	*hex;
+	long		i;
+	long		y;
+	long		res;
+	char		*value;
+	char		*hex;
 
 	i = 0;
 	y = 0;
@@ -48,8 +48,8 @@ int		ft_byte_to_str(char *str, int len)
 	value = ft_strnew(len);
 	while (i < len)
 	{
-		value[i] = hex[(int)((unsigned char)str[y]) / 16];
-		value[i + 1] = hex[(int)((unsigned char)str[y]) % 16];
+		value[i] = hex[(int)((unsigned char)env->map[(pc + y) % M]) / 16];
+		value[i + 1] = hex[(int)((unsigned char)env->map[(pc + y) % M]) % 16];
 		i += 2;
 		y++;
 	}
@@ -68,7 +68,7 @@ int		*ft_get_size(t_vm *env, t_champions *champ)
 	int		i;
 
 	champ->pc += 1;
-	size = ft_itoa_base(ft_byte_to_str(&env->map[champ->pc], 1), 2);
+	size = ft_itoa_base(ft_byte_to_str(env, champ->pc, 1), 2);
 	bin = ft_strnew(8);
 	len = ft_strlen(size);
 	i = 7;
