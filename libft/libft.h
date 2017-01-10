@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/09 13:12:44 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/09 15:45:03 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,7 +173,7 @@ void				ft_putchar_fd(char c, int fd);
 void				ft_putcendl(char c);
 void				ft_putstr(char const *s);
 void				ft_putstr_fd(char const *s, int fd);
-void				ft_put_endl(char const *s);
+void				ft_putendl(char const *s);
 void				ft_putendl_fd(char const *s, int fd);
 void				ft_putnbr(int n);
 void				ft_putnbr_base(long long nb, int base, int maj);
@@ -229,12 +229,12 @@ unsigned int		ft_hash_little(char *str, int len);
 void				ft_btree_print_preorder(t_btree *node);
 void				ft_btree_print_inorder(t_btree *node);
 void				ft_btree_print_postorder(t_btree *node);
-void 				ft_btreecmp_rev(t_btree **tree, void const *content,
-						size_t c_size);
-void 				ft_btreecmp(t_btree **tree, void const *content,
-						size_t c_size);
+void				ft_btreecmp_rev(t_btree **tree, void const *content,
+					size_t c_size);
+void				ft_btreecmp(t_btree **tree, void const *content,
+					size_t c_size);
 t_btree				*ft_btreenew(void const *content, size_t c_size);
-void 				ft_btreedel(t_btree *tree);
+void				ft_btreedel(t_btree *tree);
 void				ft_btreesearch(t_btree *node, char *content, int *ret);
 
 /*
@@ -242,17 +242,18 @@ void				ft_btreesearch(t_btree *node, char *content, int *ret);
 */
 int					ft_extract_options(char **av, t_options *options);
 
-
-void				OVERLOAD ft_put(int nbr);
-void				OVERLOAD ft_put(char c);
-int					OVERLOAD ft_put(const char *format, ...);
-
-void				OVERLOAD ft_put_fd(int nbr, int fd);
-void				OVERLOAD ft_put_fd(char c, int fd);
-void				OVERLOAD ft_put_fd(char *str, int fd);
-
-void				OVERLOAD ft_putendl(int nbr);
-void				OVERLOAD ft_putendl(char c);
-void				OVERLOAD ft_putendl(const char *format, ...);
+/*
+** void				OVERLOAD ft_put(int nbr);
+** void				OVERLOAD ft_put(char c);
+** int					OVERLOAD ft_put(const char *format, ...);
+**
+** void				OVERLOAD ft_put_fd(int nbr, int fd);
+** void				OVERLOAD ft_put_fd(char c, int fd);
+** void				OVERLOAD ft_put_fd(char *str, int fd);
+**
+** void				OVERLOAD ft_putendl(int nbr);
+** void				OVERLOAD ft_putendl(char c);
+** void				OVERLOAD ft_putendl(const char *format, ...);
+*/
 
 #endif

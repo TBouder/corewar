@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 13:39:20 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/09 18:24:48 by quroulon         ###   ########.fr       */
+/*   Updated: 2017/01/10 14:51:15 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,9 @@ int		ft_get_file_size(int fd)
 	unsigned int	file_size;
 	unsigned int	prog_size;
 
- 	o_pos = lseek(fd, 0, SEEK_CUR);
+	o_pos = lseek(fd, 0, SEEK_CUR);
 	file_size = lseek(fd, 0, SEEK_END) * 2;
-	// file_size *= 2;
-	prog_size = (MAGIC_LEN * 2) + (PROG_NAME_LENGTH * 2)
-				+ (COMMENT_LENGTH * 2) + (SIZE_LEN * 2);
+	prog_size = (8) + (128 * 2) + (2048 * 2) + (24);
 	lseek(fd, o_pos, SEEK_SET);
 	return ((file_size - prog_size) / 2);
 }
@@ -48,12 +46,6 @@ void	ft_put_map_reg(t_vm *env, t_champions *champ, int i, int j)
 		sub_reg = ft_strsub(reg, i, 2);
 		ft_color_map(env, champ, champ->pc - 1
 			+ ft_mod(env->sum_idx + j, I), sub_reg);
-		// ft_color_map(env, champ, champ->pc - 1 + (env->sum_idx + j) % I, sub_reg);
-		// if (env->sum_idx < 0)
-		// 	ft_color_map(env, champ, champ->pc - 1 + M - (-(env->sum_idx + j)) % I, sub_reg);
-		// else
-		// 	ft_color_map(env, champ, champ->pc - 1 + (env->sum_idx + j) % I, sub_reg);
-		
 		i += 2;
 		j += 1;
 		ft_strdel(&sub_reg);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/09 11:19:12 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/01 15:40:56 by quroulon         ###   ########.fr       */
+/*   Updated: 2017/01/09 10:27:48 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ char				*ft_itoa_base(long long n, int base)
 	int		sign;
 
 	len = ft_nbrlen_base(n, base);
+	if (len == 0)
+		return (ft_strinit("0"));
 	sign = n < 0 ? 1 : 0;
 	n = sign == 1 ? -n : n;
 	s = ft_strnew(len);
