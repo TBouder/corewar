@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_func_sti.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
+/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/09 12:26:18 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/10 19:55:34 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ void		ft_corewar_sti(t_vm *env, t_champions *champ, int *nbr)
 	if (IS_REG(nbr[0]) && IS_ALL(nbr[1]) && IS_DIR_REG(nbr[2]))
 	{
 		ft_extract_args(env, pc, nbr);
+		// ft_printf ("reg => {10}%d, %d, %d{0}\n", env->arg1, env->arg2, env->arg3);
+		// ft_printf ("champ => {10}%d, %d, %d{0}\n", champ->reg[env->arg1], champ->reg[env->arg2], champ->reg[env->arg3]);
 		if (!ft_edit_arg_1(env, champ, nbr))
 			return ;
 		if (!ft_edit_arg_2(env, champ, nbr))

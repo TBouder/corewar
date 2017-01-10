@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/21 12:17:02 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/10 14:48:27 by quroulon         ###   ########.fr       */
+/*   Updated: 2017/01/10 14:54:50 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void		ft_verbose_champ_info(t_vm *env, t_champions *champ, int part)
 	}
 	if (part == 2 && !IS_SILENT)
 	{
-		ft_put("Carry : {14}%d{0}\n", champ->carry);
+		ft_printf("Carry : {14}%d{0}\n", champ->carry);
 		ft_printf("New PC : {14}%d{0}\n", champ->pc);
 		ft_printf("The next cycle : {14}%d{0}\n\n\n", champ->next_cycle);
 	}
