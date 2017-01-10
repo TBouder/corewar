@@ -45,7 +45,7 @@ void		ft_verbose_champ_info(t_vm *env, t_champions *champ, int part)
 	}
 	if (part == 2 && !IS_SILENT)
 	{
-		ft_put("Carry : {14}%d{0}\n", champ->carry);
+		ft_printf("Carry : {14}%d{0}\n", champ->carry);
 		ft_printf("New PC : {14}%d{0}\n", champ->pc);
 		ft_printf("The next cycle : {14}%d{0}\n\n\n", champ->next_cycle);
 	}
