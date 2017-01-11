@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/02 18:43:15 by quroulon          #+#    #+#             */
-/*   Updated: 2017/01/10 20:15:20 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/11 09:30:10 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,21 @@ int			ft_valid_spaces(char *str)
 	count = 0;
 	while (str[i])
 	{
-		if (str[i] == 32)
-			count++;
+		if (str[i] && ft_isspace(str[i]))
+		{
+			while (str[i] && ft_isspace(str[i]))
+				i++;
+			if (str[i] && !ft_isspace(str[i]))
+				count++;
+		}
 		i++;
 	}
+	ft_printf("count : %d\n", count);
 	return (count);
+}
+
+void		ft_verif_valid_spaces_fail(t_asm *env, char *str)
+{
+	ft_printf("{9}Err{0} : arg error here : %s", str);
+	ft_error_asm(env, "", 1);
 }
