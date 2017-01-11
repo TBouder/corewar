@@ -6,7 +6,7 @@
 /*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/02 18:43:15 by quroulon          #+#    #+#             */
-/*   Updated: 2017/01/11 09:30:10 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/11 09:32:24 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ int			ft_valid_spaces(char *str)
 		}
 		i++;
 	}
-	ft_printf("count : %d\n", count);
 	return (count);
 }
 
