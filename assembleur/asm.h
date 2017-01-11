@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 12:02:58 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/09 15:51:03 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/11 09:22:43 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,8 @@ long					ft_calcul_jump(t_asm *env, char *str, int line,
 ** ft_valid_file.c
 */
 int						ft_valid_label(char *str);
+int						ft_valid_spaces(char *str);
+void					ft_verif_valid_spaces_fail(t_asm *env, char *str);
 
 /*
 ** GET : ft_get_champion.c, ft_get_file.c, ft_get_size.c
