@@ -5,8 +5,8 @@ hello:
 # sti r1, %:live1, %1
 st r1, 6
 # live1:
-	live %222
-ld %0, r15
+live %222
+zjmp %-220
 fork %:forcopy
 
 st r1, 6
@@ -14,6 +14,8 @@ live %222
 fork %:forjump
 
 # sti r1, %:live2, %8
+ld %0, r15
+
 live1:
 st r1, 6
 	live %222
@@ -23,6 +25,7 @@ forcopy:
 st r1, 6
 live %222
 fork %:forlive
+
 ld %-209, r11
 # ld %-131, r11
 ld %190056971, r10 # 0b54 0a0b
@@ -43,7 +46,7 @@ ld %-200, r11
 # ld %-122, r11
 # ld %17432376, r10 # 0109 ff38
 # ld %50986818, r10 # 0309 ff38
-ld %34209572, r10 # 0209 ff24
+ld -108, r10 # 0209 ff24
 ld %0, r15
 zjmp %:endtheworld
 
