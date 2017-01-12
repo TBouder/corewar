@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 16:03:50 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/03 16:05:13 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/12 12:40:33 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	ft_usage_asm(char *prog_name)
 {
-	ft_printf("Usage: %s [-a] <sourcefile.s>\n", prog_name);
+	ft_printf("Usage: %s [-args (no effects right now)] <sourcefile.s>\n",
+		prog_name);
 }
 
 void	ft_error_asm(t_asm *env, char *msg, int clear)
