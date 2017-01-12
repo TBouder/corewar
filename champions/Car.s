@@ -70,10 +70,12 @@ label05: ldi   r2,%:label14,r6    		# 6,233,48
 label14: sti   r6,r2,r3           		# 5,251,30
 	 zjmp  %-207              		# 3,256,25
 
-label10: live  %4294967295                 		# 5,259,22
-	 fork  %:label10          		# 3,264,17
-	 zjmp  %:label10          		# 3,267,14
+label10:
+	live  %4294967295                 		# 5,259,22
+	fork  %:label10          		# 3,264,17
+	zjmp  %:label10          		# 3,267,14
 
-label11: live  %4294967295                 		# 5,270,11
-	 fork  %:label11          		# 3,275,6
-	 zjmp  %:label11          		# 3,278,3
+label11:
+	live  %4294967295                 		# 5,270,11
+	fork  %:label11          		# 3,275,6
+	zjmp  %:label11          		# 3,278,3

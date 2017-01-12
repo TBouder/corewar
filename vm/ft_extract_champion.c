@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_extract_champion.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
+/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 17:46:14 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/09 09:09:08 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/12 15:21:14 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int		ft_rev_hex(char *hex)
 	int		y;
 
 	hex_len = ft_strlen(hex);
-	new_hex = ft_strnew(hex_len);
+	new_hex = ft_strnew(hex_len + 1);
 	i = hex_len;
 	y = 0;
 	while (y < hex_len)
@@ -34,7 +34,10 @@ static int		ft_rev_hex(char *hex)
 			new_hex[y++] = hex[i - 1];
 		}
 		else
+		{
+			new_hex[y++] = '0';
 			new_hex[y++] = hex[i - 1];
+		}
 		i -= (i - 2 >= 0) ? 2 : 1;
 	}
 	ret_value = ft_atoi_base(new_hex, 16);
