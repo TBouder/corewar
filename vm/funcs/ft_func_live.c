@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 14:16:55 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/09 15:42:20 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/12 12:27:18 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static t_list	*ft_find_live(t_vm *env, int id)
 	list = env->list_champions;
 	while (list)
 	{
-		if (((t_champions *)list->content)->champ_id == id)
+		if (((t_champions *)list->content)->fake_id == id)
 			return (list);
 		list = list->next;
 	}
