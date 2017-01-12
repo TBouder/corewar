@@ -113,7 +113,9 @@ int				ft_verif_label(t_asm *env, char *str)
 	int		reg_nb;
 
 	i = 0;
-	if (str && str[i] == DIRECT_CHAR && str[i + 1] == LABEL_CHAR)
+	if (str && str[i] == DIRECT_CHAR && !str[i + 1])
+		return (-1);
+	else if (str && str[i] == DIRECT_CHAR && str[i + 1] == LABEL_CHAR)
 		return (ft_verif_label_direct(env, str, 0));
 	else if (str && str[i] == DIRECT_CHAR && str[i + 1] != LABEL_CHAR)
 		return (ft_verif_label_direct(env, str, 1));
@@ -121,7 +123,7 @@ int				ft_verif_label(t_asm *env, char *str)
 		return (ft_verif_label_indirect(str, 0));
 	else if (str && str[i] == LABEL_CHAR)
 		return (ft_verif_label_indirect(str, 1));
-	else if (str && str[i] == 'r')
+	else if (str && str[i] == 'r' && str[i + 1])
 	{
 		if (!ft_isstrnum(str + 1))
 			return (0);

@@ -67,7 +67,7 @@ char			**ft_get_args(t_asm *env, int i)
 static void		ft_get_size_helper(t_asm *env, int i, int arg_value)
 {
 	if (arg_value == -1)
-		ft_printf("{9}Err{0} : One argument of this line is falty [%s]",
+		ft_printf("{9}Err{0} : One argument of this line is faulty [%s]",
 					env->file_content[i]);
 	if (arg_value == -2)
 		ft_printf("{9}Err{0} : Too many arguments for [%s]",
