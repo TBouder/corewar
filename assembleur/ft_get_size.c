@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 15:19:07 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/03 16:09:30 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/11 09:32:33 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ char			**ft_get_args(t_asm *env, int i)
 		ft_error_asm(env, "{9}Err{0} : Comma at the end of the line", 1);
 	elems = ft_split_args(env->file_content[i], ',', 3);
 	elem_0 = ft_split_args(elems[0], ' ', 2);
+	if (ft_valid_spaces(elems[0]) > 1)
+		ft_verif_valid_spaces_fail(env, elems[0]);
 	elem_1 = ft_strtrim(elems[1]);
 	elem_2 = ft_strtrim(elems[2]);
 	args = ft_dbstrnew(5);

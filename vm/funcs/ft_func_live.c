@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 14:16:55 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/05 18:54:23 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/09 15:42:20 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void			ft_corewar_live(t_vm *env, t_champions *champ, int *nbr)
 
 	if (IS_DIR(nbr[0]))
 	{
-		player_alive = ft_byte_to_str(&env->map[champ->pc + 1], 4);
+		player_alive = ft_byte_to_str(env, champ->pc + 1, 4);
 		if (!(list = ft_find_live(env, player_alive)))
 			return ;
 		env->nb_live[((t_champions *)list->content)->champ_id] += 1;
@@ -54,7 +54,7 @@ void			ft_corewar_live(t_vm *env, t_champions *champ, int *nbr)
 		}
 		else if (!IS_SILENT)
 		{
-			ft_put("Champion {14}%d{0} ({14}%s{0}) is {10}alive{0}\n",
+			ft_printf("Champion {14}%d{0} ({14}%s{0}) is {10}alive{0}\n",
 			player_alive, ((t_champions *)list->content)->name);
 		}
 		env->total_live++;

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+         #
+#    By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/10/05 20:24:05 by tbouder           #+#    #+#              #
-#    Updated: 2017/01/08 21:46:45 by quroulon         ###   ########.fr        #
+#    Updated: 2017/01/09 15:51:19 by tbouder          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ _WHITE		=	\033[0;37m
 #	SRC
 ################################################################################
 
-SRC			=	main.c ft_asm_func.c ft_parse.c ft_transform_hex.c ft_get_size.c \
+SRC			=	main.c ft_parse.c ft_transform_hex.c ft_get_size.c \
 				ft_opweight_part1.c ft_opweight_part2.c ft_tools.c ft_get_file.c \
 				ft_init.c ft_free.c ft_verif.c ft_get_champion.c ft_btree_asm.c \
 				ft_get_weight.c ft_write_instructions.c ft_valid_file.c \

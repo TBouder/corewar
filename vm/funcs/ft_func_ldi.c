@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 18:38:40 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/09 09:15:45 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/09 12:25:49 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,13 @@ static int	ft_edit_arg_1(t_vm *env, t_champions *champ, int *nbr)
 static void	ft_extract_args(t_vm *env, int pc, int *nbr)
 {
 	env->buf = ft_set_buffer_4(nbr[0]);
-	env->arg1 = ft_byte_to_str(&env->map[pc], env->buf);
+	env->arg1 = ft_byte_to_str(env, pc, env->buf);
 	pc += env->buf;
 	env->buf = ft_set_buffer_4(nbr[1]);
-	env->arg2 = ft_byte_to_str(&env->map[pc], env->buf);
+	env->arg2 = ft_byte_to_str(env, pc, env->buf);
 	pc += env->buf;
 	env->buf = ft_set_buffer_4(nbr[2]);
-	env->arg3 = ft_byte_to_str(&env->map[pc], env->buf);
+	env->arg3 = ft_byte_to_str(env, pc, env->buf);
 }
 
 /*
@@ -86,7 +86,7 @@ void		ft_corewar_ldi(t_vm *env, t_champions *champ, int *nbr)
 		if (ft_edit_arg_3(env, nbr) == 0)
 			return ;
 		env->sum_idx = env->arg1 + env->arg2;
-		champ->reg[env->arg3] = ft_byte_to_str(&env->map[
-			ft_mod(champ->pc - 1 + env->sum_idx, M)], 4);
+		champ->reg[env->arg3] = ft_byte_to_str(env,
+			ft_mod(champ->pc - 1 + env->sum_idx, M), 4);
 	}
 }

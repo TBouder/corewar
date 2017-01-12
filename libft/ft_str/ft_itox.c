@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itox.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/23 15:28:57 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/01 15:40:54 by quroulon         ###   ########.fr       */
+/*   Updated: 2017/01/09 16:01:41 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void		ft_convert(unsigned long long n, char *s, int *index)
 	char	*str;
 
 	str = ft_strinit("0123456789abcdef");
-	if (n < (ULL)16)
+	if (n < (unsigned long long)16)
 	{
 		s[*index] = str[n];
 		*index += 1;

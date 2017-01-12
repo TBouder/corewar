@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/23 15:32:20 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/08 17:24:19 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/09 15:39:46 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 #include "../libft.h"
 
-void		ft_put_endl(char const *str)
+void		ft_putendl(char const *str)
 {
 	ft_putstr(str);
 	ft_putchar('\n');
