@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tools_helper.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
+/*   By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 13:39:20 by tbouder           #+#    #+#             */
-/*   Updated: 2017/01/06 14:40:54 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/10 14:51:15 by quroulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,9 @@ int		ft_get_file_size(int fd)
 	unsigned int	file_size;
 	unsigned int	prog_size;
 
- 	o_pos = lseek(fd, 0, SEEK_CUR);
+	o_pos = lseek(fd, 0, SEEK_CUR);
 	file_size = lseek(fd, 0, SEEK_END) * 2;
-	// file_size *= 2;
-	prog_size = (MAGIC_LEN * 2) + (PROG_NAME_LENGTH * 2)
-				+ (COMMENT_LENGTH * 2) + (SIZE_LEN * 2);
+	prog_size = (8) + (128 * 2) + (2048 * 2) + (24);
 	lseek(fd, o_pos, SEEK_SET);
 	return ((file_size - prog_size) / 2);
 }

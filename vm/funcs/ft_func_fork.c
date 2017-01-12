@@ -26,7 +26,7 @@ static int	ft_edit_arg_1(t_vm *env, t_champions *champ, int *nbr)
 static void	ft_extract_args(t_vm *env, int pc, int *nbr)
 {
 	env->buf = ft_set_buffer_3(nbr[0]);
-	env->arg1 = ft_byte_to_str(&env->map[pc], env->buf);
+	env->arg1 = ft_byte_to_str(env, pc, env->buf);
 }
 
 /*

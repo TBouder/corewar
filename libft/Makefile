@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: quroulon <quroulon@student.42.fr>          +#+  +:+       +#+         #
+#    By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/10/05 20:24:05 by tbouder           #+#    #+#              #
-#    Updated: 2017/01/08 21:42:31 by quroulon         ###   ########.fr        #
+#    Updated: 2017/01/09 15:40:26 by tbouder          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,7 @@ FT_NB		= 	ft_nb/ft_atoi.c ft_nb/ft_atoi_base.c ft_nb/ft_atoi_hexa.c \
 				ft_nb/ft_nbrlargest.c ft_nb/ft_nbrnew.c ft_nb/ft_nbrsmallest.c \
 				ft_nb/ft_next_prime.c
 
-FT_PUT		= 	ft_put/ft_nbrendl.c ft_put/ft_put_endl.c ft_put/ft_putcendl.c \
+FT_PUT		= 	ft_put/ft_nbrendl.c ft_put/ft_putendl.c ft_put/ft_putcendl.c \
 				ft_put/ft_putchar.c ft_put/ft_putchar_fd.c ft_put/ft_putendl_fd.c \
 				ft_put/ft_putnbr.c ft_put/ft_putnbr_base.c ft_put/ft_putnbr_fd.c \
 				ft_put/ft_putstr.c ft_put/ft_putstr_fd.c
@@ -89,7 +89,7 @@ FT_BTREE	= 	ft_btree/ft_btree_print_inorder.c ft_btree/ft_btree_print_postorder.
 FT_OVER		= 	ft_overload/ft_put.c ft_overload/ft_put_fd.c ft_overload/ft_putendl.c
 
 LIBFT		=	$(FT_IS) $(FT_LEN) $(FT_LST) $(FT_MEM) $(FT_NB) $(FT_PUT) \
-				$(FT_STR) $(FT_DBSTR) $(FT_MATH) $(FT_HASH) $(FT_BTREE) $(FT_OVER)
+				$(FT_STR) $(FT_DBSTR) $(FT_MATH) $(FT_HASH) $(FT_BTREE)
 
 ################################################################################
 #	GET_NEXT_LINE
