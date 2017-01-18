@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 15:27:33 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/05 15:45:19 by tbouder          ###   ########.fr       */
+/*   Updated: 2017/01/16 12:13:33 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,12 @@ static void	ft_get_file_content_label(t_asm *env, char *label, char *final_line,
 	}
 	if (DIFF(split[1], ""))
 	{
+		if (ft_get_opcode(split[1]) == 0)
+		{
+			env->error_int = 2;
+			env->error_val = ft_strinit(split[1]);
+			return ;
+		}
 		ft_lstend(lst, split[0], ft_strlen(split[0]) + 1);
 		ft_lstend(lst, split[1], ft_strlen(split[1]) + 1);
 		env->file_len++;
