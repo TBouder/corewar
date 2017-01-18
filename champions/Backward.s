@@ -16,8 +16,7 @@ l3:
 	aff r4
 	sti	r4, 2, r2
 	add	r2, r3, r2
-live:
-	zjmp	%1
+live: zjmp	%1
 	xor	r4, r4, r4
 	zjmp	%3
 l2:
